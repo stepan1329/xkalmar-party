@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Кальмар — день рождения в квесте | Ростов-на-Дону">
+  <section class="hero">
+    <div class="wrap">
+      <h1>День рождения в квесте</h1>
+      <p>Праздник, который дети запомнят. Рассчитай стоимость за минуту.</p>
+    </div>
+  </section>
+
+  <section id="zayavka" class="lead">
+    <div class="wrap">
+      <p class="stub">Здесь появится калькулятор и форма заявки — следующий шаг.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+.hero { padding: 90px 0; text-align: center; }
+.hero h1 { font-size: clamp(34px, 6vw, 56px); font-weight: 800; margin-bottom: 16px; }
+.hero p { color: rgba(255,255,255,0.75); font-size: 18px; }
+
+.lead { padding: 40px 0 120px; text-align: center; }
+.stub {
+  border: 1px dashed rgba(255,255,255,0.3);
+  border-radius: 16px;
+  padding: 60px 24px;
+  color: rgba(255,255,255,0.6);
+}
+</style>
