@@ -1,31 +1,50 @@
 ---
-import Base from '../layouts/Base.astro';
+import Calculator from '../components/Calculator.astro';
+import RequestForm from '../components/RequestForm.astro';
 ---
-<Base title="Кальмар — день рождения в квесте | Ростов-на-Дону">
-  <section class="hero">
-    <div class="wrap">
-      <h1>День рождения в квесте</h1>
-      <p>Праздник, который дети запомнят. Рассчитай стоимость за минуту.</p>
-    </div>
-  </section>
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>XKALMAR — день рождения в квест-шоу | Ростов-на-Дону</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: 'Montserrat', Arial, sans-serif; background: #021F1D; color: #fff; }
+      .hdr { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
+      .hdr__logo { font-weight: 800; letter-spacing: .12em; font-size: 20px; }
+      .hdr__logo span { color: #C30067; }
+      .hdr a { color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; background: #C30067; padding: 11px 22px; border-radius: 24px; }
+      .hero { max-width: 900px; margin: 0 auto; padding: 72px 24px 64px; text-align: center; }
+      .hero__tag { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #0AD9C6; border: 1px solid rgba(10,217,198,.4); border-radius: 20px; padding: 6px 14px; margin-bottom: 22px; }
+      .hero h1 { font-size: clamp(32px, 6vw, 56px); font-weight: 800; line-height: 1.15; margin: 0 0 18px; }
+      .hero h1 em { font-style: normal; color: #C30067; }
+      .hero p { font-size: 17px; line-height: 1.6; color: rgba(255,255,255,.75); max-width: 620px; margin: 0 auto 30px; }
+      .hero a { color: #fff; text-decoration: none; font-weight: 700; background: #C30067; padding: 16px 36px; border-radius: 30px; display: inline-block; }
+      .ftr { text-align: center; font-size: 12px; color: rgba(255,255,255,.4); padding: 40px 20px; }
+    </style>
+  </head>
+  <body>
+    <header class="hdr">
+      <div class="hdr__logo">XKA<span>L</span>MAR</div>
+      <a href="#calc">Рассчитать праздник</a>
+    </header>
 
-  <section id="zayavka" class="lead">
-    <div class="wrap">
-      <p class="stub">Здесь появится калькулятор и форма заявки — следующий шаг.</p>
-    </div>
-  </section>
-</Base>
+    <section class="hero">
+      <span class="hero__tag">Квест-шоу для детей · Ростов-на-Дону</span>
+      <h1>Дети — в квест-шоу.<br />Родители — <em>отдыхают</em>.</h1>
+      <p>Мы берём праздник на себя полностью: сценарий, актёры, сервировка, торт, фото. Вам остаётся только прийти и дождаться восторженных детей.</p>
+      <a href="#calc">Рассчитать стоимость</a>
+    </section>
 
-<style>
-.hero { padding: 90px 0; text-align: center; }
-.hero h1 { font-size: clamp(34px, 6vw, 56px); font-weight: 800; margin-bottom: 16px; }
-.hero p { color: rgba(255,255,255,0.75); font-size: 18px; }
+    <Calculator />
 
-.lead { padding: 40px 0 120px; text-align: center; }
-.stub {
-  border: 1px dashed rgba(255,255,255,0.3);
-  border-radius: 16px;
-  padding: 60px 24px;
-  color: rgba(255,255,255,0.6);
-}
-</style>
+    <!-- Форма заявки — якорь #zayavka, к которому скроллят кнопки «Забронировать» -->
+    <RequestForm />
+
+    <footer class="ftr">© XKALMAR, 2026 · Ростов-на-Дону</footer>
+  </body>
+</html>

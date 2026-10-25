@@ -1,0 +1,498 @@
+---
+// Форма заявки v2.8: три сворачиваемые категории + отправка даты/времени праздника и телефона отдельными полями
+---
+<section class="drf" id="zayavka">
+  <div class="drf__head">
+    <h2>Оставить заявку</h2>
+    <p>Заполните три поля — остальное подтянется из расчёта выше. Организатор ответит и подтвердит точную сумму.</p>
+  </div>
+
+  <div class="drf__grid">
+    <div class="drf__form">
+      <label class="drf-field drf-field--check">
+        <span>Как вас зовут</span>
+        <input type="text" id="drf-name" placeholder="Например, Анна" maxlength="60">
+      </label>
+
+      <label class="drf-field drf-field--check">
+        <span>Телефон для связи</span>
+        <input type="tel" id="drf-phone" inputmode="tel" placeholder="+7 (900) 000-00-00" maxlength="18">
+      </label>
+
+      <div class="drf-field">
+        <span>Как с вами удобнее связаться</span>
+        <div class="drf-chips" id="drf-contact">
+          <button type="button" class="drf-chip is-active" data-v="Звонок">Звонок</button>
+          <button type="button" class="drf-chip" data-v="MAX">MAX</button>
+          <button type="button" class="drf-chip" data-v="Telegram">Telegram</button>
+          <button type="button" class="drf-chip" data-v="WhatsApp">WhatsApp</button>
+        </div>
+      </div>
+
+      <label class="drf-field">
+        <span>Комментарий <i>— необязательно</i></span>
+        <textarea id="drf-comment" rows="3" placeholder="Возраст детей, пожелания, вопросы…"></textarea>
+      </label>
+
+      <label class="drf-consent">
+        <input type="checkbox" id="drf-ok">
+        <span>Согласен(а) с <a href="/privacy" target="_blank">политикой конфиденциальности</a>. Данные используем только для связи по заявке.</span>
+      </label>
+
+      <button type="button" class="drf-btn" id="drf-send">Отправить заявку</button>
+      <p class="drf-note">Обычно отвечаем в течение часа. Праздник нужен уже на этих выходных? <a href="tel:+79287588483">Позвоните нам</a> — так быстрее всего.</p>
+    </div>
+
+    <div class="drf__order is-collapsed" id="drf-order-panel">
+      <div class="drf-order__head">
+        <span class="drf-order__tag">Состав вашей заявки</span>
+        <a class="drf-order__edit" href="#calc">изменить расчёт →</a>
+      </div>
+
+      <button type="button" class="drf-order__toggle" id="drf-order-toggle" aria-expanded="false">
+        <span id="drf-order-strip"></span>
+        <span class="drf-order__chev">▾</span>
+      </button>
+
+      <div class="drf-order__body" id="drf-order-body">
+        <div id="drf-order">
+          <p class="drf-order__empty">Состав появится, когда вы что-нибудь выберете в калькуляторе выше 🙂</p>
+        </div>
+        <div class="drf-order__total" id="drf-order-total" hidden>
+          <span>Итого по расчёту</span>
+          <b id="drf-order-price">0 ₽</b>
+        </div>
+        <p class="drf-order__note" id="drf-order-note" hidden>Бронь фиксируется предоплатой 3 000 ₽ — состав и дату можно менять, при отмене заранее предоплата возвращается.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="drf-done" id="drf-done" hidden>
+    <b>Заявка отправлена!</b>
+    <p>Организатор получил её и свяжется с вами в ближайшее время. Если хочется быстрее — напишите нам напрямую.</p>
+    <div class="drf-done__btns">
+      <a class="drf-done__link" id="drf-done-wa" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="drf-done__link" id="drf-done-tg" target="_blank" rel="noopener">Telegram</a>
+      <button type="button" class="drf-done__again" id="drf-again">Отправить ещё одну</button>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+.drf { background: #021F1D; color: #fff; padding: 72px 20px 80px; font-family: 'Montserrat', Arial, sans-serif; }
+.drf * { box-sizing: border-box; }
+.drf h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; text-align: center; margin: 0 0 12px; }
+.drf__head p { max-width: 640px; margin: 0 auto 36px; text-align: center; color: rgba(255,255,255,.75); font-size: 16px; line-height: 1.6; }
+.drf__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px; max-width: 1080px; margin: 0 auto; align-items: start; }
+
+.drf__form { background: #fff; color: #032E2B; border-radius: 22px; padding: 30px 32px; display: grid; gap: 16px; }
+.drf-field { display: grid; gap: 6px; position: relative; }
+.drf-field span { font-size: 13px; font-weight: 700; color: #3C5B57; }
+.drf-field span i { font-style: normal; font-weight: 400; color: #6B8B86; }
+.drf-field input, .drf-field textarea { font: inherit; font-size: 15px; padding: 12px 14px; border: 1px solid #E4ECEA; border-radius: 12px; color: #032E2B; background: #fff; resize: vertical; }
+.drf-field input:focus, .drf-field textarea:focus { outline: 2px solid rgba(195,0,103,.4); border-color: #C30067; }
+.drf-field.is-error input { border-color: #C30067; outline: 2px solid rgba(195,0,103,.4); }
+.drf-field--check::after { content: '✓'; position: absolute; right: 14px; bottom: 13px; font-size: 15px; font-weight: 800; color: #0A9994; opacity: 0; transform: scale(.6); transition: .15s; pointer-events: none; }
+.drf-field.is-valid::after { opacity: 1; transform: scale(1); }
+.drf-field.is-valid input { border-color: rgba(10,153,148,.5); }
+
+.drf-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.drf-chip { font: inherit; font-size: 13px; font-weight: 700; padding: 9px 16px; border-radius: 20px; border: 1px solid #E4ECEA; background: #fff; color: #3C5B57; cursor: pointer; transition: .15s; }
+.drf-chip:hover { border-color: rgba(10,153,148,.5); }
+.drf-chip.is-active { border-color: #C30067; color: #C30067; background: rgba(195,0,103,.06); }
+
+.drf-consent { display: flex; gap: 10px; align-items: flex-start; font-size: 12px; line-height: 1.5; color: #6B8B86; cursor: pointer; }
+.drf-consent input { width: 16px; height: 16px; margin: 2px 0 0; accent-color: #C30067; flex: 0 0 auto; }
+.drf-consent a { color: #0A9994; text-decoration: underline; }
+.drf-btn { font: inherit; font-weight: 700; font-size: 16px; padding: 16px 32px; border-radius: 30px; border: 0; background: #C30067; color: #fff; cursor: pointer; transition: .2s; }
+.drf-btn:hover { background: #E00077; transform: translateY(-2px); }
+.drf-btn:disabled { opacity: .6; cursor: default; transform: none; }
+.drf-note { margin: 0; font-size: 12px; line-height: 1.6; color: #6B8B86; }
+.drf-note a { color: #C30067; font-weight: 700; text-decoration: underline; }
+
+/* --- Блок «Заявка отправлена»: белая карточка в стилистике страницы --- */
+.drf-done { max-width: 1080px; margin: 0 auto; background: #fff; color: #032E2B; border-radius: 22px; padding: 30px 32px; box-shadow: 0 16px 48px rgba(0,0,0,.35); }
+.drf-done > b { display: block; font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+.drf-done > p { margin: 0 0 18px; font-size: 14px; line-height: 1.6; color: #3C5B57; max-width: 560px; }
+.drf-done__btns { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.drf-done__link { font: inherit; font-weight: 700; font-size: 15px; padding: 13px 26px; border-radius: 30px; color: #fff; text-decoration: none; transition: .15s; }
+.drf-done__link:hover { transform: translateY(-1px); filter: brightness(1.08); }
+#drf-done-wa { background: #128C7E; }
+#drf-done-tg { background: #2AABEE; }
+.drf-done__again { font: inherit; font-weight: 700; font-size: 15px; padding: 11px 24px; border-radius: 30px; background: transparent; color: #05544F; border: 2px solid #05544F; cursor: pointer; transition: .15s; }
+.drf-done__again:hover { background: #F5F7F6; }
+
+/* --- Панель состава: три категории, каждая сворачивается ---
+   Малиновым — только деньги: цена пакета, сумма допов, итог. --- */
+.drf__order { position: sticky; top: 24px; background: #fff; color: #032E2B; border-radius: 22px; padding: 26px 28px; box-shadow: 0 16px 48px rgba(0,0,0,.35); }
+.drf-order__head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding-bottom: 14px; border-bottom: 2px solid #E4ECEA; margin-bottom: 8px; }
+.drf-order__tag { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #C30067; }
+.drf-order__edit { font-size: 12px; font-weight: 700; color: #0A9994; text-decoration: underline; white-space: nowrap; }
+
+/* категория: строка-сводка + скрытые детали */
+.drf-order__catbtn { width: 100%; font: inherit; text-align: left; background: none; border: 0; border-bottom: 1px dashed #E4ECEA; padding: 12px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.drf-order__catbtn .l { display: grid; gap: 2px; min-width: 0; }
+.drf-order__catbtn .lbl { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #6B8B86; }
+.drf-order__catbtn .t { font-size: 14.5px; font-weight: 600; color: #032E2B; }
+.drf-order__catbtn .r { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+.drf-order__catbtn .v { font-size: 14.5px; font-weight: 800; color: #032E2B; white-space: nowrap; }
+.drf-order__catbtn .v.is-money { color: #C30067; }
+.drf-order__catbtn .v.is-none { color: #6B8B86; font-weight: 400; }
+.drf-order__catbtn .chev { font-size: 13px; font-weight: 800; color: #C30067; transition: transform .2s; }
+.drf-order__catbtn.is-open .chev { transform: rotate(180deg); }
+
+/* детали категории */
+.drf-order__sub { display: none; padding: 10px 0 12px; border-bottom: 1px dashed #E4ECEA; }
+.drf-order__sub.is-open { display: grid; gap: 8px; }
+.drf-order__row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 13.5px; line-height: 1.5; color: #032E2B; padding-left: 12px; position: relative; }
+.drf-order__row::before { content: '·'; position: absolute; left: 0; top: 0; font-size: 16px; font-weight: 800; color: #C30067; }
+.drf-order__row b { font-weight: 700; white-space: nowrap; }
+.drf-order__row.is-muted { color: #6B8B86; }
+.drf-order__row.is-muted b { color: #6B8B86; font-weight: 400; }
+
+.drf-order__empty { margin: 8px 0; font-size: 13.5px; color: #6B8B86; }
+
+.drf-order__total { margin-top: 14px; padding-top: 14px; border-top: 2px solid #E4ECEA; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.drf-order__total span { font-size: 13px; color: #3C5B57; }
+.drf-order__total b { font-size: 30px; font-weight: 800; color: #C30067; }
+.drf-order__total b.is-updated { animation: drfPulse .4s ease; }
+@keyframes drfPulse { from { transform: scale(1.08); } to { transform: scale(1); } }
+.drf-order__note { margin: 12px 0 0; font-size: 12px; line-height: 1.55; color: #6B8B86; }
+
+/* мобильная компактная плашка */
+.drf-order__toggle { display: none; width: 100%; font: inherit; text-align: left; font-size: 14px; font-weight: 700; color: #032E2B; background: #F5F7F6; border: 1px solid #E4ECEA; border-radius: 12px; padding: 13px 14px; cursor: pointer; align-items: center; justify-content: space-between; gap: 10px; }
+.drf-order__chev { color: #C30067; font-weight: 800; transition: transform .2s; }
+.drf__order.is-open .drf-order__chev { transform: rotate(180deg); }
+
+@media (max-width: 900px) {
+  .drf__grid { grid-template-columns: 1fr; }
+  .drf__order { position: static; }
+  .drf-order__toggle { display: flex; margin-bottom: 4px; }
+  .drf__order.is-collapsed .drf-order__body { display: none; }
+  .drf-order__head { border-bottom: 0; padding-bottom: 0; margin-bottom: 10px; }
+}
+@media (max-width: 760px) {
+  .drf { padding: 48px 14px 64px; }
+  .drf__form, .drf__order, .drf-done { padding: 22px 18px; }
+  .drf-btn { width: 100%; }
+}
+</style>
+
+<script>
+  // @ts-nocheck
+  /* === НАСТРОЙКА: вставь сюда URL своего Apps Script === */
+  const FORM_URL = 'https://script.google.com/macros/s/AKfycbwvgQ0INRJRzT4xu5mQ6ht_SakiUL7kEIBqDw-a88ooyfapllfD3Yr1undNexLI2KaP/exec'; // вида https://script.google.com/macros/s/.../exec
+
+  const WA_NUMBER = '79287588483';
+  const TG_USER = 'xkalmar';
+
+  const $ = (id) => document.getElementById(id);
+  const fmt = (n) => n.toLocaleString('ru-RU') + ' ₽';
+  const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
+
+  let contact = 'Звонок';
+  let mobileOpen = false;
+  /* открытые категории — переживают перерисовку */
+  const openCats = { pack: false, party: false, extras: false };
+
+  /* --- Способ связи --- */
+  document.querySelectorAll('#drf-contact .drf-chip').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('#drf-contact .drf-chip').forEach((c) => c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      contact = chip.dataset.v;
+    });
+  });
+
+  /* --- Живая валидация --- */
+  const nameInput = $('drf-name');
+  const phoneInput = $('drf-phone');
+
+  function checkName() {
+    const ok = nameInput.value.trim().length >= 2;
+    nameInput.parentElement.classList.toggle('is-valid', ok);
+    if (!ok && nameInput.value.length > 0) nameInput.parentElement.classList.remove('is-error');
+    return ok;
+  }
+  nameInput.addEventListener('input', checkName);
+
+  function checkPhone() {
+    const ok = phoneDigits(phoneInput.value).length === 11;
+    phoneInput.parentElement.classList.toggle('is-valid', ok);
+    if (!ok && phoneDigits(phoneInput.value).length > 0) phoneInput.parentElement.classList.remove('is-error');
+    return ok;
+  }
+
+  /* --- Панель состава: три категории со сводками --- */
+  function plural(n, one, few, many) {
+    const m10 = n % 10, m100 = n % 100;
+    if (m10 === 1 && m100 !== 11) return one;
+    if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few;
+    return many;
+  }
+
+  function row(n, v, muted) {
+    return '<div class="drf-order__row' + (muted ? ' is-muted' : '') + '"><span>' + n + '</span><b>' + v + '</b></div>';
+  }
+
+  /* Разбирает строку «Название · цена» на пару */
+  function splitPair(s) {
+    const i = s.lastIndexOf(' · ');
+    return i > -1 ? { name: s.slice(0, i), price: s.slice(i + 3) } : { name: s, price: '' };
+  }
+
+  function catHtml(key, label, title, value, valueCls, subHtml) {
+    const open = !!openCats[key];
+    return '<div class="drf-order__cat">' +
+      '<button type="button" class="drf-order__catbtn' + (open ? ' is-open' : '') + '" data-catbtn="' + key + '" aria-expanded="' + open + '">' +
+        '<span class="l"><span class="lbl">' + label + '</span><span class="t">' + title + '</span></span>' +
+        '<span class="r"><span class="v ' + valueCls + '">' + value + '</span><span class="chev">▾</span></span>' +
+      '</button>' +
+      '<div class="drf-order__sub' + (open ? ' is-open' : '') + '" data-sub="' + key + '">' + subHtml + '</div>' +
+    '</div>';
+  }
+
+  function renderOrder() {
+    const c = window.DR_CALC;
+    const box = $('drf-order');
+    const totalBox = $('drf-order-total');
+    const note = $('drf-order-note');
+    const strip = $('drf-order-strip');
+    const panel = $('drf-order-panel');
+    const toggle = $('drf-order-toggle');
+
+    if (!c || !c.ready || (!c.order && !c.summary)) {
+      box.innerHTML = '<p class="drf-order__empty">Состав появится, когда вы что-нибудь выберете в калькуляторе выше 🙂</p>';
+      totalBox.hidden = true;
+      note.hidden = true;
+      toggle.style.display = 'none';
+      panel.classList.remove('is-collapsed');
+      return;
+    }
+
+    let html = '';
+    if (c.order) {
+      const o = c.order;
+
+      /* ПАКЕТ: сводка «название — цена», детали — состав пакета */
+      const inc = o.includes || [];
+      const packSub = inc.length
+        ? inc.map((it) => row(it, 'включено', true)).join('')
+        : row('состав уточнит организатор', '', true);
+      html += catHtml('pack', 'Пакет', o.tariff, fmt(o.tariffPrice), 'is-money', packSub);
+
+      /* ВАШ ПРАЗДНИК: надбавки за гостей идут в эту категорию — суммы сходятся с итогом */
+      const surRows = (o.sur || []).map((s) => {
+        const p = splitPair(s);
+        return row(p.name, p.price, false);
+      }).join('');
+      const partyVal = o.guests + ' ' + plural(o.guests, 'ребёнок', 'ребёнка', 'детей') + ' · ' + o.party;
+      const partySub =
+        row('Детей', o.guests) +
+        surRows +
+        row('Дата', o.date || 'уточним') +
+        row('Время начала', o.slot || 'уточним') +
+        row('Праздник', o.party) +
+        row('Весь слот со сборами', o.slotFull);
+      html += catHtml('party', 'Ваш праздник', 'Детали праздника', partyVal, '', partySub);
+
+      /* ДОПОЛНИТЕЛЬНО: сводка «N услуг — сумма», детали — позиции с ценами */
+      const sum = (typeof o.extrasSum === 'number') ? o.extrasSum : 0;
+      let exTitle = 'Дополнительно';
+      let exVal = 'не выбрано';
+      let exCls = 'is-none';
+      if (o.extras && o.extras.length) {
+        exTitle = 'Дополнительно · ' + o.extras.length + ' ' + plural(o.extras.length, 'услуга', 'услуги', 'услуг');
+        exVal = sum > 0 ? fmt(sum) : 'по запросу';
+        exCls = sum > 0 ? 'is-money' : '';
+      }
+      const exSub = o.extras && o.extras.length
+        ? o.extras.map((s) => {
+            const p = splitPair(s);
+            return row(p.name, p.price || 'по запросу', false);
+          }).join('')
+        : row('ничего сверх пакета не выбрано', '', true);
+      html += catHtml('extras', '', exTitle, exVal, exCls, exSub);
+
+      const tariffShort = o.tariff.replace(' (квест-шоу + банкет)', '');
+      strip.textContent = tariffShort + ' · ' + o.guests + ' детей · ' + fmt(c.total);
+    } else {
+      /* Запасной путь: старый текстовый формат из калькулятора */
+      const lines = c.summary.split('\n').filter((l) => l && !l.startsWith('Заявка с сайта') && !l.startsWith('Итого'));
+      html = '<p class="drf-order__empty">' + lines.map((l) => l.replace(/——/g, '·')).join('<br>') + '</p>';
+      strip.textContent = 'состав из калькулятора';
+    }
+
+    box.innerHTML = html;
+    totalBox.hidden = false;
+    note.hidden = false;
+    const price = $('drf-order-price');
+    price.textContent = fmt(c.total);
+    price.classList.remove('is-updated');
+    void price.offsetWidth;
+    price.classList.add('is-updated');
+
+    if (isMobile()) {
+      panel.classList.toggle('is-collapsed', !mobileOpen);
+      toggle.style.display = 'flex';
+      toggle.setAttribute('aria-expanded', mobileOpen ? 'true' : 'false');
+    } else {
+      toggle.style.display = 'none';
+    }
+  }
+  renderOrder();
+  document.addEventListener('drcalc-update', renderOrder);
+
+  /* Раскрытие категорий */
+  $('drf-order').addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-catbtn]');
+    if (!btn) return;
+    const key = btn.dataset.catbtn;
+    openCats[key] = !openCats[key];
+    btn.classList.toggle('is-open', openCats[key]);
+    btn.setAttribute('aria-expanded', openCats[key] ? 'true' : 'false');
+    const sub = $('drf-order').querySelector('[data-sub="' + key + '"]');
+    if (sub) sub.classList.toggle('is-open', openCats[key]);
+  });
+
+  $('drf-order-toggle').addEventListener('click', () => {
+    mobileOpen = !mobileOpen;
+    const panel = $('drf-order-panel');
+    panel.classList.toggle('is-collapsed', !mobileOpen);
+    panel.classList.toggle('is-open', mobileOpen);
+    $('drf-order-toggle').setAttribute('aria-expanded', mobileOpen ? 'true' : 'false');
+  });
+
+  /* --- Маска телефона: +7 (900) 000-00-00 --- */
+  function phoneDigits(s) { return s.replace(/\D/g, ''); }
+
+  function formatPhone(raw) {
+    let d = phoneDigits(raw);
+    if (d.length === 0) return '';
+    if (d[0] === '8' && d.length >= 11) d = '7' + d.slice(1);
+    else if (d[0] !== '7') d = '7' + d;
+    d = d.slice(0, 11);
+    let out = '+7';
+    if (d.length > 1) out += ' (' + d.slice(1, 4);
+    if (d.length >= 4) out += ')';
+    if (d.length > 4) out += ' ' + d.slice(4, 7);
+    if (d.length > 7) out += '-' + d.slice(7, 9);
+    if (d.length > 9) out += '-' + d.slice(9, 11);
+    return out;
+  }
+
+  phoneInput.addEventListener('input', () => {
+    phoneInput.value = formatPhone(phoneInput.value);
+    checkPhone();
+  });
+  phoneInput.addEventListener('focus', () => {
+    if (phoneInput.value === '') phoneInput.value = '+7 (';
+  });
+  phoneInput.addEventListener('blur', () => {
+    if (phoneDigits(phoneInput.value).length <= 1) {
+      phoneInput.value = '';
+      phoneInput.parentElement.classList.remove('is-valid');
+    }
+  });
+
+  function validate() {
+    const ok = $('drf-ok');
+    const nameOk = checkName();
+    const phoneOk = checkPhone();
+    if (!nameOk) nameInput.parentElement.classList.add('is-error');
+    if (!phoneOk) phoneInput.parentElement.classList.add('is-error');
+    if (!ok.checked) {
+      alert('Чтобы отправить заявку, нужно согласие на обработку данных.');
+      return false;
+    }
+    return nameOk && phoneOk;
+  }
+
+  function buildMessage() {
+    const c = window.DR_CALC;
+    const name = nameInput.value.trim();
+    const phone = phoneInput.value.trim();
+    const comment = $('drf-comment').value.trim();
+    const o = (c && c.order) || null;
+    const when = o && o.date
+      ? (o.date + (o.slot ? ' в ' + o.slot : ', время уточним'))
+      : 'не выбрана';
+    const calcPart = (c && c.summary) ? c.summary + '\n' : '';
+    return [
+      '🔔 НОВАЯ ЗАЯВКА С САЙТА',
+      'Имя: ' + (name || 'не указано'),
+      'Телефон: ' + (phone || 'не указан'),
+      'Дата праздника: ' + when,
+      'Предпочтительный способ связи: ' + contact,
+      comment ? 'Комментарий: ' + comment : '',
+      '',
+      calcPart + (calcPart ? '— — —' : '')
+    ].filter((l) => l !== '').join('\n');
+  }
+
+  function buildPayload() {
+    const c = window.DR_CALC || {};
+    const o = c.order || {};
+    return {
+      name: nameInput.value.trim(),
+      phone: phoneInput.value.trim(),
+      phoneRaw: phoneDigits(phoneInput.value),
+      contact: contact,
+      comment: $('drf-comment').value.trim(),
+      partyDate: o.date || '',
+      partyTime: o.slot || '',
+      summary: c.summary || '',
+      total: c.total || 0,
+      text: buildMessage()
+    };
+  }
+
+  function markDone() {
+    document.querySelector('.drf__grid').style.display = 'none';
+    $('drf-done').hidden = false;
+    const fallbackText = 'Здравствуйте! Я отправлял(а) заявку с сайта. Предпочтительный способ связи: ' + contact.toLowerCase() + '.\n\n' + ((window.DR_CALC && window.DR_CALC.summary) || '');
+    $('drf-done-wa').href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(fallbackText);
+    $('drf-done-tg').href = 'https://t.me/' + TG_USER + '?text=' + encodeURIComponent(fallbackText);
+  }
+
+  function resetForm() {
+    $('drf-done').hidden = true;
+    document.querySelector('.drf__grid').style.display = '';
+    $('drf-comment').value = '';
+    const btn = $('drf-send');
+    btn.disabled = false;
+    btn.textContent = 'Отправить заявку';
+  }
+
+  async function sendRequest() {
+    if (!validate()) return;
+    const btn = $('drf-send');
+    btn.disabled = true;
+    btn.textContent = 'Отправляем…';
+
+    const payload = buildPayload();
+    let ok = false;
+    try {
+      const res = await fetch(FORM_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json().catch(() => null);
+      ok = res.ok && (!data || data.ok !== false);
+    } catch (e) {
+      ok = false;
+    }
+
+    if (ok) {
+      markDone();
+    } else {
+      const fallbackText = 'Здравствуйте! Хочу оставить заявку с сайта.\n\n' + payload.text;
+      window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(fallbackText), '_blank');
+      resetForm();
+    }
+  }
+
+  $('drf-send').addEventListener('click', sendRequest);
+  $('drf-again').addEventListener('click', resetForm);
+</script>
