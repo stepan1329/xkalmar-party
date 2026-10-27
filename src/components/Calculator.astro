@@ -1,6 +1,3 @@
----
-// Калькулятор v7.12: плашка из трёх категорий + автосохранение выбора в localStorage
----
 <section class="drc" id="calc">
   <div class="drc__head">
     <h2>Рассчитайте праздник</h2>
@@ -21,18 +18,18 @@
           <span class="drc-card__price">24 000 ₽</span>
           <span class="drc-card__meta">2,5 часа программы · до 15 детей · своя еда</span>
           <span class="drc-card__list">Квест-шоу 1,5 ч · Ярмарка игр 30 мин · банкет 30 мин · команда из 5 человек</span>
-          <span class="drc-card__cta">Выбрать</span>
+          <button type="button" class="drc-card__cta" data-pack-pick="popular">Выбрать</button>
         </span>
       </label>
       <label class="drc-card drc-card--hit">
         <input type="radio" name="dr-pack" value="optimal">
-        <span class="drc-card__badge">Выбирают чаще всего</span>
         <span class="drc-card__in">
+          <span class="drc-card__badge">Выбирают чаще всего</span>
           <span class="drc-card__name">Оптимальный</span>
           <span class="drc-card__price">33 500 ₽</span>
           <span class="drc-card__meta">3 часа программы · до 6 детей еда включена, сверх — 1 000 ₽/чел</span>
           <span class="drc-card__list">Квест-шоу полного сценария 1,5 ч · Ярмарка игр 1 ч · банкет под ключ: сервировка, еда, напитки, порционный торт</span>
-          <span class="drc-card__cta">Выбрать</span>
+          <button type="button" class="drc-card__cta" data-pack-pick="optimal">Выбрать</button>
         </span>
       </label>
       <label class="drc-card">
@@ -42,7 +39,7 @@
           <span class="drc-card__price">50 000 ₽</span>
           <span class="drc-card__meta">3,5 часа программы · всё включено · самый не суетной</span>
           <span class="drc-card__list">Расширенный сценарий · Ярмарка игр 1 ч · банкет под ключ + большой торт от кондитера · фото · гелиевые шары · подарки всем</span>
-          <span class="drc-card__cta">Выбрать</span>
+          <button type="button" class="drc-card__cta" data-pack-pick="maximal">Выбрать</button>
         </span>
       </label>
     </div>
@@ -55,88 +52,135 @@
   <div class="drc__pane" data-pane="custom">
     <span class="drc-lbl">Основа</span>
     <div class="drc-radios">
-      <label><input type="radio" name="dr-cbase" value="base" checked><span><b>База — 20 000 ₽</b> · квест-шоу 1,5 ч + банкет 30 мин (2 ч программы) · до 15 детей</span></label>
+      <label><input type="radio" name="dr-cbase" value="base"><span><b>База — 20 000 ₽</b> · квест-шоу 1,5 ч + банкет 30 мин (2 ч программы) · до 15 детей</span></label>
       <label><input type="radio" name="dr-cbase" value="mini"><span><b>Мини — 15 000 ₽</b> · квест 1 ч + банкет 30 мин (1,5 часа программы) · до 8 детей</span></label>
     </div>
     <span class="drc-lbl">Ярмарка игр</span>
     <div class="drc-radios" id="dr-cym-group">
-      <label><input type="radio" name="dr-cym" value="0" checked><span><b>Без ярмарки</b> · только квест и банкет</span></label>
+      <label><input type="radio" name="dr-cym" value="0"><span><b>Без ярмарки</b> · только квест и банкет</span></label>
       <label><input type="radio" name="dr-cym" value="30"><span><b>+30 мин — 4 000 ₽</b> · короткая добавка к программе</span></label>
       <label><input type="radio" name="dr-cym" value="60"><span><b>+60 мин — 7 500 ₽</b> · самый насыщенный вариант</span></label>
     </div>
     <button type="button" class="drc-preset" id="dr-preset">Собрать как «Расширенный»: База + Ярмарка 1 ч + еда под ключ + фото + шары</button>
   </div>
 
-  <div class="drc__steps" id="dr-steps" hidden>
-    <div class="drc-step">
-      <span class="drc-lbl"><i>1</i>Сколько детей</span>
-      <div class="drc-stepper">
-        <button type="button" id="dr-minus">−</button>
-        <output id="dr-guests">6</output>
-        <button type="button" id="dr-plus">+</button>
-      </div>
-      <span class="drc-gnote" id="dr-gnote"></span>
-      <span class="drc-hint">Не знаешь точного числа? Поставь примерно — потом можно изменить, на цену до подтверждения это не повлияет.</span>
-    </div>
-
-    <div class="drc-step">
-      <span class="drc-lbl"><i>2</i>Дата и время начала</span>
-      <input type="date" id="dr-date" class="drc-date">
-      <div class="drc-slots" id="dr-slots"></div>
-      <span class="drc-hint">Время начала можно выбрать сейчас или оставить организатору. Дату можно будет перенести после брони.</span>
-    </div>
-
-    <div class="drc-step">
-      <span class="drc-lbl"><i>3</i>Продление праздника</span>
-      <div class="drc-ext" id="dr-ext-block"></div>
-
-      <div class="drc-ext">
-        <label class="drc-opt"><input type="checkbox" id="dr-room-ext"><span class="drc-opt__b"><b>Продление банкетной комнаты без программы</b><span>комната остаётся за вами, программа не ведётся</span></span></label>
-        <div class="drc-hours" id="dr-room-hours" hidden>
-          <label><input type="radio" name="dr-rh" value="30" checked>+30 мин · 1 250 ₽</label>
-          <label><input type="radio" name="dr-rh" value="60">+60 мин · 2 500 ₽</label>
+  <div class="drc__cols">
+    <div class="drc__steps" id="dr-steps" hidden>
+      <div class="drc-step">
+        <button type="button" class="drc-step__head is-open" data-stephead="0" aria-expanded="true">
+          <span class="drc-lbl"><i>1</i>Сколько детей</span>
+          <span class="drc-step__aside"><span class="drc-step__sum" id="dr-sum-0"></span><span class="drc-step__chev">▾</span></span>
+        </button>
+        <div class="drc-step__body" data-stepbody="0">
+          <div class="drc-stepper">
+            <button type="button" id="dr-minus">−</button>
+            <output id="dr-guests">6</output>
+            <button type="button" id="dr-plus">+</button>
+          </div>
+          <span class="drc-gnote" id="dr-gnote"></span>
+          <span class="drc-hint">Не знаешь точного числа? Поставь примерно — потом можно изменить, на цену до подтверждения это не повлияет.</span>
         </div>
       </div>
-      <span class="drc-hint">Можно ничего не продлевать — длительность пакета уже подобрана с запасом.</span>
+
+      <div class="drc-step">
+        <button type="button" class="drc-step__head" data-stephead="1" aria-expanded="false">
+          <span class="drc-lbl"><i>2</i>Дата и время начала</span>
+          <span class="drc-step__aside"><span class="drc-step__sum" id="dr-sum-1"></span><span class="drc-step__chev">▾</span></span>
+        </button>
+        <div class="drc-step__body" data-stepbody="1" hidden>
+          <input type="date" id="dr-date" class="drc-date">
+          <div class="drc-slots" id="dr-slots"></div>
+          <span class="drc-hint">Время начала можно выбрать сейчас или оставить организатору. Дату можно будет перенести после брони.</span>
+        </div>
+      </div>
+
+      <div class="drc-step">
+        <button type="button" class="drc-step__head" data-stephead="2" aria-expanded="false">
+          <span class="drc-lbl"><i>3</i>Продление праздника</span>
+          <span class="drc-step__aside"><span class="drc-step__sum" id="dr-sum-2"></span><span class="drc-step__chev">▾</span></span>
+        </button>
+        <div class="drc-step__body" data-stepbody="2" hidden>
+          <div class="drc-ext" id="dr-ext-block"></div>
+          <div class="drc-ext">
+            <label class="drc-opt"><input type="checkbox" id="dr-room-ext"><span class="drc-opt__b"><b>Продление банкетной комнаты без программы</b><span>комната остаётся за вами, программа не ведётся</span></span></label>
+            <div class="drc-hours" id="dr-room-hours" hidden>
+              <label><input type="radio" name="dr-rh" value="30" checked>+30 мин · 1 250 ₽</label>
+              <label><input type="radio" name="dr-rh" value="60">+60 мин · 2 500 ₽</label>
+            </div>
+          </div>
+          <span class="drc-hint">Можно ничего не продлевать — длительность пакета уже подобрана с запасом.</span>
+        </div>
+      </div>
+
+      <div class="drc-step">
+        <button type="button" class="drc-step__head" data-stephead="3" aria-expanded="false">
+          <span class="drc-lbl"><i>4</i>Дополнительные услуги</span>
+          <span class="drc-step__aside"><span class="drc-step__sum" id="dr-sum-3"></span><span class="drc-step__chev">▾</span></span>
+        </button>
+        <div class="drc-step__body" data-stepbody="3" hidden>
+          <div class="drc-ext">
+            <label class="drc-opt" id="dr-opt-menu"><input type="checkbox" id="dr-menu"><span class="drc-opt__b"><b>Меню под ключ</b><span>сервировка, еда, напитки, порционный торт</span></span><span class="drc-opt__p">1 000 ₽ / чел</span></label>
+            <label class="drc-opt" id="dr-opt-video"><input type="checkbox" id="dr-video"><span class="drc-opt__b"><b>Видеосъёмка</b><span>сторис-ролик 1–3 минуты</span></span><span class="drc-opt__p">4 000 ₽</span></label>
+            <label class="drc-opt" id="dr-opt-photo"><input type="checkbox" id="dr-photo"><span class="drc-opt__b"><b>Фотосъёмка</b><span>100–150 готовых фото</span></span><span class="drc-opt__p">6 000 ₽</span></label>
+            <label class="drc-opt" id="dr-opt-balls"><input type="checkbox" id="dr-balls"><span class="drc-opt__b"><b>Гелиевые шары</b><span>две сборки, 14 шаров — забираете с собой</span></span><span class="drc-opt__p">3 500 ₽</span></label>
+            <label class="drc-opt" id="dr-opt-tort"><input type="checkbox" id="dr-tort"><span class="drc-opt__b"><b>Тематический торт от кондитера</b><span>2–2,5 кг, вместо порционного — вычет его стоимости</span></span><span class="drc-opt__p">7 000 ₽</span></label>
+            <label class="drc-opt drc-opt--free" id="dr-opt-room2"><input type="checkbox" id="dr-room2"><span class="drc-opt__b"><b>Вторая банкетная комната</b><span>выдаётся по запросу</span></span><span class="drc-opt__p">0 ₽</span></label>
+          </div>
+          <span class="drc-hint">Можно ничего не добавлять — базовая стоимость уже включена в расчёт ниже.</span>
+        </div>
+      </div>
     </div>
 
-    <div class="drc-step">
-      <span class="drc-lbl"><i>4</i>Дополнительные услуги</span>
-      <div class="drc-ext">
-        <label class="drc-opt" id="dr-opt-menu"><input type="checkbox" id="dr-menu"><span class="drc-opt__b"><b>Меню под ключ</b><span>сервировка, еда, напитки, порционный торт</span></span><span class="drc-opt__p">1 000 ₽ / чел</span></label>
-        <label class="drc-opt" id="dr-opt-video"><input type="checkbox" id="dr-video"><span class="drc-opt__b"><b>Видеосъёмка</b><span>сторис-ролик 1–3 минуты</span></span><span class="drc-opt__p">4 000 ₽</span></label>
-        <label class="drc-opt" id="dr-opt-photo"><input type="checkbox" id="dr-photo"><span class="drc-opt__b"><b>Фотосъёмка</b><span>100–150 готовых фото</span></span><span class="drc-opt__p">6 000 ₽</span></label>
-        <label class="drc-opt" id="dr-opt-balls"><input type="checkbox" id="dr-balls"><span class="drc-opt__b"><b>Гелиевые шары</b><span>две сборки, 14 шаров — забираете с собой</span></span><span class="drc-opt__p">3 500 ₽</span></label>
-        <label class="drc-opt" id="dr-opt-tort"><input type="checkbox" id="dr-tort"><span class="drc-opt__b"><b>Тематический торт от кондитера</b><span>2–2,5 кг, вместо порционного — вычет его стоимости</span></span><span class="drc-opt__p">7 000 ₽</span></label>
-        <label class="drc-opt drc-opt--free" id="dr-opt-room2"><input type="checkbox" id="dr-room2"><span class="drc-opt__b"><b>Вторая банкетная комната</b><span>выдаётся по запросу</span></span><span class="drc-opt__p">0 ₽</span></label>
+    <div class="drc-plate" id="dr-result" hidden>
+      <div class="drc-plate__head">
+        <div>
+          <span class="drc-plate__tag">Ваш тариф</span>
+          <b class="drc-plate__price" id="dr-total">0 ₽</b>
+        </div>
+        <div class="drc-plate__btns">
+          <button type="button" class="drc-btn drc-btn--ghost" id="dr-choose">Выбрать</button>
+          <button type="button" class="drc-btn" id="dr-book">Забронировать</button>
+        </div>
       </div>
-      <span class="drc-hint">Можно ничего не добавлять — базовая стоимость уже включена в расчёт ниже.</span>
-    </div>
-  </div>
-
-  <div class="drc-plate" id="dr-result" hidden>
-    <div class="drc-plate__head">
-      <div>
-        <span class="drc-plate__tag">Ваш индивидуальный тариф</span>
-        <b class="drc-plate__price" id="dr-total">0 ₽</b>
+      <div class="drc-plate__cats" id="dr-breakdown"></div>
+      <div class="drc-plate__meta" id="dr-duration"></div>
+      <div class="drc-plate__actions">
+        <button type="button" class="drc-btn drc-btn--ghost" id="dr-help">Помочь с расчётом</button>
+        <button type="button" class="drc-btn drc-btn--ghost" id="dr-reset">Сбросить выбор</button>
       </div>
-      <button type="button" class="drc-btn" id="dr-book">Забронировать</button>
+      <p class="drc-plate__note">Заявка ни к чему не обязывает. Организатор подтвердит свободное время и точную сумму. Бронь фиксируется предоплатой 3 000 ₽ — дату и состав можно менять, при отмене заранее предоплата возвращается.</p>
+      <p class="drc-plate__offer">Нашли похожий праздник дешевле? <button type="button" class="drc-link" id="dr-offer">Напишите нам</button> — обсудим условия.</p>
     </div>
-    <div class="drc-plate__cats" id="dr-breakdown"></div>
-    <div class="drc-plate__meta" id="dr-duration"></div>
-    <div class="drc-plate__actions">
-      <button type="button" class="drc-btn drc-btn--ghost" id="dr-help">Помочь с расчётом</button>
-    </div>
-    <p class="drc-plate__note">Заявка ни к чему не обязывает. Организатор подтвердит свободное время и точную сумму. Бронь фиксируется предоплатой 3 000 ₽ — дату и состав можно менять, при отмене заранее предоплата возвращается.</p>
-    <p class="drc-plate__offer">Нашли похожий праздник дешевле? <button type="button" class="drc-link" id="dr-offer">Напишите нам</button> — обсудим условия.</p>
   </div>
 
   <p class="drc-foot">Расчёт предварительный: точную сумму и свободное время подтверждает организатор. К любой программе добавляем +30 минут на сборы и разъезд детей.</p>
 </section>
 
 <div class="drc-bar" id="dr-bar" hidden>
-  <div class="drc-bar__sum"><b id="dr-bar-total">0 ₽</b><span>предварительно</span></div>
-  <button type="button" class="drc-btn drc-btn--bar" id="dr-bar-book">Забронировать</button>
+  <div class="drc-bar__top">
+    <button type="button" class="drc-bar__sum" id="dr-bar-sum" title="Открыть расчёт">
+      <b id="dr-bar-total">0 ₽</b><span>предварительно</span><span class="drc-bar__hint">нажми — открою расчёт</span>
+    </button>
+    <div class="drc-bar__tools">
+      <button type="button" class="drc-bar__reset" id="dr-bar-reset" aria-label="Сбросить выбор" title="Сбросить выбор">↺</button>
+      <button type="button" class="drc-bar__x" id="dr-bar-close" aria-label="Скрыть итог">✕</button>
+    </div>
+  </div>
+  <div class="drc-bar__btns">
+    <button type="button" class="drc-btn drc-btn--bar-ghost" id="dr-bar-choose">Выбрать</button>
+    <button type="button" class="drc-btn drc-btn--bar" id="dr-bar-book">Забронировать</button>
+  </div>
+</div>
+
+<button type="button" class="drc-pill" id="dr-pill" hidden aria-label="Показать расчёт">
+  <b id="dr-pill-total">0 ₽</b>
+  <span class="drc-pill__hint" aria-hidden="true">↻</span>
+</button>
+
+<div class="drc-toast" id="dr-toast" hidden>
+  <span>Состав перенесён в заявку</span>
+  <button type="button" class="is-primary" id="dr-toast-go">Перейти к заявке</button>
+  <button type="button" class="is-plain" id="dr-toast-stay">Продолжить выбор</button>
 </div>
 
 <div class="drc-modal" id="dr-modal" hidden>
@@ -156,46 +200,87 @@
 
 <style is:global>
 [hidden] { display: none !important; }
-.drc { background: #032E2B; color: #fff; padding: 72px 20px 80px; font-family: 'Montserrat', Arial, sans-serif; }
+.drc { background: #032E2B; color: #fff; padding: 72px 20px 80px; overflow-x: hidden; }
 .drc * { box-sizing: border-box; }
-.drc h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; text-align: center; margin: 0 0 12px; }
-.drc__head p { max-width: 640px; margin: 0 auto 36px; text-align: center; color: rgba(255,255,255,.75); font-size: 16px; line-height: 1.6; }
+.drc h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
+.drc__head p { max-width: 640px; margin: 0 auto 28px; text-align: center; color: rgba(255,255,255,.75); font-size: 15px; line-height: 1.6; }
 .drc__tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 30px; flex-wrap: wrap; }
-.drc__tab { font: inherit; font-weight: 700; padding: 12px 24px; border-radius: 30px; border: 2px solid rgba(255,255,255,.25); background: transparent; color: #fff; cursor: pointer; transition: .2s; }
+.drc__tab { font: inherit; font-weight: 700; padding: 10px 20px; font-size: 14px; border-radius: 30px; border: 2px solid rgba(255,255,255,.25); background: transparent; color: #fff; cursor: pointer; transition: .2s; }
 .drc__tab.is-active { background: #C30067; border-color: #C30067; }
 .drc__pane { display: none; }
 .drc__pane.is-active { display: block; }
+.drc__pane[data-pane="custom"] { max-width: 760px; margin: 0 auto; }
 
 .drc__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 1080px; margin: 0 auto; }
 .drc-card { position: relative; display: block; cursor: pointer; }
-.drc-card input { position: absolute; opacity: 0; }
-.drc-card__in { display: flex; flex-direction: column; gap: 6px; height: 100%; background: #fff; color: #032E2B; border: 2px solid transparent; border-radius: 20px; padding: 26px 24px; transition: .2s; }
+.drc-card input { position: absolute; opacity: 0; pointer-events: none; }
+.drc-card__in { display: flex; flex-direction: column; gap: 6px; height: 100%; background: #fff; color: #032E2B; border: 2px solid transparent; border-radius: 20px; padding: 22px 20px; transition: .2s; }
 .drc-card:hover .drc-card__in { border-color: rgba(10,153,148,.5); transform: translateY(-2px); }
 .drc-card input:checked ~ .drc-card__in { border-color: #C30067; box-shadow: 0 10px 30px rgba(195,0,103,.25); }
-.drc-card__name { font-size: 20px; font-weight: 800; }
-.drc-card__price { font-size: 30px; font-weight: 800; color: #C30067; }
-.drc-card__meta { font-size: 13px; color: #3C5B57; }
-.drc-card__list { font-size: 13px; line-height: 1.6; color: #3C5B57; margin-top: 6px; }
-.drc-card__cta { margin-top: auto; align-self: flex-start; font-weight: 700; font-size: 14px; color: #C30067; padding-top: 14px; }
-.drc-card__badge { position: absolute; top: -12px; left: 20px; background: #C30067; color: #fff; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 20px; z-index: 1; }
+.drc-card__name { font-size: 18px; font-weight: 700; }
+.drc-card__price { font-size: 26px; font-weight: 800; color: #C30067; }
+.drc-card__meta { font-size: 12.5px; color: #3C5B57; }
+.drc-card__list { font-size: 12.5px; line-height: 1.6; color: #3C5B57; margin-top: 6px; }
+
+.drc-card__cta {
+  margin-top: auto;
+  align-self: flex-start;
+  font: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  color: #C30067;
+  padding: 6px 0;
+  padding-top: 14px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+}
+.drc-card__cta:hover { color: #E00077; }
+.drc-card__cta.is-picked { color: #0A9994; }
+
+.drc-card__badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #C30067;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  z-index: 1;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+  line-height: 1.3;
+}
 .drc-card--hit .drc-card__in { border-color: #C30067; }
 
 .drc-mini { display: flex; gap: 12px; align-items: center; max-width: 1080px; margin: 14px auto 0; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 14px; padding: 14px 18px; cursor: pointer; font-size: 14px; color: rgba(255,255,255,.85); }
 .drc-mini input { position: absolute; opacity: 0; }
 .drc-mini:has(input:checked) { border-color: #C30067; }
+.drc-mini:hover { border-color: rgba(195,0,103,.6); }
 .drc-mini__cta { color: #0AD9C6; font-weight: 700; white-space: nowrap; }
 
-.drc-lbl { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.85); margin: 0 0 12px; }
-.drc-lbl i { font-style: normal; width: 26px; height: 26px; border-radius: 50%; background: #C30067; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; flex: 0 0 auto; }
-.drc__steps { max-width: 760px; margin: 36px auto 0; background: #fff; color: #032E2B; border-radius: 20px; padding: 30px 34px; display: grid; gap: 28px; }
+.drc-lbl { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; letter-spacing: .06em; color: rgba(255,255,255,.85); margin: 0 0 12px; }
+.drc-lbl i { font-style: normal; width: 22px; height: 22px; border-radius: 50%; background: rgba(195,0,103,.08); color: #C30067; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; flex: 0 0 auto; }
+
+.drc__cols { max-width: 1080px; margin: 36px auto 0; display: grid; gap: 24px; align-items: start; }
+@media (min-width: 901px) {
+  .drc__cols { grid-template-columns: minmax(0, 1fr) 420px; }
+  .drc-plate { position: sticky; top: 20px; }
+}
+
+.drc__steps { background: #fff; color: #032E2B; border-radius: 20px; padding: 30px 34px; display: grid; gap: 2px; }
 .drc-step .drc-lbl { color: #3C5B57; }
 .drc-stepper { display: inline-flex; align-items: center; gap: 14px; background: #F5F7F6; border-radius: 12px; padding: 8px 12px; }
-.drc-stepper button { width: 34px; height: 34px; border: 0; border-radius: 10px; background: #05544F; color: #fff; font-size: 18px; font-weight: 800; cursor: pointer; }
+.drc-stepper button { width: 32px; height: 32px; border: 0; border-radius: 10px; background: #05544F; color: #fff; font-size: 16px; font-weight: 800; cursor: pointer; }
 .drc-stepper button:disabled { opacity: .35; cursor: default; }
-.drc-stepper output { min-width: 56px; text-align: center; font-size: 18px; font-weight: 800; }
+.drc-stepper output { min-width: 48px; text-align: center; font-size: 16px; font-weight: 800; }
 .drc-gnote { display: block; margin-top: 8px; font-size: 12px; color: #3C5B57; }
 .drc-hint { display: block; margin-top: 10px; font-size: 12px; line-height: 1.5; color: #6B8B86; background: #F5F7F6; border-radius: 10px; padding: 8px 12px; }
-.drc-date { font: inherit; font-size: 15px; padding: 10px 14px; border: 1px solid #E4ECEA; border-radius: 12px; color: #032E2B; background: #fff; }
+.drc-date { font: inherit; font-size: 15px; padding: 10px 14px; border: 1px solid #E4ECEA; border-radius: 12px; color: #032E2B; background: #fff; width: 100%; max-width: 240px; }
 .drc-slots { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 .drc-slot { font: inherit; font-size: 13px; padding: 8px 16px; border: 1px solid #E4ECEA; border-radius: 10px; background: #fff; color: #3C5B57; cursor: pointer; }
 .drc-slot.is-active { border-color: #C30067; color: #C30067; font-weight: 700; }
@@ -208,10 +293,10 @@
 .drc-opt.is-incl .drc-opt__p { color: #0A9994; }
 .drc-opt input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: #C30067; flex: 0 0 auto; }
 .drc-opt input:disabled { opacity: .6; }
-.drc-opt__b { flex: 1; }
-.drc-opt__b b { display: block; font-size: 14px; font-weight: 800; color: #032E2B; }
+.drc-opt__b { flex: 1; min-width: 0; }
+.drc-opt__b b { display: block; font-size: 13.5px; font-weight: 700; color: #032E2B; }
 .drc-opt__b span { font-size: 12px; color: #3C5B57; }
-.drc-opt__p { font-size: 14px; font-weight: 800; color: #032E2B; white-space: nowrap; }
+.drc-opt__p { font-size: 13.5px; font-weight: 700; color: #032E2B; white-space: nowrap; }
 .drc-opt--free .drc-opt__p { color: #0A9994; }
 .drc-hours { display: flex; gap: 8px; padding-left: 30px; flex-wrap: wrap; }
 .drc-hours label { font-size: 13px; color: #3C5B57; cursor: pointer; border: 1px solid #E4ECEA; border-radius: 10px; padding: 6px 14px; }
@@ -219,39 +304,40 @@
 .drc-hours input { display: none; }
 
 .drc-radios { display: grid; gap: 10px; max-width: 760px; margin: 0 auto 22px; }
-.drc-radios label { display: flex; gap: 12px; align-items: flex-start; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.18); border-radius: 12px; padding: 14px 16px; cursor: pointer; font-size: 14px; line-height: 1.5; }
+.drc-radios label { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.18); border-radius: 12px; padding: 14px 16px; cursor: pointer; font-size: 14px; line-height: 1.5; }
 .drc-radios label b { display: block; }
 .drc-radios label:has(input:checked) { border-color: #C30067; }
 .drc-radios input { accent-color: #C30067; margin: 3px 0 0; }
 .drc-preset { max-width: 760px; width: 100%; margin: 4px auto 0; display: block; font: inherit; font-size: 14px; font-weight: 700; color: #0AD9C6; background: rgba(10,153,148,.12); border: 1px dashed rgba(10,217,198,.6); padding: 13px 16px; border-radius: 12px; cursor: pointer; }
+.drc-preset:hover { border-color: #C30067; color: #C30067; }
 
-.drc-plate { max-width: 760px; margin: 24px auto 0; background: #fff; color: #032E2B; border-radius: 22px; padding: 28px 32px; box-shadow: 0 16px 48px rgba(0,0,0,.35); }
+.drc-plate { background: #fff; color: #032E2B; border-radius: 22px; padding: 24px 26px; box-shadow: 0 16px 48px rgba(0,0,0,.35); max-width: 100%; overflow: hidden; }
 .drc-plate__head { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-bottom: 18px; border-bottom: 2px solid #E4ECEA; }
-.drc-plate__tag { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #C30067; margin-bottom: 4px; }
-.drc-plate__price { display: block; font-size: 40px; font-weight: 800; line-height: 1.1; }
-.drc-btn { font: inherit; font-weight: 700; font-size: 15px; padding: 15px 32px; border-radius: 30px; border: 0; background: #C30067; color: #fff; cursor: pointer; transition: .2s; }
+.drc-plate__tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; color: #C30067; margin-bottom: 4px; }
+.drc-plate__price { display: block; font-size: clamp(30px, 8vw, 40px); font-weight: 800; line-height: 1.1; }
+.drc-btn { font: inherit; font-weight: 700; font-size: 14px; padding: 13px 28px; border-radius: 30px; border: 0; background: #C30067; color: #fff; cursor: pointer; transition: .2s; }
 .drc-btn:hover { background: #E00077; transform: translateY(-2px); }
-.drc-btn--ghost { background: transparent; color: #05544F; border: 2px solid #05544F; padding: 13px 28px; }
+.drc-btn--ghost { background: transparent; color: #05544F; border: 2px solid #05544F; padding: 11px 24px; }
 .drc-btn--ghost:hover { background: #F5F7F6; transform: none; }
 .drc-link { font: inherit; font-size: 12px; font-weight: 700; color: #0A9994; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
 
-/* --- Категории в плашке: тот же язык, что в форме заявки --- */
 .drc-plate__cats { margin-top: 6px; }
 .drc-catbtn { width: 100%; font: inherit; text-align: left; background: none; border: 0; border-bottom: 1px dashed #E4ECEA; padding: 12px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-.drc-catbtn .l { display: grid; gap: 2px; min-width: 0; }
-.drc-catbtn .lbl { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #6B8B86; }
-.drc-catbtn .t { font-size: 14.5px; font-weight: 600; color: #032E2B; }
+.drc-catbtn .l { display: grid; gap: 2px; min-width: 0; flex: 1 1 auto; }
+.drc-catbtn .lbl { font-size: 11px; font-weight: 600; letter-spacing: 0; color: #6B8B86; }
+.drc-catbtn .t { font-size: 14px; font-weight: 600; color: #032E2B; overflow-wrap: anywhere; word-break: break-word; }
 .drc-catbtn .r { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
-.drc-catbtn .v { font-size: 14.5px; font-weight: 800; color: #032E2B; white-space: nowrap; }
+.drc-catbtn .v { font-size: 14px; font-weight: 700; color: #032E2B; white-space: nowrap; }
 .drc-catbtn .v.is-money { color: #C30067; }
 .drc-catbtn .v.is-none { color: #6B8B86; font-weight: 400; }
-.drc-catbtn .chev { font-size: 13px; font-weight: 800; color: #C30067; transition: transform .2s; }
+.drc-catbtn .chev { font-size: 13px; font-weight: 700; color: #C30067; transition: transform .2s; }
 .drc-catbtn.is-open .chev { transform: rotate(180deg); }
-.drc-catsub { display: none; padding: 10px 0 12px; border-bottom: 1px dashed #E4ECEA; }
-.drc-catsub.is-open { display: grid; gap: 8px; }
-.drc-catrow { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 13.5px; line-height: 1.5; color: #032E2B; padding-left: 12px; position: relative; }
-.drc-catrow::before { content: '·'; position: absolute; left: 0; top: 0; font-size: 16px; font-weight: 800; color: #C30067; }
-.drc-catrow b { font-weight: 700; white-space: nowrap; }
+.drc-catsub { display: none; padding: 6px 0 8px; border-bottom: 1px dashed #E4ECEA; }
+.drc-catsub.is-open { display: grid; gap: 4px; }
+.drc-catrow { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: baseline; font-size: 13px; line-height: 1.5; color: #032E2B; padding: 5px 0; border-bottom: 1px solid rgba(228, 236, 234, 0.5); }
+.drc-catrow:last-child { border-bottom: 0; }
+.drc-catrow span { overflow-wrap: anywhere; word-break: break-word; }
+.drc-catrow b { font-weight: 500; color: #3C5B57; white-space: nowrap; }
 .drc-catrow.is-muted { color: #6B8B86; }
 .drc-catrow.is-muted b { color: #6B8B86; font-weight: 400; }
 
@@ -261,15 +347,62 @@
 .drc-plate__offer { margin: 8px 0 0; font-size: 12px; color: #6B8B86; }
 .drc-foot { margin-top: 18px; text-align: center; font-size: 12px; color: rgba(255,255,255,.5); }
 
-.drc-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; justify-content: space-between; align-items: center; gap: 12px; background: #021F1D; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); box-shadow: 0 -6px 24px rgba(0,0,0,.4); }
-.drc-bar__sum b { font-size: 20px; font-weight: 800; color: #fff; display: block; }
-.drc-bar__sum span { font-size: 11px; color: rgba(255,255,255,.55); }
-.drc-btn--bar { padding: 13px 26px; }
+.drc-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; flex-direction: column; gap: 8px; background: #021F1D; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); box-shadow: 0 -6px 24px rgba(0,0,0,.4); }
+.drc-bar__top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.drc-bar__sum { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 8px; background: none; border: 0; color: #fff; font: inherit; padding: 0; cursor: pointer; text-align: left; }
+.drc-bar__sum b { font-size: 19px; font-weight: 800; line-height: 1.15; }
+.drc-bar__sum span { font-size: 12px; color: rgba(255,255,255,.55); }
+.drc-bar__hint { flex-basis: 100%; }
+.drc-bar__tools { display: flex; gap: 8px; flex: 0 0 auto; }
+.drc-bar__reset { width: 38px; height: 38px; border: 0; border-radius: 50%; background: rgba(255,255,255,.12); color: rgba(255,255,255,.7); font-size: 16px; cursor: pointer; flex: 0 0 auto; }
+.drc-bar__x { width: 38px; height: 38px; border: 0; border-radius: 50%; background: rgba(255,255,255,.12); color: rgba(255,255,255,.7); font-size: 15px; cursor: pointer; flex: 0 0 auto; }
+.drc-bar__btns { display: flex; gap: 8px; }
+.drc-btn--bar { flex: 1.3 1 0; padding: 14px 10px; border-radius: 20px; font-size: 14px; text-align: center; }
+.drc-btn--bar-ghost { flex: 1 1 0; background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.45); padding: 12px 10px; border-radius: 20px; font-size: 14px; text-align: center; }
+
+/* Таблетка с ценой: закруглённая кнопка внизу справа (замена круглому fab) */
+.drc-pill {
+  position: fixed;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 49;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 24px;
+  background: #C30067;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0,0,0,.45);
+  cursor: pointer;
+  font: inherit;
+  transition: background .15s;
+}
+.drc-pill:hover { background: #E00077; }
+.drc-pill b { font-size: 16px; font-weight: 800; line-height: 1; }
+.drc-pill__hint { font-size: 14px; opacity: .8; line-height: 1; }
+.drc-pill.is-dirty::before {
+  content: '●';
+  color: #0AD9C6;
+  font-size: 10px;
+  line-height: 1;
+  margin-right: -2px;
+}
+
+.drc-toast { position: fixed; left: 50%; transform: translateX(-50%); width: calc(100% - 32px); max-width: 560px; bottom: 28px; z-index: 60; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: #fff; color: #032E2B; border-radius: 16px; padding: 14px 16px; box-shadow: 0 12px 32px rgba(0,0,0,.4); font-size: 14px; font-weight: 600; }
+.drc-toast button { font: inherit; font-size: 13px; font-weight: 700; padding: 9px 16px; border-radius: 20px; cursor: pointer; }
+.drc-toast button.is-primary { background: #C30067; color: #fff; border: 0; }
+.drc-toast button.is-plain { background: transparent; color: #6B8B86; border: 1px solid #E4ECEA; }
+
+.drc-plate__btns { display: flex; gap: 10px; flex-wrap: wrap; }
+@media (min-width: 761px) { .drc-pill { display: none; } }
 
 .drc-modal { position: fixed; inset: 0; z-index: 100; background: rgba(1,16,15,.7); display: flex; align-items: center; justify-content: center; padding: 20px; }
 .drc-modal__box { position: relative; background: #fff; color: #032E2B; border-radius: 22px; padding: 30px 30px 24px; max-width: 420px; width: 100%; }
 .drc-modal__x { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: #F5F7F6; color: #3C5B57; font-size: 14px; cursor: pointer; }
-.drc-modal__title { display: block; font-size: 19px; font-weight: 800; margin-bottom: 8px; }
+.drc-modal__title { display: block; font-size: 19px; font-weight: 700; margin-bottom: 8px; }
 .drc-modal__sub { margin: 0 0 18px; font-size: 13px; line-height: 1.6; color: #3C5B57; }
 .drc-modal__btns { display: grid; gap: 10px; }
 .drc-chan { display: block; text-align: center; font: inherit; font-weight: 700; font-size: 15px; padding: 14px; border-radius: 14px; color: #fff; text-decoration: none; transition: .15s; }
@@ -280,18 +413,31 @@
 .drc-chan--tel { background: #032E2B; }
 .drc-modal__note { margin: 16px 0 0; font-size: 11px; line-height: 1.5; color: #6B8B86; }
 
+.drc-step { border-bottom: 1px dashed #E4ECEA; }
+.drc-step:last-child { border-bottom: 0; }
+.drc-step__head { display: block; position: relative; width: 100%; font: inherit; background: none; border: 0; text-align: left; padding: 12px 28px 10px 0; cursor: pointer; }
+.drc-step__head .drc-lbl { margin: 0; text-transform: none; letter-spacing: 0; font-size: 15px; font-weight: 600; color: #032E2B; }
+.drc-step__aside { display: block; margin-top: 3px; }
+.drc-step__sum { text-align: left; font-size: 13px; font-weight: 600; color: #3C5B57; }
+.drc-step__chev { position: absolute; right: 2px; top: 16px; font-size: 13px; font-weight: 600; color: #6B8B86; transition: transform .2s; }
+.drc-step__head.is-open .drc-step__chev { transform: rotate(180deg); color: #C30067; }
+.drc-step__body { padding-bottom: 14px; }
+
 @media (max-width: 900px) { .drc__cards { grid-template-columns: 1fr; } }
 @media (max-width: 760px) {
-  .drc { padding: 48px 14px 110px; }
-  .drc__steps, .drc-plate { padding: 22px 18px; }
+  .drc { padding: 48px 14px 150px; }
+  .drc__steps, .drc-plate { padding: 20px 16px; }
   .drc-plate__head { flex-direction: column; align-items: stretch; }
-  .drc-btn { width: 100%; }
+  .drc-plate .drc-btn { width: 100%; }
+  .drc-toast { bottom: calc(126px + env(safe-area-inset-bottom)); }
+  .drc-lbl i { width: 20px; height: 20px; font-size: 11px; }
 }
 @media (min-width: 761px) { .drc-bar { display: none; } }
 </style>
 
-<script>
-  // @ts-nocheck
+<script is:inline>
+// Калькулятор v8.2 — модель «черновик / снимок» + видимая цена + сигнализаторы
+// @ts-nocheck
   const CONFIG = {
     wa: '79287588483',
     tg: 'xkalmar',
@@ -330,10 +476,19 @@
   let lastTotal = 0;
   let lastOrder = null;
 
-  /* Открытые категории плашки — переживают пересчёты */
+  let snapshot = null;
+  let dirty = false;
+
+  let barClosed = false;
+  let toastTimer = null;
+
   const plateOpen = { pack: false, party: false, extras: false };
 
-  window.DR_CALC = { ready: false, tariff: '', guests: 0, date: '', slot: '', extras: '', total: 0, summary: '' };
+  window.DR_CALC = {
+    ready: false, selected: false, tariff: '', guests: 0,
+    date: '', slot: '', extras: '', total: 0, summary: '', order: null,
+    dirty: false, justUpdatedAt: 0
+  };
 
   const $ = (id) => document.getElementById(id);
   const fmt = (n) => n.toLocaleString('ru-RU') + ' ₽';
@@ -350,35 +505,25 @@
   function currentTariff() {
     return mode() === 'packs' ? TARIFFS[state.pack] : TARIFFS[state.customBase];
   }
-
   function customYm() {
     const sel = document.querySelector('input[name="dr-cym"]:checked');
     return sel ? parseInt(sel.value, 10) : 0;
   }
-
   function currentExt() {
     const sel = document.querySelector('input[name="dr-ext"]:checked');
     return sel ? parseInt(sel.value, 10) : 0;
   }
-
   function roomExtMinutes() {
     if (!$('dr-room-ext').checked) return 0;
     const sel = document.querySelector('input[name="dr-rh"]:checked');
     return sel ? parseInt(sel.value, 10) : 30;
   }
-
-  /* Чистая программа (продление комнаты не входит — оно ведётся без аниматоров) */
   function programHours() {
     const t = currentTariff();
     if (!t) return 0;
     return t.program + (mode() === 'packs' ? currentExt() : customYm()) / 60;
   }
-
-  /* Весь слот = праздник + сборы 30 мин */
-  function slotHours() {
-    return programHours() + 0.5 + roomExtMinutes() / 60;
-  }
-
+  function slotHours() { return programHours() + 0.5 + roomExtMinutes() / 60; }
   function ymAddPrice() {
     const t = currentTariff();
     if (mode() === 'packs') {
@@ -391,15 +536,58 @@
 
   function setDisplay(id, show) { $(id).style.display = show ? '' : 'none'; }
   function isIncluded(optId) {
-    return mode() === 'packs' && state.pack === 'maximal' && ['dr-video', 'dr-photo', 'dr-balls', 'dr-tort'].includes(optId);
+    return mode() === 'packs' && state.pack === 'maximal' && ['dr-video','dr-photo','dr-balls','dr-tort'].includes(optId);
   }
-
-  /* Сброс натыканных услуг — только при явном выборе пакета или пресета */
   function resetExtras() {
-    ['dr-menu', 'dr-video', 'dr-photo', 'dr-balls', 'dr-tort', 'dr-room2', 'dr-room-ext'].forEach((id) => {
+    ['dr-menu','dr-video','dr-photo','dr-balls','dr-tort','dr-room2','dr-room-ext'].forEach((id) => {
       $(id).checked = false;
     });
     $('dr-room-hours').hidden = true;
+  }
+
+  /* Сравнение снимка и текущего черновика по значимым полям (цена не участвует — она производная) */
+  function hasChangesSinceSnapshot() {
+    if (!snapshot || !lastOrder) return false;
+    if (snapshot.tariffKey !== lastOrder.tariffKey) return true;
+    if (snapshot.guests !== lastOrder.guests) return true;
+    if (snapshot.dateISO !== lastOrder.dateISO) return true;
+    if (snapshot.slot !== lastOrder.slot) return true;
+    const e1 = (snapshot.extras || []).join('|');
+    const e2 = (lastOrder.extras || []).join('|');
+    if (e1 !== e2) return true;
+    return false;
+  }
+
+  function syncPackCtas() {
+    document.querySelectorAll('[data-pack-pick]').forEach((btn) => {
+      btn.classList.remove('is-picked');
+      btn.textContent = 'Выбрать';
+    });
+    if (snapshot && !dirty && state.pack) {
+      const btn = document.querySelector('[data-pack-pick="' + state.pack + '"]');
+      if (btn) {
+        btn.classList.add('is-picked');
+        btn.textContent = 'Выбрано';
+      }
+    }
+  }
+
+  /* Кнопки-команды: плашка «Ваш тариф» и бар — 3 состояния */
+  function syncChooseBtns() {
+    let plateTxt, barTxt;
+    if (!snapshot) { plateTxt = 'Выбрать'; barTxt = 'Выбрать'; }
+    else if (dirty) { plateTxt = 'Перенести в заявку'; barTxt = 'Перенести'; }
+    else { plateTxt = '✓ Выбрано'; barTxt = '✓ Выбрано'; }
+    if ($('dr-choose')) $('dr-choose').textContent = plateTxt;
+    if ($('dr-bar-choose')) $('dr-bar-choose').textContent = barTxt;
+  }
+
+  /* Таблетка с ценой: обновление суммы и точки-сигнализатора */
+  function syncPill() {
+    const pill = $('dr-pill');
+    if (!pill) return;
+    $('dr-pill-total').textContent = fmt(lastTotal);
+    pill.classList.toggle('is-dirty', !!dirty);
   }
 
   function syncExt() {
@@ -417,6 +605,7 @@
 
   function syncVisibility() {
     const t = currentTariff();
+    if (!t) return;
     const isMax = mode() === 'packs' && state.pack === 'maximal';
     const isMini = mode() === 'packs' ? state.pack === 'mini' : state.customBase === 'mini';
     setDisplay('dr-ext-block', mode() === 'packs');
@@ -426,7 +615,7 @@
     setDisplay('dr-opt-balls', !isMax);
     setDisplay('dr-opt-tort', !isMax);
     setDisplay('dr-opt-room2', !isMini);
-    ['dr-video', 'dr-photo', 'dr-balls', 'dr-tort'].forEach((id) => {
+    ['dr-video','dr-photo','dr-balls','dr-tort'].forEach((id) => {
       const input = $(id);
       const incl = isIncluded(id);
       input.disabled = incl;
@@ -436,6 +625,7 @@
 
   function syncGuests() {
     const t = currentTariff();
+    if (!t) return;
     if (!state.guestsTouched) state.guests = t.minGuests;
     if (state.guests < t.minGuests) state.guests = t.minGuests;
     if (state.guests > MAX_GUESTS) state.guests = MAX_GUESTS;
@@ -469,11 +659,9 @@
     return extras;
   }
 
-  /* --- Строки и категории для плашки --- */
   function crow(label, value, muted) {
     return '<div class="drc-catrow' + (muted ? ' is-muted' : '') + '"><span>' + label + '</span><b>' + value + '</b></div>';
   }
-  /* Разбирает строку «Название · цена» на пару */
   function crowSp(s) {
     const i = s.lastIndexOf(' · ');
     return crow(i > -1 ? s.slice(0, i) : s, i > -1 ? s.slice(i + 3) : '', false);
@@ -496,7 +684,6 @@
     const dateStr = $('dr-date').value;
     let total = t.price;
 
-    /* --- Надбавки за гостей: идут в категорию «Ваш праздник», чтобы суммы сходились с итогом --- */
     const surList = [];
     if (t.food) {
       const foodExtra = Math.max(0, g - t.freeGuests);
@@ -517,7 +704,6 @@
       }
     }
 
-    /* --- Дополнительно: услуги с ценами --- */
     const extrasList = [];
     let extrasSum = 0;
     const pushExtra = (name, price) => {
@@ -542,12 +728,9 @@
     if ($('dr-room2').checked) pushExtra('Вторая банкетная комната', null);
 
     total += extrasSum;
-
-    /* --- Праздник = программа + продление комнаты --- */
     const party = programHours() + roomExtMinutes() / 60;
     $('dr-duration').textContent = 'Праздник: ' + fmtH(party) + ' · весь слот: ' + fmtH(party + 0.5) + ' (+30 мин на сборы и разъезд)';
 
-    /* --- Плашка: три категории со сводками --- */
     const packSub = (t.includes || []).map((it) => crow(it, 'включено', true)).join('');
     let html = ccat('pack', 'Пакет', '«' + t.name + '»', fmt(t.price), 'is-money', packSub);
 
@@ -582,10 +765,12 @@
 
     lastOrder = {
       tariff: t.name,
+      tariffKey: mode() === 'packs' ? state.pack : state.customBase,
       tariffPrice: t.price,
       includes: t.includes || [],
       guests: g,
       date: dateStr ? dateStr.split('-').reverse().join('.') : '',
+      dateISO: dateStr || '',
       slot: state.slot || '',
       party: fmtH(party),
       slotFull: fmtH(party + 0.5),
@@ -598,26 +783,25 @@
     lastTotal = total;
     $('dr-total').textContent = fmt(total);
     $('dr-bar-total').textContent = fmt(total);
+    setStepSum(0, g + ' ' + plural(g, 'ребёнок', 'ребёнка', 'детей'));
+    setStepSum(1, dateStr ? dateStr.split('-').reverse().join('.') + (state.slot ? ', ' + state.slot : '') : 'дату уточним');
+    const extBits = [];
+    if (mode() === 'packs' && currentExt() > 0) extBits.push('ярмарка +' + currentExt() + ' мин');
+    if (roomExtMinutes()) extBits.push('комната +' + roomExtMinutes() + ' мин');
+    setStepSum(2, extBits.length ? extBits.join(' · ') : 'без продления');
+    const exCount = ['dr-menu','dr-video','dr-photo','dr-balls','dr-tort','dr-room2'].filter((id) => $(id).checked).length;
+    setStepSum(3, exCount ? exCount + ' ' + plural(exCount, 'услуга', 'услуги', 'услуг') : 'ничего не добавлено');
+
+    /* dirty = «снимок отличается от черновика» — только по значимым полям */
+    dirty = snapshot ? hasChangesSinceSnapshot() : false;
+    syncChooseBtns();
+    syncPackCtas();
+    syncPill();
     pushCalc();
   }
 
-  function buildSummary() {
-    const t = currentTariff();
-    if (!t) return '';
-    /* Берём структуру из расчёта; если её вдруг нет — собираем по старинке */
-    const o = lastOrder || {
-      tariff: t.name,
-      tariffPrice: t.price,
-      includes: t.includes || [],
-      guests: state.guests,
-      date: $('dr-date').value ? $('dr-date').value.split('-').reverse().join('.') : '',
-      slot: state.slot || '',
-      party: fmtH(programHours() + roomExtMinutes() / 60),
-      slotFull: fmtH(programHours() + roomExtMinutes() / 60 + 0.5),
-      sur: [],
-      extras: [],
-      total: lastTotal
-    };
+  function buildSummary(o) {
+    if (!o) return '';
     const lines = [
       'Заявка с сайта xkalmar.com (страница дня рождения)',
       '',
@@ -635,11 +819,8 @@
       '',
       '➕ ДОПОЛНИТЕЛЬНО'
     );
-    if (o.extras && o.extras.length) {
-      o.extras.forEach((e) => lines.push('· ' + e));
-    } else {
-      lines.push('· ничего сверх пакета');
-    }
+    if (o.extras && o.extras.length) o.extras.forEach((e) => lines.push('· ' + e));
+    else lines.push('· ничего сверх пакета');
     lines.push('', '💰 Итого по расчёту на сайте: ' + fmt(o.total));
     return lines.join('\n');
   }
@@ -654,14 +835,46 @@
     c.date = $('dr-date').value || '';
     c.slot = state.slot || '';
     c.extras = collectExtras().join(', ');
-    c.total = lastTotal;
-    c.summary = buildSummary();
-    c.order = lastOrder;
+    c.dirty = dirty;
     saveCalcState();
     try { document.dispatchEvent(new CustomEvent('drcalc-update')); } catch (e) {}
   }
 
-  /* Раскрытие категорий плашки — делегирование, переживает перерисовку */
+  function pushSnapshot() {
+    const c = window.DR_CALC;
+    if (snapshot) {
+      c.selected = true;
+      c.order = snapshot;
+      c.summary = buildSummary(snapshot);
+      c.total = snapshot.total;
+    } else {
+      c.selected = false;
+      c.order = null;
+      c.summary = '';
+      c.total = 0;
+    }
+    c.dirty = dirty;
+    saveCalcState();
+    try { document.dispatchEvent(new CustomEvent('drcalc-update')); } catch (e) {}
+  }
+
+  function pick() {
+    if (!lastOrder) return;
+    snapshot = JSON.parse(JSON.stringify(lastOrder));
+    dirty = false;
+    window.DR_CALC.justUpdatedAt = Date.now();
+    pushSnapshot();
+    syncChooseBtns();
+    syncPackCtas();
+    syncPill();
+    if (!window.__drToastShown) {
+      window.__drToastShown = true;
+      $('dr-toast').hidden = false;
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { $('dr-toast').hidden = true; }, 8000);
+    }
+  }
+
   $('dr-breakdown').addEventListener('click', (e) => {
     const btn = e.target.closest('[data-catbtn]');
     if (!btn) return;
@@ -673,7 +886,6 @@
     if (sub) sub.classList.toggle('is-open', plateOpen[key]);
   });
 
-  /* ===== Автосохранение в localStorage ===== */
   function saveCalcState() {
     try {
       const data = {
@@ -693,10 +905,12 @@
         photo: $('dr-photo').checked,
         balls: $('dr-balls').checked,
         tort: $('dr-tort').checked,
-        room2: $('dr-room2').checked
+        room2: $('dr-room2').checked,
+        snapshot: snapshot,
+        dirty: dirty
       };
       localStorage.setItem(LS_KEY, JSON.stringify(data));
-    } catch (e) { /* приватный режим или переполнение — живём без сохранения */ }
+    } catch (e) {}
   }
 
   function restoreCalcState() {
@@ -704,51 +918,54 @@
     try { d = JSON.parse(localStorage.getItem(LS_KEY) || 'null'); } catch (e) { d = null; }
     if (!d) return false;
     try {
-      /* Таб */
       if (d.tab === 'custom') {
         document.querySelectorAll('.drc__tab').forEach((x) => x.classList.toggle('is-active', x.dataset.tab === 'custom'));
         document.querySelectorAll('.drc__pane').forEach((p) => p.classList.toggle('is-active', p.dataset.pane === 'custom'));
         state.customBase = TARIFFS[d.customBase] ? d.customBase : 'base';
-        const cb = document.querySelector('input[name="dr-cbase"][value="' + state.customBase + '"]');
-        if (cb) cb.checked = true;
       } else if (d.pack && TARIFFS[d.pack]) {
         state.pack = d.pack;
         const pr = document.querySelector('input[name="dr-pack"][value="' + d.pack + '"]');
         if (pr) pr.checked = true;
       } else {
-        return false; /* ничего осмысленного не выбирали */
+        return false;
       }
-
-      /* Ярмарка в «Собрать свой формат» */
-      const cym = document.querySelector('input[name="dr-cym"][value="' + (d.customYm || '0') + '"]');
-      if (cym) cym.checked = true;
-
-      /* Гости, дата, время */
       if (typeof d.guests === 'number' && d.guests > 0) state.guests = d.guests;
       state.guestsTouched = !!d.guestsTouched;
       if (d.date) $('dr-date').value = d.date;
-      if (d.slot) state.slot = d.slot; /* buildSlots сбросит, если слот не подходит */
+      if (d.slot) state.slot = d.slot;
 
-      /* Допы и продление комнаты */
-      if (d.roomExt) { $('dr-room-ext').checked = true; }
+      if (d.tab === 'custom') {
+        const cb = document.querySelector('input[name="dr-cbase"][value="' + state.customBase + '"]');
+        if (cb) cb.checked = true;
+        const cymEl = document.querySelector('input[name="dr-cym"][value="' + (d.customYm || '0') + '"]');
+        if (cymEl) cymEl.checked = true;
+        state.customYm = d.customYm || '0';
+      }
+      if (d.roomExt) $('dr-room-ext').checked = true;
       const rh = document.querySelector('input[name="dr-rh"][value="' + (d.rh || '30') + '"]');
       if (rh) rh.checked = true;
-      ['menu', 'video', 'photo', 'balls', 'tort', 'room2'].forEach((k) => {
-        if (d[k]) $(('dr-' + k)).checked = true;
+      ['menu','video','photo','balls','tort','room2'].forEach((k) => {
+        if (d[k]) $('dr-' + k).checked = true;
       });
 
       showSteps(true);
       recalcAll();
 
-      /* Вариант продления Ярмарки — восстанавливаем после того, как syncExt пересоздал радио */
       if (d.tab === 'packs' && d.ext != null) {
         const er = document.querySelector('input[name="dr-ext"][value="' + d.ext + '"]');
         if (er) { er.checked = true; calculate(); }
       }
+
+      if (d.snapshot) {
+        snapshot = d.snapshot;
+        dirty = !!d.dirty;
+      }
+      pushSnapshot();
+      syncChooseBtns();
+      syncPackCtas();
+      syncPill();
       return true;
-    } catch (e) {
-      return false;
-    }
+    } catch (e) { return false; }
   }
 
   function buildSlots() {
@@ -784,26 +1001,73 @@
   function showSteps(show) {
     $('dr-steps').hidden = !show;
     $('dr-result').hidden = !show;
-    $('dr-bar').hidden = !show;
+    if (show) {
+      $('dr-bar').hidden = barClosed;
+      $('dr-pill').hidden = !barClosed;
+    } else {
+      $('dr-bar').hidden = true;
+      $('dr-pill').hidden = true;
+    }
   }
 
   function recalcAll() {
     syncExt();
     syncVisibility();
     syncGuests();
+    syncChooseBtns();
+    syncPackCtas();
     buildSlots();
     calculate();
+    syncPill();
+  }
+
+  const stepOpen = [true, false, false, false];
+  function renderSteps() {
+    document.querySelectorAll('#dr-steps .drc-step').forEach((st, i) => {
+      const body = st.querySelector('.drc-step__body');
+      const head = st.querySelector('.drc-step__head');
+      body.hidden = !stepOpen[i];
+      head.classList.toggle('is-open', stepOpen[i]);
+      head.setAttribute('aria-expanded', stepOpen[i] ? 'true' : 'false');
+    });
+  }
+  document.querySelectorAll('#dr-steps .drc-step__head').forEach((h) => {
+    h.addEventListener('click', () => {
+      const i = Number(h.dataset.stephead);
+      stepOpen[i] = !stepOpen[i];
+      renderSteps();
+    });
+  });
+  function openNext(i) {
+    if (i < 3 && !stepOpen[i + 1]) { stepOpen[i + 1] = true; renderSteps(); }
+  }
+  function setStepSum(i, text) { const el = $('dr-sum-' + i); if (el) el.textContent = text; }
+
+  function applyPack(el) {
+    state.pack = el.value;
+    const t = TARIFFS[el.value];
+    if (!t) return;
+    state.guests = state.guestsTouched ? Math.max(state.guests, t.minGuests) : t.minGuests;
+    resetExtras();
+    showSteps(true);
+    recalcAll();
   }
 
   document.querySelectorAll('input[name="dr-pack"]').forEach((el) => {
-    el.addEventListener('change', () => {
-      state.pack = el.value;
-      const t = TARIFFS[el.value];
-      state.guests = state.guestsTouched ? Math.max(state.guests, t.minGuests) : t.minGuests;
-      resetExtras();
-      showSteps(true);
-      recalcAll();
-      $('dr-steps').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    el.addEventListener('change', () => applyPack(el));
+  });
+
+  document.querySelectorAll('[data-pack-pick]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const val = btn.dataset.packPick;
+      const input = document.querySelector('input[name="dr-pack"][value="' + val + '"]');
+      if (input && !input.checked) {
+        input.checked = true;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      pick();
     });
   });
 
@@ -812,14 +1076,12 @@
       state.customBase = el.value;
       const t = TARIFFS[el.value];
       state.guests = state.guestsTouched ? Math.max(state.guests, t.minGuests) : t.minGuests;
+      showSteps(true);
       recalcAll();
     });
   });
   document.querySelectorAll('input[name="dr-cym"]').forEach((el) => {
-    el.addEventListener('change', () => {
-      state.customYm = el.value;
-      recalcAll();
-    });
+    el.addEventListener('change', () => { state.customYm = el.value; recalcAll(); });
   });
 
   document.querySelectorAll('.drc__tab').forEach((tab) => {
@@ -832,33 +1094,36 @@
         recalcAll();
       } else if (!state.pack) {
         showSteps(false);
+      } else {
+        recalcAll();
       }
     });
   });
 
-  $('dr-plus').addEventListener('click', () => { state.guests++; state.guestsTouched = true; recalcAll(); });
-  $('dr-minus').addEventListener('click', () => { state.guests--; state.guestsTouched = true; recalcAll(); });
+  $('dr-plus').addEventListener('click', () => { state.guests++; state.guestsTouched = true; recalcAll(); openNext(0); });
+  $('dr-minus').addEventListener('click', () => { state.guests--; state.guestsTouched = true; recalcAll(); openNext(0); });
 
-  ['dr-menu', 'dr-video', 'dr-photo', 'dr-balls', 'dr-tort', 'dr-room2'].forEach((id) => {
+  ['dr-menu','dr-video','dr-photo','dr-balls','dr-tort','dr-room2'].forEach((id) => {
     $(id).addEventListener('change', calculate);
   });
   $('dr-room-ext').addEventListener('change', () => {
     $('dr-room-hours').hidden = !$('dr-room-ext').checked;
     buildSlots();
+    openNext(2);
     calculate();
   });
-  document.getElementById('dr-ext-block').addEventListener('change', () => { buildSlots(); calculate(); });
+  document.getElementById('dr-ext-block').addEventListener('change', () => { buildSlots(); calculate(); openNext(2); });
   document.querySelectorAll('input[name="dr-rh"]').forEach((el) => el.addEventListener('change', () => {
     buildSlots();
     calculate();
   }));
 
   const dateInput = $('dr-date');
-  dateInput.min = new Date().toISOString().split('T')[0];
-  dateInput.addEventListener('change', calculate);
+  const _d = new Date();
+  dateInput.min = _d.getFullYear() + '-' + String(_d.getMonth()+1).padStart(2,'0') + '-' + String(_d.getDate()).padStart(2,'0');
+  dateInput.addEventListener('change', () => { calculate(); openNext(1); });
 
   $('dr-preset').addEventListener('click', () => {
-    document.querySelector('.drc__tab[data-tab="custom"]').click();
     document.querySelector('input[name="dr-cbase"][value="base"]').checked = true;
     document.querySelector('input[name="dr-cym"][value="60"]').checked = true;
     state.customBase = 'base';
@@ -868,11 +1133,11 @@
     $('dr-menu').checked = true;
     $('dr-photo').checked = true;
     $('dr-balls').checked = true;
+    document.querySelector('.drc__tab[data-tab="custom"]').click();
+    showSteps(true);
     recalcAll();
-    $('dr-steps').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  /* ===== Переключатель каналов связи ===== */
   function openChannels(title, text) {
     $('dr-modal-title').textContent = title;
     $('dr-chan-wa').href = 'https://wa.me/' + CONFIG.wa + '?text=' + encodeURIComponent(text);
@@ -888,7 +1153,14 @@
 
   function book() {
     const anchor = document.getElementById('zayavka');
-    if (anchor) { anchor.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+    if (anchor) {
+      $('dr-toast').hidden = true;
+      $('dr-bar').hidden = true;
+      $('dr-pill').hidden = false;
+      barClosed = true;
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
     openChannels('Заявка на праздник', window.DR_CALC.summary || 'Здравствуйте! Хочу забронировать праздник.');
   }
   function help() {
@@ -897,11 +1169,73 @@
   function offer() {
     openChannels('Обсудить условия', 'Здравствуйте! Нашел(ла) похожее предложение дешевле — можем обсудить условия?');
   }
+
+  $('dr-toast-go').addEventListener('click', () => { $('dr-toast').hidden = true; book(); });
+  $('dr-toast-stay').addEventListener('click', () => { $('dr-toast').hidden = true; });
+  $('dr-bar-choose').addEventListener('click', pick);
+  $('dr-choose').addEventListener('click', pick);
   $('dr-book').addEventListener('click', book);
   $('dr-bar-book').addEventListener('click', book);
   $('dr-help').addEventListener('click', help);
   $('dr-offer').addEventListener('click', offer);
 
-  /* Восстановление сохранённого выбора — в самом конце, когда всё объявлено */
+  $('dr-bar-close').addEventListener('click', () => {
+    barClosed = true;
+    $('dr-bar').hidden = true;
+    $('dr-pill').hidden = false;
+  });
+  $('dr-pill').addEventListener('click', () => {
+    barClosed = false;
+    $('dr-bar').hidden = false;
+    $('dr-pill').hidden = true;
+    /* сразу прокрутить к плашке, чтобы пользователь увидел полный расчёт */
+    const plate = document.getElementById('dr-result');
+    if (plate) plate.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  $('dr-bar-sum').addEventListener('click', () => {
+    barClosed = true;
+    $('dr-bar').hidden = true;
+    $('dr-pill').hidden = false;
+    const plate = document.getElementById('dr-result');
+    if (plate) plate.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  function doReset() {
+    try { localStorage.removeItem(LS_KEY); } catch (e) {}
+    ['dr-menu','dr-video','dr-photo','dr-balls','dr-tort','dr-room2','dr-room-ext'].forEach((id) => { $(id).checked = false; });
+    $('dr-room-hours').hidden = true;
+    document.querySelectorAll('input[name="dr-pack"]').forEach((i) => (i.checked = false));
+    document.querySelectorAll('input[name="dr-cbase"]').forEach((i) => (i.checked = false));
+    document.querySelectorAll('input[name="dr-cym"]').forEach((i) => (i.checked = false));
+    $('dr-date').value = '';
+    state.pack = null;
+    state.customBase = 'base';
+    state.customYm = '0';
+    state.guests = 6;
+    state.guestsTouched = false;
+    state.slot = null;
+    stepOpen[0] = true; stepOpen[1] = false; stepOpen[2] = false; stepOpen[3] = false;
+
+    snapshot = null;
+    dirty = false;
+    barClosed = false;
+    window.__drToastShown = false;
+    window.DR_CALC.justUpdatedAt = 0;
+
+    syncChooseBtns();
+    syncPackCtas();
+    syncPill();
+    showSteps(false);
+    window.DR_CALC.ready = false;
+    pushSnapshot();
+    document.querySelectorAll('.drc__tab').forEach((x) => x.classList.toggle('is-active', x.dataset.tab === 'packs'));
+    document.querySelectorAll('.drc__pane').forEach((p) => p.classList.toggle('is-active', p.dataset.pane === 'packs'));
+    document.querySelector('.drc__tabs').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  $('dr-reset').addEventListener('click', doReset);
+  $('dr-bar-reset').addEventListener('click', doReset);
+
   restoreCalcState();
+  renderSteps();
 </script>
