@@ -1,10 +1,10 @@
 ---
-// Форма заявки v2.8: три сворачиваемые категории + отправка даты/времени праздника и телефона отдельными полями
+// Форма заявки v3.0
 ---
 <section class="drf" id="zayavka">
   <div class="drf__head">
     <h2>Оставить заявку</h2>
-    <p>Заполните три поля — остальное подтянется из расчёта выше. Организатор ответит и подтвердит точную сумму.</p>
+    <p>Заполните три поля — остальное подтянется из расчёта выше.</p>
   </div>
 
   <div class="drf__grid">
@@ -13,12 +13,10 @@
         <span>Как вас зовут</span>
         <input type="text" id="drf-name" placeholder="Например, Анна" maxlength="60">
       </label>
-
       <label class="drf-field drf-field--check">
         <span>Телефон для связи</span>
         <input type="tel" id="drf-phone" inputmode="tel" placeholder="+7 (900) 000-00-00" maxlength="18">
       </label>
-
       <div class="drf-field">
         <span>Как с вами удобнее связаться</span>
         <div class="drf-chips" id="drf-contact">
@@ -28,29 +26,22 @@
           <button type="button" class="drf-chip" data-v="WhatsApp">WhatsApp</button>
         </div>
       </div>
-
       <label class="drf-field">
         <span>Комментарий <i>— необязательно</i></span>
         <textarea id="drf-comment" rows="3" placeholder="Возраст детей, пожелания, вопросы…"></textarea>
       </label>
-
       <label class="drf-consent">
         <input type="checkbox" id="drf-ok">
-        <span>Согласен(а) с <a href="/privacy" target="_blank">политикой конфиденциальности</a>. Данные используем только для связи по заявке.</span>
+        <span>Согласен(а) с <a href="/privacy" target="_blank">политикой конфиденциальности</a>.</span>
       </label>
-
       <button type="button" class="drf-btn" id="drf-send">Отправить заявку</button>
-      <p class="drf-note">Обычно отвечаем в течение часа. Праздник нужен уже на этих выходных? <a href="tel:+79287588483">Позвоните нам</a> — так быстрее всего.</p>
+      <p class="drf-note">Обычно отвечаем в течение часа. Нужно быстрее? <a href="tel:+79287588483">Позвоните</a>.</p>
     </div>
 
     <div class="drf__order is-collapsed" id="drf-order-panel">
       <div class="drf-order__head">
         <span class="drf-order__tag">Состав заявки</span>
-        <span class="drf-order__status" id="drf-order-status" hidden></span>
-        <span class="drf-order__links">
-          <button type="button" class="drf-order__edit" id="drf-order-clear">очистить</button>
-          <a class="drf-order__edit" href="#calc">изменить расчёт →</a>
-        </span>
+        <button type="button" class="drf-order__status" id="drf-order-status" hidden></button>
       </div>
 
       <button type="button" class="drf-order__toggle" id="drf-order-toggle" aria-expanded="false">
@@ -60,20 +51,24 @@
 
       <div class="drf-order__body" id="drf-order-body">
         <div id="drf-order">
-          <p class="drf-order__empty">Состав появится, когда вы что-нибудь выберете в калькуляторе выше 🙂</p>
+          <p class="drf-order__empty">Состав появится, когда нажмёте «Выбрать» в калькуляторе выше</p>
         </div>
         <div class="drf-order__total" id="drf-order-total" hidden>
-          <span>Итого по расчёту</span>
+          <span>Итого</span>
           <b id="drf-order-price">0 ₽</b>
         </div>
-        <p class="drf-order__note" id="drf-order-note" hidden>Бронь фиксируется предоплатой 3 000 ₽ — состав и дату можно менять, при отмене заранее предоплата возвращается.</p>
+        <div class="drf-order__actions" id="drf-order-actions" hidden>
+          <button type="button" class="drf-order__edit" id="drf-order-clear">очистить</button>
+          <a class="drf-order__edit" href="#calc">изменить расчёт →</a>
+        </div>
+        <p class="drf-order__note" id="drf-order-note" hidden>Бронь фиксируется предоплатой 3 000 ₽.</p>
       </div>
     </div>
   </div>
 
   <div class="drf-done" id="drf-done" hidden>
     <b>Заявка отправлена!</b>
-    <p>Организатор получил её и свяжется с вами в ближайшее время. Если хочется быстрее — напишите нам напрямую.</p>
+    <p>Организатор получил её и свяжется в ближайшее время.</p>
     <div class="drf-done__btns">
       <a class="drf-done__link" id="drf-done-wa" target="_blank" rel="noopener">WhatsApp</a>
       <a class="drf-done__link" id="drf-done-tg" target="_blank" rel="noopener">Telegram</a>
@@ -83,13 +78,13 @@
 </section>
 
 <style is:global>
-.drf { background: #021F1D; color: #fff; padding: 72px 20px 80px; font-family: inherit; }
+.drf { background: #021F1D; color: #fff; padding: 72px 20px 80px; overflow-x: hidden; }
 .drf * { box-sizing: border-box; }
-.drf h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; text-align: center; margin: 0 0 12px; }
-.drf__head p { max-width: 640px; margin: 0 auto 36px; text-align: center; color: rgba(255,255,255,.75); font-size: 16px; line-height: 1.6; }
+.drf h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
+.drf__head p { max-width: 640px; margin: 0 auto 28px; text-align: center; color: rgba(255,255,255,.75); font-size: 15px; line-height: 1.6; }
 .drf__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px; max-width: 1080px; margin: 0 auto; align-items: start; }
 
-.drf__form { background: #fff; color: #032E2B; border-radius: 22px; padding: 30px 32px; display: grid; gap: 16px; }
+.drf__form { background: #fff; color: #032E2B; border-radius: 22px; padding: 26px 28px; display: grid; gap: 14px; max-width: 100%; }
 .drf-field { display: grid; gap: 6px; position: relative; }
 .drf-field span { font-size: 13px; font-weight: 700; color: #3C5B57; }
 .drf-field span i { font-style: normal; font-weight: 400; color: #6B8B86; }
@@ -101,74 +96,70 @@
 .drf-field.is-valid input { border-color: rgba(10,153,148,.5); }
 
 .drf-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-.drf-chip { font: inherit; font-size: 13px; font-weight: 700; padding: 9px 16px; border-radius: 20px; border: 1px solid #E4ECEA; background: #fff; color: #3C5B57; cursor: pointer; transition: .15s; }
+.drf-chip { font: inherit; font-size: 13px; font-weight: 700; padding: 9px 16px; border-radius: 20px; border: 1px solid #E4ECEA; background: #fff; color: #3C5B57; cursor: pointer; }
 .drf-chip:hover { border-color: rgba(10,153,148,.5); }
 .drf-chip.is-active { border-color: #C30067; color: #C30067; background: rgba(195,0,103,.06); }
 
 .drf-consent { display: flex; gap: 10px; align-items: flex-start; font-size: 12px; line-height: 1.5; color: #6B8B86; cursor: pointer; }
 .drf-consent input { width: 16px; height: 16px; margin: 2px 0 0; accent-color: #C30067; flex: 0 0 auto; }
 .drf-consent a { color: #0A9994; text-decoration: underline; }
-.drf-btn { font: inherit; font-weight: 700; font-size: 16px; padding: 16px 32px; border-radius: 30px; border: 0; background: #C30067; color: #fff; cursor: pointer; transition: .2s; }
+.drf-btn { font: inherit; font-weight: 700; font-size: 16px; padding: 15px 30px; border-radius: 30px; border: 0; background: #C30067; color: #fff; cursor: pointer; transition: .2s; }
 .drf-btn:hover { background: #E00077; transform: translateY(-2px); }
 .drf-btn:disabled { opacity: .6; cursor: default; transform: none; }
 .drf-note { margin: 0; font-size: 12px; line-height: 1.6; color: #6B8B86; }
 .drf-note a { color: #C30067; font-weight: 700; text-decoration: underline; }
 
-/* --- Блок «Заявка отправлена»: белая карточка в стилистике страницы --- */
 .drf-done { max-width: 1080px; margin: 0 auto; background: #fff; color: #032E2B; border-radius: 22px; padding: 30px 32px; box-shadow: 0 16px 48px rgba(0,0,0,.35); }
 .drf-done > b { display: block; font-size: 22px; font-weight: 800; margin-bottom: 8px; }
 .drf-done > p { margin: 0 0 18px; font-size: 14px; line-height: 1.6; color: #3C5B57; max-width: 560px; }
 .drf-done__btns { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-.drf-done__link { font: inherit; font-weight: 700; font-size: 15px; padding: 13px 26px; border-radius: 30px; color: #fff; text-decoration: none; transition: .15s; }
-.drf-done__link:hover { transform: translateY(-1px); filter: brightness(1.08); }
+.drf-done__link { font: inherit; font-weight: 700; font-size: 15px; padding: 13px 26px; border-radius: 30px; color: #fff; text-decoration: none; }
 #drf-done-wa { background: #128C7E; }
 #drf-done-tg { background: #2AABEE; }
-.drf-done__again { font: inherit; font-weight: 700; font-size: 15px; padding: 11px 24px; border-radius: 30px; background: transparent; color: #05544F; border: 2px solid #05544F; cursor: pointer; transition: .15s; }
-.drf-done__again:hover { background: #F5F7F6; }
+.drf-done__again { font: inherit; font-weight: 700; font-size: 15px; padding: 11px 24px; border-radius: 30px; background: transparent; color: #05544F; border: 2px solid #05544F; cursor: pointer; }
 
-/* --- Панель состава: три категории, каждая сворачивается ---
-   Малиновым — только деньги: цена пакета, сумма допов, итог. --- */
-.drf__order { position: sticky; top: 24px; background: #fff; color: #032E2B; border-radius: 22px; padding: 26px 28px; box-shadow: 0 16px 48px rgba(0,0,0,.35); }
-.drf-order__head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding-bottom: 14px; border-bottom: 2px solid #E4ECEA; margin-bottom: 8px; }
-.drf-order__tag { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #C30067; }
-.drf-order__edit { font-size: 12px; font-weight: 700; color: #0A9994; text-decoration: underline; white-space: nowrap; }
-.drf-order__links { display: flex; gap: 14px; align-items: baseline; }
-button.drf-order__edit { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; }
+.drf__order { position: sticky; top: 24px; background: #fff; color: #032E2B; border-radius: 22px; padding: 22px 24px; box-shadow: 0 16px 48px rgba(0,0,0,.35); max-width: 100%; overflow: hidden; }
+.drf-order__head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-bottom: 12px; border-bottom: 2px solid #E4ECEA; margin-bottom: 8px; }
+.drf-order__tag { font-size: 11px; font-weight: 700; letter-spacing: .04em; color: #C30067; white-space: nowrap; }
+.drf-order__status { font: inherit; text-align: left; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 10px; border: 0; cursor: default; line-height: 1.3; white-space: normal; max-width: 100%; }
+.drf-order__status--stale { background: rgba(195,0,103,.08); color: #C30067; cursor: pointer; }
+.drf-order__status--stale:hover { background: rgba(195,0,103,.14); }
+.drf-order__status--stale b { font-weight: 800; }
+.drf-order__status--fresh { background: rgba(10,217,198,.12); color: #0A9994; }
 
-/* категория: строка-сводка + скрытые детали */
 .drf-order__catbtn { width: 100%; font: inherit; text-align: left; background: none; border: 0; border-bottom: 1px dashed #E4ECEA; padding: 12px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-.drf-order__catbtn .l { display: grid; gap: 2px; min-width: 0; }
-.drf-order__catbtn .lbl { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #6B8B86; }
-.drf-order__catbtn .t { font-size: 14.5px; font-weight: 600; color: #032E2B; }
+.drf-order__catbtn .l { display: grid; gap: 2px; min-width: 0; flex: 1 1 auto; }
+.drf-order__catbtn .lbl { font-size: 11px; font-weight: 600; color: #6B8B86; }
+.drf-order__catbtn .t { font-size: 14px; font-weight: 600; color: #032E2B; overflow-wrap: anywhere; }
 .drf-order__catbtn .r { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
-.drf-order__catbtn .v { font-size: 14.5px; font-weight: 800; color: #032E2B; white-space: nowrap; }
+.drf-order__catbtn .v { font-size: 14px; font-weight: 700; color: #032E2B; white-space: nowrap; }
 .drf-order__catbtn .v.is-money { color: #C30067; }
 .drf-order__catbtn .v.is-none { color: #6B8B86; font-weight: 400; }
 .drf-order__catbtn .chev { font-size: 13px; font-weight: 700; color: #C30067; transition: transform .2s; }
 .drf-order__catbtn.is-open .chev { transform: rotate(180deg); }
-button.drf-order__edit { color: #6B8B86; text-decoration: none; }
-button.drf-order__edit:hover { color: #C30067; }
 
-/* детали категории */
-.drf-order__sub { display: none; padding: 10px 0 12px; border-bottom: 1px dashed #E4ECEA; }
-.drf-order__sub.is-open { display: grid; gap: 8px; }
-.drf-order__row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 13.5px; line-height: 1.5; color: #032E2B; padding-left: 12px; position: relative; }
-.drf-order__row::before { content: '·'; position: absolute; left: 0; top: 0; font-size: 16px; font-weight: 800; color: #C30067; }
-.drf-order__row b { font-weight: 700; white-space: nowrap; }
+.drf-order__sub { display: none; padding: 6px 0 8px; border-bottom: 1px dashed #E4ECEA; }
+.drf-order__sub.is-open { display: grid; gap: 4px; }
+.drf-order__row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: baseline; font-size: 13px; line-height: 1.5; color: #032E2B; padding: 5px 0; border-bottom: 1px solid rgba(228,236,234,.5); }
+.drf-order__row:last-child { border-bottom: 0; }
+.drf-order__row span { overflow-wrap: anywhere; word-break: break-word; }
+.drf-order__row b { font-weight: 500; color: #3C5B57; white-space: nowrap; }
 .drf-order__row.is-muted { color: #6B8B86; }
 .drf-order__row.is-muted b { color: #6B8B86; font-weight: 400; }
 
 .drf-order__empty { margin: 8px 0; font-size: 13.5px; color: #6B8B86; }
-
 .drf-order__total { margin-top: 14px; padding-top: 14px; border-top: 2px solid #E4ECEA; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 .drf-order__total span { font-size: 13px; color: #3C5B57; }
-.drf-order__total b { font-size: 30px; font-weight: 800; color: #C30067; }
+.drf-order__total b { font-size: 28px; font-weight: 800; color: #C30067; white-space: nowrap; }
 .drf-order__total b.is-updated { animation: drfPulse .4s ease; }
 @keyframes drfPulse { from { transform: scale(1.08); } to { transform: scale(1); } }
+
+.drf-order__actions { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; gap: 12px; }
+.drf-order__edit { font: inherit; font-size: 12px; font-weight: 600; color: #6B8B86; text-decoration: none; padding: 4px 8px; border-radius: 8px; background: transparent; border: 0; cursor: pointer; transition: .15s; }
+.drf-order__edit:hover { color: #C30067; background: #F5F7F6; }
 .drf-order__note { margin: 12px 0 0; font-size: 12px; line-height: 1.55; color: #6B8B86; }
 
-/* мобильная компактная плашка */
-.drf-order__toggle { display: none; width: 100%; font: inherit; text-align: left; font-size: 14px; font-weight: 700; color: #032E2B; background: #F5F7F6; border: 1px solid #E4ECEA; border-radius: 12px; padding: 13px 14px; cursor: pointer; align-items: center; justify-content: space-between; gap: 10px; }
+.drf-order__toggle { display: none; width: 100%; font: inherit; text-align: left; font-size: 14px; font-weight: 700; color: #032E2B; background: #F5F7F6; border: 1px solid #E4ECEA; border-radius: 12px; padding: 12px 14px; cursor: pointer; align-items: center; justify-content: space-between; gap: 10px; }
 .drf-order__chev { color: #C30067; font-weight: 800; transition: transform .2s; }
 .drf__order.is-open .drf-order__chev { transform: rotate(180deg); }
 
@@ -182,92 +173,21 @@ button.drf-order__edit:hover { color: #C30067; }
 
 @media (max-width: 760px) {
   .drf { padding: 48px 14px 64px; }
-  .drf__form, .drf__order, .drf-done { padding: 22px 18px; }
+  .drf__form, .drf__order, .drf-done { padding: 20px 18px; }
   .drf-btn { width: 100%; }
 }
-
-/* Ссылки в шапке состава — единый стиль */
-.drf-order__links a,
-.drf-order__links button {
-  font-size: 13px;
-  font-weight: 600;
-  color: #0A9994;
-  text-decoration: none;
-  text-transform: none;
-}
-.drf-order__links a:hover,
-.drf-order__links button:hover { color: #C30067; }
-
-/* Анти-overflow на мобилке */
-.drf__order,
-.drf__form { max-width: 100%; overflow-x: hidden; }
-.drf-order__head { flex-wrap: wrap; row-gap: 6px; }
-.drf-order__links { flex-wrap: wrap; row-gap: 4px; }
-.drf-order__catbtn { flex-wrap: wrap; row-gap: 4px; }
-.drf-order__catbtn .l,
-.drf-order__catbtn .r { min-width: 0; }
-.drf-order__catbtn .t,
-.drf-order__row span { overflow-wrap: anywhere; word-break: break-word; }
-
-/* Кнопки «очистить / изменить расчёт» — ghost */
-.drf-order__edit {
-  font-size: 12px;
-  font-weight: 600;
-  color: #6B8B86;
-  text-decoration: none;
-  padding: 4px 8px;
-  border-radius: 8px;
-  transition: .15s;
-  background: transparent;
-  border: 0;
-  font-family: inherit;
-  cursor: pointer;
-}
-.drf-order__edit:hover { color: #C30067; background: #F5F7F6; }
-
-/* Плашка статуса: «Состав устарел» / «Расчёт обновлён» */
-.drf-order__status {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 10px;
-  line-height: 1.3;
-  white-space: normal;
-  max-width: 100%;
-}
-.drf-order__status--stale {
-  background: rgba(195,0,103,.08);
-  color: #C30067;
-}
-.drf-order__status--stale b { font-weight: 800; }
-.drf-order__status--fresh {
-  background: rgba(10,217,198,.12);
-  color: #0A9994;
-}
-
-/* Итого — без переноса суммы */
-.drf-order__total { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-.drf-order__total b { white-space: nowrap; }
-
-.drf-order__total b { white-space: nowrap; }
-.drf-order__tag { white-space: nowrap; }
 </style>
 
 <script>
   // @ts-nocheck
-  /* === НАСТРОЙКА: вставь сюда URL своего Apps Script === */
-  const FORM_URL = 'https://script.google.com/macros/s/AKfycbwvgQ0INRJRzT4xu5mQ6ht_SakiUL7kEIBqDw-a88ooyfapllfD3Yr1undNexLI2KaP/exec'; // вида https://script.google.com/macros/s/.../exec
-
+  const FORM_URL = 'https://script.google.com/macros/s/AKfycbwvgQ0INRJRzT4xu5mQ6ht_SakiUL7kEIBqDw-a88ooyfapllfD3Yr1undNexLI2KaP/exec';
   const WA_NUMBER = '79287588483';
   const TG_USER = 'xkalmar';
 
   const $ = (id) => document.getElementById(id);
   const fmt = (n) => n.toLocaleString('ru-RU') + ' ₽';
   const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
-  /* Двухступенчатый сигнализатор в шапке «Состав заявки»:
-   — dirty=true  → «Состав устарел» (малиновый, висит пока не обновишь)
-   — fresh       → «Расчёт обновлён» (бирюзовый, гаснет через 5 сек) */
+
   function renderOrderStatus() {
     const el = $('drf-order-status');
     if (!el) return;
@@ -281,7 +201,7 @@ button.drf-order__edit:hover { color: #C30067; }
     if (c.dirty) {
       el.hidden = false;
       el.className = 'drf-order__status drf-order__status--stale';
-      el.innerHTML = 'Состав устарел — нажмите <b>«Перенести в заявку»</b> в калькуляторе';
+      el.innerHTML = 'Состав устарел — <b>обновить</b>';
       return;
     }
     if (c.justUpdatedAt && (Date.now() - c.justUpdatedAt) < 5000) {
@@ -301,12 +221,20 @@ button.drf-order__edit:hover { color: #C30067; }
     el.className = 'drf-order__status';
   }
 
+  function onStatusClick() {
+    if (!window.DR_CALC || !window.DR_CALC.dirty) return;
+    const bar = document.getElementById('dr-bar-choose');
+    if (bar) bar.click();
+    else {
+      const choose = document.getElementById('dr-choose');
+      if (choose) choose.click();
+    }
+  }
+
   let contact = 'Звонок';
   let mobileOpen = false;
-  /* открытые категории — переживают перерисовку */
   const openCats = { pack: false, party: false, extras: false };
 
-  /* --- Способ связи --- */
   document.querySelectorAll('#drf-contact .drf-chip').forEach((chip) => {
     chip.addEventListener('click', () => {
       document.querySelectorAll('#drf-contact .drf-chip').forEach((c) => c.classList.remove('is-active'));
@@ -315,7 +243,6 @@ button.drf-order__edit:hover { color: #C30067; }
     });
   });
 
-  /* --- Живая валидация --- */
   const nameInput = $('drf-name');
   const phoneInput = $('drf-phone');
 
@@ -327,6 +254,8 @@ button.drf-order__edit:hover { color: #C30067; }
   }
   nameInput.addEventListener('input', checkName);
 
+  function phoneDigits(s) { return s.replace(/\D/g, ''); }
+
   function checkPhone() {
     const ok = phoneDigits(phoneInput.value).length === 11;
     phoneInput.parentElement.classList.toggle('is-valid', ok);
@@ -334,29 +263,24 @@ button.drf-order__edit:hover { color: #C30067; }
     return ok;
   }
 
-  /* --- Панель состава: три категории со сводками --- */
   function plural(n, one, few, many) {
     const m10 = n % 10, m100 = n % 100;
     if (m10 === 1 && m100 !== 11) return one;
     if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few;
     return many;
   }
-
   function row(n, v, muted) {
     return '<div class="drf-order__row' + (muted ? ' is-muted' : '') + '"><span>' + n + '</span><b>' + v + '</b></div>';
   }
-
-  /* Разбирает строку «Название · цена» на пару */
   function splitPair(s) {
     const i = s.lastIndexOf(' · ');
     return i > -1 ? { name: s.slice(0, i), price: s.slice(i + 3) } : { name: s, price: '' };
   }
-
   function catHtml(key, label, title, value, valueCls, subHtml) {
     const open = !!openCats[key];
     return '<div class="drf-order__cat">' +
       '<button type="button" class="drf-order__catbtn' + (open ? ' is-open' : '') + '" data-catbtn="' + key + '" aria-expanded="' + open + '">' +
-        '<span class="l"><span class="lbl">' + label + '</span><span class="t">' + title + '</span></span>' +
+        '<span class="l">' + (label ? '<span class="lbl">' + label + '</span>' : '') + '<span class="t">' + title + '</span></span>' +
         '<span class="r"><span class="v ' + valueCls + '">' + value + '</span><span class="chev">▾</span></span>' +
       '</button>' +
       '<div class="drf-order__sub' + (open ? ' is-open' : '') + '" data-sub="' + key + '">' + subHtml + '</div>' +
@@ -368,14 +292,16 @@ button.drf-order__edit:hover { color: #C30067; }
     const box = $('drf-order');
     const totalBox = $('drf-order-total');
     const note = $('drf-order-note');
+    const actions = $('drf-order-actions');
     const strip = $('drf-order-strip');
     const panel = $('drf-order-panel');
     const toggle = $('drf-order-toggle');
 
     if (!c || !c.ready || !c.selected || (!c.order && !c.summary)) {
-      box.innerHTML = '<p class="drf-order__empty">Состав появится, когда выберете тариф в калькуляторе — там есть кнопка «Выбрать» 🙂</p>';
+      box.innerHTML = '<p class="drf-order__empty">Состав появится, когда нажмёте «Выбрать» в калькуляторе</p>';
       totalBox.hidden = true;
       note.hidden = true;
+      if (actions) actions.hidden = true;
       toggle.style.display = 'none';
       panel.classList.remove('is-collapsed');
       return;
@@ -384,15 +310,10 @@ button.drf-order__edit:hover { color: #C30067; }
     let html = '';
     if (c.order) {
       const o = c.order;
-
-      /* ПАКЕТ: сводка «название — цена», детали — состав пакета */
       const inc = o.includes || [];
-      const packSub = inc.length
-        ? inc.map((it) => row(it, 'включено', true)).join('')
-        : row('состав уточнит организатор', '', true);
+      const packSub = inc.length ? inc.map((it) => row(it, 'включено', true)).join('') : row('состав уточнит организатор', '', true);
       html += catHtml('pack', 'Пакет', o.tariff, fmt(o.tariffPrice), 'is-money', packSub);
 
-      /* ВАШ ПРАЗДНИК: надбавки за гостей идут в эту категорию — суммы сходятся с итогом */
       const surRows = (o.sur || []).map((s) => {
         const p = splitPair(s);
         return row(p.name, p.price, false);
@@ -402,12 +323,11 @@ button.drf-order__edit:hover { color: #C30067; }
         row('Детей', o.guests) +
         surRows +
         row('Дата', o.date || 'уточним') +
-        row('Время начала', o.slot || 'уточним') +
+        row('Время', o.slot || 'уточним') +
         row('Праздник', o.party) +
-        row('Весь слот со сборами', o.slotFull);
-      html += catHtml('party', 'Ваш праздник', 'Детали праздника', partyVal, '', partySub);
+        row('Весь слот', o.slotFull);
+      html += catHtml('party', '', 'Детали праздника', partyVal, '', partySub);
 
-      /* ДОПОЛНИТЕЛЬНО: сводка «N услуг — сумма», детали — позиции с ценами */
       const sum = (typeof o.extrasSum === 'number') ? o.extrasSum : 0;
       let exTitle = 'Дополнительно';
       let exVal = 'не выбрано';
@@ -418,17 +338,13 @@ button.drf-order__edit:hover { color: #C30067; }
         exCls = sum > 0 ? 'is-money' : '';
       }
       const exSub = o.extras && o.extras.length
-        ? o.extras.map((s) => {
-            const p = splitPair(s);
-            return row(p.name, p.price || 'по запросу', false);
-          }).join('')
-        : row('ничего сверх пакета не выбрано', '', true);
+        ? o.extras.map((s) => { const p = splitPair(s); return row(p.name, p.price || 'по запросу', false); }).join('')
+        : row('ничего не выбрано', '', true);
       html += catHtml('extras', '', exTitle, exVal, exCls, exSub);
 
       const tariffShort = o.tariff.replace(' (квест-шоу + банкет)', '');
       strip.textContent = tariffShort + ' · ' + o.guests + ' детей · ' + fmt(c.total);
     } else {
-      /* Запасной путь: старый текстовый формат из калькулятора */
       const lines = c.summary.split('\n').filter((l) => l && !l.startsWith('Заявка с сайта') && !l.startsWith('Итого'));
       html = '<p class="drf-order__empty">' + lines.map((l) => l.replace(/——/g, '·')).join('<br>') + '</p>';
       strip.textContent = 'состав из калькулятора';
@@ -437,6 +353,7 @@ button.drf-order__edit:hover { color: #C30067; }
     box.innerHTML = html;
     totalBox.hidden = false;
     note.hidden = false;
+    if (actions) actions.hidden = false;
     const price = $('drf-order-price');
     price.textContent = fmt(c.total);
     price.classList.remove('is-updated');
@@ -452,14 +369,11 @@ button.drf-order__edit:hover { color: #C30067; }
     }
     renderOrderStatus();
   }
-  renderOrder();
-  renderOrderStatus();
-  document.addEventListener('drcalc-update', () => {
-  renderOrder();
-  renderOrderStatus();
-  });
 
-  /* Раскрытие категорий */
+  renderOrder();
+  renderOrderStatus();
+  document.addEventListener('drcalc-update', () => { renderOrder(); renderOrderStatus(); });
+
   $('drf-order').addEventListener('click', (e) => {
     const btn = e.target.closest('[data-catbtn]');
     if (!btn) return;
@@ -479,7 +393,8 @@ button.drf-order__edit:hover { color: #C30067; }
     $('drf-order-toggle').setAttribute('aria-expanded', mobileOpen ? 'true' : 'false');
   });
 
-  /* Очистить состав — тот же сброс, что и кнопка «Сбросить выбор» в калькуляторе */
+  $('drf-order-status').addEventListener('click', onStatusClick);
+
   $('drf-order-clear').addEventListener('click', () => {
     const r = document.getElementById('dr-reset');
     if (r) r.click();
@@ -489,9 +404,6 @@ button.drf-order__edit:hover { color: #C30067; }
       renderOrder();
     }
   });
-
-  /* --- Маска телефона: +7 (900) 000-00-00 --- */
-  function phoneDigits(s) { return s.replace(/\D/g, ''); }
 
   function formatPhone(raw) {
     let d = phoneDigits(raw);
@@ -567,7 +479,7 @@ button.drf-order__edit:hover { color: #C30067; }
       phoneRaw: phoneDigits(phoneInput.value),
       contact: contact,
       comment: $('drf-comment').value.trim(),
-      partyDate: c.selected ? (o.date || '') : '',
+      partyDate: c.selected ? (o.dateISO || '') : '',
       partyTime: c.selected ? (o.slot || '') : '',
       summary: c.selected ? (c.summary || '') : '',
       total: c.selected ? (c.total || 0) : 0,
@@ -578,7 +490,7 @@ button.drf-order__edit:hover { color: #C30067; }
   function markDone() {
     document.querySelector('.drf__grid').style.display = 'none';
     $('drf-done').hidden = false;
-    const fallbackText = 'Здравствуйте! Я отправлял(а) заявку с сайта. Предпочтительный способ связи: ' + contact.toLowerCase() + '.\n\n' + ((window.DR_CALC && window.DR_CALC.summary) || '');
+    const fallbackText = 'Здравствуйте! Я отправлял(а) заявку с сайта. Способ связи: ' + contact.toLowerCase() + '.\n\n' + ((window.DR_CALC && window.DR_CALC.summary) || '');
     $('drf-done-wa').href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(fallbackText);
     $('drf-done-tg').href = 'https://t.me/' + TG_USER + '?text=' + encodeURIComponent(fallbackText);
   }
@@ -608,9 +520,7 @@ button.drf-order__edit:hover { color: #C30067; }
       });
       const data = await res.json().catch(() => null);
       ok = res.ok && (!data || data.ok !== false);
-    } catch (e) {
-      ok = false;
-    }
+    } catch (e) { ok = false; }
 
     if (ok) {
       markDone();
