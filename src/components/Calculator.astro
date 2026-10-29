@@ -1,7 +1,7 @@
 <section class="drc" id="calc">
   <div class="drc__head">
     <h2>Рассчитайте праздник</h2>
-    <p>Выберите пакет — цена видна сразу. Дальше несколько шагов: гости, дата, продление, допы. Итог пересчитывается мгновенно.</p>
+    <p>Выберите пакет — цена видна сразу. Дальше шаги: гости, дата, продление, допы. Итог пересчитывается мгновенно.</p>
   </div>
 
   <div class="drc__cards">
@@ -10,10 +10,10 @@
       <span class="drc-card__in">
         <span class="drc-card__name">Популярный</span>
         <span class="drc-card__price">24 000 ₽</span>
-        <span class="drc-card__meta">2,5 часа программы · до 15 детей · своя еда</span>
+        <span class="drc-card__meta">2,5 часа · до 15 детей · еда своя</span>
         <button type="button" class="drc-card__more" data-more="popular">Подробнее</button>
         <span class="drc-card__details" data-details="popular" hidden>
-          Квест-шоу 1,5 ч · Ярмарка игр 30 мин · банкет 30 мин · команда из 5 человек
+          Квест-приключение с командой из 5 аниматоров — 1,5 часа · 30 минут подвижных игр с призами · 30 минут за праздничным столом · еду приносите свою
         </span>
       </span>
     </label>
@@ -23,10 +23,10 @@
         <span class="drc-card__badge">Выбирают чаще всего</span>
         <span class="drc-card__name">Оптимальный</span>
         <span class="drc-card__price">33 500 ₽</span>
-        <span class="drc-card__meta">3 часа программы · до 6 детей еда включена</span>
+        <span class="drc-card__meta">3 часа · до 6 детей · еда включена</span>
         <button type="button" class="drc-card__more" data-more="optimal">Подробнее</button>
         <span class="drc-card__details" data-details="optimal" hidden>
-          Квест-шоу полного сценария 1,5 ч · Ярмарка игр 1 ч · банкет под ключ: сервировка, еда, напитки, порционный торт
+          Квест-приключение с полным сценарием — 1,5 часа · час подвижных игр с призами · стол под ключ: накроем, накормим, порционный торт каждому
         </span>
       </span>
     </label>
@@ -35,10 +35,10 @@
       <span class="drc-card__in">
         <span class="drc-card__name">Максимальный</span>
         <span class="drc-card__price">50 000 ₽</span>
-        <span class="drc-card__meta">3,5 часа программы · всё включено</span>
+        <span class="drc-card__meta">3,5 часа · всё включено</span>
         <button type="button" class="drc-card__more" data-more="maximal">Подробнее</button>
         <span class="drc-card__details" data-details="maximal" hidden>
-          Расширенный сценарий · Ярмарка игр 1 ч · банкет под ключ + большой торт от кондитера · фото · гелиевые шары · подарки всем
+          Расширенный квест-сценарий · час игр с призами · стол под ключ и большой торт от кондитера · фотограф · гелиевые шары · подарок каждому ребёнку
         </span>
       </span>
     </label>
@@ -49,7 +49,7 @@
       Собрать свой формат →
     </button>
     <button type="button" class="drc-mini-banner" id="dr-mini-trigger">
-      <b>Компания до 8 детей?</b> Есть «Мини» — 15 000 ₽ · 1,5 часа
+      <b>Компания до 8 детей?</b> Есть «Мини» — короткий праздник за 1,5 часа · 15 000 ₽
     </button>
   </div>
 
@@ -71,10 +71,16 @@
         </div>
         <div id="dr-program-custom" hidden>
           <div class="drc-radios drc-radios--light">
-            <label><input type="radio" name="dr-cbase" value="base"><span><b>База — 20 000 ₽</b> · квест-шоу 1,5 ч + банкет 30 мин (2 ч) · до 15 детей</span></label>
-            <label><input type="radio" name="dr-cbase" value="mini"><span><b>Мини — 15 000 ₽</b> · квест 1 ч + банкет 30 мин (1,5 ч) · до 8 детей</span></label>
+            <label><input type="radio" name="dr-cbase" value="base"><span><b>База — 20 000 ₽</b> · квест 1,5 ч + стол 30 мин (2 часа) · до 15 детей · еда своя</span></label>
+            <label><input type="radio" name="dr-cbase" value="mini"><span><b>Мини — 15 000 ₽</b> · короткий квест 1 ч + стол 30 мин (1,5 часа) · для компании до 8 детей</span></label>
           </div>
           <button type="button" class="drc-link" id="dr-to-packs">← Выбрать готовый пакет</button>
+        </div>
+        
+        <div class="drc-gloss">
+          <span><b>Квест</b> — игра-приключение с аниматорами: дети ищут подсказки и выполняют задания.</span>
+          <span><b>Ярмарка игр</b> — весёлые конкурсы и активности с ведущими и призами.</span>
+          <span><b>Банкет</b> — праздничный стол. «Под ключ» — еда и сервировка наши, иначе еда своя.</span>
         </div>
       </div>
     </div>
@@ -116,9 +122,8 @@
         <span class="drc-step__chev">▾</span>
       </button>
       <div class="drc-step__body" data-stepbody="3" hidden>
-        <!-- Для готового пакета -->
+        <span class="drc-lbl" style="margin-top:8px;">С программой (Ярмарка игр)</span>
         <div class="drc-ext" id="dr-ext-block"></div>
-        <!-- Для своего формата -->
         <div class="drc-ext" id="dr-ym-custom" hidden>
           <div class="drc-radios drc-radios--light">
             <label><input type="radio" name="dr-cym" value="0"><span><b>Без ярмарки</b> · только квест и банкет</span></label>
@@ -126,7 +131,8 @@
             <label><input type="radio" name="dr-cym" value="60"><span><b>+60 мин — 7 500 ₽</b> · самый насыщенный</span></label>
           </div>
         </div>
-        <!-- Комната -->
+
+        <span class="drc-lbl" style="margin-top:16px;">Без программы (Комната)</span>
         <div class="drc-ext">
           <label class="drc-opt"><input type="checkbox" id="dr-room-ext"><span class="drc-opt__b"><b>Продление банкетной комнаты</b><span>комната остаётся за вами, программа не ведётся</span></span></label>
           <div class="drc-hours" id="dr-room-hours" hidden>
@@ -159,30 +165,17 @@
   <p class="drc-foot">Расчёт предварительный: точную сумму и свободное время подтверждает организатор.</p>
 </section>
 
-<!-- Корзина (нижняя плашка) -->
-<div class="drc-bar" id="dr-bar" hidden>
-  <div class="drc-bar__top">
-    <button type="button" class="drc-bar__sum" id="dr-bar-sum" aria-label="Показать состав">
-      <b id="dr-bar-total">0 ₽</b>
-      <span id="dr-bar-count">0 услуг</span>
-      <span class="drc-bar__dot" id="dr-bar-dot" hidden></span>
-    </button>
-    <div class="drc-bar__tools">
-      <button type="button" class="drc-bar__reset" id="dr-bar-reset" aria-label="Сбросить выбор" title="Сбросить выбор">↺</button>
-      <button type="button" class="drc-bar__x" id="dr-bar-close" aria-label="Скрыть">✕</button>
-    </div>
-  </div>
-  <div class="drc-bar__btns">
-    <button type="button" class="drc-btn drc-btn--bar" id="dr-bar-book">Добавить к заявке</button>
-  </div>
-</div>
+<button type="button" id="dr-reset" hidden></button>
 
-<!-- Плавающая пилюля -->
+<!-- Пилюля (Pill) -->
 <button type="button" class="drc-pill" id="dr-pill" hidden aria-label="Открыть корзину">
-  <b id="dr-pill-total">🛒</b>
+  <span id="dr-pill-count" class="drc-pill__count"></span>
+  <span class="drc-pill__sep">·</span>
+  <b id="dr-pill-total">0 ₽</b>
+  <span class="drc-pill__dot" id="dr-pill-dot" hidden></span>
 </button>
 
-<!-- Шторка со списком товаров -->
+<!-- Шторка (Bottom Sheet) -->
 <div class="drc-sheet" id="dr-sheet" hidden>
   <div class="drc-sheet__bg" id="dr-sheet-bg"></div>
   <div class="drc-sheet__content">
@@ -227,11 +220,11 @@
 
 <style is:global>
 [hidden] { display: none !important; }
-/* Убираем дефолтное моргание кнопок на мобилках */
 button, a { -webkit-tap-highlight-color: transparent; }
-button:focus { outline: none; }
+button:focus:not(:focus-visible) { outline: none; }
+button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
 
-.drc { background: #032E2B; color: #fff; padding: 72px 20px 80px; overflow-x: hidden; }
+.drc { background: #032E2B; color: #fff; padding: 72px 20px 120px; overflow-x: hidden; }
 .drc * { box-sizing: border-box; }
 .drc h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
 .drc__head p { max-width: 640px; margin: 0 auto 28px; text-align: center; color: rgba(255,255,255,.75); font-size: 15px; line-height: 1.6; }
@@ -239,7 +232,7 @@ button:focus { outline: none; }
 .drc__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 1080px; margin: 0 auto; align-items: start; }
 .drc-card { position: relative; display: block; cursor: pointer; }
 .drc-card input { position: absolute; opacity: 0; pointer-events: none; }
-.drc-card__in { display: flex; flex-direction: column; gap: 6px; height: 100%; background: #fff; color: #032E2B; border: 2px solid transparent; border-radius: 20px; padding: 22px 20px; transition: .2s; }
+.drc-card__in { display: flex; flex-direction: column; gap: 6px; background: #fff; color: #032E2B; border: 2px solid transparent; border-radius: 20px; padding: 22px 20px; transition: .2s; }
 .drc-card:hover .drc-card__in { border-color: rgba(10,153,148,.5); transform: translateY(-2px); }
 .drc-card input:checked ~ .drc-card__in { border-color: #C30067; box-shadow: 0 10px 30px rgba(195,0,103,.25); }
 .drc-card__name { font-size: 18px; font-weight: 700; }
@@ -284,6 +277,11 @@ button:focus { outline: none; }
 .drc-program-summary { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; background: #F5F7F6; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; font-size: 14px; }
 .drc-program-summary b { font-size: 15px; font-weight: 700; color: #C30067; }
 
+.drc-lbl { display: block; font-size: 12px; font-weight: 600; letter-spacing: .04em; color: #6B8B86; margin-bottom: 10px; }
+
+.drc-gloss { display: grid; gap: 6px; margin-top: 12px; padding-top: 12px; border-top: 1px dashed #E4ECEA; font-size: 12.5px; line-height: 1.55; color: #3C5B57; }
+.drc-gloss b { color: #032E2B; }
+
 .drc-ext { display: grid; gap: 10px; margin-bottom: 12px; }
 .drc-opt { display: flex; gap: 12px; align-items: flex-start; border: 1px solid #E4ECEA; border-radius: 12px; padding: 12px 14px; cursor: pointer; transition: .15s; }
 .drc-opt:hover { border-color: rgba(10,153,148,.5); }
@@ -308,31 +306,23 @@ button:focus { outline: none; }
 .drc-link { font: inherit; font-size: 13px; font-weight: 600; color: #0A9994; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
 .drc-link:hover { color: #C30067; }
 
-.drc-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; flex-direction: column; gap: 8px; background: #021F1D; padding: 12px 14px calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(255,255,255,.15); }
-.drc-bar__top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-.drc-bar__sum { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 8px; background: none; border: 0; color: #fff; font: inherit; padding: 0; cursor: pointer; text-align: left; position: relative; }
-.drc-bar__sum b { font-size: 20px; font-weight: 800; line-height: 1.15; }
-.drc-bar__sum span { font-size: 12px; color: rgba(255,255,255,.55); }
-.drc-bar__dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #0AD9C6; margin-left: 4px; }
-.drc-bar__tools { display: flex; gap: 8px; }
-.drc-bar__reset { width: 38px; height: 38px; border: 0; border-radius: 50%; background: rgba(255,255,255,.12); color: rgba(255,255,255,.7); font-size: 16px; cursor: pointer; }
-.drc-bar__x { width: 38px; height: 38px; border: 0; border-radius: 50%; background: rgba(255,255,255,.12); color: rgba(255,255,255,.7); font-size: 15px; cursor: pointer; }
-.drc-bar__btns { display: flex; gap: 8px; }
-.drc-btn--bar { flex: 1; padding: 14px 10px; border-radius: 20px; font-size: 14px; }
-
+/* Pill */
 .drc-pill {
   position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 49;
-  display: inline-flex; align-items: center; justify-content: center;
-  height: 52px; min-width: 52px; padding: 0 20px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 52px; padding: 0 20px;
   border: 0; border-radius: 26px; background: #C30067; color: #fff;
   box-shadow: 0 8px 24px rgba(0,0,0,.45); cursor: pointer; font: inherit; transition: background .15s, transform .15s;
 }
 .drc-pill:hover { background: #E00077; transform: translateY(-2px); }
+.drc-pill__count, .drc-pill__sep { font-size: 12px; font-weight: 600; opacity: .85; }
 .drc-pill b { font-size: 16px; font-weight: 800; line-height: 1; }
-.drc-pill.is-empty b { font-size: 20px; }
-@media (min-width: 761px) { .drc-pill { display: none; } }
+.drc-pill__dot { position: absolute; top: -3px; right: -3px; width: 12px; height: 12px; border-radius: 50%; background: #0AD9C6; border: 2px solid #021F1D; }
+@keyframes pillPulse { 0% { transform: scale(1); } 50% { transform: scale(1.6); } 100% { transform: scale(1); } }
+.drc-pill__dot.is-pulse { animation: pillPulse 0.6s ease 3; }
 
-.drc-sheet { position: fixed; inset: 0; z-index: 70; display: flex; align-items: flex-end; justify-content: center; }
+/* Bottom Sheet */
+.drc-sheet { position: fixed; inset: 0; z-index: 100; display: flex; align-items: flex-end; justify-content: center; }
 .drc-sheet__bg { position: absolute; inset: 0; background: rgba(1,16,15,.7); animation: sheetFade .2s ease; }
 .drc-sheet__content { position: relative; width: 100%; max-width: 560px; max-height: 80vh; background: #fff; color: #032E2B; border-radius: 22px 22px 0 0; display: flex; flex-direction: column; animation: sheetUp .25s ease; }
 @keyframes sheetFade { from { opacity: 0; } to { opacity: 1; } }
@@ -357,7 +347,7 @@ button:focus { outline: none; }
 .drc-sheet__actions .drc-btn--bar { flex: 1; }
 .drc-sheet__empty { text-align: center; padding: 24px 0; color: #6B8B86; font-size: 14px; }
 
-.drc-modal { position: fixed; inset: 0; z-index: 100; background: rgba(1,16,15,.7); display: flex; align-items: center; justify-content: center; padding: 20px; }
+.drc-modal { position: fixed; inset: 0; z-index: 110; background: rgba(1,16,15,.7); display: flex; align-items: center; justify-content: center; padding: 20px; }
 .drc-modal__box { position: relative; background: #fff; color: #032E2B; border-radius: 22px; padding: 30px 30px 24px; max-width: 420px; width: 100%; }
 .drc-modal__x { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: #F5F7F6; color: #3C5B57; font-size: 14px; cursor: pointer; }
 .drc-modal__title { display: block; font-size: 19px; font-weight: 700; margin-bottom: 8px; }
@@ -369,7 +359,7 @@ button:focus { outline: none; }
 .drc-chan--max { background: #6A3CF5; }
 .drc-chan--tel { background: #032E2B; }
 
-.drc-toast { position: fixed; left: 50%; transform: translateX(-50%); width: calc(100% - 32px); max-width: 400px; bottom: 28px; z-index: 60; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: #fff; color: #032E2B; border-radius: 16px; padding: 14px 16px; box-shadow: 0 16px 48px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.06); font-size: 14px; font-weight: 600; }
+.drc-toast { position: fixed; left: 50%; transform: translateX(-50%); width: calc(100% - 32px); max-width: 400px; bottom: 84px; z-index: 60; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: #fff; color: #032E2B; border-radius: 16px; padding: 14px 16px; box-shadow: 0 16px 48px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.06); font-size: 14px; font-weight: 600; }
 .drc-toast > span:first-child { flex: 1 1 100%; margin-bottom: 2px; }
 .drc-toast button { font: inherit; font-size: 13px; font-weight: 700; padding: 9px 14px; border-radius: 20px; cursor: pointer; flex: 1 1 auto; }
 .drc-toast button.is-ghost { background: transparent; color: #C30067; border: 2px solid #C30067; }
@@ -388,10 +378,7 @@ button:focus { outline: none; }
 @media (max-width: 760px) {
   .drc { padding: 48px 14px 140px; }
   .drc__steps { padding: 18px 16px; }
-  .drc-bar { padding-left: 14px; padding-right: 14px; }
-  .drc-toast { bottom: 110px; }
 }
-@media (min-width: 761px) { .drc-bar { display: none; } .drc-sheet { display: none; } }
 </style>
 
 <script is:inline>
@@ -409,35 +396,37 @@ button:focus { outline: none; }
 
   const TARIFFS = {
     popular:  { name: 'Популярный',  price: 24000, freeGuests: 15, minGuests: 5, program: 2.5, food: false, inclYm: 30,
-                includes: [ 'Квест-шоу 1,5 ч', 'Ярмарка игр 30 мин', 'Банкет 30 мин', 'Команда из 5 человек' ],
+                includes: [ 'Квест-приключение 1,5 ч', 'Ярмарка игр 30 мин', 'Банкет 30 мин', 'Команда из 5 аниматоров' ],
                 ext: [ { v: 0, label: '30 мин — как в пакете', p: 0 }, { v: 30, label: '+30 мин — доплата 3 500 ₽', p: 3500 } ] },
     optimal:  { name: 'Оптимальный', price: 33500, freeGuests: 6,  minGuests: 6, program: 3, food: true, inclYm: 60,
-                includes: [ 'Квест-шоу полного сценария 1,5 ч', 'Ярмарка игр 1 ч', 'Банкет под ключ' ],
+                includes: [ 'Квест-приключение 1,5 ч (полный сценарий)', 'Ярмарка игр 1 ч', 'Банкет под ключ: сервировка, еда, напитки, торт' ],
                 ext: [ { v: 0, label: '1 ч — входит в пакет', p: 0 } ] },
     maximal:  { name: 'Максимальный', price: 50000, freeGuests: 6, minGuests: 6, program: 3.5, food: true, inclYm: 60,
-                includes: [ 'Расширенный сценарий', 'Ярмарка игр 1 ч', 'Банкет под ключ', 'Торт от кондитера', 'Фото', 'Шары', 'Подарки' ],
+                includes: [ 'Расширенный квест-сценарий', 'Ярмарка игр 1 ч', 'Банкет под ключ', 'Торт от кондитера', 'Фотосъёмка', 'Гелиевые шары', 'Подарки каждому' ],
                 ext: [ { v: 0, label: '1 ч — входит в пакет', p: 0 } ] },
     base:     { name: 'База', price: 20000, freeGuests: 15, minGuests: 5, program: 2, food: false, inclYm: 0,
-                includes: [ 'Квест-шоу 1,5 ч', 'Банкет 30 мин' ],
+                includes: [ 'Квест-приключение 1,5 ч', 'Банкет 30 мин' ],
                 ext: [ { v: 0, label: 'Без ярмарки', p: 0 } ] },
     mini:     { name: 'Мини', price: 15000, freeGuests: 8, minGuests: 5, program: 1.5, food: false, inclYm: 0,
                 includes: [ 'Квест 1 ч', 'Банкет 30 мин' ],
-                ext: [ { v: 0, label: 'Без ярмарки', p: 0 } ] }
+                ext: [ { v: 0, label: 'Без ярмарки', p: 0 }, { v: 30, label: '+30 мин Ярмарки — 4 000 ₽', p: 4000 }, { v: 60, label: '+60 мин Ярмарки — 7 500 ₽', p: 7500 } ] }
   };
 
   const state = {
-    mode: 'packs',        // 'packs' | 'custom'
+    mode: 'packs',
     pack: null,
     customBase: 'base',
     customYm: '0',
-    guests: 6, slot: null, guestsTouched: false
+    guests: 6, slot: null, guestsTouched: false,
+    date: ''
   };
   let lastTotal = 0;
   let lastOrder = null;
   let snapshot = null;
   let dirty = false;
-  let barClosed = true;
+  let prevDirty = false;
   let toastTimer = null;
+  let addedTimer = null;
 
   window.DR_CALC = {
     ready: false, selected: false, tariff: '', guests: 0,
@@ -465,7 +454,8 @@ button:focus { outline: none; }
   }
   function customYm() { return parseInt(state.customYm, 10) || 0; }
   function roomExtMinutes() {
-    if (!$('dr-room-ext').checked) return 0;
+    const cb = $('dr-room-ext');
+    if (!cb || !cb.checked) return 0;
     const sel = document.querySelector('input[name="dr-rh"]:checked');
     return sel ? parseInt(sel.value, 10) : 30;
   }
@@ -488,8 +478,10 @@ button:focus { outline: none; }
     return state.mode === 'packs' && state.pack === 'maximal' && ['dr-video','dr-photo','dr-balls','dr-tort'].includes(optId);
   }
   function resetExtras() {
-    ['dr-menu','dr-video','dr-photo','dr-balls','dr-tort','dr-room2','dr-room-ext'].forEach((id) => { $(id).checked = false; });
-    $('dr-room-hours').hidden = true;
+    ['dr-menu','dr-video','dr-photo','dr-balls','dr-tort','dr-room2','dr-room-ext'].forEach((id) => { 
+      const el = $(id); if(el) el.checked = false; 
+    });
+    const rh = $('dr-room-hours'); if(rh) rh.hidden = true;
   }
 
   function hasChangesSinceSnapshot() {
@@ -502,7 +494,10 @@ button:focus { outline: none; }
     return false;
   }
 
-  function syncActionBtns() {
+  function updateActionButtons() {
+    const btnSheet = $('dr-sheet-book');
+    if (!btnSheet) return;
+
     let text = 'Добавить к заявке';
     let isDisabled = false;
     
@@ -515,79 +510,94 @@ button:focus { outline: none; }
     }
     
     if (!state.pack && state.mode === 'packs') isDisabled = true;
-    
-    $('dr-cart-add').textContent = text;
-    $('dr-bar-book').textContent = text;
-    $('dr-sheet-book').textContent = text;
-    
-    $('dr-cart-add').disabled = isDisabled;
-    $('dr-bar-book').disabled = isDisabled;
-    $('dr-sheet-book').disabled = isDisabled;
+    if (state.mode === 'custom' && !state.customBase) isDisabled = true;
+
+    btnSheet.textContent = text;
+    btnSheet.disabled = isDisabled;
   }
 
   function showCart() {
-    const hasCart = !!(state.mode === 'packs' ? state.pack : true);
+    const hasCart = !!(state.mode === 'packs' ? state.pack : state.customBase);
     const pill = $('dr-pill');
-    const pillTotal = $('dr-pill-total');
+    if (!pill) return;
     
-    if (!hasCart) {
-      $('dr-bar').hidden = true;
-      $('dr-sheet').hidden = true;
-      if(pill) {
-          pill.hidden = false;
-          pillTotal.textContent = '🛒';
-          pill.classList.add('is-empty');
-      }
-      return;
-    }
-
-    pillTotal.textContent = fmt(lastTotal);
-    pill.classList.remove('is-empty');
-
-    if (barClosed) {
-      $('dr-bar').hidden = true;
-      if(pill) pill.hidden = false;
+    if (hasCart) {
+      pill.hidden = false;
     } else {
-      $('dr-bar').hidden = false;
-      if(pill) pill.hidden = true;
+      pill.hidden = true;
+      const sheet = $('dr-sheet'); if(sheet) sheet.hidden = true;
     }
-    $('dr-bar-dot').hidden = !dirty;
-    syncActionBtns();
   }
 
   function syncCart() {
     const t = currentTariff();
     if (!t) return;
-    const cnt = collectExtras().length;
-    $('dr-bar-total').textContent = fmt(lastTotal);
-    $('dr-bar-count').textContent = cnt + ' ' + plural(cnt, 'услуга', 'услуги', 'услуг');
-    $('dr-bar-dot').hidden = !dirty;
-    syncActionBtns();
+    
+    const baseCnt = 1;
+    const extrasCnt = collectExtras().length;
+    const totalCnt = baseCnt + extrasCnt;
+    
+    const pill = $('dr-pill');
+    const pillTotal = $('dr-pill-total');
+    const pillCount = $('dr-pill-count');
+    const dot = $('dr-pill-dot');
+    
+    if (!pill || !pillTotal || !pillCount) return;
+    
+    pillTotal.textContent = fmt(lastTotal);
+    pillCount.textContent = totalCnt + ' ' + plural(totalCnt, 'позиция', 'позиции', 'позиций');
+    
+    if (!dirty) {
+      if (dot) dot.hidden = true;
+    } else {
+      if (dot) {
+        if (dot.hidden) {
+          dot.hidden = false;
+          dot.classList.add('is-pulse');
+          setTimeout(() => dot.classList.remove('is-pulse'), 2000);
+        }
+      }
+    }
+    updateActionButtons();
   }
 
   function syncProgramUI() {
     const isPacks = state.mode === 'packs';
-    $('dr-program-packs').hidden = !isPacks;
-    $('dr-program-custom').hidden = isPacks;
+    const pp = $('dr-program-packs');
+    const pc = $('dr-program-custom');
+    if (pp) pp.hidden = !isPacks;
+    if (pc) pc.hidden = isPacks;
     
     if (isPacks && state.pack) {
-      $('dr-program-name').textContent = '«' + TARIFFS[state.pack].name + '»';
+      const pn = $('dr-program-name');
+      if (pn) pn.textContent = '«' + TARIFFS[state.pack].name + '»';
     }
-    $('dr-ext-block').hidden = !(state.mode === 'packs' && !!state.pack);
-    $('dr-ym-custom').hidden = !(state.mode === 'custom');
+    const eb = $('dr-ext-block');
+    const yc = $('dr-ym-custom');
+    if (eb) eb.hidden = !(state.mode === 'packs' && !!state.pack);
+    if (yc) yc.hidden = !(state.mode === 'custom');
   }
 
   function syncExt() {
     const t = currentTariff();
     const box = $('dr-ext-block');
+    if (!box) return;
     if (state.mode !== 'packs' || !t || !state.pack) { box.innerHTML = ''; return; }
+    
+    const prev = currentExt();
     const onlyIncl = t.ext.length === 1 && t.ext[0].p === 0 && t.inclYm > 0;
-    box.innerHTML = t.ext.map((e, i) => `
+    
+    box.innerHTML = t.ext.map((e, i) => {
+      const checked = (e.v === prev) ? 'checked' : (prev === 0 && i === 0 ? 'checked' : '');
+      const desc = onlyIncl ? 'уже входит в пакет' : (e.p === 0 && t.inclYm > 0 ? 'входит в пакет' : (e.p === 0 ? 'без ярмарки' : 'программа продолжается'));
+      
+      return `
       <label class="drc-opt${onlyIncl || (e.p === 0 && t.inclYm > 0) ? ' is-incl' : ''}">
-        <input type="radio" name="dr-ext" value="${e.v}"${i === 0 ? ' checked' : ''}>
-        <span class="drc-opt__b"><b>Ярмарка игр</b> <span>${onlyIncl ? 'уже входит в пакет' : (t.inclYm > 0 && e.v === 0 ? 'входит в пакет' : 'программа продолжается')}</span></span>
+        <input type="radio" name="dr-ext" value="${e.v}" ${checked}>
+        <span class="drc-opt__b"><b>Ярмарка игр</b> <span>${desc}</span></span>
         <span class="drc-opt__p">${e.p > 0 ? fmt(e.p) : (t.inclYm > 0 ? 'включено' : '0 ₽')}</span>
-      </label>`).join('');
+      </label>`;
+    }).join('');
   }
 
   function syncVisibility() {
@@ -595,14 +605,19 @@ button:focus { outline: none; }
     if (!t) return;
     const isMax = state.mode === 'packs' && state.pack === 'maximal';
     const isMini = state.mode === 'packs' ? state.pack === 'mini' : state.customBase === 'mini';
-    $('dr-opt-menu').hidden = t.food;
-    $('dr-opt-video').hidden = isMax;
-    $('dr-opt-photo').hidden = isMax;
-    $('dr-opt-balls').hidden = isMax;
-    $('dr-opt-tort').hidden = isMax;
-    $('dr-opt-room2').hidden = isMini;
+    
+    const setDisplay = (id, show) => { const el = $(id); if(el) el.style.display = show ? '' : 'none'; };
+    
+    setDisplay('dr-opt-menu', !t.food);
+    setDisplay('dr-opt-video', !isMax);
+    setDisplay('dr-opt-photo', !isMax);
+    setDisplay('dr-opt-balls', !isMax);
+    setDisplay('dr-opt-tort', !isMax);
+    setDisplay('dr-opt-room2', !isMini);
+    
     ['dr-video','dr-photo','dr-balls','dr-tort'].forEach((id) => {
       const input = $(id);
+      if (!input) return;
       const incl = isIncluded(id);
       input.disabled = incl;
       if (incl) input.checked = true;
@@ -615,33 +630,39 @@ button:focus { outline: none; }
     if (!state.guestsTouched) state.guests = t.minGuests;
     if (state.guests < t.minGuests) state.guests = t.minGuests;
     if (state.guests > MAX_GUESTS) state.guests = MAX_GUESTS;
-    $('dr-guests').textContent = state.guests;
-    $('dr-minus').disabled = state.guests <= t.minGuests;
-    $('dr-plus').disabled = state.guests >= MAX_GUESTS;
+    
+    const gOut = $('dr-guests'); if(gOut) gOut.textContent = state.guests;
+    const btnMinus = $('dr-minus'); if(btnMinus) btnMinus.disabled = state.guests <= t.minGuests;
+    const btnPlus = $('dr-plus'); if(btnPlus) btnPlus.disabled = state.guests >= MAX_GUESTS;
+    
     const note = $('dr-gnote');
-    if (t.food) {
-      note.textContent = state.guests <= t.freeGuests
-        ? 'еда и напитки включены на ' + t.freeGuests + ' детей'
-        : '+' + fmt(1000) + '/чел за каждого сверх ' + t.freeGuests;
-    } else {
-      note.textContent = 'в пакете до ' + t.freeGuests + ' гостей · дальше +' + fmt(1000) + '/чел';
+    if (note) {
+      if (t.food) {
+        note.textContent = state.guests <= t.freeGuests
+          ? 'еда и напитки включены на ' + t.freeGuests + ' детей'
+          : '+' + fmt(1000) + '/чел за каждого сверх ' + t.freeGuests;
+      } else {
+        note.textContent = 'в пакете до ' + t.freeGuests + ' гостей · дальше +' + fmt(1000) + '/чел';
+      }
     }
   }
 
   function collectExtras() {
     const extras = [];
+    const isChecked = (id) => { const el = $(id); return el && el.checked; };
+
     if (state.mode === 'packs') {
       if (currentExt() > 0) extras.push('Ярмарка игр +' + currentExt() + ' мин');
     } else if (customYm() > 0) {
       extras.push('Ярмарка игр ' + customYm() + ' мин');
     }
-    if ($('dr-room-ext').checked) extras.push('продление комнаты ' + roomExtMinutes() + ' мин');
-    if ($('dr-menu').checked) extras.push('меню под ключ');
-    if ($('dr-video').checked) extras.push('видеосъёмка');
-    if ($('dr-photo').checked) extras.push('фотосъёмка');
-    if ($('dr-balls').checked) extras.push('гелиевые шары');
-    if ($('dr-tort').checked) extras.push('тематический торт');
-    if ($('dr-room2').checked) extras.push('вторая банкетная комната');
+    if (isChecked('dr-room-ext')) extras.push('продление комнаты ' + roomExtMinutes() + ' мин');
+    if (isChecked('dr-menu')) extras.push('меню под ключ');
+    if (isChecked('dr-video')) extras.push('видеосъёмка');
+    if (isChecked('dr-photo')) extras.push('фотосъёмка');
+    if (isChecked('dr-balls')) extras.push('гелиевые шары');
+    if (isChecked('dr-tort')) extras.push('тематический торт');
+    if (isChecked('dr-room2')) extras.push('вторая банкетная комната');
     return extras;
   }
 
@@ -649,9 +670,10 @@ button:focus { outline: none; }
     const t = currentTariff();
     if (!t) return;
     const g = state.guests;
-    const dateStr = $('dr-date').value;
+    const dateStr = $('dr-date') ? $('dr-date').value : '';
     let total = t.price;
     const surList = [];
+
     if (t.food) {
       const foodExtra = Math.max(0, g - t.freeGuests);
       if (foodExtra > 0) { total += foodExtra * 1000; surList.push('Дети сверх ' + t.freeGuests + ' — еда (' + foodExtra + ' × 1 000 ₽) · ' + fmt(foodExtra * 1000)); }
@@ -661,28 +683,31 @@ button:focus { outline: none; }
       const extra = Math.max(0, g - t.freeGuests);
       if (extra > 0) { total += extra * 1000; surList.push('Гости сверх ' + t.freeGuests + ' — программа (' + extra + ' × 1 000 ₽) · ' + fmt(extra * 1000)); }
     }
+
     const extrasList = [];
     let extrasSum = 0;
     const pushExtra = (name, price) => {
       extrasList.push(price != null ? name + ' · ' + fmt(price) : name);
       if (price) extrasSum += price;
     };
+    
     const anyYm = state.mode === 'packs' ? currentExt() > 0 : customYm() > 0;
     if (anyYm) {
       const mins = state.mode === 'packs' ? currentExt() : customYm();
       pushExtra('Ярмарка игр +' + mins + ' мин', ymAddPrice());
     }
-    if ($('dr-room-ext').checked) pushExtra('Продление комнаты ' + roomExtMinutes() + ' мин', roomExtMinutes() === 60 ? 2500 : 1250);
-    if ($('dr-menu').checked && !t.food) pushExtra('Меню под ключ (' + g + ' × 1 000 ₽)', g * 1000);
-    if ($('dr-video').checked && !isIncluded('dr-video')) pushExtra('Видеосъёмка', 4000);
-    if ($('dr-photo').checked && !isIncluded('dr-photo')) pushExtra('Фотосъёмка', 6000);
-    if ($('dr-balls').checked && !isIncluded('dr-balls')) pushExtra('Гелиевые шары', 3500);
-    if ($('dr-tort').checked && !isIncluded('dr-tort')) {
-      const foodCount = t.food ? Math.max(g, t.freeGuests) : ($('dr-menu').checked ? g : 0);
-      if (foodCount > 0) pushExtra('Тематический торт (вычет −' + fmt(250 * foodCount) + ')', 7000 - 250 * foodCount);
+    if ($('dr-room-ext') && $('dr-room-ext').checked) pushExtra('Продление комнаты ' + roomExtMinutes() + ' мин', roomExtMinutes() === 60 ? 2500 : 1250);
+    if ($('dr-menu') && $('dr-menu').checked && !t.food) pushExtra('Меню под ключ (' + g + ' × 1 000 ₽)', g * 1000);
+    if ($('dr-video') && $('dr-video').checked && !isIncluded('dr-video')) pushExtra('Видеосъёмка', 4000);
+    if ($('dr-photo') && $('dr-photo').checked && !isIncluded('dr-photo')) pushExtra('Фотосъёмка', 6000);
+    if ($('dr-balls') && $('dr-balls').checked && !isIncluded('dr-balls')) pushExtra('Гелиевые шары', 3500);
+    
+    if ($('dr-tort') && $('dr-tort').checked && !isIncluded('dr-tort')) {
+      const foodCount = t.food ? Math.max(g, t.freeGuests) : (($('dr-menu') && $('dr-menu').checked) ? g : 0);
+      if (foodCount > 0) pushExtra('Тематический торт (вычет −' + fmt(250 * foodCount) + ')', Math.max(0, 7000 - 250 * foodCount));
       else pushExtra('Тематический торт', 7000);
     }
-    if ($('dr-room2').checked) pushExtra('Вторая банкетная комната', null);
+    if ($('dr-room2') && $('dr-room2').checked) pushExtra('Вторая банкетная комната', null);
 
     total += extrasSum;
     const party = programHours() + roomExtMinutes() / 60;
@@ -706,6 +731,7 @@ button:focus { outline: none; }
 
     lastTotal = total;
     dirty = snapshot ? hasChangesSinceSnapshot() : false;
+    prevDirty = dirty;
 
     syncCart();
     showCart();
@@ -740,7 +766,7 @@ button:focus { outline: none; }
     c.ready = true;
     c.tariff = t.name;
     c.guests = state.guests;
-    c.date = $('dr-date').value || '';
+    c.date = $('dr-date') ? $('dr-date').value : '';
     c.slot = state.slot || '';
     c.extras = collectExtras().join(', ');
     c.dirty = dirty;
@@ -759,47 +785,73 @@ button:focus { outline: none; }
 
   function pick() {
     if (!lastOrder) return;
-    snapshot = JSON.parse(JSON.stringify(lastOrder));
-    dirty = false;
-    window.DR_CALC.justUpdatedAt = Date.now();
-    pushSnapshot();
+    const changed = dirty;
+    if (changed) {
+      snapshot = JSON.parse(JSON.stringify(lastOrder));
+      dirty = false;
+      prevDirty = false;
+      window.DR_CALC.justUpdatedAt = Date.now();
+      pushSnapshot();
+    }
     syncCart();
     showCart();
-
-    if (!window.__drToastShown) {
-      window.__drToastShown = true;
-      $('dr-toast').hidden = false;
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => { $('dr-toast').hidden = true; }, 8000);
+    closeSheet();
+    const btnSheet = $('dr-sheet-book');
+    if (changed) {
+      if (btnSheet) {
+        btnSheet.textContent = 'Добавлено ✓';
+        clearTimeout(addedTimer);
+        addedTimer = setTimeout(() => { updateActionButtons(); }, 2000);
+      }
+      const toast = $('dr-toast');
+      if (toast) {
+        toast.hidden = false;
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => { toast.hidden = true; }, 8000);
+      }
+    } else {
+      const anchor = document.getElementById('zayavka');
+      if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
-  function openSheet() { renderSheet(); $('dr-sheet').hidden = false; }
-  function closeSheet() { $('dr-sheet').hidden = true; }
+  function openSheet() { renderSheet(); const s = $('dr-sheet'); if(s) s.hidden = false; }
+  function closeSheet() { const s = $('dr-sheet'); if(s) s.hidden = true; }
 
   function renderSheet() {
     const t = currentTariff();
-    if (!t) return;
+    const list = $('dr-sheet-list');
+    if (!t || !list) return;
     const rows = [];
     rows.push({ key: 'pack', label: 'Пакет «' + t.name + '»', price: fmt(t.price), fixed: true });
-    if (state.guests !== t.minGuests) {
-      const extra = Math.max(0, state.guests - (t.food ? t.freeGuests : t.freeGuests));
+    
+    if (t.food) {
+      const fe = Math.max(0, state.guests - t.freeGuests);
+      if (fe > 0) rows.push({ key: 'guests-food', label: 'Еда сверх ' + t.freeGuests + ' (' + fe + ' чел)', price: fmt(fe * 1000), fixed: true });
+      const pe = Math.max(0, state.guests - 15);
+      if (pe > 0) rows.push({ key: 'guests-prog', label: 'Программа сверх 15 (' + pe + ' чел)', price: fmt(pe * 1000), fixed: true });
+    } else {
+      const extra = Math.max(0, state.guests - t.freeGuests);
       if (extra > 0) rows.push({ key: 'guests', label: 'Гости сверх лимита (' + extra + ' чел)', price: fmt(extra * 1000), fixed: true });
     }
-    if (state.mode === 'packs' && currentExt() > 0) rows.push({ key: 'ym', label: 'Ярмарка +' + currentExt() + ' мин', price: fmt(ymAddPrice()), fixed: false });
-    if (state.mode === 'custom' && customYm() > 0) rows.push({ key: 'ym', label: 'Ярмарка ' + customYm() + ' мин', price: fmt(ymAddPrice()), fixed: false });
-    if ($('dr-room-ext').checked) rows.push({ key: 'room-ext', label: 'Продление комнаты ' + roomExtMinutes() + ' мин', price: fmt(roomExtMinutes() === 60 ? 2500 : 1250), fixed: false });
-    if ($('dr-menu').checked && !t.food) rows.push({ key: 'menu', label: 'Меню под ключ', price: fmt(state.guests * 1000), fixed: false });
-    if ($('dr-video').checked && !isIncluded('dr-video')) rows.push({ key: 'video', label: 'Видеосъёмка', price: fmt(4000), fixed: false });
-    if ($('dr-photo').checked && !isIncluded('dr-photo')) rows.push({ key: 'photo', label: 'Фотосъёмка', price: fmt(6000), fixed: false });
-    if ($('dr-balls').checked && !isIncluded('dr-balls')) rows.push({ key: 'balls', label: 'Гелиевые шары', price: fmt(3500), fixed: false });
-    if ($('dr-tort').checked && !isIncluded('dr-tort')) {
-      const foodCount = t.food ? Math.max(state.guests, t.freeGuests) : ($('dr-menu').checked ? state.guests : 0);
-      rows.push({ key: 'tort', label: 'Торт', price: fmt(foodCount > 0 ? 7000 - 250 * foodCount : 7000), fixed: false });
+    
+    const anyYm = state.mode === 'packs' ? currentExt() > 0 : customYm() > 0;
+    if (anyYm) {
+      const mins = state.mode === 'packs' ? currentExt() : customYm();
+      rows.push({ key: 'ym', label: 'Ярмарка +' + mins + ' мин', price: fmt(ymAddPrice()), fixed: false });
     }
-    if ($('dr-room2').checked) rows.push({ key: 'room2', label: 'Вторая комната', price: 'по запросу', fixed: false });
+    if ($('dr-room-ext') && $('dr-room-ext').checked) rows.push({ key: 'room-ext', label: 'Продление комнаты ' + roomExtMinutes() + ' мин', price: fmt(roomExtMinutes() === 60 ? 2500 : 1250), fixed: false });
+    if ($('dr-menu') && $('dr-menu').checked && !t.food) rows.push({ key: 'menu', label: 'Меню под ключ', price: fmt(state.guests * 1000), fixed: false });
+    if ($('dr-video') && $('dr-video').checked && !isIncluded('dr-video')) rows.push({ key: 'video', label: 'Видеосъёмка', price: fmt(4000), fixed: false });
+    if ($('dr-photo') && $('dr-photo').checked && !isIncluded('dr-photo')) rows.push({ key: 'photo', label: 'Фотосъёмка', price: fmt(6000), fixed: false });
+    if ($('dr-balls') && $('dr-balls').checked && !isIncluded('dr-balls')) rows.push({ key: 'balls', label: 'Гелиевые шары', price: fmt(3500), fixed: false });
+    
+    if ($('dr-tort') && $('dr-tort').checked && !isIncluded('dr-tort')) {
+      const foodCount = t.food ? Math.max(state.guests, t.freeGuests) : (($('dr-menu') && $('dr-menu').checked) ? state.guests : 0);
+      rows.push({ key: 'tort', label: 'Торт', price: fmt(foodCount > 0 ? Math.max(0, 7000 - 250 * foodCount) : 7000), fixed: false });
+    }
+    if ($('dr-room2') && $('dr-room2').checked) rows.push({ key: 'room2', label: 'Вторая комната', price: 'по запросу', fixed: false });
 
-    const list = $('dr-sheet-list');
     if (!rows.length) {
       list.innerHTML = '<p class="drc-sheet__empty">Корзина пуста</p>';
     } else {
@@ -810,56 +862,132 @@ button:focus { outline: none; }
           <button type="button" data-remove="${r.key}" aria-label="Удалить">✕</button>
         </div>`).join('');
     }
-    $('dr-sheet-total').textContent = fmt(lastTotal);
+    const tot = $('dr-sheet-total'); if(tot) tot.textContent = fmt(lastTotal);
   }
 
-  $('dr-sheet-list').addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-remove]');
-    if (!btn) return;
-    const key = btn.dataset.remove;
-    if (key === 'ym') {
-      if (state.mode === 'packs') { const r = document.querySelector('input[name="dr-ext"][value="0"]'); if (r) r.checked = true; }
-      else { const r = document.querySelector('input[name="dr-cym"][value="0"]'); if (r) r.checked = true; state.customYm = '0'; }
-    }
-    if (key === 'room-ext') { $('dr-room-ext').checked = false; $('dr-room-hours').hidden = true; }
-    if (key === 'menu') $('dr-menu').checked = false;
-    if (key === 'video') $('dr-video').checked = false;
-    if (key === 'photo') $('dr-photo').checked = false;
-    if (key === 'balls') $('dr-balls').checked = false;
-    if (key === 'tort') $('dr-tort').checked = false;
-    if (key === 'room2') $('dr-room2').checked = false;
-    recalcAll();
-    renderSheet();
-  });
+  function bindEvents() {
+    const bind = (id, ev, fn) => { const el = $(id); if(el) el.addEventListener(ev, fn); };
 
-  $('dr-bar-sum').addEventListener('click', openSheet);
-  $('dr-sheet-bg').addEventListener('click', closeSheet);
-  $('dr-sheet-x').addEventListener('click', closeSheet);
-  $('dr-sheet-clear').addEventListener('click', () => { doReset(); closeSheet(); });
-  if ($('dr-pill')) $('dr-pill').addEventListener('click', openSheet);
-
-  document.querySelectorAll('[data-more]').forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const key = btn.dataset.more;
-      const det = document.querySelector('[data-details="' + key + '"]');
-      if (det) det.hidden = !det.hidden;
+    bind('dr-sheet-list', 'click', (e) => {
+      const btn = e.target.closest('[data-remove]');
+      if (!btn) return;
+      const key = btn.dataset.remove;
+      if (key === 'ym') {
+        if (state.mode === 'packs') { const r = document.querySelector('input[name="dr-ext"][value="0"]'); if (r) r.checked = true; }
+        else { const r = document.querySelector('input[name="dr-cym"][value="0"]'); if (r) r.checked = true; state.customYm = '0'; }
+      }
+      if (key === 'room-ext') { const r = $('dr-room-ext'); if(r) r.checked = false; const h = $('dr-room-hours'); if(h) h.hidden = true; }
+      if (key === 'menu') { const r = $('dr-menu'); if(r) r.checked = false; }
+      if (key === 'video') { const r = $('dr-video'); if(r) r.checked = false; }
+      if (key === 'photo') { const r = $('dr-photo'); if(r) r.checked = false; }
+      if (key === 'balls') { const r = $('dr-balls'); if(r) r.checked = false; }
+      if (key === 'tort') { const r = $('dr-tort'); if(r) r.checked = false; }
+      if (key === 'room2') { const r = $('dr-room2'); if(r) r.checked = false; }
+      recalcAll();
+      renderSheet();
     });
-  });
+
+    bind('dr-sheet-bg', 'click', closeSheet);
+    bind('dr-sheet-x', 'click', closeSheet);
+    bind('dr-sheet-clear', 'click', () => { doReset(); closeSheet(); });
+    bind('dr-pill', 'click', openSheet);
+
+    document.querySelectorAll('[data-more]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const key = btn.dataset.more;
+        const det = document.querySelector('[data-details="' + key + '"]');
+        if (det) det.hidden = !det.hidden;
+      });
+    });
+
+    document.querySelectorAll('input[name="dr-pack"]').forEach((el) => {
+      el.addEventListener('change', () => setPack(el.value));
+    });
+
+    document.querySelectorAll('input[name="dr-cbase"]').forEach((el) => {
+      el.addEventListener('change', () => setCustom(el.value));
+    });
+    document.querySelectorAll('input[name="dr-cym"]').forEach((el) => {
+      el.addEventListener('change', () => { state.customYm = el.value; recalcAll(); });
+    });
+
+    bind('dr-custom-trigger', 'click', () => setCustom('base'));
+    bind('dr-mini-trigger', 'click', () => setPack('mini'));
+    bind('dr-to-custom', 'click', () => setCustom('base'));
+    bind('dr-to-packs', 'click', () => {
+      const lastPack = state.pack || 'popular';
+      setPack(lastPack);
+    });
+
+    bind('dr-plus', 'click', () => { state.guests++; state.guestsTouched = true; recalcAll(); openNext(1); });
+    bind('dr-minus', 'click', () => { state.guests--; state.guestsTouched = true; recalcAll(); openNext(1); });
+
+    ['dr-menu','dr-video','dr-photo','dr-balls','dr-tort','dr-room2'].forEach((id) => {
+      bind(id, 'change', calculate);
+    });
+    
+    bind('dr-room-ext', 'change', () => {
+      const h = $('dr-room-hours'); if(h) h.hidden = !$('dr-room-ext').checked;
+      buildSlots(); openNext(3); calculate();
+    });
+    
+    const eb = $('dr-ext-block'); if(eb) eb.addEventListener('change', () => { buildSlots(); calculate(); openNext(3); });
+    document.querySelectorAll('input[name="dr-rh"]').forEach((el) => el.addEventListener('change', () => { buildSlots(); calculate(); }));
+
+    const dateInput = $('dr-date');
+    if (dateInput) {
+      const _d = new Date();
+      dateInput.min = _d.getFullYear() + '-' + String(_d.getMonth()+1).padStart(2,'0') + '-' + String(_d.getDate()).padStart(2,'0');
+      dateInput.addEventListener('change', () => { calculate(); openNext(2); });
+    }
+
+    document.querySelectorAll('.drc-step__head').forEach((h) => {
+      h.addEventListener('click', () => { const i = Number(h.dataset.stephead); stepOpen[i] = !stepOpen[i]; renderSteps(); });
+    });
+
+    function openChannels(title, text) {
+      const mt = $('dr-modal-title'); if(mt) mt.textContent = title;
+      const wa = $('dr-chan-wa'); if(wa) wa.href = 'https://wa.me/' + CONFIG.wa + '?text=' + encodeURIComponent(text);
+      const tg = $('dr-chan-tg'); if(tg) tg.href = 'https://t.me/' + CONFIG.tg + '?text=' + encodeURIComponent(text);
+      const mx = $('dr-chan-max'); if(mx) mx.href = CONFIG.max;
+      const tl = $('dr-chan-tel'); if(tl) tl.href = 'tel:' + CONFIG.tel;
+      const m = $('dr-modal'); if(m) m.hidden = false;
+    }
+    function closeChannels() { const m = $('dr-modal'); if(m) m.hidden = true; }
+    bind('dr-modal-x', 'click', closeChannels);
+    bind('dr-modal', 'click', (e) => { if (e.target === $('dr-modal')) closeChannels(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeChannels(); closeSheet(); } });
+
+    bind('dr-toast-go', 'click', () => {
+      const t = $('dr-toast'); if(t) t.hidden = true;
+      const anchor = document.getElementById('zayavka');
+      if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    bind('dr-toast-stay', 'click', () => { const t = $('dr-toast'); if(t) t.hidden = true; });
+    bind('dr-sheet-book', 'click', pick);
+
+    window.addEventListener('drcalc-reset', doReset);
+    window.addEventListener('drcalc-refresh', () => pick());
+    bind('dr-reset', 'click', doReset);
+  }
 
   function saveCalcState() {
     try {
       const data = {
         mode: state.mode, pack: state.pack, customBase: state.customBase,
         customYm: state.customYm, guests: state.guests, guestsTouched: state.guestsTouched,
-        date: $('dr-date').value || '', slot: state.slot || '',
+        date: $('dr-date') ? $('dr-date').value : '', slot: state.slot || '',
         ext: document.querySelector('input[name="dr-ext"]:checked')?.value ?? null,
-        roomExt: $('dr-room-ext').checked,
+        roomExt: $('dr-room-ext') ? $('dr-room-ext').checked : false,
         rh: document.querySelector('input[name="dr-rh"]:checked')?.value || '30',
-        menu: $('dr-menu').checked, video: $('dr-video').checked,
-        photo: $('dr-photo').checked, balls: $('dr-balls').checked,
-        tort: $('dr-tort').checked, room2: $('dr-room2').checked,
+        menu: $('dr-menu') ? $('dr-menu').checked : false, 
+        video: $('dr-video') ? $('dr-video').checked : false,
+        photo: $('dr-photo') ? $('dr-photo').checked : false, 
+        balls: $('dr-balls') ? $('dr-balls').checked : false,
+        tort: $('dr-tort') ? $('dr-tort').checked : false, 
+        room2: $('dr-room2') ? $('dr-room2').checked : false,
         snapshot: snapshot, dirty: dirty
       };
       localStorage.setItem(LS_KEY, JSON.stringify(data));
@@ -884,7 +1012,7 @@ button:focus { outline: none; }
 
       if (typeof d.guests === 'number' && d.guests > 0) state.guests = d.guests;
       state.guestsTouched = !!d.guestsTouched;
-      if (d.date) $('dr-date').value = d.date;
+      const di = $('dr-date'); if (d.date && di) di.value = d.date;
       if (d.slot) state.slot = d.slot;
 
       if (d.mode === 'custom') {
@@ -892,20 +1020,23 @@ button:focus { outline: none; }
         if (cymEl) cymEl.checked = true;
         state.customYm = d.customYm || '0';
       }
-      if (d.roomExt) $('dr-room-ext').checked = true;
+      const re = $('dr-room-ext'); if (d.roomExt && re) re.checked = true;
       const rh = document.querySelector('input[name="dr-rh"][value="' + (d.rh || '30') + '"]');
       if (rh) rh.checked = true;
-      ['menu','video','photo','balls','tort','room2'].forEach((k) => { if (d[k]) $('dr-' + k).checked = true; });
+      ['menu','video','photo','balls','tort','room2'].forEach((k) => { 
+        const el = $('dr-' + k); if (d[k] && el) el.checked = true; 
+      });
 
       showSteps(true);
       syncProgramUI();
+      const dot = $('dr-pill-dot'); if (dot) dot.hidden = !!d.dirty;
       recalcAll();
 
       if (d.mode === 'packs' && d.ext != null) {
         const er = document.querySelector('input[name="dr-ext"][value="' + d.ext + '"]');
         if (er) { er.checked = true; calculate(); }
       }
-      if (d.snapshot) { snapshot = d.snapshot; dirty = !!d.dirty; }
+      if (d.snapshot) { snapshot = d.snapshot; dirty = !!d.dirty; prevDirty = dirty; }
       pushSnapshot();
       syncCart();
       showCart();
@@ -916,12 +1047,29 @@ button:focus { outline: none; }
   function buildSlots() {
     const box = $('dr-slots');
     const t = currentTariff();
+    if (!box) return;
     if (!t) { box.innerHTML = ''; return; }
     const lastStart = CONFIG.endHour - slotHours();
     const labels = [];
-    for (let h = CONFIG.startHour; h <= CONFIG.endHour; h++) { if (h > lastStart) break; labels.push((h < 10 ? '0' + h : h) + ':00'); }
+    
+    for (let h = CONFIG.startHour; h <= CONFIG.endHour; h++) {
+      for (let m = 0; m < 60; m += 30) {
+        const timeVal = h + m / 60;
+        if (timeVal > lastStart) break;
+        const hh = h < 10 ? '0' + h : h;
+        const mm = m === 0 ? '00' : '30';
+        labels.push(hh + ':' + mm);
+      }
+    }
+    
     if (!labels.includes(state.slot)) state.slot = null;
     box.innerHTML = '';
+    
+    if (labels.length === 0) {
+      box.innerHTML = '<span class="drc-hint" style="margin-top:0;">на эту дату свободных слотов мало — уточним по телефону</span>';
+      return;
+    }
+
     labels.forEach((label) => {
       const b = document.createElement('button');
       b.type = 'button';
@@ -937,8 +1085,10 @@ button:focus { outline: none; }
   }
 
   function showSteps(show) {
-    $('dr-steps').hidden = !show;
-    if (!show) { $('dr-bar').hidden = true; $('dr-sheet').hidden = true; }
+    const s = $('dr-steps'); if(s) s.hidden = !show;
+    if (!show) { 
+      const sh = $('dr-sheet'); if(sh) sh.hidden = true; 
+    }
   }
 
   function recalcAll() {
@@ -951,14 +1101,13 @@ button:focus { outline: none; }
     document.querySelectorAll('#dr-steps .drc-step').forEach((st, i) => {
       const body = st.querySelector('.drc-step__body');
       const head = st.querySelector('.drc-step__head');
+      if (!body || !head) return;
       body.hidden = !stepOpen[i];
       head.classList.toggle('is-open', stepOpen[i]);
       head.setAttribute('aria-expanded', stepOpen[i] ? 'true' : 'false');
     });
   }
-  document.querySelectorAll('#dr-steps .drc-step__head').forEach((h) => {
-    h.addEventListener('click', () => { const i = Number(h.dataset.stephead); stepOpen[i] = !stepOpen[i]; renderSteps(); });
-  });
+  
   function openNext(i) { if (i < 4 && !stepOpen[i + 1]) { stepOpen[i + 1] = true; renderSteps(); } }
 
   function setPack(val) {
@@ -974,7 +1123,6 @@ button:focus { outline: none; }
     resetExtras();
     showSteps(true);
     syncProgramUI();
-    barClosed = false;
     recalcAll();
   }
 
@@ -989,92 +1137,21 @@ button:focus { outline: none; }
     state.guests = state.guestsTouched ? Math.max(state.guests, t.minGuests) : t.minGuests;
     showSteps(true);
     syncProgramUI();
-    barClosed = false;
     recalcAll();
   }
 
-  document.querySelectorAll('input[name="dr-pack"]').forEach((el) => {
-    el.addEventListener('change', () => setPack(el.value));
-  });
-
-  document.querySelectorAll('input[name="dr-cbase"]').forEach((el) => {
-    el.addEventListener('change', () => setCustom(el.value));
-  });
-  document.querySelectorAll('input[name="dr-cym"]').forEach((el) => {
-    el.addEventListener('change', () => { state.customYm = el.value; recalcAll(); });
-  });
-
-  $('dr-custom-trigger').addEventListener('click', () => setCustom('base'));
-  $('dr-mini-trigger').addEventListener('click', () => setPack('mini'));
-
-  $('dr-to-custom').addEventListener('click', () => setCustom('base'));
-  $('dr-to-packs').addEventListener('click', () => {
-    const lastPack = state.pack || 'popular';
-    setPack(lastPack);
-  });
-
-  $('dr-plus').addEventListener('click', () => { state.guests++; state.guestsTouched = true; recalcAll(); openNext(1); });
-  $('dr-minus').addEventListener('click', () => { state.guests--; state.guestsTouched = true; recalcAll(); openNext(1); });
-
-  ['dr-menu','dr-video','dr-photo','dr-balls','dr-tort','dr-room2'].forEach((id) => {
-    $(id).addEventListener('change', calculate);
-  });
-  $('dr-room-ext').addEventListener('change', () => {
-    $('dr-room-hours').hidden = !$('dr-room-ext').checked;
-    buildSlots(); openNext(3); calculate();
-  });
-  document.getElementById('dr-ext-block').addEventListener('change', () => { buildSlots(); calculate(); openNext(3); });
-  document.querySelectorAll('input[name="dr-rh"]').forEach((el) => el.addEventListener('change', () => { buildSlots(); calculate(); }));
-
-  const dateInput = $('dr-date');
-  const _d = new Date();
-  dateInput.min = _d.getFullYear() + '-' + String(_d.getMonth()+1).padStart(2,'0') + '-' + String(_d.getDate()).padStart(2,'0');
-  dateInput.addEventListener('change', () => { calculate(); openNext(2); });
-
-  function openChannels(title, text) {
-    $('dr-modal-title').textContent = title;
-    $('dr-chan-wa').href = 'https://wa.me/' + CONFIG.wa + '?text=' + encodeURIComponent(text);
-    $('dr-chan-tg').href = 'https://t.me/' + CONFIG.tg + '?text=' + encodeURIComponent(text);
-    $('dr-chan-max').href = CONFIG.max;
-    $('dr-chan-tel').href = 'tel:' + CONFIG.tel;
-    $('dr-modal').hidden = false;
-  }
-  function closeChannels() { $('dr-modal').hidden = true; }
-  $('dr-modal-x').addEventListener('click', closeChannels);
-  $('dr-modal').addEventListener('click', (e) => { if (e.target === $('dr-modal')) closeChannels(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeChannels(); closeSheet(); } });
-
-  function addToClaim() {
-    if (state.mode === 'packs' && !state.pack) return;
-    if (!snapshot || dirty) {
-      pick();
-    }
-    closeSheet();
-    $('dr-toast').hidden = true;
-    const anchor = document.getElementById('zayavka');
-    if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  $('dr-toast-go').addEventListener('click', () => { $('dr-toast').hidden = true; addToClaim(); });
-  $('dr-toast-stay').addEventListener('click', () => { $('dr-toast').hidden = true; });
-  $('dr-bar-book').addEventListener('click', addToClaim);
-  $('dr-sheet-book').addEventListener('click', addToClaim);
-  $('dr-cart-add').addEventListener('click', addToClaim);
-
-  $('dr-bar-close').addEventListener('click', () => { barClosed = true; showCart(); });
-
   function doReset() {
     try { localStorage.removeItem(LS_KEY); } catch (e) {}
-    ['dr-menu','dr-video','dr-photo','dr-balls','dr-tort','dr-room2','dr-room-ext'].forEach((id) => { $(id).checked = false; });
-    $('dr-room-hours').hidden = true;
+    ['dr-menu','dr-video','dr-photo','dr-balls','dr-tort','dr-room2','dr-room-ext'].forEach((id) => { const el = $(id); if(el) el.checked = false; });
+    const rh = $('dr-room-hours'); if(rh) rh.hidden = true;
     document.querySelectorAll('input[name="dr-pack"], input[name="dr-cbase"], input[name="dr-cym"]').forEach((i) => (i.checked = false));
-    $('dr-date').value = '';
+    const di = $('dr-date'); if(di) di.value = '';
+    
     state.mode = 'packs'; state.pack = null;
     state.customBase = 'base'; state.customYm = '0';
     state.guests = 6; state.guestsTouched = false; state.slot = null;
     stepOpen[0] = true; stepOpen[1] = false; stepOpen[2] = false; stepOpen[3] = false; stepOpen[4] = false;
-    snapshot = null; dirty = false; barClosed = true;
-    window.__drToastShown = false;
+    snapshot = null; dirty = false; prevDirty = false;
     window.DR_CALC.justUpdatedAt = 0;
     
     syncProgramUI();
@@ -1082,11 +1159,11 @@ button:focus { outline: none; }
     showSteps(false);
     window.DR_CALC.ready = false;
     pushSnapshot();
-    document.querySelector('.drc__cards').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const c = document.querySelector('.drc__cards');
+    if(c) c.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  $('dr-bar-reset').addEventListener('click', doReset);
-
+  bindEvents();
   restoreCalcState();
   renderSteps();
 </script>
