@@ -1,7 +1,7 @@
 <section class="drc" id="calc">
   <div class="drc__head">
     <h2>Рассчитайте праздник</h2>
-    <p>Выберите пакет — цена видна сразу. Дальше четыре шага: гости, дата, продление, допы. Итог пересчитывается мгновенно.</p>
+    <p>Выберите пакет — цена видна сразу. Дальше несколько шагов: гости, дата, продление, допы. Итог пересчитывается мгновенно.</p>
   </div>
 
   <div class="drc__cards">
@@ -44,141 +44,114 @@
     </label>
   </div>
 
-  <div class="drc__cols">
-    <div class="drc__steps" id="dr-steps" hidden>
-      
-      <!-- ШАГ 0: ПРОГРАММА -->
-      <div class="drc-step">
-        <button type="button" class="drc-step__head is-open" data-stephead="0" aria-expanded="true">
-          <span class="drc-step__title">Программа</span>
-          <span class="drc-step__chev">▾</span>
-        </button>
-        <div class="drc-step__body" data-stepbody="0">
-          <!-- Режим пакета -->
-          <div id="dr-program-packs">
-            <div class="drc-program-summary">
-              <span>Выбран пакет</span>
-              <b id="dr-program-name">«Популярный»</b>
-            </div>
-            <button type="button" class="drc-link" id="dr-to-custom">Собрать свой формат →</button>
+  <div class="drc__custom-area">
+    <button type="button" class="drc__custom-trigger" id="dr-custom-trigger">
+      Собрать свой формат →
+    </button>
+    <button type="button" class="drc-mini-banner" id="dr-mini-trigger">
+      <b>Компания до 8 детей?</b> Есть «Мини» — 15 000 ₽ · 1,5 часа
+    </button>
+  </div>
+
+  <div class="drc__steps" id="dr-steps" hidden>
+    
+    <!-- ШАГ 0: ПРОГРАММА -->
+    <div class="drc-step">
+      <button type="button" class="drc-step__head is-open" data-stephead="0" aria-expanded="true">
+        <span class="drc-step__title">Программа</span>
+        <span class="drc-step__chev">▾</span>
+      </button>
+      <div class="drc-step__body" data-stepbody="0">
+        <div id="dr-program-packs">
+          <div class="drc-program-summary">
+            <span>Выбран пакет</span>
+            <b id="dr-program-name">«Популярный»</b>
           </div>
-          
-          <!-- Режим кастома -->
-          <div id="dr-program-custom" hidden>
-            <div class="drc-radios drc-radios--light">
-              <label><input type="radio" name="dr-cbase" value="base"><span><b>База — 20 000 ₽</b> · квест-шоу 1,5 ч + банкет 30 мин (2 ч) · до 15 детей</span></label>
-              <label><input type="radio" name="dr-cbase" value="mini"><span><b>Мини — 15 000 ₽</b> · квест 1 ч + банкет 30 мин (1,5 ч) · до 8 детей</span></label>
-            </div>
-            <button type="button" class="drc-link" id="dr-to-packs">← Выбрать готовый пакет</button>
+          <button type="button" class="drc-link" id="dr-to-custom">Собрать свой формат →</button>
+        </div>
+        <div id="dr-program-custom" hidden>
+          <div class="drc-radios drc-radios--light">
+            <label><input type="radio" name="dr-cbase" value="base"><span><b>База — 20 000 ₽</b> · квест-шоу 1,5 ч + банкет 30 мин (2 ч) · до 15 детей</span></label>
+            <label><input type="radio" name="dr-cbase" value="mini"><span><b>Мини — 15 000 ₽</b> · квест 1 ч + банкет 30 мин (1,5 ч) · до 8 детей</span></label>
           </div>
+          <button type="button" class="drc-link" id="dr-to-packs">← Выбрать готовый пакет</button>
         </div>
       </div>
+    </div>
 
-      <!-- ШАГ 1: ЯРМАРКА -->
-      <div class="drc-step" id="dr-step-ym">
-        <button type="button" class="drc-step__head" data-stephead="1" aria-expanded="false">
-          <span class="drc-step__title">Ярмарка игр</span>
-          <span class="drc-step__chev">▾</span>
-        </button>
-        <div class="drc-step__body" data-stepbody="1" hidden>
-          <!-- Для кастома -->
-          <div id="dr-ym-custom" class="drc-radios drc-radios--light" hidden>
+    <!-- ШАГ 1: ГОСТИ -->
+    <div class="drc-step">
+      <button type="button" class="drc-step__head" data-stephead="1" aria-expanded="false">
+        <span class="drc-step__title">Сколько детей</span>
+        <span class="drc-step__chev">▾</span>
+      </button>
+      <div class="drc-step__body" data-stepbody="1" hidden>
+        <div class="drc-stepper">
+          <button type="button" id="dr-minus">−</button>
+          <output id="dr-guests">6</output>
+          <button type="button" id="dr-plus">+</button>
+        </div>
+        <span class="drc-gnote" id="dr-gnote"></span>
+        <span class="drc-hint">Не знаешь точного числа? Поставь примерно — потом можно изменить.</span>
+      </div>
+    </div>
+
+    <!-- ШАГ 2: ДАТА -->
+    <div class="drc-step">
+      <button type="button" class="drc-step__head" data-stephead="2" aria-expanded="false">
+        <span class="drc-step__title">Дата и время начала</span>
+        <span class="drc-step__chev">▾</span>
+      </button>
+      <div class="drc-step__body" data-stepbody="2" hidden>
+        <input type="date" id="dr-date" class="drc-date">
+        <div class="drc-slots" id="dr-slots"></div>
+        <span class="drc-hint">Время начала можно выбрать сейчас или оставить организатору.</span>
+      </div>
+    </div>
+
+    <!-- ШАГ 3: ПРОДЛЕНИЕ -->
+    <div class="drc-step">
+      <button type="button" class="drc-step__head" data-stephead="3" aria-expanded="false">
+        <span class="drc-step__title">Продление праздника</span>
+        <span class="drc-step__chev">▾</span>
+      </button>
+      <div class="drc-step__body" data-stepbody="3" hidden>
+        <!-- Для готового пакета -->
+        <div class="drc-ext" id="dr-ext-block"></div>
+        <!-- Для своего формата -->
+        <div class="drc-ext" id="dr-ym-custom" hidden>
+          <div class="drc-radios drc-radios--light">
             <label><input type="radio" name="dr-cym" value="0"><span><b>Без ярмарки</b> · только квест и банкет</span></label>
             <label><input type="radio" name="dr-cym" value="30"><span><b>+30 мин — 4 000 ₽</b> · короткая добавка</span></label>
             <label><input type="radio" name="dr-cym" value="60"><span><b>+60 мин — 7 500 ₽</b> · самый насыщенный</span></label>
           </div>
-          <!-- Для пакета (только инфо) -->
-          <div id="dr-ym-packs" hidden>
-             <div class="drc-opt is-incl" style="pointer-events:none;">
-                <span class="drc-opt__b"><b>Ярмарка игр</b> <span id="dr-ym-included-text">уже входит в пакет</span></span>
-                <span class="drc-opt__p">включено</span>
-             </div>
-          </div>
         </div>
-      </div>
-
-      <!-- ШАГ 2: ГОСТИ -->
-      <div class="drc-step">
-        <button type="button" class="drc-step__head" data-stephead="2" aria-expanded="false">
-          <span class="drc-step__title">Сколько детей</span>
-          <span class="drc-step__chev">▾</span>
-        </button>
-        <div class="drc-step__body" data-stepbody="2" hidden>
-          <div class="drc-stepper">
-            <button type="button" id="dr-minus">−</button>
-            <output id="dr-guests">6</output>
-            <button type="button" id="dr-plus">+</button>
-          </div>
-          <span class="drc-gnote" id="dr-gnote"></span>
-          <span class="drc-hint">Не знаешь точного числа? Поставь примерно — потом можно изменить.</span>
-        </div>
-      </div>
-
-      <!-- ШАГ 3: ДАТА -->
-      <div class="drc-step">
-        <button type="button" class="drc-step__head" data-stephead="3" aria-expanded="false">
-          <span class="drc-step__title">Дата и время начала</span>
-          <span class="drc-step__chev">▾</span>
-        </button>
-        <div class="drc-step__body" data-stepbody="3" hidden>
-          <input type="date" id="dr-date" class="drc-date">
-          <div class="drc-slots" id="dr-slots"></div>
-          <span class="drc-hint">Время начала можно выбрать сейчас или оставить организатору.</span>
-        </div>
-      </div>
-
-      <!-- ШАГ 4: ПРОДЛЕНИЕ -->
-      <div class="drc-step">
-        <button type="button" class="drc-step__head" data-stephead="4" aria-expanded="false">
-          <span class="drc-step__title">Продление праздника</span>
-          <span class="drc-step__chev">▾</span>
-        </button>
-        <div class="drc-step__body" data-stepbody="4" hidden>
-          <div class="drc-ext" id="dr-ext-block"></div>
-          <div class="drc-ext">
-            <label class="drc-opt"><input type="checkbox" id="dr-room-ext"><span class="drc-opt__b"><b>Продление банкетной комнаты</b><span>комната остаётся за вами, программа не ведётся</span></span></label>
-            <div class="drc-hours" id="dr-room-hours" hidden>
-              <label><input type="radio" name="dr-rh" value="30" checked>+30 мин · 1 250 ₽</label>
-              <label><input type="radio" name="dr-rh" value="60">+60 мин · 2 500 ₽</label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ШАГ 5: ДОПЫ -->
-      <div class="drc-step">
-        <button type="button" class="drc-step__head" data-stephead="5" aria-expanded="false">
-          <span class="drc-step__title">Дополнительные услуги</span>
-          <span class="drc-step__chev">▾</span>
-        </button>
-        <div class="drc-step__body" data-stepbody="5" hidden>
-          <div class="drc-ext">
-            <label class="drc-opt" id="dr-opt-menu"><input type="checkbox" id="dr-menu"><span class="drc-opt__b"><b>Меню под ключ</b><span>сервировка, еда, напитки, торт</span></span><span class="drc-opt__p">1 000 ₽ / чел</span></label>
-            <label class="drc-opt" id="dr-opt-video"><input type="checkbox" id="dr-video"><span class="drc-opt__b"><b>Видеосъёмка</b><span>сторис-ролик</span></span><span class="drc-opt__p">4 000 ₽</span></label>
-            <label class="drc-opt" id="dr-opt-photo"><input type="checkbox" id="dr-photo"><span class="drc-opt__b"><b>Фотосъёмка</b><span>100–150 фото</span></span><span class="drc-opt__p">6 000 ₽</span></label>
-            <label class="drc-opt" id="dr-opt-balls"><input type="checkbox" id="dr-balls"><span class="drc-opt__b"><b>Гелиевые шары</b><span>14 шаров</span></span><span class="drc-opt__p">3 500 ₽</span></label>
-            <label class="drc-opt" id="dr-opt-tort"><input type="checkbox" id="dr-tort"><span class="drc-opt__b"><b>Тематический торт</b><span>2–2,5 кг, вычет за порционный</span></span><span class="drc-opt__p">7 000 ₽</span></label>
-            <label class="drc-opt drc-opt--free" id="dr-opt-room2"><input type="checkbox" id="dr-room2"><span class="drc-opt__b"><b>Вторая банкетная комната</b><span>по запросу</span></span><span class="drc-opt__p">0 ₽</span></label>
+        <!-- Комната -->
+        <div class="drc-ext">
+          <label class="drc-opt"><input type="checkbox" id="dr-room-ext"><span class="drc-opt__b"><b>Продление банкетной комнаты</b><span>комната остаётся за вами, программа не ведётся</span></span></label>
+          <div class="drc-hours" id="dr-room-hours" hidden>
+            <label><input type="radio" name="dr-rh" value="30" checked>+30 мин · 1 250 ₽</label>
+            <label><input type="radio" name="dr-rh" value="60">+60 мин · 2 500 ₽</label>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="drc-plate" id="dr-result" hidden>
-      <div class="drc-plate__head">
-        <div>
-          <span class="drc-plate__tag">Ваш тариф</span>
-          <b class="drc-plate__price" id="dr-total">0 ₽</b>
+    <!-- ШАГ 4: ДОПЫ -->
+    <div class="drc-step">
+      <button type="button" class="drc-step__head" data-stephead="4" aria-expanded="false">
+        <span class="drc-step__title">Дополнительные услуги</span>
+        <span class="drc-step__chev">▾</span>
+      </button>
+      <div class="drc-step__body" data-stepbody="4" hidden>
+        <div class="drc-ext">
+          <label class="drc-opt" id="dr-opt-menu"><input type="checkbox" id="dr-menu"><span class="drc-opt__b"><b>Меню под ключ</b><span>сервировка, еда, напитки, торт</span></span><span class="drc-opt__p">1 000 ₽ / чел</span></label>
+          <label class="drc-opt" id="dr-opt-video"><input type="checkbox" id="dr-video"><span class="drc-opt__b"><b>Видеосъёмка</b><span>сторис-ролик</span></span><span class="drc-opt__p">4 000 ₽</span></label>
+          <label class="drc-opt" id="dr-opt-photo"><input type="checkbox" id="dr-photo"><span class="drc-opt__b"><b>Фотосъёмка</b><span>100–150 фото</span></span><span class="drc-opt__p">6 000 ₽</span></label>
+          <label class="drc-opt" id="dr-opt-balls"><input type="checkbox" id="dr-balls"><span class="drc-opt__b"><b>Гелиевые шары</b><span>14 шаров</span></span><span class="drc-opt__p">3 500 ₽</span></label>
+          <label class="drc-opt" id="dr-opt-tort"><input type="checkbox" id="dr-tort"><span class="drc-opt__b"><b>Тематический торт</b><span>2–2,5 кг, вычет за порционный</span></span><span class="drc-opt__p">7 000 ₽</span></label>
+          <label class="drc-opt drc-opt--free" id="dr-opt-room2"><input type="checkbox" id="dr-room2"><span class="drc-opt__b"><b>Вторая банкетная комната</b><span>по запросу</span></span><span class="drc-opt__p">0 ₽</span></label>
         </div>
-        <div class="drc-plate__btns">
-          <button type="button" class="drc-btn" id="dr-cart-add">Добавить к заявке</button>
-        </div>
-      </div>
-      <div class="drc-plate__cats" id="dr-breakdown"></div>
-      <div class="drc-plate__meta" id="dr-duration"></div>
-      <div class="drc-plate__actions">
-        <button type="button" class="drc-btn drc-btn--ghost" id="dr-help">Помочь с расчётом</button>
-        <button type="button" class="drc-btn drc-btn--ghost" id="dr-reset">Сбросить выбор</button>
       </div>
     </div>
   </div>
@@ -186,6 +159,7 @@
   <p class="drc-foot">Расчёт предварительный: точную сумму и свободное время подтверждает организатор.</p>
 </section>
 
+<!-- Корзина (нижняя плашка) -->
 <div class="drc-bar" id="dr-bar" hidden>
   <div class="drc-bar__top">
     <button type="button" class="drc-bar__sum" id="dr-bar-sum" aria-label="Показать состав">
@@ -203,10 +177,12 @@
   </div>
 </div>
 
+<!-- Плавающая пилюля -->
 <button type="button" class="drc-pill" id="dr-pill" hidden aria-label="Открыть корзину">
   <b id="dr-pill-total">🛒</b>
 </button>
 
+<!-- Шторка со списком товаров -->
 <div class="drc-sheet" id="dr-sheet" hidden>
   <div class="drc-sheet__bg" id="dr-sheet-bg"></div>
   <div class="drc-sheet__content">
@@ -251,12 +227,16 @@
 
 <style is:global>
 [hidden] { display: none !important; }
+/* Убираем дефолтное моргание кнопок на мобилках */
+button, a { -webkit-tap-highlight-color: transparent; }
+button:focus { outline: none; }
+
 .drc { background: #032E2B; color: #fff; padding: 72px 20px 80px; overflow-x: hidden; }
 .drc * { box-sizing: border-box; }
 .drc h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
 .drc__head p { max-width: 640px; margin: 0 auto 28px; text-align: center; color: rgba(255,255,255,.75); font-size: 15px; line-height: 1.6; }
 
-.drc__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 1080px; margin: 0 auto; }
+.drc__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 1080px; margin: 0 auto; align-items: start; }
 .drc-card { position: relative; display: block; cursor: pointer; }
 .drc-card input { position: absolute; opacity: 0; pointer-events: none; }
 .drc-card__in { display: flex; flex-direction: column; gap: 6px; height: 100%; background: #fff; color: #032E2B; border: 2px solid transparent; border-radius: 20px; padding: 22px 20px; transition: .2s; }
@@ -276,13 +256,14 @@
   z-index: 1; white-space: nowrap; line-height: 1.3;
 }
 
-.drc__cols { max-width: 1080px; margin: 32px auto 0; display: grid; gap: 24px; align-items: start; }
-@media (min-width: 901px) {
-  .drc__cols { grid-template-columns: minmax(0, 1fr) 420px; }
-  .drc-plate { position: sticky; top: 20px; }
-}
+.drc__custom-area { display: flex; flex-direction: column; gap: 10px; max-width: 1080px; margin: 16px auto 0; }
+.drc__custom-trigger { display: block; width: 100%; text-align: center; font: inherit; font-size: 15px; font-weight: 600; color: #fff; background: rgba(195,0,103,.12); border: 1px solid rgba(195,0,103,.4); padding: 16px; border-radius: 16px; cursor: pointer; transition: .2s; }
+.drc__custom-trigger:hover { background: rgba(195,0,103,.2); border-color: #C30067; }
+.drc-mini-banner { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; text-align: center; font: inherit; font-size: 14px; color: #fff; background: transparent; border: 1px dashed rgba(255,255,255,.2); padding: 14px; border-radius: 16px; cursor: pointer; transition: .2s; }
+.drc-mini-banner:hover { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.4); }
+.drc-mini-banner b { font-weight: 700; color: #0AD9C6; }
 
-.drc__steps { background: #fff; color: #032E2B; border-radius: 20px; padding: 20px 28px; display: grid; gap: 0; }
+.drc__steps { max-width: 1080px; margin: 32px auto 0; background: #fff; color: #032E2B; border-radius: 20px; padding: 20px 28px; display: grid; gap: 0; }
 .drc-stepper { display: inline-flex; align-items: center; gap: 14px; background: #F5F7F6; border-radius: 12px; padding: 8px 12px; }
 .drc-stepper button { width: 32px; height: 32px; border: 0; border-radius: 10px; background: #05544F; color: #fff; font-size: 16px; font-weight: 800; cursor: pointer; }
 .drc-stepper button:disabled { opacity: .35; cursor: default; }
@@ -294,7 +275,6 @@
 .drc-slot { font: inherit; font-size: 13px; padding: 8px 16px; border: 1px solid #E4ECEA; border-radius: 10px; background: #fff; color: #3C5B57; cursor: pointer; }
 .drc-slot.is-active { border-color: #C30067; color: #C30067; font-weight: 700; }
 
-/* Стили для радио-кнопок внутри белого калькулятора */
 .drc-radios--light { display: grid; gap: 8px; margin-bottom: 12px; }
 .drc-radios--light label { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start; background: #F5F7F6; border: 1px solid #E4ECEA; border-radius: 12px; padding: 12px 14px; cursor: pointer; font-size: 13.5px; line-height: 1.5; color: #032E2B; }
 .drc-radios--light label b { display: block; font-weight: 700; }
@@ -304,7 +284,7 @@
 .drc-program-summary { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; background: #F5F7F6; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; font-size: 14px; }
 .drc-program-summary b { font-size: 15px; font-weight: 700; color: #C30067; }
 
-.drc-ext { display: grid; gap: 10px; }
+.drc-ext { display: grid; gap: 10px; margin-bottom: 12px; }
 .drc-opt { display: flex; gap: 12px; align-items: flex-start; border: 1px solid #E4ECEA; border-radius: 12px; padding: 12px 14px; cursor: pointer; transition: .15s; }
 .drc-opt:hover { border-color: rgba(10,153,148,.5); }
 .drc-opt:has(input:checked) { border-color: #C30067; }
@@ -317,46 +297,18 @@
 .drc-opt__b span { font-size: 12px; color: #3C5B57; }
 .drc-opt__p { font-size: 13.5px; font-weight: 700; color: #032E2B; white-space: nowrap; }
 .drc-opt--free .drc-opt__p { color: #0A9994; }
-.drc-hours { display: flex; gap: 8px; padding-left: 30px; flex-wrap: wrap; }
+.drc-hours { display: flex; gap: 8px; padding-left: 30px; flex-wrap: wrap; margin-top: 8px; }
 .drc-hours label { font-size: 13px; color: #3C5B57; cursor: pointer; border: 1px solid #E4ECEA; border-radius: 10px; padding: 6px 14px; }
 .drc-hours label:has(input:checked) { border-color: #C30067; color: #C30067; font-weight: 700; }
 .drc-hours input { display: none; }
 
-.drc-plate { background: #fff; color: #032E2B; border-radius: 22px; padding: 22px 26px; box-shadow: 0 16px 48px rgba(0,0,0,.35); max-width: 100%; overflow: hidden; }
-.drc-plate__head { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-bottom: 14px; border-bottom: 2px solid #E4ECEA; }
-.drc-plate__tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .04em; color: #C30067; margin-bottom: 4px; }
-.drc-plate__price { display: block; font-size: clamp(30px, 8vw, 40px); font-weight: 800; line-height: 1.1; }
-.drc-btn { font: inherit; font-weight: 700; font-size: 14px; padding: 13px 28px; border-radius: 30px; border: 0; background: #C30067; color: #fff; cursor: pointer; transition: .2s; }
-.drc-btn:hover { background: #E00077; transform: translateY(-2px); }
-.drc-btn--ghost { background: transparent; color: #05544F; border: 2px solid #05544F; padding: 11px 24px; }
-.drc-btn--ghost:hover { background: #F5F7F6; transform: none; }
-.drc-btn:disabled { opacity: .5; cursor: default; transform: none; }
+.drc-btn { font: inherit; font-weight: 700; font-size: 14px; padding: 13px 28px; border-radius: 30px; border: 0; background: #C30067; color: #fff; cursor: pointer; transition: background .2s; }
+.drc-btn:hover { background: #E00077; }
+.drc-btn:disabled { opacity: .5; cursor: default; }
+.drc-link { font: inherit; font-size: 13px; font-weight: 600; color: #0A9994; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+.drc-link:hover { color: #C30067; }
 
-.drc-plate__cats { margin-top: 4px; }
-.drc-catbtn { width: 100%; font: inherit; text-align: left; background: none; border: 0; border-bottom: 1px dashed #E4ECEA; padding: 12px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-.drc-catbtn .l { display: grid; gap: 2px; min-width: 0; flex: 1 1 auto; }
-.drc-catbtn .lbl { font-size: 11px; font-weight: 600; color: #6B8B86; }
-.drc-catbtn .t { font-size: 14px; font-weight: 600; color: #032E2B; overflow-wrap: anywhere; }
-.drc-catbtn .r { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
-.drc-catbtn .v { font-size: 14px; font-weight: 700; color: #032E2B; white-space: nowrap; }
-.drc-catbtn .v.is-money { color: #C30067; }
-.drc-catbtn .v.is-none { color: #6B8B86; font-weight: 400; }
-.drc-catbtn .chev { font-size: 13px; font-weight: 700; color: #C30067; transition: transform .2s; }
-.drc-catbtn.is-open .chev { transform: rotate(180deg); }
-.drc-catsub { display: none; padding: 6px 0 8px; border-bottom: 1px dashed #E4ECEA; }
-.drc-catsub.is-open { display: grid; gap: 4px; }
-.drc-catrow { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: baseline; font-size: 13px; line-height: 1.5; color: #032E2B; padding: 5px 0; border-bottom: 1px solid rgba(228,236,234,.5); }
-.drc-catrow:last-child { border-bottom: 0; }
-.drc-catrow span { overflow-wrap: anywhere; word-break: break-word; }
-.drc-catrow b { font-weight: 500; color: #3C5B57; white-space: nowrap; }
-.drc-catrow.is-muted { color: #6B8B86; }
-.drc-catrow.is-muted b { color: #6B8B86; font-weight: 400; }
-
-.drc-plate__meta { margin-top: 14px; font-size: 13px; font-weight: 600; color: #3C5B57; background: #F5F7F6; border-radius: 10px; padding: 10px 14px; }
-.drc-plate__actions { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
-.drc-foot { margin-top: 18px; text-align: center; font-size: 12px; color: rgba(255,255,255,.5); }
-
-.drc-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; flex-direction: column; gap: 8px; background: #021F1D; padding: 12px 14px calc(12px + env(safe-area-inset-bottom)); box-shadow: 0 -6px 24px rgba(0,0,0,.4); }
+.drc-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; flex-direction: column; gap: 8px; background: #021F1D; padding: 12px 14px calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(255,255,255,.15); }
 .drc-bar__top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .drc-bar__sum { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 8px; background: none; border: 0; color: #fff; font: inherit; padding: 0; cursor: pointer; text-align: left; position: relative; }
 .drc-bar__sum b { font-size: 20px; font-weight: 800; line-height: 1.15; }
@@ -430,23 +382,19 @@
 .drc-step__chev { font-size: 13px; font-weight: 600; color: #6B8B86; transition: transform .2s; flex: 0 0 auto; }
 .drc-step__head.is-open .drc-step__chev { transform: rotate(180deg); color: #C30067; }
 .drc-step__body { padding-bottom: 14px; }
-.drc-link { font: inherit; font-size: 13px; font-weight: 600; color: #0A9994; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
-.drc-link:hover { color: #C30067; }
+.drc-foot { margin-top: 18px; text-align: center; font-size: 12px; color: rgba(255,255,255,.5); }
 
 @media (max-width: 900px) { .drc__cards { grid-template-columns: 1fr; } }
 @media (max-width: 760px) {
   .drc { padding: 48px 14px 140px; }
-  .drc__steps, .drc-plate { padding: 18px 16px; }
-  .drc-plate__head { flex-direction: column; align-items: stretch; }
-  .drc-plate .drc-btn { width: 100%; }
+  .drc__steps { padding: 18px 16px; }
   .drc-bar { padding-left: 14px; padding-right: 14px; }
-  .drc-toast { bottom: 126px; }
+  .drc-toast { bottom: 110px; }
 }
 @media (min-width: 761px) { .drc-bar { display: none; } .drc-sheet { display: none; } }
 </style>
 
 <script is:inline>
-// Калькулятор v10.1 — основа и ярмарка интегрированы в шаги
 // @ts-nocheck
   const CONFIG = {
     wa: '79287588483',
@@ -490,7 +438,6 @@
   let dirty = false;
   let barClosed = true;
   let toastTimer = null;
-  const plateOpen = { pack: false, party: false, extras: false };
 
   window.DR_CALC = {
     ready: false, selected: false, tariff: '', guests: 0,
@@ -537,7 +484,6 @@
     const m = customYm();
     return m === 30 ? 4000 : m === 60 ? 7500 : 0;
   }
-  function setDisplay(id, show) { $(id).style.display = show ? '' : 'none'; }
   function isIncluded(optId) {
     return state.mode === 'packs' && state.pack === 'maximal' && ['dr-video','dr-photo','dr-balls','dr-tort'].includes(optId);
   }
@@ -556,38 +502,47 @@
     return false;
   }
 
+  function syncActionBtns() {
+    let text = 'Добавить к заявке';
+    let isDisabled = false;
+    
+    if (snapshot) {
+      if (dirty) {
+        text = 'Обновить заявку';
+      } else {
+        text = 'Перейти к заявке';
+      }
+    }
+    
+    if (!state.pack && state.mode === 'packs') isDisabled = true;
+    
+    $('dr-cart-add').textContent = text;
+    $('dr-bar-book').textContent = text;
+    $('dr-sheet-book').textContent = text;
+    
+    $('dr-cart-add').disabled = isDisabled;
+    $('dr-bar-book').disabled = isDisabled;
+    $('dr-sheet-book').disabled = isDisabled;
+  }
+
   function showCart() {
-    const hasCart = !!(state.mode === 'packs' ? state.pack : state.customBase);
+    const hasCart = !!(state.mode === 'packs' ? state.pack : true);
     const pill = $('dr-pill');
     const pillTotal = $('dr-pill-total');
     
     if (!hasCart) {
       $('dr-bar').hidden = true;
       $('dr-sheet').hidden = true;
-      if (!barClosed) {
-          $('dr-bar').hidden = false;
-          if(pill) pill.hidden = true;
-      } else {
-          if(pill) {
-              pill.hidden = false;
-              pillTotal.textContent = '🛒';
-              pill.classList.add('is-empty');
-          }
+      if(pill) {
+          pill.hidden = false;
+          pillTotal.textContent = '🛒';
+          pill.classList.add('is-empty');
       }
       return;
     }
 
-    if (lastTotal > 0) {
-        if(pillTotal) {
-            pillTotal.textContent = fmt(lastTotal);
-            pill.classList.remove('is-empty');
-        }
-    } else {
-        if(pillTotal) {
-            pillTotal.textContent = '🛒';
-            pill.classList.add('is-empty');
-        }
-    }
+    pillTotal.textContent = fmt(lastTotal);
+    pill.classList.remove('is-empty');
 
     if (barClosed) {
       $('dr-bar').hidden = true;
@@ -597,6 +552,7 @@
       if(pill) pill.hidden = true;
     }
     $('dr-bar-dot').hidden = !dirty;
+    syncActionBtns();
   }
 
   function syncCart() {
@@ -606,21 +562,19 @@
     $('dr-bar-total').textContent = fmt(lastTotal);
     $('dr-bar-count').textContent = cnt + ' ' + plural(cnt, 'услуга', 'услуги', 'услуг');
     $('dr-bar-dot').hidden = !dirty;
-    $('dr-cart-add').textContent = 'Добавить к заявке';
-    $('dr-cart-add').disabled = !state.pack && state.mode === 'packs';
+    syncActionBtns();
   }
 
   function syncProgramUI() {
     const isPacks = state.mode === 'packs';
     $('dr-program-packs').hidden = !isPacks;
     $('dr-program-custom').hidden = isPacks;
-    $('dr-ym-custom').hidden = isPacks;
-    $('dr-ym-packs').hidden = !isPacks;
     
     if (isPacks && state.pack) {
       $('dr-program-name').textContent = '«' + TARIFFS[state.pack].name + '»';
-      $('dr-ym-included-text').textContent = 'входит в пакет: ' + TARIFFS[state.pack].inclYm + ' мин';
     }
+    $('dr-ext-block').hidden = !(state.mode === 'packs' && !!state.pack);
+    $('dr-ym-custom').hidden = !(state.mode === 'custom');
   }
 
   function syncExt() {
@@ -641,13 +595,12 @@
     if (!t) return;
     const isMax = state.mode === 'packs' && state.pack === 'maximal';
     const isMini = state.mode === 'packs' ? state.pack === 'mini' : state.customBase === 'mini';
-    setDisplay('dr-ext-block', state.mode === 'packs' && !!state.pack);
-    setDisplay('dr-opt-menu', !t.food);
-    setDisplay('dr-opt-video', !isMax);
-    setDisplay('dr-opt-photo', !isMax);
-    setDisplay('dr-opt-balls', !isMax);
-    setDisplay('dr-opt-tort', !isMax);
-    setDisplay('dr-opt-room2', !isMini);
+    $('dr-opt-menu').hidden = t.food;
+    $('dr-opt-video').hidden = isMax;
+    $('dr-opt-photo').hidden = isMax;
+    $('dr-opt-balls').hidden = isMax;
+    $('dr-opt-tort').hidden = isMax;
+    $('dr-opt-room2').hidden = isMini;
     ['dr-video','dr-photo','dr-balls','dr-tort'].forEach((id) => {
       const input = $(id);
       const incl = isIncluded(id);
@@ -692,24 +645,6 @@
     return extras;
   }
 
-  function crow(label, value, muted) {
-    return '<div class="drc-catrow' + (muted ? ' is-muted' : '') + '"><span>' + label + '</span><b>' + value + '</b></div>';
-  }
-  function crowSp(s) {
-    const i = s.lastIndexOf(' · ');
-    return crow(i > -1 ? s.slice(0, i) : s, i > -1 ? s.slice(i + 3) : '', false);
-  }
-  function ccat(key, label, title, value, valueCls, subHtml) {
-    const open = !!plateOpen[key];
-    return '<div class="drc-cat">' +
-      '<button type="button" class="drc-catbtn' + (open ? ' is-open' : '') + '" data-catbtn="' + key + '" aria-expanded="' + open + '">' +
-        '<span class="l">' + (label ? '<span class="lbl">' + label + '</span>' : '') + '<span class="t">' + title + '</span></span>' +
-        '<span class="r"><span class="v ' + valueCls + '">' + value + '</span><span class="chev">▾</span></span>' +
-      '</button>' +
-      '<div class="drc-catsub' + (open ? ' is-open' : '') + '" data-catsub="' + key + '">' + subHtml + '</div>' +
-    '</div>';
-  }
-
   function calculate() {
     const t = currentTariff();
     if (!t) return;
@@ -751,37 +686,7 @@
 
     total += extrasSum;
     const party = programHours() + roomExtMinutes() / 60;
-    $('dr-duration').textContent = 'Праздник: ' + fmtH(party) + ' · весь слот: ' + fmtH(party + 0.5) + ' (+30 мин сборы)';
-
-    const packSub = (t.includes || []).map((it) => crow(it, 'включено', true)).join('');
-    let html = ccat('pack', 'Пакет', '«' + t.name + '»', fmt(t.price), 'is-money', packSub);
-
-    const partySub =
-      crow('Детей', g) +
-      surList.map(crowSp).join('') +
-      crow('Дата', dateStr ? dateStr.split('-').reverse().join('.') : 'уточним') +
-      crow('Время', state.slot || 'уточним') +
-      crow('Праздник', fmtH(party)) +
-      crow('Весь слот', fmtH(party + 0.5));
-    const surSum = surList.reduce((acc, s) => {
-      const m = s.match(/(\d[\d\s\u00A0]*) ₽/);
-      return acc + (m ? parseInt(m[1].replace(/[\s\u00A0]/g, ''), 10) : 0);
-    }, 0);
-    const partyVal = g + ' ' + plural(g, 'ребёнок', 'ребёнка', 'детей') + ' · ' + fmtH(party) + (surSum ? ' · +' + fmt(surSum) : '');
-    html += ccat('party', '', 'Детали праздника', partyVal, '', partySub);
-
-    let exTitle = 'Дополнительно';
-    let exVal = 'не выбрано';
-    let exCls = 'is-none';
-    if (extrasList.length) {
-      exTitle = 'Дополнительно · ' + extrasList.length + ' ' + plural(extrasList.length, 'услуга', 'услуги', 'услуг');
-      exVal = extrasSum > 0 ? fmt(extrasSum) : 'по запросу';
-      exCls = extrasSum > 0 ? 'is-money' : '';
-    }
-    const exSub = extrasList.length ? extrasList.map(crowSp).join('') : crow('ничего не выбрано', '', true);
-    html += ccat('extras', '', exTitle, exVal, exCls, exSub);
-    $('dr-breakdown').innerHTML = html;
-
+    
     lastOrder = {
       tariff: t.name,
       tariffKey: state.mode === 'packs' ? state.pack : state.customBase,
@@ -800,7 +705,6 @@
     };
 
     lastTotal = total;
-    $('dr-total').textContent = fmt(total);
     dirty = snapshot ? hasChangesSinceSnapshot() : false;
 
     syncCart();
@@ -934,17 +838,6 @@
   $('dr-sheet-clear').addEventListener('click', () => { doReset(); closeSheet(); });
   if ($('dr-pill')) $('dr-pill').addEventListener('click', openSheet);
 
-  $('dr-breakdown').addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-catbtn]');
-    if (!btn) return;
-    const key = btn.dataset.catbtn;
-    plateOpen[key] = !plateOpen[key];
-    btn.classList.toggle('is-open', plateOpen[key]);
-    btn.setAttribute('aria-expanded', plateOpen[key] ? 'true' : 'false');
-    const sub = document.querySelector('[data-catsub="' + key + '"]');
-    if (sub) sub.classList.toggle('is-open', plateOpen[key]);
-  });
-
   document.querySelectorAll('[data-more]').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -1045,7 +938,6 @@
 
   function showSteps(show) {
     $('dr-steps').hidden = !show;
-    $('dr-result').hidden = !show;
     if (!show) { $('dr-bar').hidden = true; $('dr-sheet').hidden = true; }
   }
 
@@ -1054,7 +946,7 @@
     buildSlots(); calculate(); syncCart(); showCart();
   }
 
-  const stepOpen = [true, false, false, false, false, false];
+  const stepOpen = [true, false, false, false, false];
   function renderSteps() {
     document.querySelectorAll('#dr-steps .drc-step').forEach((st, i) => {
       const body = st.querySelector('.drc-step__body');
@@ -1067,16 +959,17 @@
   document.querySelectorAll('#dr-steps .drc-step__head').forEach((h) => {
     h.addEventListener('click', () => { const i = Number(h.dataset.stephead); stepOpen[i] = !stepOpen[i]; renderSteps(); });
   });
-  function openNext(i) { if (i < 5 && !stepOpen[i + 1]) { stepOpen[i + 1] = true; renderSteps(); } }
+  function openNext(i) { if (i < 4 && !stepOpen[i + 1]) { stepOpen[i + 1] = true; renderSteps(); } }
 
-  function applyPack(el) {
+  function setPack(val) {
     state.mode = 'packs';
-    state.pack = el.value;
-    const t = TARIFFS[el.value];
-    if (!t) return;
-    document.querySelectorAll('input[name="dr-cbase"], input[name="dr-cym"]').forEach((r) => (r.checked = false));
+    state.pack = val;
+    document.querySelectorAll('input[name="dr-pack"]').forEach(r => { r.checked = (r.value === val); });
+    document.querySelectorAll('input[name="dr-cbase"], input[name="dr-cym"]').forEach(r => r.checked = false);
     state.customBase = 'base';
     state.customYm = '0';
+    const t = TARIFFS[val];
+    if (!t) return;
     state.guests = state.guestsTouched ? Math.max(state.guests, t.minGuests) : t.minGuests;
     resetExtras();
     showSteps(true);
@@ -1085,74 +978,58 @@
     recalcAll();
   }
 
+  function setCustom(baseVal) {
+    state.mode = 'custom';
+    state.pack = null;
+    document.querySelectorAll('input[name="dr-pack"]').forEach(r => r.checked = false);
+    document.querySelectorAll('input[name="dr-cbase"]').forEach(r => { r.checked = (r.value === baseVal); });
+    state.customBase = baseVal;
+    const t = TARIFFS[baseVal];
+    if (!t) return;
+    state.guests = state.guestsTouched ? Math.max(state.guests, t.minGuests) : t.minGuests;
+    showSteps(true);
+    syncProgramUI();
+    barClosed = false;
+    recalcAll();
+  }
+
   document.querySelectorAll('input[name="dr-pack"]').forEach((el) => {
-    el.addEventListener('change', () => applyPack(el));
+    el.addEventListener('change', () => setPack(el.value));
   });
 
   document.querySelectorAll('input[name="dr-cbase"]').forEach((el) => {
-    el.addEventListener('change', () => {
-      state.mode = 'custom';
-      state.pack = null;
-      document.querySelectorAll('input[name="dr-pack"]').forEach((r) => (r.checked = false));
-      state.customBase = el.value;
-      const t = TARIFFS[el.value];
-      state.guests = state.guestsTouched ? Math.max(state.guests, t.minGuests) : t.minGuests;
-      showSteps(true);
-      syncProgramUI();
-      barClosed = false;
-      recalcAll();
-    });
+    el.addEventListener('change', () => setCustom(el.value));
   });
   document.querySelectorAll('input[name="dr-cym"]').forEach((el) => {
     el.addEventListener('change', () => { state.customYm = el.value; recalcAll(); });
   });
 
-  // Переключение режимов внутри шага "Программа"
-  $('dr-to-custom').addEventListener('click', () => {
-    state.mode = 'custom';
-    document.querySelectorAll('input[name="dr-pack"]').forEach((r) => (r.checked = false));
-    state.pack = null;
-    // По умолчанию ставим "База"
-    document.querySelector('input[name="dr-cbase"][value="base"]').checked = true;
-    state.customBase = 'base';
-    const t = TARIFFS['base'];
-    state.guests = state.guestsTouched ? Math.max(state.guests, t.minGuests) : t.minGuests;
-    syncProgramUI();
-    recalcAll();
-  });
+  $('dr-custom-trigger').addEventListener('click', () => setCustom('base'));
+  $('dr-mini-trigger').addEventListener('click', () => setPack('mini'));
+
+  $('dr-to-custom').addEventListener('click', () => setCustom('base'));
   $('dr-to-packs').addEventListener('click', () => {
-    state.mode = 'packs';
-    document.querySelectorAll('input[name="dr-cbase"], input[name="dr-cym"]').forEach((r) => (r.checked = false));
-    state.customBase = 'base';
-    state.customYm = '0';
-    // Возвращаем "Популярный" или последний выбранный, если был
-    const fallbackPack = state.pack || 'popular';
-    state.pack = fallbackPack;
-    document.querySelector('input[name="dr-pack"][value="' + fallbackPack + '"]').checked = true;
-    const t = TARIFFS[fallbackPack];
-    state.guests = state.guestsTouched ? Math.max(state.guests, t.minGuests) : t.minGuests;
-    resetExtras();
-    syncProgramUI();
-    recalcAll();
+    const lastPack = state.pack || 'popular';
+    setPack(lastPack);
   });
 
-  $('dr-plus').addEventListener('click', () => { state.guests++; state.guestsTouched = true; recalcAll(); openNext(2); });
-  $('dr-minus').addEventListener('click', () => { state.guests--; state.guestsTouched = true; recalcAll(); openNext(2); });
+  $('dr-plus').addEventListener('click', () => { state.guests++; state.guestsTouched = true; recalcAll(); openNext(1); });
+  $('dr-minus').addEventListener('click', () => { state.guests--; state.guestsTouched = true; recalcAll(); openNext(1); });
 
   ['dr-menu','dr-video','dr-photo','dr-balls','dr-tort','dr-room2'].forEach((id) => {
     $(id).addEventListener('change', calculate);
   });
   $('dr-room-ext').addEventListener('change', () => {
     $('dr-room-hours').hidden = !$('dr-room-ext').checked;
-    buildSlots(); openNext(4); calculate();
+    buildSlots(); openNext(3); calculate();
   });
-  document.getElementById('dr-ext-block').addEventListener('change', () => { buildSlots(); calculate(); openNext(4); });
+  document.getElementById('dr-ext-block').addEventListener('change', () => { buildSlots(); calculate(); openNext(3); });
   document.querySelectorAll('input[name="dr-rh"]').forEach((el) => el.addEventListener('change', () => { buildSlots(); calculate(); }));
 
   const dateInput = $('dr-date');
   const _d = new Date();
   dateInput.min = _d.getFullYear() + '-' + String(_d.getMonth()+1).padStart(2,'0') + '-' + String(_d.getDate()).padStart(2,'0');
-  dateInput.addEventListener('change', () => { calculate(); openNext(3); });
+  dateInput.addEventListener('change', () => { calculate(); openNext(2); });
 
   function openChannels(title, text) {
     $('dr-modal-title').textContent = title;
@@ -1169,20 +1046,20 @@
 
   function addToClaim() {
     if (state.mode === 'packs' && !state.pack) return;
-    pick();
+    if (!snapshot || dirty) {
+      pick();
+    }
     closeSheet();
+    $('dr-toast').hidden = true;
     const anchor = document.getElementById('zayavka');
     if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-
-  function help() { openChannels('Помочь с расчётом', 'Здравствуйте! Помогите рассчитать праздник.\n\n' + (window.DR_CALC.summary || '')); }
 
   $('dr-toast-go').addEventListener('click', () => { $('dr-toast').hidden = true; addToClaim(); });
   $('dr-toast-stay').addEventListener('click', () => { $('dr-toast').hidden = true; });
   $('dr-bar-book').addEventListener('click', addToClaim);
   $('dr-sheet-book').addEventListener('click', addToClaim);
   $('dr-cart-add').addEventListener('click', addToClaim);
-  $('dr-help').addEventListener('click', help);
 
   $('dr-bar-close').addEventListener('click', () => { barClosed = true; showCart(); });
 
@@ -1195,7 +1072,7 @@
     state.mode = 'packs'; state.pack = null;
     state.customBase = 'base'; state.customYm = '0';
     state.guests = 6; state.guestsTouched = false; state.slot = null;
-    stepOpen[0] = true; stepOpen[1] = false; stepOpen[2] = false; stepOpen[3] = false; stepOpen[4] = false; stepOpen[5] = false;
+    stepOpen[0] = true; stepOpen[1] = false; stepOpen[2] = false; stepOpen[3] = false; stepOpen[4] = false;
     snapshot = null; dirty = false; barClosed = true;
     window.__drToastShown = false;
     window.DR_CALC.justUpdatedAt = 0;
@@ -1208,7 +1085,6 @@
     document.querySelector('.drc__cards').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  $('dr-reset').addEventListener('click', doReset);
   $('dr-bar-reset').addEventListener('click', doReset);
 
   restoreCalcState();

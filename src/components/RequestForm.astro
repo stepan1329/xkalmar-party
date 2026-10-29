@@ -1,5 +1,5 @@
 ---
-// Форма заявки v3.2 — синхронизирована с калькулятором v10.1
+// Форма заявки v3.3 — адаптирована под новые статусы
 ---
 <section class="drf" id="zayavka">
   <div class="drf__head">
@@ -79,11 +79,14 @@
 </section>
 
 <style is:global>
+button, a { -webkit-tap-highlight-color: transparent; }
+button:focus { outline: none; }
+
 .drf { background: #021F1D; color: #fff; padding: 72px 20px 80px; overflow-x: hidden; }
 .drf * { box-sizing: border-box; }
 .drf h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
 .drf__head p { max-width: 640px; margin: 0 auto 28px; text-align: center; color: rgba(255,255,255,.75); font-size: 15px; line-height: 1.6; }
-.drf__grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 20px; max-width: 1080px; margin: 0 auto; align-items: start; }
+.drf__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1080px; margin: 0 auto; align-items: start; }
 
 .drf__form { background: #fff; color: #032E2B; border-radius: 22px; padding: 24px 26px; display: grid; gap: 14px; max-width: 100%; }
 .drf-field { display: grid; gap: 6px; position: relative; }
@@ -105,8 +108,8 @@
 .drf-consent input { width: 16px; height: 16px; margin: 2px 0 0; accent-color: #C30067; flex: 0 0 auto; }
 .drf-consent a { color: #0A9994; text-decoration: underline; }
 .drf-btn { font: inherit; font-weight: 700; font-size: 16px; padding: 15px 30px; border-radius: 30px; border: 0; background: #C30067; color: #fff; cursor: pointer; transition: .2s; }
-.drf-btn:hover { background: #E00077; transform: translateY(-2px); }
-.drf-btn:disabled { opacity: .6; cursor: default; transform: none; }
+.drf-btn:hover { background: #E00077; }
+.drf-btn:disabled { opacity: .6; cursor: default; }
 .drf-note { margin: 0; font-size: 12px; line-height: 1.6; color: #6B8B86; }
 .drf-note a { color: #C30067; font-weight: 700; text-decoration: underline; }
 
@@ -174,10 +177,8 @@
 }
 
 @media (max-width: 760px) {
-  /* Убираем боковые отступы секции, чтобы карточки стали шире */
-  .drf { padding: 48px 0 64px; }
-  /* Карточкам даём небольшие отступы по бокам, чтобы не прилипали к краям экрана */
-  .drf__form, .drf__order, .drf-done { margin: 0 10px; padding: 20px 16px; }
+  .drf { padding: 48px 14px 64px; }
+  .drf__form, .drf__order, .drf-done { padding: 20px 16px; }
   .drf-btn { width: 100%; }
 }
 </style>
@@ -227,7 +228,6 @@
 
   function onStatusClick() {
     if (!window.DR_CALC || !window.DR_CALC.dirty) return;
-    // Синхронизируем с калькулятором: имитируем клик по кнопке «Добавить к заявке»
     const cartAdd = document.getElementById('dr-cart-add');
     if (cartAdd) cartAdd.click();
   }
