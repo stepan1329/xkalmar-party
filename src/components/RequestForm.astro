@@ -1,5 +1,5 @@
 ---
-// Форма заявки v3.8
+// Форма заявки v3.9
 ---
 <section class="drf" id="zayavka">
   <div class="drf__head">
@@ -168,6 +168,24 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
 @keyframes drfFlash { from { opacity: .35; } to { opacity: 1; } }
 .drf-order__note { margin: 12px 0 0; font-size: 12px; line-height: 1.55; color: #6B8B86; }
 
+.drf-transfer-btn {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 18px;
+  border-radius: 20px;
+  border: 0;
+  background: #C30067;
+  color: #fff;
+  cursor: pointer;
+  transition: background .15s;
+  text-align: center;
+}
+.drf-transfer-btn:hover { background: #E00077; }
+
 .drf-order__toggle { display: none; width: 100%; font: inherit; text-align: left; font-size: 14px; font-weight: 700; color: #032E2B; background: #F5F7F6; border: 1px solid #E4ECEA; border-radius: 12px; padding: 12px 14px; cursor: pointer; align-items: center; justify-content: space-between; gap: 10px; }
 .drf-order__chev { color: #C30067; font-weight: 800; transition: transform .2s; }
 .drf__order.is-open .drf-order__chev { transform: rotate(180deg); }
@@ -285,11 +303,19 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     const toggle = $('drf-order-toggle');
 
     if (!c || !c.ready || !c.selected || (!c.order && !c.summary)) {
-      const emptyKey = 'empty';
+      const isReady = !!(c && c.ready && (c.order || c.summary));
+      const emptyKey = isReady ? 'empty-ready' : 'empty-noready';
       if (emptyKey === lastRenderedKey) { renderOrderStatus(); return; }
       lastRenderedKey = emptyKey;
       
-      box.innerHTML = '<p class="drf-order__empty">Состав появится, когда нажмёте «Добавить к заявке» в калькуляторе</p>';
+      if (isReady) {
+        box.innerHTML = 
+          '<p class="drf-order__empty">Расчёт готов — перенесите его в заявку:</p>' +
+          '<button type="button" class="drf-transfer-btn" id="drf-transfer-calc">Перенести расчёт в заявку →</button>';
+      } else {
+        box.innerHTML = '<p class="drf-order__empty">Состав появится, когда нажмёте «Добавить к заявке» в калькуляторе</p>';
+      }
+      
       totalBox.hidden = true;
       note.hidden = true;
       toggle.style.display = 'none';
@@ -370,6 +396,12 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
   document.addEventListener('drcalc-update', () => { renderOrder(); renderOrderStatus(); });
 
   $('drf-order').addEventListener('click', (e) => {
+    const transferBtn = e.target.closest('#drf-transfer-calc');
+    if (transferBtn) {
+      document.dispatchEvent(new CustomEvent('drcalc-refresh'));
+      return;
+    }
+    
     const btn = e.target.closest('[data-catbtn]');
     if (!btn) return;
     const key = btn.dataset.catbtn;
