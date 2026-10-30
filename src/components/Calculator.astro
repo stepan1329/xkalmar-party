@@ -63,7 +63,6 @@
   </div>
 
   <div class="drc__steps" id="dr-steps" hidden>
-    
     <!-- ШАГ 0: ПРОГРАММА -->
     <div class="drc-step">
       <button type="button" class="drc-step__head is-open" data-stephead="0" aria-expanded="true">
@@ -87,7 +86,6 @@
           <span class="drc-hint" style="margin-top:4px;">Основная программа — основа праздника, она выбирается всегда. Ярмарка игр и допы добавляются к ней.</span>
           <button type="button" class="drc-link" id="dr-to-packs" style="margin-top:12px;">← Выбрать готовый пакет</button>
         </div>
-        
         <div class="drc-gloss">
           <span><b>Квест-шоу</b> — игра-приключение с командой из 3 ведущих-актёров: дети ищут подсказки и выполняют задания.</span>
           <span><b>Ярмарка игр</b> — весёлые конкурсы и активности с призами. Ведут те же актёры.</span>
@@ -178,7 +176,6 @@
 
 <button type="button" id="dr-reset" hidden></button>
 
-<!-- Пилюля (Pill) -->
 <button type="button" class="drc-pill" id="dr-pill" hidden aria-label="Открыть корзину">
   <span id="dr-pill-count" class="drc-pill__count"></span>
   <span class="drc-pill__sep">·</span>
@@ -186,7 +183,6 @@
   <span class="drc-pill__dot" id="dr-pill-dot" hidden></span>
 </button>
 
-<!-- Шторка (Bottom Sheet) -->
 <div class="drc-sheet" id="dr-sheet" hidden>
   <div class="drc-sheet__bg" id="dr-sheet-bg"></div>
   <div class="drc-sheet__content">
@@ -322,7 +318,6 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
 .drc-link { font: inherit; font-size: 13px; font-weight: 600; color: #0A9994; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
 .drc-link:hover { color: #C30067; }
 
-/* Pill */
 .drc-pill {
   position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 49;
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
@@ -337,7 +332,6 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
 @keyframes pillPulse { 0% { transform: scale(1); } 50% { transform: scale(1.6); } 100% { transform: scale(1); } }
 .drc-pill__dot.is-pulse { animation: pillPulse 0.6s ease 3; }
 
-/* Bottom Sheet */
 .drc-sheet { position: fixed; inset: 0; z-index: 100; display: flex; align-items: flex-end; justify-content: center; }
 .drc-sheet__bg { position: absolute; inset: 0; background: rgba(1,16,15,.7); animation: sheetFade .2s ease; }
 .drc-sheet__content { position: relative; width: 100%; max-width: 560px; max-height: 80vh; background: #fff; color: #032E2B; border-radius: 22px 22px 0 0; display: flex; flex-direction: column; animation: sheetUp .25s ease; }
@@ -661,8 +655,6 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     const isMax = state.mode === 'packs' && state.pack === 'maximal';
     const banqOn = isMax ? ($('dr-banquet') ? $('dr-banquet').checked : false) : false;
     const foodOn = state.mode === 'custom' ? false : (isMax ? banqOn : t.food);
-    // FIXME-REVIEW: для Максимального с включённым меню еда уже покрывает всех g детей.
-    // Используем effFreeGuests = g, чтобы foodExtra не задваивал надбавку (в букве ТЗ t.freeGuests).
     const effFreeGuests = (isMax && banqOn) ? state.guests : t.freeGuests;
     
     if (isMax) {
@@ -722,9 +714,7 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     const isMax = state.mode === 'packs' && state.pack === 'maximal';
     const banqOn = isMax ? isChecked('dr-banquet') : false;
     const foodOn = state.mode === 'custom' ? false : (isMax ? banqOn : t.food);
-    // FIXME-REVIEW: progLimit единый для всех тарифов (CONFIG.programLimit = 15).
     const progLimit = CONFIG.programLimit;
-    // FIXME-REVIEW: для Максимального с включённым меню еда покрывает всех g детей.
     const effFreeGuests = (isMax && banqOn) ? g : t.freeGuests;
     
     const curExtVal = currentExt();
@@ -880,7 +870,7 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     try { document.dispatchEvent(new CustomEvent('drcalc-update')); } catch (e) {}
   }
 
-  function pick() {
+  function pick(silent) {
     if (!lastOrder) return;
     const changed = !snapshot || dirty;
     if (changed) {
@@ -892,22 +882,26 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
       syncCart();
       showCart();
       closeSheet();
-      const btnSheet = $('dr-sheet-book');
-      if (btnSheet) {
-        btnSheet.textContent = 'Добавлено ✓';
-        clearTimeout(addedTimer);
-        addedTimer = setTimeout(() => { updateActionButtons(); }, 2000);
-      }
-      const toast = $('dr-toast');
-      if (toast) {
-        toast.hidden = false;
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => { toast.hidden = true; }, 8000);
+      if (!silent) {
+        const btnSheet = $('dr-sheet-book');
+        if (btnSheet) {
+          btnSheet.textContent = 'Добавлено ✓';
+          clearTimeout(addedTimer);
+          addedTimer = setTimeout(() => { updateActionButtons(); }, 2000);
+        }
+        const toast = $('dr-toast');
+        if (toast) {
+          toast.hidden = false;
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(() => { toast.hidden = true; }, 8000);
+        }
       }
     } else {
       closeSheet();
-      const anchor = document.getElementById('zayavka');
-      if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (!silent) {
+        const anchor = document.getElementById('zayavka');
+        if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   }
 
@@ -1122,10 +1116,13 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
       if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     bind('dr-toast-stay', 'click', () => { const t = $('dr-toast'); if(t) t.hidden = true; });
-    bind('dr-sheet-book', 'click', pick);
+    
+    // ВАЖНО: оборачиваем в стрелочную, чтобы клик-событие не попало в silent
+    bind('dr-sheet-book', 'click', () => pick());
 
     window.addEventListener('drcalc-reset', doReset);
-    document.addEventListener('drcalc-refresh', () => pick());
+    // Слушаем на document, pick с silent=true (из формы)
+    document.addEventListener('drcalc-refresh', () => pick(true));
     bind('dr-reset', 'click', doReset);
   }
 
