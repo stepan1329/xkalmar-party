@@ -303,7 +303,7 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     const toggle = $('drf-order-toggle');
 
     if (!c || !c.ready || !c.selected || (!c.order && !c.summary)) {
-      const isReady = !!(c && c.ready && (c.order || c.summary));
+      const isReady = !!(c && c.ready && !c.selected);
       const emptyKey = isReady ? 'empty-ready' : 'empty-noready';
       if (emptyKey === lastRenderedKey) { renderOrderStatus(); return; }
       lastRenderedKey = emptyKey;
