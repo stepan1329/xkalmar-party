@@ -1125,7 +1125,7 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     bind('dr-sheet-book', 'click', pick);
 
     window.addEventListener('drcalc-reset', doReset);
-    window.addEventListener('drcalc-refresh', () => pick());
+    document.addEventListener('drcalc-refresh', () => pick());
     bind('dr-reset', 'click', doReset);
   }
 
