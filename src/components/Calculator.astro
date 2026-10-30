@@ -1,4 +1,3 @@
-<!-- src/components/Calculator.astro -->
 <section class="drc" id="calc">
   <div class="drc__head">
     <h2>Рассчитайте праздник</h2>
@@ -9,46 +8,46 @@
     <label class="drc-card">
       <input type="radio" name="dr-pack" value="popular">
       <span class="drc-card__in">
-        <span class="drc-card__toprow">
+        <span class="drc-card__namerow">
+          <span class="drc-card__name">Популярный</span>
           <span class="drc-card__chosen">Выбрано ✓</span>
         </span>
-        <span class="drc-card__name">Популярный</span>
         <span class="drc-card__price">24 000 ₽</span>
         <span class="drc-card__meta">2,5 часа · до 15 детей · еда своя</span>
         <button type="button" class="drc-card__more" data-more="popular">Подробнее</button>
         <span class="drc-card__details" data-details="popular" hidden>
-          Квест-приключение 1,5 часа с командой из 3 ведущих-актёров · 30 минут подвижных игр с призами · 30 минут за праздничным столом · еду приносите свою
+          Квест-шоу 1,5 часа с командой из 3 ведущих-актёров · подвижные игры с призами — 30 мин · праздничный стол — 30 мин, еду приносите свою
         </span>
       </span>
     </label>
     <label class="drc-card">
       <input type="radio" name="dr-pack" value="optimal">
       <span class="drc-card__in">
-        <span class="drc-card__toprow">
+        <span class="drc-card__namerow">
+          <span class="drc-card__name">Оптимальный</span>
           <span class="drc-card__chosen">Выбрано ✓</span>
           <span class="drc-card__badge">Выбирают чаще всего</span>
         </span>
-        <span class="drc-card__name">Оптимальный</span>
         <span class="drc-card__price">33 500 ₽</span>
         <span class="drc-card__meta">3 часа · квест + час игр · еда включена</span>
         <button type="button" class="drc-card__more" data-more="optimal">Подробнее</button>
         <span class="drc-card__details" data-details="optimal" hidden>
-          Квест-приключение 1,5 часа с командой из 3 ведущих-актёров — полный сценарий · дополнительный час подвижных игр с призами: интерактивная стена, кидалка, «Угадай напиток», вышибалы, мафия — на выбор · стол под ключ: накроем, накормим, порционный торт каждому
+          Квест-шоу 1,5 часа с командой из 3 ведущих-актёров · подвижные игры с призами — 1 ч: стена-кидалка, «Угадай напиток», вышибалы, мафия — на выбор · стол под ключ: накроем, накормим, порционный торт каждому
         </span>
       </span>
     </label>
     <label class="drc-card">
       <input type="radio" name="dr-pack" value="maximal">
       <span class="drc-card__in">
-        <span class="drc-card__toprow">
+        <span class="drc-card__namerow">
+          <span class="drc-card__name">Максимальный</span>
           <span class="drc-card__chosen">Выбрано ✓</span>
         </span>
-        <span class="drc-card__name">Максимальный</span>
         <span class="drc-card__price">50 000 ₽</span>
         <span class="drc-card__meta">3,5 часа · всё включено · фотограф, шары, торт</span>
         <button type="button" class="drc-card__more" data-more="maximal">Подробнее</button>
         <span class="drc-card__details" data-details="maximal" hidden>
-          Квест-приключение 1,5 часа с командой из 3 ведущих-актёров — расширенный сценарий · час подвижных игр с призами: интерактивная стена, кидалка, «Угадай напиток», вышибалы, мафия — на выбор · стол под ключ и большой торт от кондитера · фотограф · гелиевые шары · подарок каждому ребёнку
+          Квест-шоу 1,5 часа с командой из 3 ведущих-актёров · ярмарка игр расширенная: подвижные игры, а под конец мафия — 1 ч · стол под ключ и большой торт от кондитера · фотограф · гелиевые шары · подарок каждому ребёнку
         </span>
       </span>
     </label>
@@ -82,15 +81,15 @@
         </div>
         <div id="dr-program-custom" hidden>
           <div class="drc-radios drc-radios--light">
-            <label><input type="radio" name="dr-cbase" value="base"><span><b>База — 20 000 ₽</b> · квест 1,5 ч + стол 30 мин (2 часа) · до 15 детей · еда своя</span></label>
-            <label><input type="radio" name="dr-cbase" value="mini"><span><b>Мини — 15 000 ₽</b> · короткий квест 1 ч + стол 30 мин (1,5 часа) · для компании до 8 детей</span></label>
+            <label><input type="radio" name="dr-cbase" value="base"><span><b>База — 20 000 ₽</b> · квест-шоу 1,5 ч + стол 30 мин (2 часа) · до 15 детей · еда своя</span></label>
+            <label><input type="radio" name="dr-cbase" value="mini"><span><b>Мини — 15 000 ₽</b> · короткий квест-шоу 1 ч + стол 30 мин (1,5 часа) · для компании до 8 детей</span></label>
           </div>
           <span class="drc-hint" style="margin-top:4px;">Основная программа — основа праздника, она выбирается всегда. Ярмарка игр и допы добавляются к ней.</span>
           <button type="button" class="drc-link" id="dr-to-packs" style="margin-top:12px;">← Выбрать готовый пакет</button>
         </div>
         
         <div class="drc-gloss">
-          <span><b>Квест</b> — игра-приключение с командой из 3 ведущих-актёров: дети ищут подсказки и выполняют задания.</span>
+          <span><b>Квест-шоу</b> — игра-приключение с командой из 3 ведущих-актёров: дети ищут подсказки и выполняют задания.</span>
           <span><b>Ярмарка игр</b> — весёлые конкурсы и активности с призами. Ведут те же актёры.</span>
           <span><b>Банкет</b> — праздничный стол. «Под ключ» — еда и сервировка наши, иначе еда своя.</span>
         </div>
@@ -163,11 +162,11 @@
       <div class="drc-step__body" data-stepbody="4" hidden>
         <div class="drc-ext">
           <label class="drc-opt" id="dr-opt-menu"><input type="checkbox" id="dr-menu"><span class="drc-opt__b"><b>Меню под ключ</b><span>сервировка, еда, напитки, торт</span></span><span class="drc-opt__p">1 000 ₽ / чел</span></label>
-          <label class="drc-opt" id="dr-opt-banquet"><input type="checkbox" id="dr-banquet" checked><span class="drc-opt__b"><b>Банкет под ключ</b><span>накроем стол, еда и напитки на 6 детей</span></span><span class="drc-opt__p">6 000 ₽</span><span class="drc-opt__incl" hidden>в пакете</span></label>
+          <label class="drc-opt" id="dr-opt-banquet"><input type="checkbox" id="dr-banquet" checked><span class="drc-opt__b"><b>Меню под ключ</b><span id="dr-banquet-sub">накроем стол, еда и напитки на 6 детей</span></span><span class="drc-opt__p"><span class="drc-opt__incl">в пакете</span><span id="dr-banquet-price">6 000 ₽</span></span></label>
           <label class="drc-opt" id="dr-opt-video"><input type="checkbox" id="dr-video"><span class="drc-opt__b"><b>Видеосъёмка</b><span>сторис-ролик</span></span><span class="drc-opt__p">4 000 ₽</span></label>
-          <label class="drc-opt" id="dr-opt-photo"><input type="checkbox" id="dr-photo"><span class="drc-opt__b"><b>Фотосъёмка</b><span>100–150 фото</span></span><span class="drc-opt__p">6 000 ₽</span><span class="drc-opt__incl" hidden>в пакете</span></label>
-          <label class="drc-opt" id="dr-opt-balls"><input type="checkbox" id="dr-balls"><span class="drc-opt__b"><b>Гелиевые шары</b><span>14 шаров</span></span><span class="drc-opt__p">3 500 ₽</span><span class="drc-opt__incl" hidden>в пакете</span></label>
-          <label class="drc-opt" id="dr-opt-tort"><input type="checkbox" id="dr-tort"><span class="drc-opt__b"><b>Тематический торт</b><span>начинка и оформление на выбор · 2–2,5 кг</span></span><span class="drc-opt__p">7 000 ₽</span><span class="drc-opt__incl" hidden>в пакете</span></label>
+          <label class="drc-opt" id="dr-opt-photo"><input type="checkbox" id="dr-photo"><span class="drc-opt__b"><b>Фотосъёмка</b><span>100–150 фото</span></span><span class="drc-opt__p"><span class="drc-opt__incl" hidden>в пакете</span><span>6 000 ₽</span></span></label>
+          <label class="drc-opt" id="dr-opt-balls"><input type="checkbox" id="dr-balls"><span class="drc-opt__b"><b>Гелиевые шары</b><span>14 шаров</span></span><span class="drc-opt__p"><span class="drc-opt__incl" hidden>в пакете</span><span>3 500 ₽</span></span></label>
+          <label class="drc-opt" id="dr-opt-tort"><input type="checkbox" id="dr-tort"><span class="drc-opt__b"><b>Тематический торт</b><span>начинка и оформление на выбор · 2–2,5 кг</span></span><span class="drc-opt__p"><span class="drc-opt__incl" hidden>в пакете</span><span>7 000 ₽</span></span></label>
           <label class="drc-opt drc-opt--free" id="dr-opt-room2"><input type="checkbox" id="dr-room2"><span class="drc-opt__b"><b>Вторая банкетная комната</b><span>по запросу</span></span><span class="drc-opt__p">0 ₽</span></label>
         </div>
       </div>
@@ -251,10 +250,11 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
 .drc-card:hover .drc-card__in { border-color: rgba(10,153,148,.5); transform: translateY(-2px); }
 .drc-card input:checked ~ .drc-card__in { border-color: #C30067; box-shadow: 0 10px 30px rgba(195,0,103,.25); }
 
-.drc-card__toprow { display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 22px; margin-bottom: 2px; }
+.drc-card__namerow { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .drc-card__chosen { display: none; background: #0AD9C6; color: #032E2B; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; line-height: 1.3; white-space: nowrap; }
 .drc-card input:checked ~ .drc-card__in .drc-card__chosen { display: inline-block !important; }
 .drc-card__badge { background: #C30067; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px; line-height: 1.3; white-space: nowrap; }
+.drc-card input:checked ~ .drc-card__in .drc-card__badge { display: none; }
 
 .drc-card__name { font-size: 18px; font-weight: 700; }
 .drc-card__price { font-size: 26px; font-weight: 800; color: #C30067; }
@@ -307,10 +307,10 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
 .drc-opt__b { flex: 1; min-width: 0; }
 .drc-opt__b b { display: block; font-size: 13.5px; font-weight: 700; color: #032E2B; }
 .drc-opt__b span { font-size: 12px; color: #3C5B57; }
-.drc-opt__p { font-size: 13.5px; font-weight: 700; color: #032E2B; white-space: nowrap; }
+.drc-opt__p { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; font-size: 13.5px; font-weight: 700; color: #032E2B; white-space: nowrap; }
 .drc-opt__p--incl { color: #0A9994; }
 .drc-opt--free .drc-opt__p { color: #0A9994; }
-.drc-opt__incl { font-size: 11px; font-weight: 700; color: #0A9994; border: 1px solid rgba(10,153,148,.4); border-radius: 10px; padding: 2px 8px; white-space: nowrap; align-self: center; }
+.drc-opt__incl { font-size: 11px; font-weight: 700; color: #0A9994; border: 1px solid rgba(10,153,148,.4); border-radius: 10px; padding: 2px 8px; white-space: nowrap; }
 .drc-hours { display: flex; gap: 8px; padding-left: 30px; flex-wrap: wrap; margin-top: 8px; }
 .drc-hours label { font-size: 13px; color: #3C5B57; cursor: pointer; border: 1px solid #E4ECEA; border-radius: 10px; padding: 6px 14px; }
 .drc-hours label:has(input:checked) { border-color: #C30067; color: #C30067; font-weight: 700; }
@@ -405,22 +405,23 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     max: 'https://max.ru/u/f9LHodD0cOKVRRd0t2pjN2pm8s7nWCNllQJYsSra5mx0QiqcfNxI553bSzc',
     tel: '+79287588483',
     startHour: 10,
-    endHour: 22
+    endHour: 22,
+    programLimit: 15
   };
   const MAX_GUESTS = 20;
   const LS_KEY = 'xkalmar-calc-v1';
 
   const TARIFFS = {
     popular:  { name: 'Популярный',  price: 24000, freeGuests: 15, minGuests: 5, program: 2.5, food: false, inclYm: 30, ymDefault: 30, ymIncl: 4000,
-                includes: [ 'Квест-приключение 1,5 ч (команда из 3 ведущих-актёров)', 'Подвижные игры 30 мин с призами', 'Праздничный стол 30 мин' ] },
+                includes: [ 'Квест-шоу, 3 ведущих-актёра · 1,5 ч', 'Подвижные игры с призами · 30 мин', 'Праздничный стол · своя еда · 30 мин' ] },
     optimal:  { name: 'Оптимальный', price: 33500, freeGuests: 6,  minGuests: 6, program: 3, food: true, inclYm: 60, ymDefault: 60, ymIncl: 7500,
-                includes: [ 'Квест-приключение 1,5 ч — полный сценарий (команда из 3 ведущих-актёров)', 'Подвижные игры 1 ч с призами: интерактивная стена, кидалка, «Угадай напиток», вышибалы, мафия — на выбор', 'Банкет под ключ: сервировка, еда, напитки, порционный торт' ] },
+                includes: [ 'Квест-шоу, 3 ведущих-актёра · 1,5 ч', 'Подвижные игры с призами · 1 ч', 'Банкет под ключ · еда и напитки, порционный торт' ] },
     maximal:  { name: 'Максимальный', price: 50000, freeGuests: 6, minGuests: 6, program: 3.5, food: true, inclYm: 60, ymDefault: 60, ymIncl: 7500, core: 27500,
-                includes: [ 'Квест-приключение — расширенный сценарий (команда из 3 ведущих-актёров)', 'Подвижные игры 1 ч с призами: интерактивная стена, кидалка, «Угадай напиток», вышибалы, мафия — на выбор', 'Подарок каждому ребёнку' ] },
+                includes: [ 'Квест-шоу, 3 ведущих-актёра · 1,5 ч', 'Ярмарка игр расширенная · 1 ч', 'Подарок каждому ребёнку' ] },
     base:     { name: 'База', price: 20000, freeGuests: 15, minGuests: 5, program: 2, food: false, inclYm: 0, ymDefault: 0, ymIncl: 0,
-                includes: [ 'Квест-приключение 1,5 ч', 'Банкет 30 мин' ] },
+                includes: [ 'Квест-шоу 1,5 ч', 'Банкет 30 мин' ] },
     mini:     { name: 'Мини', price: 15000, freeGuests: 8, minGuests: 5, program: 1.5, food: false, inclYm: 0, ymDefault: 0, ymIncl: 0,
-                includes: [ 'Квест 1 ч', 'Банкет 30 мин' ] }
+                includes: [ 'Квест-шоу 1 ч', 'Банкет 30 мин' ] }
   };
 
   const state = {
@@ -660,16 +661,27 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     const isMax = state.mode === 'packs' && state.pack === 'maximal';
     const banqOn = isMax ? ($('dr-banquet') ? $('dr-banquet').checked : false) : false;
     const foodOn = state.mode === 'custom' ? false : (isMax ? banqOn : t.food);
-    const progLimit = (isMax && !banqOn) ? 15 : t.freeGuests;
+    // FIXME-REVIEW: для Максимального с включённым меню еда уже покрывает всех g детей.
+    // Используем effFreeGuests = g, чтобы foodExtra не задваивал надбавку (в букве ТЗ t.freeGuests).
+    const effFreeGuests = (isMax && banqOn) ? state.guests : t.freeGuests;
+    
+    if (isMax) {
+      const bprice = $('dr-banquet-price'); if (bprice) bprice.textContent = fmt(state.guests * 1000);
+      const bsub = $('dr-banquet-sub'); if (bsub) bsub.textContent = 'накроем стол, еда и напитки на ' + state.guests + ' детей';
+    }
     
     const note = $('dr-gnote');
     if (note) {
       if (foodOn) {
-        note.textContent = state.guests <= t.freeGuests
-          ? 'еда и напитки включены на ' + t.freeGuests + ' детей'
-          : '+' + fmt(1000) + '/чел за каждого сверх ' + t.freeGuests;
+        let txt = state.guests <= effFreeGuests
+          ? 'еда и напитки включены на ' + effFreeGuests + ' детей'
+          : '+' + fmt(1000) + '/чел за каждого сверх ' + effFreeGuests + ' (еда)';
+        if (state.guests > CONFIG.programLimit) {
+          txt += ' · программа сверх ' + CONFIG.programLimit + ' — +' + fmt(1000) + '/чел';
+        }
+        note.textContent = txt;
       } else {
-        note.textContent = 'программа до ' + progLimit + ' детей · дальше +' + fmt(1000) + '/чел';
+        note.textContent = 'программа до ' + CONFIG.programLimit + ' детей · дальше +' + fmt(1000) + '/чел';
       }
     }
   }
@@ -710,7 +722,10 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     const isMax = state.mode === 'packs' && state.pack === 'maximal';
     const banqOn = isMax ? isChecked('dr-banquet') : false;
     const foodOn = state.mode === 'custom' ? false : (isMax ? banqOn : t.food);
-    const progLimit = (isMax && !banqOn) ? 15 : t.freeGuests;
+    // FIXME-REVIEW: progLimit единый для всех тарифов (CONFIG.programLimit = 15).
+    const progLimit = CONFIG.programLimit;
+    // FIXME-REVIEW: для Максимального с включённым меню еда покрывает всех g детей.
+    const effFreeGuests = (isMax && banqOn) ? g : t.freeGuests;
     
     const curExtVal = currentExt();
     const ymRemoved = (state.mode === 'packs') && curExtVal === null && (t.ymIncl || 0) > 0;
@@ -734,7 +749,7 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
 
     if (isMax) {
       const maxItems = [
-        { id: 'dr-banquet', price: 6000, inc: 'Банкет под ключ' },
+        { id: 'dr-banquet', price: state.guests * 1000, inc: 'Меню под ключ (на ' + state.guests + ' детей)' },
         { id: 'dr-balls', price: 3500, inc: 'Гелиевые шары' },
         { id: 'dr-photo', price: 6000, inc: 'Фотосъёмка' },
         { id: 'dr-tort', price: 7000, inc: 'Большой торт от кондитера' }
@@ -750,10 +765,10 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     let total = packPrice;
 
     if (foodOn) {
-      const foodExtra = Math.max(0, g - t.freeGuests);
-      if (foodExtra > 0) { total += foodExtra * 1000; surList.push('Дети сверх ' + t.freeGuests + ' — еда (' + foodExtra + ' × 1 000 ₽) · ' + fmt(foodExtra * 1000)); }
+      const foodExtra = Math.max(0, g - effFreeGuests);
+      if (foodExtra > 0) { total += foodExtra * 1000; surList.push('Еда сверх ' + effFreeGuests + ' детей (' + foodExtra + ' × 1 000 ₽) · ' + fmt(foodExtra * 1000)); }
       const progExtra = Math.max(0, g - progLimit);
-      if (progExtra > 0) { total += progExtra * 1000; surList.push('Гости сверх ' + progLimit + ' — программа (' + progExtra + ' × 1 000 ₽) · ' + fmt(progExtra * 1000)); }
+      if (progExtra > 0) { total += progExtra * 1000; surList.push('Программа сверх ' + progLimit + ' детей (' + progExtra + ' × 1 000 ₽) · ' + fmt(progExtra * 1000)); }
     } else {
       const extra = Math.max(0, g - progLimit);
       if (extra > 0) { total += extra * 1000; surList.push('Гости сверх ' + progLimit + ' — программа (' + extra + ' × 1 000 ₽) · ' + fmt(extra * 1000)); }
@@ -778,14 +793,10 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     if ($('dr-photo') && $('dr-photo').checked && !isMax) pushExtra('Фотосъёмка', 6000);
     if ($('dr-balls') && $('dr-balls').checked && !isMax) pushExtra('Гелиевые шары', 3500);
     
-    if (isMax) {
-      if (isChecked('dr-tort')) pushExtra('Тематический торт', 7000);
-    } else {
-      if ($('dr-tort') && $('dr-tort').checked) {
-        const foodCount = foodOn ? Math.max(g, t.freeGuests) : ($('dr-menu') && $('dr-menu').checked ? g : 0);
-        if (foodCount > 0) pushExtra('Тематический торт (вычет −' + fmt(250 * foodCount) + ')', Math.max(0, 7000 - 250 * foodCount));
-        else pushExtra('Тематический торт', 7000);
-      }
+    if (!isMax && $('dr-tort') && $('dr-tort').checked) {
+      const foodCount = foodOn ? Math.max(g, t.freeGuests) : ($('dr-menu') && $('dr-menu').checked ? g : 0);
+      if (foodCount > 0) pushExtra('Тематический торт (вычет −' + fmt(250 * foodCount) + ')', Math.max(0, 7000 - 250 * foodCount));
+      else pushExtra('Тематический торт', 7000);
     }
 
     if ($('dr-room-ext') && $('dr-room-ext').checked) pushExtra('Продление комнаты ' + roomExtMinutes() + ' мин', roomExtMinutes() === 60 ? 2500 : 1250);
@@ -919,7 +930,7 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
 
     if (isMax) {
       const maxItems = [
-        { id: 'dr-banquet', key: 'banquet', price: 6000, inc: 'Банкет под ключ' },
+        { id: 'dr-banquet', key: 'banquet', price: state.guests * 1000, inc: 'Меню под ключ' },
         { id: 'dr-balls', key: 'balls', price: 3500, inc: 'Гелиевые шары' },
         { id: 'dr-photo', key: 'photo', price: 6000, inc: 'Фотосъёмка' },
         { id: 'dr-tort', key: 'tort', price: 7000, inc: 'Большой торт от кондитера' }
@@ -955,6 +966,17 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
         </div>`).join('');
     }
     const tot = $('dr-sheet-total'); if(tot) tot.textContent = fmt(lastTotal);
+  }
+
+  function unsetPack() {
+    state.pack = null;
+    document.querySelectorAll('input[name="dr-pack"]').forEach(r => r.checked = false);
+    resetExtras();
+    state.extSel = undefined;
+    state.packModified = false;
+    syncProgramUI();
+    syncCart(); showCart();
+    showSteps(false);
   }
 
   function bindEvents() {
@@ -995,6 +1017,9 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
 
     document.querySelectorAll('input[name="dr-pack"]').forEach((el) => {
       el.addEventListener('change', () => setPack(el.value));
+      el.addEventListener('click', () => {
+        if (state.mode === 'packs' && state.pack === el.value) unsetPack();
+      });
     });
 
     document.querySelectorAll('input[name="dr-cbase"]').forEach((el) => {
@@ -1262,6 +1287,7 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     if (!t) return;
     state.guests = state.guestsTouched ? Math.max(state.guests, t.minGuests) : t.minGuests;
     resetExtras();
+    if (val === 'maximal') ['dr-banquet','dr-balls','dr-photo','dr-tort'].forEach((id) => { const el = $(id); if (el) el.checked = true; });
     state.extSel = undefined;
     state.packModified = false;
     showSteps(true);

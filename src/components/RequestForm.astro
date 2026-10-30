@@ -1,6 +1,5 @@
-<!-- src/components/RequestForm.astro -->
 ---
-// Форма заявки v3.7 — адаптирована под модель Пилл+Шторка и статус отправки
+// Форма заявки v3.8
 ---
 <section class="drf" id="zayavka">
   <div class="drf__head">
@@ -174,7 +173,7 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
 .drf__order.is-open .drf-order__chev { transform: rotate(180deg); }
 
 @media (max-width: 900px) {
-  .drf__grid { display: flex; flex-direction: column; }
+  .drf__grid { display: flex; flex-direction: column; align-items: stretch; }
   .drf__order { order: -1; position: static; }
   .drf-order__toggle { display: flex; margin-bottom: 4px; }
   .drf__order.is-collapsed .drf-order__body { display: none; }
@@ -186,6 +185,8 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
   .drf { padding: 48px 0 64px; }
   .drf__form, .drf__order, .drf-done { margin: 0 10px; padding: 20px 16px; }
   .drf-btn { width: 100%; }
+  .rf-status-box { flex-direction: column; align-items: stretch; gap: 8px; }
+  .rf-status-btn { width: 100%; justify-content: center; }
 }
 </style>
 
