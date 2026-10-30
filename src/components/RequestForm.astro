@@ -1,5 +1,5 @@
 ---
-// Форма заявки v3.4 — адаптирована под модель Пилл+Шторка
+// Форма заявки v3.6 — адаптирована под модель Пилл+Шторка и статус отправки
 ---
 <section class="drf" id="zayavka">
   <div class="drf__head">
@@ -41,9 +41,11 @@
     <div class="drf__order is-collapsed" id="drf-order-panel">
       <div class="drf-order__head">
         <span class="drf-order__tag">Состав заявки</span>
-        <button type="button" id="dr-refresh-order" class="rf-refresh" style="display:none;">
-          <span class="rf-dot"></span>Обновить состав заявки
-        </button>
+      </div>
+      
+      <div class="rf-status-box" id="drf-status-box" hidden>
+        <span class="rf-status-text" id="drf-status-text"></span>
+        <button type="button" class="rf-status-btn" id="dr-refresh-order"></button>
       </div>
       
       <div class="drf-order__links-row">
@@ -125,17 +127,14 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
 #drf-done-tg { background: #2AABEE; }
 .drf-done__again { font: inherit; font-weight: 700; font-size: 15px; padding: 11px 24px; border-radius: 30px; background: transparent; color: #05544F; border: 2px solid #05544F; cursor: pointer; }
 
-.drf__order { position: sticky; top: 24px; background: #fff; color: #032E2B; border-radius: 22px; padding: 24px 26px; box-shadow: 0 16px 48px rgba(0,0,0,.35); max-width: 100%; overflow: hidden; }
+.drf__order { position: sticky; top: 24px; background: #fff; color: #032E2B; border-radius: 22px; padding: 24px 26px; box-shadow: 0 16px 48px rgba(0,0,0,.35); max-width: 100%; overflow: hidden; width: 100%; }
 .drf-order__head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-bottom: 8px; }
 .drf-order__tag { font-size: 11px; font-weight: 700; letter-spacing: .04em; color: #C30067; white-space: nowrap; }
-.rf-refresh {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: #C30067; color: #fff; border: 0; border-radius: 20px;
-  padding: 12px 18px; font: inherit; font-weight: 700; font-size: 13px;
-  cursor: pointer; transition: background .15s;
-}
-.rf-refresh:hover { background: #E00077; }
-.rf-dot { width: 8px; height: 8px; border-radius: 50%; background: #0AD9C6; flex: 0 0 auto; }
+
+.rf-status-box { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: rgba(10,153,148,.08); border: 1px solid rgba(10,153,148,.2); border-radius: 12px; padding: 10px 14px; margin-top: 4px; margin-bottom: 4px; width: 100%; }
+.rf-status-text { font-size: 13px; font-weight: 500; color: #3C5B57; flex: 1; line-height: 1.4; }
+.rf-status-btn { font: inherit; font-size: 13px; font-weight: 600; color: #0A9994; background: transparent; border: 1px solid #0A9994; border-radius: 20px; padding: 6px 14px; cursor: pointer; white-space: nowrap; transition: .15s; display: flex; align-items: center; gap: 4px; }
+.rf-status-btn:hover { background: rgba(10,153,148,.1); }
 
 .drf-order__links-row { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 2px solid #E4ECEA; margin-bottom: 8px; gap: 12px; }
 .drf-order__edit { font: inherit; font-size: 12px; font-weight: 600; color: #6B8B86; text-decoration: none; padding: 4px 8px; border-radius: 8px; background: transparent; border: 0; cursor: pointer; transition: .15s; }
@@ -165,8 +164,8 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
 .drf-order__total { margin-top: 14px; padding-top: 14px; border-top: 2px solid #E4ECEA; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 .drf-order__total span { font-size: 13px; color: #3C5B57; }
 .drf-order__total b { font-size: 28px; font-weight: 800; color: #C30067; white-space: nowrap; }
-.drf-order__total b.is-updated { animation: drfPulse .4s ease; }
-@keyframes drfPulse { from { transform: scale(1.08); } to { transform: scale(1); } }
+.drf-order__total b.is-updated { animation: drfFlash .5s ease; }
+@keyframes drfFlash { from { opacity: .35; } to { opacity: 1; } }
 .drf-order__note { margin: 12px 0 0; font-size: 12px; line-height: 1.55; color: #6B8B86; }
 
 .drf-order__toggle { display: none; width: 100%; font: inherit; text-align: left; font-size: 14px; font-weight: 700; color: #032E2B; background: #F5F7F6; border: 1px solid #E4ECEA; border-radius: 12px; padding: 12px 14px; cursor: pointer; align-items: center; justify-content: space-between; gap: 10px; }
@@ -198,20 +197,24 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
   const $ = (id) => document.getElementById(id);
   const fmt = (n) => n.toLocaleString('ru-RU') + ' ₽';
   const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
+  
+  let lastRenderedKey = '';
 
   function renderOrderStatus() {
-    const el = $('dr-refresh-order');
-    if (!el) return;
+    const box = $('drf-status-box');
+    if (!box) return;
     const c = window.DR_CALC;
-    if (!c || !c.selected) {
-      el.style.display = 'none';
+    if (!c || !c.selected || !c.dirty) {
+      box.style.display = 'none';
       return;
     }
-    if (c.dirty) {
-      el.style.display = 'inline-flex';
-    } else {
-      el.style.display = 'none';
-    }
+    box.style.display = 'flex';
+    const isSent = !!(c && c.sent);
+    const txt = $('drf-status-text');
+    const btn = $('dr-refresh-order');
+    
+    if (txt) txt.textContent = isSent ? 'Состав изменился после отправки заявки' : 'Расчёт изменился — состав заявки устарел';
+    if (btn) btn.innerHTML = isSent ? '↻ Обновить заявку' : '↻ Перенести изменения';
   }
 
   let contact = 'Звонок';
@@ -280,13 +283,22 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     const toggle = $('drf-order-toggle');
 
     if (!c || !c.ready || !c.selected || (!c.order && !c.summary)) {
+      const emptyKey = 'empty';
+      if (emptyKey === lastRenderedKey) { renderOrderStatus(); return; }
+      lastRenderedKey = emptyKey;
+      
       box.innerHTML = '<p class="drf-order__empty">Состав появится, когда нажмёте «Добавить к заявке» в калькуляторе</p>';
       totalBox.hidden = true;
       note.hidden = true;
       toggle.style.display = 'none';
       panel.classList.remove('is-collapsed');
+      renderOrderStatus();
       return;
     }
+
+    const renderKey = JSON.stringify({ o: c.order, total: c.total, selected: c.selected });
+    if (renderKey === lastRenderedKey) { renderOrderStatus(); return; }
+    lastRenderedKey = renderKey;
 
     let html = '';
     if (c.order) {
@@ -346,6 +358,7 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
       toggle.setAttribute('aria-expanded', mobileOpen ? 'true' : 'false');
     } else {
       toggle.style.display = 'none';
+      panel.classList.remove('is-collapsed');
     }
     renderOrderStatus();
   }
@@ -509,6 +522,8 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
 
     if (ok) {
       markDone();
+      if (window.DR_CALC) window.DR_CALC.sent = true;
+      renderOrderStatus();
     } else {
       const fallbackText = 'Здравствуйте! Хочу оставить заявку с сайта.\n\n' + payload.text;
       window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(fallbackText), '_blank');
