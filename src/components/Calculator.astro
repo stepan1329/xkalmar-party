@@ -1,3 +1,4 @@
+<!-- src/components/Calculator.astro -->
 <section class="drc" id="calc">
   <div class="drc__head">
     <h2>Рассчитайте праздник</h2>
@@ -489,15 +490,6 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
 
   function slotHours() { return programHours() + 0.5 + roomExtMinutes() / 60; }
   
-  function ymAddPrice() {
-    const t = currentTariff();
-    if (state.mode !== 'packs' || !t) return 0;
-    const cur = currentExt();
-    if (cur === null || cur <= 0) return 0;
-    const base = cur === 60 ? 7500 : 4000;
-    return Math.max(0, base - (t.ymIncl || 0));
-  }
-
   function resetExtras() {
     ['dr-menu','dr-video','dr-photo','dr-balls','dr-tort','dr-room2','dr-room-ext','dr-banquet'].forEach((id) => { 
       const el = $(id); if(el) el.checked = false; 
@@ -612,7 +604,7 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     if (state.mode !== 'packs' || !t || !state.pack) { box.innerHTML = ''; return; }
     const cur = currentExt();
     const inclMin = t.ymDefault || 0;
-    const isIncl = (v) => (t.ymIncl || 0) > 0 && v <= inclMin;
+    const isIncl = (v) => (t.ymIncl || 0) > 0 && v === inclMin;
     const isPartial = (v) => (t.ymIncl || 0) > 0 && v > inclMin;
     const row = (v, base) => {
       const incl = isIncl(v);
@@ -724,18 +716,19 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     const ymRemoved = (state.mode === 'packs') && curExtVal === null && (t.ymIncl || 0) > 0;
     const isModified = (state.mode === 'packs') && (curExtVal === null || (curExtVal !== null && curExtVal < t.ymDefault));
     
-    let packPrice = t.price;
+    let packPrice = (isMax && t.core) ? t.core : t.price;
     let incList = (t.includes || []).slice();
     const surList = [];
 
     if (isModified) {
       packPrice -= (t.ymIncl || 0);
+      if (curExtVal === 30) packPrice += 4000;
       incList = incList.filter((s) => s.indexOf('Подвижные игры') === -1);
       if (curExtVal === null) {
         surList.push('Ярмарка снята (−' + fmt(t.ymIncl) + ')');
       } else {
-        packPrice += (curExtVal === 30 ? 4000 : 0);
-        surList.push('Ярмарка изменена (+' + fmt(curExtVal === 30 ? 4000 : 0) + ')');
+        surList.push('Ярмарка 30 мин вместо ' + t.ymDefault + ' (−' + fmt((t.ymIncl || 0) - 4000) + ')');
+        incList.push('Подвижные игры 30 мин с призами');
       }
     }
 
@@ -746,7 +739,6 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
         { id: 'dr-photo', price: 6000, inc: 'Фотосъёмка' },
         { id: 'dr-tort', price: 7000, inc: 'Большой торт от кондитера' }
       ];
-      packPrice = t.core;
       maxItems.forEach((m) => {
         if (isChecked(m.id)) {
           packPrice += m.price;
@@ -1013,7 +1005,8 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     if (yc) {
       yc.addEventListener('click', (e) => {
         const inp = e.target.closest('input[name="dr-cym"]');
-        if (!inp || !inp.checked) return;
+        if (!inp) return;
+        if (String(customYm()) !== inp.value) return;
         e.preventDefault();
         inp.checked = false;
         state.customYm = '0';
@@ -1056,17 +1049,19 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     if (eb) {
       eb.addEventListener('click', (e) => {
         const inp = e.target.closest('input[name="dr-ext"]');
-        if (!inp || !inp.checked) return;
+        if (!inp) return;
+        const cur = currentExt();
+        if (cur === null || String(cur) !== inp.value) return;
         e.preventDefault();
         inp.checked = false;
         state.extSel = null;
-        buildSlots(); calculate(); renderSheet();
+        syncExt(); buildSlots(); calculate(); renderSheet();
       });
       eb.addEventListener('change', (e) => {
         const inp = e.target.closest('input[name="dr-ext"]');
         if (!inp) return;
         state.extSel = parseInt(inp.value, 10);
-        buildSlots(); calculate(); openNext(3);
+        syncExt(); buildSlots(); calculate(); openNext(3);
       });
     }
     
@@ -1126,7 +1121,8 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
         room2: $('dr-room2') ? $('dr-room2').checked : false,
         banquet: $('dr-banquet') ? $('dr-banquet').checked : false,
         packModified: state.packModified,
-        snapshot: snapshot, dirty: dirty
+        snapshot: snapshot, dirty: dirty,
+        sent: !!(window.DR_CALC && window.DR_CALC.sent)
       };
       localStorage.setItem(LS_KEY, JSON.stringify(data));
     } catch (e) {}
@@ -1152,6 +1148,7 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
       state.guestsTouched = !!d.guestsTouched;
       const di = $('dr-date'); if (d.date && di) di.value = d.date;
       if (d.slot) state.slot = d.slot;
+      window.DR_CALC.sent = !!d.sent;
 
       if (d.mode === 'custom') {
         const cymEl = document.querySelector('input[name="dr-cym"][value="' + (d.customYm || '0') + '"]');

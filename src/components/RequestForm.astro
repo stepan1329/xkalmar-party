@@ -1,5 +1,6 @@
+<!-- src/components/RequestForm.astro -->
 ---
-// Форма заявки v3.6 — адаптирована под модель Пилл+Шторка и статус отправки
+// Форма заявки v3.7 — адаптирована под модель Пилл+Шторка и статус отправки
 ---
 <section class="drf" id="zayavka">
   <div class="drf__head">
@@ -43,7 +44,7 @@
         <span class="drf-order__tag">Состав заявки</span>
       </div>
       
-      <div class="rf-status-box" id="drf-status-box" hidden>
+      <div class="rf-status-box" id="drf-status-box" style="display:none">
         <span class="rf-status-text" id="drf-status-text"></span>
         <button type="button" class="rf-status-btn" id="dr-refresh-order"></button>
       </div>
@@ -127,7 +128,7 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
 #drf-done-tg { background: #2AABEE; }
 .drf-done__again { font: inherit; font-weight: 700; font-size: 15px; padding: 11px 24px; border-radius: 30px; background: transparent; color: #05544F; border: 2px solid #05544F; cursor: pointer; }
 
-.drf__order { position: sticky; top: 24px; background: #fff; color: #032E2B; border-radius: 22px; padding: 24px 26px; box-shadow: 0 16px 48px rgba(0,0,0,.35); max-width: 100%; overflow: hidden; width: 100%; }
+.drf__order { position: sticky; top: 24px; background: #fff; color: #032E2B; border-radius: 22px; padding: 24px 26px; box-shadow: 0 16px 48px rgba(0,0,0,.35); max-width: 100%; overflow: hidden; }
 .drf-order__head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-bottom: 8px; }
 .drf-order__tag { font-size: 11px; font-weight: 700; letter-spacing: .04em; color: #C30067; white-space: nowrap; }
 
