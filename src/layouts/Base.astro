@@ -3,13 +3,49 @@ const { title = 'Кальмар — квесты в Ростове-на-Дону
 ---
 <!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{title}</title>
-  <meta name="description" content={description}>
-  <link rel="icon" href="/favicon.svg">
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <link rel="icon" href="/favicon.svg">
+    <link rel="canonical" href="https://xkalmar.com">
+
+    <!-- OG -->
+    <meta property="og:title" content="XKALMAR — день рождения в квест-шоу | Ростов-на-Дону">
+    <meta property="og:description" content={description}>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xkalmar.com">
+    <meta property="og:image" content="/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Structured Data: EntertainmentBusiness -->
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "EntertainmentBusiness",
+      "name": "XKALMAR — квест-шоу",
+      "description": "Квест-шоу для детей в Ростове-на-Дону: сценарий, актёры, банкет под ключ, фото и торт.",
+      "url": "https://xkalmar.com",
+      "telephone": "+79287588483",
+      "email": "quest@xkalmar.ru",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Зорге, 15",
+        "addressLocality": "Ростов-на-Дону",
+        "addressCountry": "RU"
+      },
+      "priceRange": "15 000 — 50 000 ₽",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "154",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+    </script>
+  </head>
 <body>
   <header class="site-header">
     <div class="wrap">
