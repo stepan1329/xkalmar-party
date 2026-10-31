@@ -1120,7 +1120,6 @@ button:focus-visible { outline: 2px solid #0AD9C6; outline-offset: 2px; }
     // ВАЖНО: оборачиваем в стрелочную, чтобы клик-событие не попало в silent
     bind('dr-sheet-book', 'click', () => pick());
 
-    window.addEventListener('drcalc-reset', doReset);
     // Слушаем на document, pick с silent=true (из формы)
     document.addEventListener('drcalc-refresh', () => pick(true));
     bind('dr-reset', 'click', doReset);
