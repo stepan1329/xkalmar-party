@@ -6,13 +6,43 @@ import RequestForm from '../components/RequestForm.astro';
 <Base title="XKALMAR — день рождения в квест-шоу | Ростов-на-Дону" description="День рождения в квест-шоу для детей в Ростове-на-Дону: сценарий, актёры, банкет под ключ, фото и торт. Рассчитайте праздник за минуту.">
   <section class="hero">
     <div class="hero__bg">
+      <div class="hero__overlay"></div>
       <img src="/photos/hero-1.webp" alt="Квест-шоу Игра в кальмара для детей — праздник под ключ в Ростове-на-Дону" class="hero__img hero__img--desktop" />
       <img src="/photos/hero-mobil-1.webp" alt="Детский квест-шоу в Ростове-на-Дону — яркие эмоции для детей 6–12 лет" class="hero__img hero__img--mobile" />
     </div>
-    <span class="hero__tag">Квест-шоу для детей · Ростов-на-Дону</span>
-    <h1>Дети — в квест-шоу.<br />Родители — <em>отдыхают</em>.</h1>
-    <p>Мы берём праздник на себя полностью: сценарий, актёры, сервировка, торт, фото. Вам остаётся только прийти и дождаться восторженных детей.</p>
-    <a href="#calc">Рассчитать праздник</a>
+    <div class="hero__inner">
+      <span class="hero__tag">Квест-шоу для детей · Ростов-на-Дону</span>
+      <h1>Дети — в квест-шоу.<br />Родители — <em>отдыхают</em>.</h1>
+      <p>Мы берём праздник на себя полностью: сценарий, актёры, сервировка, торт, фото. Вам остаётся только прийти и дождаться восторженных детей.</p>
+      <a href="#format">Что это за формат?</a>
+      <a href="#calc" class="hero__cta-alt">Рассчитать праздник</a>
+    </div>
+  </section>
+
+  <!-- ЧТО ЭТО ЗА ФОРМАТ -->
+  <section class="format" id="format">
+    <div class="wrap">
+      <h2>Что это за формат?</h2>
+      <p class="format__sub">Это праздник, где дети проходят испытания как в сериале «Игра в кальмара» — но безопасно и весело. Три ведущих, 9 игр, 90 минут, банкет. Без проигравших.</p>
+      <div class="format__grid">
+        <div class="format__card">
+          <b>🎭 Актёры и сценарий</b>
+          <p>Трое ведущих ведут игру — не один оператор в тёмной комнате. Каждый ребёнок в центре внимания.</p>
+        </div>
+        <div class="format__card">
+          <b>🎮 9 игр за 90 минут</b>
+          <p>Каждые 8–10 минут — новое испытание. Эстафеты, логика, движение. Никто не скучает.</p>
+        </div>
+        <div class="format__card">
+          <b>🎂 Банкет под ключ</b>
+          <p>Своя еда или под ключ — пицца, наггетсы, соки, торт. Сервировка, скатерть, чай — всё включено.</p>
+        </div>
+        <div class="format__card">
+          <b>👨‍👩‍👧 Родители рядом</b>
+          <p>Смотрите игру из игровой комнаты или посидите в банкетной. Мы не выгоняем и не заставляем.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <Calculator />
@@ -95,7 +125,7 @@ import RequestForm from '../components/RequestForm.astro';
               <span class="yamarka__icon">📦</span>
               <div>
                 <b>Нащупай предмет</b>
-                <p>В ящике спрятан предмет — угадай на ощупь. Руки обману не обманут!</p>
+                <p>В ящике спрятан предмет — угадай на ощупь. Руки обмануть не обманут!</p>
               </div>
             </div>
             <div class="yamarka__row">
@@ -116,7 +146,10 @@ import RequestForm from '../components/RequestForm.astro';
           <p class="yamarka__note">Никто не стоит в очереди. Никто не ждёт своей команды. Каждый занят тем, что ему нравится.</p>
         </div>
         <div class="yamarka__video">
-          <iframe src="https://kinescope.io/embed/sNbVwwHesgoeMfyGbU2GCG" allow="autoplay; fullscreen" allowfullscreen title="Ярмарка игр — квест-шоу Игра в кальмара"></iframe>
+          <button class="yamarka__video-btn" data-video="https://kinescope.io/embed/sNbVwwHesgoeMfyGbU2GCG" aria-label="Смотреть видео Ярмарка игр">
+            <span class="yamarka__video-icon">▶</span>
+            Смотреть видео
+          </button>
         </div>
       </div>
     </div>
@@ -134,7 +167,10 @@ import RequestForm from '../components/RequestForm.astro';
           <p>Смотрите игру из игровой комнаты, посидите в банкетной, уходите и возвращайтесь — как вам удобно. Мы не выгоняем родителей и не заставляем их сидеть в коридоре. Вы участвуете в празднике ровно настолько, насколько хотите.</p>
         </div>
         <div class="hallway__video">
-          <iframe src="https://kinescope.io/embed/3QTCvnzrXbWFQxz3RHX3Gf" allow="autoplay; fullscreen" allowfullscreen title="Обзор площадки — квест-шоу Игра в кальмара Ростов-на-Дону"></iframe>
+          <button class="hallway__video-btn" data-video="https://kinescope.io/embed/3QTCvnzrXbWFQxz3RHX3Gf" aria-label="Смотреть видео Обзор площадки">
+            <span class="hallway__video-icon">▶</span>
+            Смотреть видео
+          </button>
         </div>
       </div>
     </div>
@@ -260,6 +296,47 @@ import RequestForm from '../components/RequestForm.astro';
         <button class="gallery__item" data-src="/photos/squid-game-quest-10.webp" data-alt="Торт на празднике — свечи и именинник в центре">
           <img src="/photos/squid-game-quest-10.webp" alt="Вынос торта на детском празднике" loading="lazy" />
         </button>
+      </div>
+      <button class="gallery__more" id="gallery-more">Все фото</button>
+    </div>
+  </section>
+
+  <!-- Полная галерея (скрыта) -->
+  <section class="gallery-full" id="gallery-full" style="display:none;">
+    <div class="wrap">
+      <h2>Фотогалерея</h2>
+      <p class="gallery-full__sub">Все фото с наших праздников — нажми, чтобы рассмотреть</p>
+      <div class="gallery__grid">
+        <button class="gallery__item" data-src="/photos/squid-game-quest-1.webp" data-alt="Квест-шоу Игра в кальмара — дети в игровых футболках с номерами">
+          <img src="/photos/squid-game-quest-1.webp" alt="Квест-шоу для детей — дети в футболках с номерами" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-2.webp" data-alt="Эстафеты на квест-шоу — активные игры для детей 6–12 лет">
+          <img src="/photos/squid-game-quest-2.webp" alt="Эстафеты на квест-шоу для детей" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-3.webp" data-alt="Командные игры на квесте — логика и внимание">
+          <img src="/photos/squid-game-quest-3.webp" alt="Командные игры на квесте" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-4.webp" data-alt="Вышибалы на ярмарке игр — активная игра для детей">
+          <img src="/photos/squid-game-quest-4.webp" alt="Вышибалы на ярмарке игр" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-5.webp" data-alt="Угадай напиток — игра на ярмарке для детей">
+          <img src="/photos/squid-game-quest-5.webp" alt="Игра Угадай напиток на ярмарке" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-6.webp" data-alt="Мафия с ведущим — стратегическая игра для детей">
+          <img src="/photos/squid-game-quest-6.webp" alt="Мафия с ведущим на квесте" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-7.webp" data-alt="Стена-кидалка — интерактивная игра на проекторе">
+          <img src="/photos/squid-game-quest-7.webp" alt="Стена-кидалка на квест-шоу" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-8.webp" data-alt="Нащупай предмет — игра вслепую на ярмарке">
+          <img src="/photos/squid-game-quest-8.webp" alt="Нащупай предмет на ярмарке игр" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-9.webp" data-alt="Поздравление именинника — вынос торта на квесте">
+          <img src="/photos/squid-game-quest-9.webp" alt="Поздравление и вынос торта на квесте" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-10.webp" data-alt="Торт на празднике — свечи и именинник в центре">
+          <img src="/photos/squid-game-quest-10.webp" alt="Вынос торта на детском празднике" loading="lazy" />
+        </button>
         <button class="gallery__item" data-src="/photos/squid-game-quest-11.webp" data-alt="Банкетная комната — сервировка стола на квесте">
           <img src="/photos/squid-game-quest-11.webp" alt="Банкетная комната на квесте" loading="lazy" />
         </button>
@@ -344,9 +421,6 @@ import RequestForm from '../components/RequestForm.astro';
         <button class="gallery__item" data-src="/photos/squid-game-quest-38.webp" data-alt="Дети смеются — положительные эмоции">
           <img src="/photos/squid-game-quest-38.webp" alt="Дети смеются на квесте" loading="lazy" />
         </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-39.webp" data-alt="Командная работа — сплочение детей">
-          <img src="/photos/squid-game-quest-39.webp" alt="Командная работа на квесте" loading="lazy" />
-        </button>
         <button class="gallery__item" data-src="/photos/squid-game-quest-40.webp" data-alt="Эмоции детей — восторг и азарт">
           <img src="/photos/squid-game-quest-40.webp" alt="Эмоции детей на квест-шоу" loading="lazy" />
         </button>
@@ -371,9 +445,6 @@ import RequestForm from '../components/RequestForm.astro';
         <button class="gallery__item" data-src="/photos/squid-game-quest-47.webp" data-alt="Звук и свет — техническое оснащение">
           <img src="/photos/squid-game-quest-47.webp" alt="Звук и свет на квесте" loading="lazy" />
         </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-48.webp" data-alt="Вход на площадку — отдельный вход Зорге 15">
-          <img src="/photos/squid-game-quest-48.webp" alt="Вход на площадку квест-шоу" loading="lazy" />
-        </button>
         <button class="gallery__item" data-src="/photos/squid-game-quest-49.webp" data-alt="Игровая зона — простор 240 м²">
           <img src="/photos/squid-game-quest-49.webp" alt="Игровая зона 240 м²" loading="lazy" />
         </button>
@@ -395,33 +466,38 @@ import RequestForm from '../components/RequestForm.astro';
 
   <RequestForm />
 
-  <!-- Лайтбокс -->
+  <!-- Лайтбокс фото -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox__close" id="lightbox-close">✕</button>
     <button class="lightbox__nav lightbox__prev" id="lightbox-prev">‹</button>
     <div class="lightbox__content">
       <img src="" alt="" id="lightbox-img" />
-      <p class="lightbox__caption" id="lightbox-caption"></p>
     </div>
     <button class="lightbox__nav lightbox__next" id="lightbox-next">›</button>
+  </div>
+
+  <!-- Модальное окно видео -->
+  <div class="video-modal" id="video-modal">
+    <button class="video-modal__close" id="video-modal-close">✕</button>
+    <div class="video-modal__content">
+      <iframe src="" allow="autoplay; fullscreen" allowfullscreen title="Видео"></iframe>
+    </div>
   </div>
 
   <script>
     // @ts-nocheck
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxCaption = document.getElementById('lightbox-caption');
-    const items = document.querySelectorAll('.gallery__item');
+    const allItems = document.querySelectorAll('.gallery__item');
     let currentIndex = 0;
 
     function openLightbox(index) {
       currentIndex = index;
-      const item = items[index];
+      const item = allItems[index];
       const src = item.dataset.src;
       const alt = item.dataset.alt;
       lightboxImg.src = src;
       lightboxImg.alt = alt;
-      lightboxCaption.textContent = alt;
       lightbox.classList.add('is-open');
       document.body.style.overflow = 'hidden';
     }
@@ -432,11 +508,11 @@ import RequestForm from '../components/RequestForm.astro';
     }
 
     function navigate(dir) {
-      currentIndex = (currentIndex + dir + items.length) % items.length;
+      currentIndex = (currentIndex + dir + allItems.length) % allItems.length;
       openLightbox(currentIndex);
     }
 
-    items.forEach((item, i) => {
+    allItems.forEach((item, i) => {
       item.addEventListener('click', () => openLightbox(i));
     });
 
@@ -455,13 +531,69 @@ import RequestForm from '../components/RequestForm.astro';
       if (e.key === 'ArrowRight') navigate(1);
     });
   </script>
+
+  <script>
+    // @ts-nocheck
+    const gallery = document.getElementById('gallery');
+    const galleryFull = document.getElementById('gallery-full');
+    const galleryMore = document.getElementById('gallery-more');
+    let galleryExpanded = false;
+
+    galleryMore.addEventListener('click', () => {
+      galleryExpanded = !galleryExpanded;
+      if (galleryExpanded) {
+        gallery.style.display = 'none';
+        galleryFull.style.display = 'block';
+        galleryMore.textContent = '← Назад';
+      } else {
+        galleryFull.style.display = 'none';
+        gallery.style.display = 'block';
+        galleryMore.textContent = 'Все фото';
+        window.scrollTo({ top: gallery.offsetTop - 100, behavior: 'smooth' });
+      }
+    });
+  </script>
+
+  <script>
+    // @ts-nocheck
+    const videoModal = document.getElementById('video-modal');
+    const videoIframe = videoModal.querySelector('iframe');
+
+    function openVideoModal(url) {
+      videoIframe.src = url;
+      videoModal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+      videoModal.classList.remove('is-open');
+      videoIframe.src = '';
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.yamarka__video-btn, .hallway__video-btn').forEach(btn => {
+      btn.addEventListener('click', () => openVideoModal(btn.dataset.video));
+    });
+
+    document.getElementById('video-modal-close').addEventListener('click', closeVideoModal);
+    videoModal.addEventListener('click', (e) => {
+      if (e.target === videoModal) closeVideoModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!videoModal.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeVideoModal();
+    });
+  </script>
 </Base>
 
 <style>
 .hero { max-width: 900px; margin: 0 auto; padding: 72px 24px 64px; text-align: center; position: relative; }
 .hero__bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: 24px; }
+.hero__overlay { position: absolute; inset: 0; background: rgba(0,0,0,.55); z-index: 1; }
 .hero__img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
 .hero__img--mobile { display: none; }
+.hero__inner { position: relative; z-index: 2; }
 .hero__tag {
   display: inline-block;
   font-size: 11px;
@@ -478,7 +610,17 @@ import RequestForm from '../components/RequestForm.astro';
 .hero h1 { font-size: clamp(32px, 6vw, 56px); font-weight: 800; line-height: 1.15; margin: 0 0 18px; }
 .hero h1 em { font-style: normal; color: #C30067; }
 .hero p { font-size: 17px; line-height: 1.6; color: rgba(255,255,255,.75); max-width: 620px; margin: 0 auto 30px; }
-.hero a { color: #fff; text-decoration: none; font-weight: 700; background: #C30067; padding: 16px 36px; border-radius: 30px; display: inline-block; }
+.hero a { color: #fff; text-decoration: none; font-weight: 700; background: #C30067; padding: 16px 36px; border-radius: 30px; display: inline-block; margin: 0 8px; }
+.hero__cta-alt { background: transparent; border: 2px solid rgba(255,255,255,.6); }
+.hero__cta-alt:hover { background: rgba(255,255,255,.1); border-color: #fff; }
+
+.format { background: #032E2B; padding: 72px 20px; }
+.format h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
+.format__sub { text-align: center; color: rgba(255,255,255,.75); font-size: 15px; line-height: 1.6; max-width: 640px; margin: 0 auto 40px; }
+.format__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 1080px; margin: 0 auto; }
+.format__card { background: #fff; color: #032E2B; border-radius: 20px; padding: 24px; }
+.format__card b { font-size: 16px; font-weight: 700; display: block; margin-bottom: 8px; }
+.format__card p { font-size: 14px; line-height: 1.6; color: #3C5B57; margin: 0; }
 
 .timeline { background: #032E2B; padding: 72px 20px; }
 .timeline h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
@@ -508,7 +650,14 @@ import RequestForm from '../components/RequestForm.astro';
 .yamarka__row p { font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.7); margin: 0; }
 .yamarka__note { margin-top: 20px; font-size: 14px; color: #0AD9C6; font-weight: 600; text-align: center; }
 .yamarka__video { flex: 0 0 480px; }
-.yamarka__video iframe { width: 100%; height: 270px; border: 0; border-radius: 12px; }
+.yamarka__video-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: #C30067; color: #fff; border: 0; border-radius: 12px;
+  padding: 16px 28px; font-size: 15px; font-weight: 700; cursor: pointer;
+  transition: background .15s; width: 100%;
+}
+.yamarka__video-btn:hover { background: #E00077; }
+.yamarka__video-icon { font-size: 20px; }
 
 .hallway { background: #021F1D; padding: 72px 20px; }
 .hallway h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
@@ -518,7 +667,14 @@ import RequestForm from '../components/RequestForm.astro';
 .hallway__text p { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,.75); margin: 0 0 16px; }
 .hallway__text b { color: #fff; }
 .hallway__video { flex: 0 0 480px; }
-.hallway__video iframe { width: 100%; height: 270px; border: 0; border-radius: 12px; }
+.hallway__video-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: #C30067; color: #fff; border: 0; border-radius: 12px;
+  padding: 16px 28px; font-size: 15px; font-weight: 700; cursor: pointer;
+  transition: background .15s; width: 100%;
+}
+.hallway__video-btn:hover { background: #E00077; }
+.hallway__video-icon { font-size: 20px; }
 
 .gallery { background: #021F1D; padding: 72px 20px; }
 .gallery h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
@@ -527,6 +683,14 @@ import RequestForm from '../components/RequestForm.astro';
 .gallery__item { border: 0; background: none; padding: 0; cursor: pointer; border-radius: 12px; overflow: hidden; position: relative; aspect-ratio: 4/3; }
 .gallery__item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
 .gallery__item:hover img { transform: scale(1.05); }
+.gallery__more {
+  display: block; margin: 24px auto 0; background: #C30067; color: #fff;
+  border: 0; border-radius: 30px; padding: 14px 36px; font-size: 15px;
+  font-weight: 700; cursor: pointer; transition: background .15s;
+}
+.gallery__more:hover { background: #E00077; }
+.gallery-full { padding: 0 0 72px; }
+.gallery-full__sub { text-align: center; color: rgba(255,255,255,.7); font-size: 15px; margin: 0 0 36px; max-width: 640px; margin-left: auto; margin-right: auto; }
 
 /* Лайтбокс */
 .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.95); z-index: 1000; align-items: center; justify-content: center; }
@@ -541,10 +705,24 @@ import RequestForm from '../components/RequestForm.astro';
 .lightbox__prev { left: 20px; }
 .lightbox__next { right: 20px; }
 
+/* Модальное окно видео */
+.video-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.95); z-index: 1001; align-items: center; justify-content: center; }
+.video-modal.is-open { display: flex; }
+.video-modal__close { position: absolute; top: 20px; right: 20px; background: none; border: 0; color: #fff; font-size: 32px; cursor: pointer; z-index: 10; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background .2s; }
+.video-modal__close:hover { background: rgba(255,255,255,.1); }
+.video-modal__content { max-width: 90vw; max-height: 90vh; width: 800px; }
+.video-modal__content iframe { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 12px; }
+
+@media (max-width: 760px) {
+  .video-modal__content { width: 95vw; }
+}
+
 @media (max-width: 760px) {
   .timeline { padding: 48px 14px; }
   .timeline__item { gap: 12px; }
   .timeline__num { width: 32px; height: 32px; font-size: 14px; }
+  .format { padding: 48px 14px; }
+  .format__grid { grid-template-columns: 1fr; }
   .features { padding: 48px 14px; }
   .features__grid { grid-template-columns: 1fr; }
   .faq { padding: 48px 14px; }
