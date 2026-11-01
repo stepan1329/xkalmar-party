@@ -5,6 +5,10 @@ import RequestForm from '../components/RequestForm.astro';
 ---
 <Base title="XKALMAR — день рождения в квест-шоу | Ростов-на-Дону" description="День рождения в квест-шоу для детей в Ростове-на-Дону: сценарий, актёры, банкет под ключ, фото и торт. Рассчитайте праздник за минуту.">
   <section class="hero">
+    <div class="hero__bg">
+      <img src="/photos/hero-1.jpg" alt="Квест-шоу Игра в кальмара для детей — праздник под ключ в Ростове-на-Дону" class="hero__img hero__img--desktop" />
+      <img src="/photos/hero-mobil-1.JPG" alt="Детский квест-шоу в Ростове-на-Дону — яркие эмоции для детей 6–12 лет" class="hero__img hero__img--mobile" />
+    </div>
     <span class="hero__tag">Квест-шоу для детей · Ростов-на-Дону</span>
     <h1>Дети — в квест-шоу.<br />Родители — <em>отдыхают</em>.</h1>
     <p>Мы берём праздник на себя полностью: сценарий, актёры, сервировка, торт, фото. Вам остаётся только прийти и дождаться восторженных детей.</p>
@@ -60,6 +64,77 @@ import RequestForm from '../components/RequestForm.astro';
             <b>Чай с тортом и сборы</b>
             <p>Организатор нарезает торт, дети пьют чай — праздник завершён.</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЯРМАРКА ИГР -->
+  <section class="yamarka" id="yamarka">
+    <div class="wrap">
+      <h2>Ярмарка игр</h2>
+      <p class="yamarka__sub">После квеста трое ведущих одновременно проводят разные активности — и каждый ребёнок выбирает, что ему по душе.</p>
+      <div class="yamarka__content">
+        <div class="yamarka__text">
+          <div class="yamarka__list">
+            <div class="yamarka__row">
+              <span class="yamarka__icon">🎯</span>
+              <div>
+                <b>Вышибалы впятером</b>
+                <p>Командная игра на реакцию и координацию. Кто последний остался — победил!</p>
+              </div>
+            </div>
+            <div class="yamarka__row">
+              <span class="yamarka__icon">🥤</span>
+              <div>
+                <b>Угадай напиток</b>
+                <p>Вслепую определяешь вкус — от газировки до сока. Сложнее, чем кажется!</p>
+              </div>
+            </div>
+            <div class="yamarka__row">
+              <span class="yamarka__icon">📦</span>
+              <div>
+                <b>Нащупай предмет</b>
+                <p>В ящике спрятан предмет — угадай на ощупь. Руки обману не обманут!</p>
+              </div>
+            </div>
+            <div class="yamarka__row">
+              <span class="yamarka__icon">🃏</span>
+              <div>
+                <b>Мафия</b>
+                <p>Стратегическая игра на логику и наблюдательность. Ведущий ведёт партию.</p>
+              </div>
+            </div>
+            <div class="yamarka__row">
+              <span class="yamarka__icon">🧱</span>
+              <div>
+                <b>Стена-кидалка</b>
+                <p>Проектор на стене — лови мяч, уклоняйся, реагируй. Движение без пауз.</p>
+              </div>
+            </div>
+          </div>
+          <p class="yamarka__note">Никто не стоит в очереди. Никто не ждёт своей команды. Каждый занят тем, что ему нравится.</p>
+        </div>
+        <div class="yamarka__video">
+          <iframe src="https://kinescope.io/embed/sNbVwwHesgoeMfyGbU2GCG" allow="autoplay; fullscreen" allowfullscreen title="Ярмарка игр — квест-шоу Игра в кальмара"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПЛОЩАДКА -->
+  <section class="hallway" id="hallway">
+    <div class="wrap">
+      <h2>Площадка 240 м²</h2>
+      <p class="hallway__sub">Своя территория под квест-шоу — не арендуем чужую площадку на час.</p>
+      <div class="hallway__content">
+        <div class="hallway__text">
+          <p>Игровая и банкетная комнаты — под одной крышей, отдельный вход, вентиляция. Звук, свет, видеоряд — всё своё, всё настроено под квест-шоу. Вам не нужно переезжать из комнаты в комнату через чужой коридор.</p>
+          <p><b>Родители могут остаться</b></p>
+          <p>Смотрите игру из игровой комнаты, посидите в банкетной, уходите и возвращайтесь — как вам удобно. Мы не выгоняем родителей и не заставляем их сидеть в коридоре. Вы участвуете в празднике ровно настолько, насколько хотите.</p>
+        </div>
+        <div class="hallway__video">
+          <iframe src="https://kinescope.io/embed/3QTCvnzrXbWFQxz3RHX3Gf" allow="autoplay; fullscreen" allowfullscreen title="Обзор площадки — квест-шоу Игра в кальмара Ростов-на-Дону"></iframe>
         </div>
       </div>
     </div>
@@ -149,11 +224,133 @@ import RequestForm from '../components/RequestForm.astro';
     </div>
   </section>
 
+  <!-- ГАЛЕРЕЯ -->
+  <section class="gallery" id="gallery">
+    <div class="wrap">
+      <h2>Фотогалерея</h2>
+      <p class="gallery__sub">Реальные моменты с наших праздников — нажми, чтобы рассмотреть</p>
+      <div class="gallery__grid">
+        <button class="gallery__item" data-src="/photos/squid-game-quest-1.jpg" data-alt="Квест-шоу Игра в кальмара — дети в игровых футболках с номерами">
+          <img src="/photos/squid-game-quest-1.jpg" alt="Квест-шоу для детей — дети в футболках с номерами" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-2.jpg" data-alt="Эстафеты на квест-шоу — активные игры для детей 6–12 лет">
+          <img src="/photos/squid-game-quest-2.jpg" alt="Эстафеты на квест-шоу для детей" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-3.jpg" data-alt="Командные игры на квесте — логика и внимание">
+          <img src="/photos/squid-game-quest-3.jpg" alt="Командные игры на квесте" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-4.jpg" data-alt="Вышибалы на ярмарке игр — активная игра для детей">
+          <img src="/photos/squid-game-quest-4.jpg" alt="Вышибалы на ярмарке игр" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-5.jpg" data-alt="Угадай напиток — игра на ярмарке для детей">
+          <img src="/photos/squid-game-quest-5.jpg" alt="Игра Угадай напиток на ярмарке" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-6.jpg" data-alt="Мафия с ведущим — стратегическая игра для детей">
+          <img src="/photos/squid-game-quest-6.jpg" alt="Мафия с ведущим на квесте" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-7.jpg" data-alt="Стена-кидалка — интерактивная игра на проекторе">
+          <img src="/photos/squid-game-quest-7.jpg" alt="Стена-кидалка на квест-шоу" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-8.jpg" data-alt="Нащупай предмет — игра вслепую на ярмарке">
+          <img src="/photos/squid-game-quest-8.jpg" alt="Нащупай предмет на ярмарке игр" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-9.jpg" data-alt="Поздравление именинника — вынос торта на квесте">
+          <img src="/photos/squid-game-quest-9.jpg" alt="Поздравление и вынос торта на квесте" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-10.jpg" data-alt="Торт на празднике — свечи и именинник в центре">
+          <img src="/photos/squid-game-quest-10.jpg" alt="Вынос торта на детском празднике" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-11.jpg" data-alt="Банкетная комната — сервировка стола на квесте">
+          <img src="/photos/squid-game-quest-11.jpg" alt="Банкетная комната на квесте" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-12.jpg" data-alt="Дети за банкетным столом — праздник под ключ">
+          <img src="/photos/squid-game-quest-12.jpg" alt="Дети за банкетным столом" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-13.jpg" data-alt="Ведущие-актёры с детьми — квест-шоу для детей 6–12 лет">
+          <img src="/photos/squid-game-quest-13.jpg" alt="Ведущие-актёры с детьми на квесте" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-14.jpg" data-alt="Родители наблюдают за праздником — зона ожидания">
+          <img src="/photos/squid-game-quest-14.jpg" alt="Родители наблюдают за квестом" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-15.jpg" data-alt="Сувениры каждому ребёнку — памятные подарки на квесте">
+          <img src="/photos/squid-game-quest-15.jpg" alt="Сувениры каждому ребёнку на квесте" loading="lazy" />
+        </button>
+        <button class="gallery__item" data-src="/photos/squid-game-quest-16.jpg" data-alt="Финал квест-шоу — все дети вместе">
+          <img src="/photos/squid-game-quest-16.jpg" alt="Финал квест-шоу — все участники вместе" loading="lazy" />
+        </button>
+      </div>
+    </div>
+  </section>
+
   <RequestForm />
+
+  <!-- Лайтбокс -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox__close" id="lightbox-close">✕</button>
+    <button class="lightbox__nav lightbox__prev" id="lightbox-prev">‹</button>
+    <div class="lightbox__content">
+      <img src="" alt="" id="lightbox-img" />
+      <p class="lightbox__caption" id="lightbox-caption"></p>
+    </div>
+    <button class="lightbox__nav lightbox__next" id="lightbox-next">›</button>
+  </div>
+
+  <script>
+    // @ts-nocheck
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const items = document.querySelectorAll('.gallery__item');
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      const item = items[index];
+      const src = item.dataset.src;
+      const alt = item.dataset.alt;
+      lightboxImg.src = src;
+      lightboxImg.alt = alt;
+      lightboxCaption.textContent = alt;
+      lightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function navigate(dir) {
+      currentIndex = (currentIndex + dir + items.length) % items.length;
+      openLightbox(currentIndex);
+    }
+
+    items.forEach((item, i) => {
+      item.addEventListener('click', () => openLightbox(i));
+    });
+
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-prev').addEventListener('click', () => navigate(-1));
+    document.getElementById('lightbox-next').addEventListener('click', () => navigate(1));
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+    });
+  </script>
 </Base>
 
 <style>
-.hero { max-width: 900px; margin: 0 auto; padding: 72px 24px 64px; text-align: center; }
+.hero { max-width: 900px; margin: 0 auto; padding: 72px 24px 64px; text-align: center; position: relative; }
+.hero__bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: 24px; }
+.hero__img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.hero__img--mobile { display: none; }
 .hero__tag {
   display: inline-block;
   font-size: 11px;
@@ -188,6 +385,51 @@ import RequestForm from '../components/RequestForm.astro';
 .feature-card b { font-size: 16px; font-weight: 700; display: block; margin-bottom: 8px; }
 .feature-card p { font-size: 14px; line-height: 1.6; color: #3C5B57; margin: 0; }
 
+.yamarka { background: #032E2B; padding: 72px 20px; }
+.yamarka h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
+.yamarka__sub { text-align: center; color: rgba(255,255,255,.75); font-size: 15px; margin: 0 0 40px; max-width: 640px; margin-left: auto; margin-right: auto; }
+.yamarka__content { display: flex; gap: 32px; max-width: 1200px; margin: 0 auto; align-items: flex-start; }
+.yamarka__text { flex: 1; }
+.yamarka__list { display: grid; gap: 16px; }
+.yamarka__row { display: flex; gap: 14px; align-items: flex-start; }
+.yamarka__icon { font-size: 24px; flex: 0 0 32px; }
+.yamarka__row b { font-size: 15px; font-weight: 700; color: #fff; display: block; margin-bottom: 2px; }
+.yamarka__row p { font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.7); margin: 0; }
+.yamarka__note { margin-top: 20px; font-size: 14px; color: #0AD9C6; font-weight: 600; text-align: center; }
+.yamarka__video { flex: 0 0 480px; }
+.yamarka__video iframe { width: 100%; height: 270px; border: 0; border-radius: 12px; }
+
+.hallway { background: #021F1D; padding: 72px 20px; }
+.hallway h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
+.hallway__sub { text-align: center; color: rgba(255,255,255,.75); font-size: 15px; margin: 0 0 40px; max-width: 640px; margin-left: auto; margin-right: auto; }
+.hallway__content { display: flex; gap: 32px; max-width: 1200px; margin: 0 auto; align-items: flex-start; }
+.hallway__text { flex: 1; }
+.hallway__text p { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,.75); margin: 0 0 16px; }
+.hallway__text b { color: #fff; }
+.hallway__video { flex: 0 0 480px; }
+.hallway__video iframe { width: 100%; height: 270px; border: 0; border-radius: 12px; }
+
+.gallery { background: #021F1D; padding: 72px 20px; }
+.gallery h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
+.gallery__sub { text-align: center; color: rgba(255,255,255,.7); font-size: 15px; margin: 0 0 36px; max-width: 640px; margin-left: auto; margin-right: auto; }
+.gallery__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; max-width: 1200px; margin: 0 auto; }
+.gallery__item { border: 0; background: none; padding: 0; cursor: pointer; border-radius: 12px; overflow: hidden; position: relative; aspect-ratio: 4/3; }
+.gallery__item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
+.gallery__item:hover img { transform: scale(1.05); }
+
+/* Лайтбокс */
+.lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.95); z-index: 1000; align-items: center; justify-content: center; }
+.lightbox.is-open { display: flex; }
+.lightbox__close { position: absolute; top: 20px; right: 20px; background: none; border: 0; color: #fff; font-size: 32px; cursor: pointer; z-index: 10; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background .2s; }
+.lightbox__close:hover { background: rgba(255,255,255,.1); }
+.lightbox__content { max-width: 90vw; max-height: 90vh; position: relative; display: flex; flex-direction: column; align-items: center; }
+.lightbox__content img { max-width: 100%; max-height: 85vh; object-fit: contain; border-radius: 8px; }
+.lightbox__caption { color: rgba(255,255,255,.8); font-size: 14px; margin-top: 12px; text-align: center; }
+.lightbox__nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.1); border: 0; color: #fff; font-size: 48px; width: 64px; height: 64px; border-radius: 50%; cursor: pointer; transition: background .2s; display: flex; align-items: center; justify-content: center; }
+.lightbox__nav:hover { background: rgba(255,255,255,.2); }
+.lightbox__prev { left: 20px; }
+.lightbox__next { right: 20px; }
+
 @media (max-width: 760px) {
   .timeline { padding: 48px 14px; }
   .timeline__item { gap: 12px; }
@@ -197,6 +439,12 @@ import RequestForm from '../components/RequestForm.astro';
   .faq { padding: 48px 14px; }
   .reviews { padding: 48px 14px; }
   .reviews__grid { grid-template-columns: 1fr; }
+  .yamarka { padding: 48px 14px; }
+  .hallway { padding: 48px 14px; }
+  .yamarka__content { flex-direction: column; }
+  .hallway__content { flex-direction: column; }
+  .hero__img--desktop { display: none; }
+  .hero__img--mobile { display: block; }
 }
 </style>
 
