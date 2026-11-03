@@ -1,43 +1,41 @@
-# Astro Starter Kit: Minimal
+# XKALMAR Party — сайт квест-шоу
 
-```sh
-npm create astro@latest -- --template minimal
+Сайт квест-шоу для детей в Ростове-на-Дону: главная — день рождения,
+сложный интерактивный калькулятор стоимости, форма заявки.
+Статический сайт на Astro, деплой на Cloudflare Pages.
+
+## Стек
+
+- Astro 7.4.2 + Vite 8.3.5, TypeScript strict, без UI-фреймворков.
+- Node ≥ 22.23.4.
+
+## Команды
+
+```bash
+npm install              # зависимости
+npm run dev              # dev-сервер (localhost:4321)
+npm run build            # сборка в ./dist/
+npm run preview          # предпросмотр сборки
+npm run astro check      # проверка типов
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Структура
 
-## 🚀 Project Structure
+- `src/components/` — Calculator.astro (калькулятор), RequestForm.astro
+  (форма заявки), ImageGallery.astro (галерея с лайтбоксом).
+- `src/layouts/Base.astro` — базовый layout (SEO, шапка, футер).
+- `src/pages/` — index.astro (главная), privacy.astro.
+- `public/photos/` — фотографии мероприятий.
+- `docs/` — дизайн-система (DRAFT), визуальный аудит, скриншоты QA.
+- `.agents/` — инструкции для ИИ-агентов: точка входа AGENTS.md,
+  документы .agents/docs/, навык визуального QA.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Для ИИ-агентов
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Начинайте с [AGENTS.md](AGENTS.md) — маршрутизатор задач, Правило №0
+(источник фактов), гейты деплоя и визуальной приёмки.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Деплой
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+git push → Cloudflare Pages автодеплой → https://xkalmar-party.pages.dev.
+Пуш — только по явной команде владельца (см. .agents/docs/01-environment.md).

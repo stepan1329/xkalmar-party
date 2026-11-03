@@ -1,0 +1,322 @@
+- generic [active] [ref=f91e1]:
+  - banner [ref=f91e2]:
+    - generic [ref=f91e3]:
+      - link "XKALMAR" [ref=f91e4] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f91e5]:
+        - navigation [ref=f91e6]:
+          - link "Главная" [ref=f91e7] [cursor=pointer]:
+            - /url: /
+          - link "+7 (928) 758-84-83" [ref=f91e8] [cursor=pointer]:
+            - /url: tel:+79287588483
+        - generic [ref=f91e9]:
+          - link "📞 Позвонить" [ref=f91e10] [cursor=pointer]:
+            - /url: tel:+79287588483
+          - link "Оставить заявку" [ref=f91e11] [cursor=pointer]:
+            - /url: "#zayavka"
+  - main [ref=f91e12]:
+    - generic [ref=f91e13]:
+      - img "Квест-шоу Игра в кальмара для детей — праздник под ключ в Ростове-на-Дону" [ref=f91e16]
+      - generic [ref=f91e17]:
+        - generic [ref=f91e18]: Квест-шоу для детей · Ростов-на-Дону
+        - heading [level=1] [ref=f91e19]:
+          - text: Дети — в квест-шоу.Родители —
+          - emphasis [ref=f91e20]: отдыхают
+          - text: .
+        - paragraph [ref=f91e21]: "Мы берём праздник на себя полностью: сценарий, актёры, сервировка, торт, фото. Вам остаётся только прийти и дождаться восторженных детей."
+        - generic [ref=f91e22]: от 15 000 ₽ за 90 минут
+        - link "Что это за формат?" [ref=f91e23] [cursor=pointer]:
+          - /url: "#format"
+        - link "Рассчитать праздник" [ref=f91e24] [cursor=pointer]:
+          - /url: "#calc"
+    - generic [ref=f91e26]:
+      - heading "Что это за формат?" [level=2] [ref=f91e27]
+      - paragraph [ref=f91e28]: Это праздник, где дети проходят испытания как в сериале «Игра в кальмара» — но безопасно и весело. Три ведущих, 9 игр, 90 минут, банкет. Без проигравших.
+      - generic [ref=f91e29]:
+        - generic [ref=f91e30]:
+          - generic [ref=f91e35]: Актёры и сценарий
+          - paragraph [ref=f91e36]: Трое ведущих ведут игру — не один оператор в тёмной комнате. Каждый ребёнок в центре внимания.
+        - generic [ref=f91e37]:
+          - generic [ref=f91e42]: 9 игр за 90 минут
+          - paragraph [ref=f91e43]: Каждые 8–10 минут — новое испытание. Эстафеты, логика, движение. Никто не скучает.
+        - generic [ref=f91e44]:
+          - generic [ref=f91e49]: Банкет под ключ
+          - paragraph [ref=f91e50]: Своя еда или под ключ — пицца, наггетсы, соки, торт. Сервировка, скатерть, чай — всё включено.
+        - generic [ref=f91e51]:
+          - generic [ref=f91e58]: Родители рядом
+          - paragraph [ref=f91e59]: Смотрите игру из игровой комнаты или посидите в банкетной. Мы не выгоняем и не заставляем.
+    - generic [ref=f91e61]:
+      - heading "Частые вопросы" [level=2] [ref=f91e62]
+      - generic [ref=f91e63]:
+        - group [ref=f91e64]:
+          - generic "Это же Игра в кальмара — это страшно? +" [ref=f91e65] [cursor=pointer]
+        - group [ref=f91e66]:
+          - generic "Почему у вас дороже обычных квестов? +" [ref=f91e67] [cursor=pointer]
+        - group [ref=f91e68]:
+          - generic "С какого возраста? Будет ли интересно 6-летним? А 12-летним? +" [ref=f91e69] [cursor=pointer]
+        - group [ref=f91e70]:
+          - generic "Где вы находитесь? +" [ref=f91e71] [cursor=pointer]
+        - group [ref=f91e72]:
+          - generic "Что с собой везти? +" [ref=f91e73] [cursor=pointer]
+        - group [ref=f91e74]:
+          - generic "Как забронировать и сколько ждать? +" [ref=f91e75] [cursor=pointer]
+    - generic [ref=f91e76]:
+      - generic [ref=f91e77]:
+        - heading "Рассчитайте праздник" [level=2] [ref=f91e78]
+        - paragraph [ref=f91e79]: "Выберите пакет — цена видна сразу. Дальше шаги: гости, дата, продление, допы. Итог пересчитывается мгновенно."
+      - generic [ref=f91e80]:
+        - generic [ref=f91e81] [cursor=pointer]:
+          - radio "Популярный Выбрано ✓ 24 000 ₽ 2,5 часа · до 15 детей · еда своя Подробнее" [checked]
+          - generic [ref=f91e82]:
+            - generic [ref=f91e83]:
+              - generic [ref=f91e84]: Популярный
+              - generic [ref=f91e85]: Выбрано ✓
+            - generic [ref=f91e86]: 24 000 ₽
+            - generic [ref=f91e87]: 2,5 часа · до 15 детей · еда своя
+            - button "Подробнее" [ref=f91e88]
+        - generic [ref=f91e89] [cursor=pointer]:
+          - radio "Оптимальный Выбирают чаще всего 33 500 ₽ 3 часа · квест + час игр · еда включена Подробнее"
+          - generic [ref=f91e90]:
+            - generic [ref=f91e91]:
+              - generic [ref=f91e92]: Оптимальный
+              - generic [ref=f91e93]: Выбирают чаще всего
+            - generic [ref=f91e94]: 33 500 ₽
+            - generic [ref=f91e95]: 3 часа · квест + час игр · еда включена
+            - button "Подробнее" [ref=f91e96]
+        - generic [ref=f91e97] [cursor=pointer]:
+          - radio "Максимальный 50 000 ₽ 3,5 часа · всё включено · фотограф, шары, торт Подробнее"
+          - generic [ref=f91e98]:
+            - generic [ref=f91e99]: Максимальный
+            - generic [ref=f91e101]: 50 000 ₽
+            - generic [ref=f91e102]: 3,5 часа · всё включено · фотограф, шары, торт
+            - button "Подробнее" [ref=f91e103]
+      - generic [ref=f91e104]:
+        - button "Собрать свой формат →" [ref=f91e105] [cursor=pointer]
+        - button "Компания до 8 детей? Есть «Мини» — короткий праздник за 1,5 часа · 15 000 ₽" [ref=f91e106] [cursor=pointer]:
+          - generic [ref=f91e107]: Компания до 8 детей?
+          - text: Есть «Мини» — короткий праздник за 1,5 часа · 15 000 ₽
+      - generic [ref=f91e108]:
+        - generic [ref=f91e109]:
+          - button "1 · Программа ▾" [expanded] [ref=f91e110] [cursor=pointer]:
+            - generic [ref=f91e111]: 1 · Программа
+            - generic [ref=f91e112]: ▾
+          - generic [ref=f91e113]:
+            - generic [ref=f91e114]:
+              - generic [ref=f91e115]:
+                - generic [ref=f91e116]: Выбран пакет
+                - generic [ref=f91e117]: «Популярный»
+              - button "Собрать свой формат →" [ref=f91e118] [cursor=pointer]
+            - generic [ref=f91e119]:
+              - generic [ref=f91e120]: "Квест-шоу — игра-приключение с командой из 3 ведущих-актёров: дети играют, взаимодействуют с актёрами и выполняют задания."
+              - generic [ref=f91e121]: Ярмарка игр — весёлые конкурсы и активности с призами. Ведут те же актёры.
+              - generic [ref=f91e122]: Банкет — праздничный стол. «Под ключ» — еда и сервировка наши, иначе еда своя.
+        - button "2 · Сколько детей ▾" [ref=f91e124] [cursor=pointer]:
+          - generic [ref=f91e125]: 2 · Сколько детей
+          - generic [ref=f91e126]: ▾
+        - button "3 · Дата и время ▾" [ref=f91e128] [cursor=pointer]:
+          - generic [ref=f91e129]: 3 · Дата и время
+          - generic [ref=f91e130]: ▾
+        - button "4 · Продление праздника ▾" [ref=f91e132] [cursor=pointer]:
+          - generic [ref=f91e133]: 4 · Продление праздника
+          - generic [ref=f91e134]: ▾
+        - button "5 · Дополнительные услуги ▾" [ref=f91e136] [cursor=pointer]:
+          - generic [ref=f91e137]: 5 · Дополнительные услуги
+          - generic [ref=f91e138]: ▾
+      - paragraph [ref=f91e139]: "Расчёт предварительный: точную сумму и свободное время подтверждает организатор."
+    - button "Открыть корзину" [ref=f91e140] [cursor=pointer]:
+      - generic [ref=f91e141]: 1 позиция
+      - generic [ref=f91e142]: ·
+      - generic [ref=f91e143]: 21 000 ₽
+    - generic [ref=f91e145]:
+      - heading "Из чего состоит праздник" [level=2] [ref=f91e146]
+      - paragraph [ref=f91e147]: Формат один, набор блоков — по выбранному пакету. Длительность и порядок подстроим под вас при брони.
+      - generic [ref=f91e148]:
+        - generic [ref=f91e149]:
+          - generic [ref=f91e150]: "1"
+          - generic [ref=f91e151]:
+            - generic [ref=f91e152]: Сборы и инструктаж
+            - paragraph [ref=f91e153]: Дети надевают игровые футболки с номерами и знакомятся с ведущими. Родители ждут в зоне ожидания с кофе.
+        - generic [ref=f91e154]:
+          - generic [ref=f91e155]: "2"
+          - generic [ref=f91e156]:
+            - generic [ref=f91e157]: Квест-шоу
+            - paragraph [ref=f91e158]: Эстафеты, логика, внимание и память. Новое испытание каждые 8–10 минут — никто не выбывает и не скучает. Каждый участник получает сувенир.
+        - generic [ref=f91e159]:
+          - generic [ref=f91e160]: "3"
+          - generic [ref=f91e161]:
+            - generic [ref=f91e162]: Поздравление и вынос торта
+            - paragraph [ref=f91e163]: Свечи, именинник в центре — самые живые кадры праздника.
+        - generic [ref=f91e164]:
+          - generic [ref=f91e165]: "4"
+          - generic [ref=f91e166]:
+            - generic [ref=f91e167]: Банкет
+            - paragraph [ref=f91e168]: Сервированная банкетная комната. Своя еда или под ключ — как в выбранном пакете.
+        - generic [ref=f91e169]:
+          - generic [ref=f91e170]: "5"
+          - generic [ref=f91e171]:
+            - generic [ref=f91e172]: Ярмарка игр
+            - paragraph [ref=f91e173]: "Трое ведущих играют одновременно: стена-кидалка, мафия, вышибалы, «нащупай предмет», «угадай напиток». Каждый ребёнок выбирает своё — без очередей."
+        - generic [ref=f91e174]:
+          - generic [ref=f91e175]: "6"
+          - generic [ref=f91e176]:
+            - generic [ref=f91e177]: Чай с тортом и сборы
+            - paragraph [ref=f91e178]: Организатор нарезает торт, дети пьют чай — праздник завершён.
+    - generic [ref=f91e180]:
+      - heading "Ярмарка игр" [level=2] [ref=f91e181]
+      - paragraph [ref=f91e182]: После квеста трое ведущих одновременно проводят разные активности — и каждый ребёнок выбирает, что ему по душе.
+      - generic [ref=f91e183]:
+        - generic [ref=f91e184]:
+          - generic [ref=f91e185]:
+            - generic [ref=f91e192]:
+              - generic [ref=f91e193]: Вышибалы впятером
+              - paragraph [ref=f91e194]: Командная игра на реакцию и координацию. Кто последний остался — победил!
+            - generic [ref=f91e200]:
+              - generic [ref=f91e201]: Угадай напиток
+              - paragraph [ref=f91e202]: Вслепую определяешь вкус — от газировки до сока. Сложнее, чем кажется!
+            - generic [ref=f91e208]:
+              - generic [ref=f91e209]: Нащупай предмет
+              - paragraph [ref=f91e210]: В ящике спрятан предмет — угадай на ощупь. Руки обмануть не обманут!
+            - generic [ref=f91e215]:
+              - generic [ref=f91e216]: Мафия
+              - paragraph [ref=f91e217]: Стратегическая игра на логику и наблюдательность. Ведущий ведёт партию.
+            - generic [ref=f91e222]:
+              - generic [ref=f91e223]: Стена-кидалка
+              - paragraph [ref=f91e224]: Проектор на стене — лови мяч, уклоняйся, реагируй. Движение без пауз.
+          - paragraph [ref=f91e225]: Никто не стоит в очереди. Никто не ждёт своей команды. Каждый занят тем, что ему нравится.
+        - button "Смотреть видео Ярмарка игр" [ref=f91e227] [cursor=pointer]:
+          - generic [ref=f91e228]: ▶
+          - text: Смотреть видео
+    - generic [ref=f91e230]:
+      - heading "Площадка 240 м²" [level=2] [ref=f91e231]
+      - paragraph [ref=f91e232]: Своя территория под квест-шоу — не арендуем чужую площадку на час.
+      - generic [ref=f91e233]:
+        - generic [ref=f91e234]:
+          - paragraph [ref=f91e235]: Игровая и банкетная комнаты — под одной крышей, отдельный вход, вентиляция. Звук, свет, видеоряд — всё своё, всё настроено под квест-шоу. Вам не нужно переезжать из комнаты в комнату через чужой коридор.
+          - paragraph [ref=f91e236]: Родители могут остаться
+          - paragraph [ref=f91e237]: Смотрите игру из игровой комнаты, посидите в банкетной, уходите и возвращайтесь — как вам удобно. Мы не выгоняем родителей и не заставляем их сидеть в коридоре. Вы участвуете в празднике ровно настолько, насколько хотите.
+        - button "Смотреть видео Обзор площадки" [ref=f91e239] [cursor=pointer]:
+          - generic [ref=f91e240]: ▶
+          - text: Смотреть видео
+    - generic [ref=f91e244]:
+      - heading "Почему мы" [level=2] [ref=f91e245]
+      - generic [ref=f91e246]:
+        - generic [ref=f91e247]:
+          - generic [ref=f91e253]: Не квест-комната, а шоу
+          - paragraph [ref=f91e254]: Дети не разгадывают загадки в закрытом помещении — двигаются, бегают, соревнуются. 90 минут без пауз и скуки.
+        - generic [ref=f91e255]:
+          - generic [ref=f91e262]: Команда, а не один ведущий
+          - paragraph [ref=f91e263]: Трое ведущих на каждом празднике — каждый держит свой участок. Никто не остаётся без внимания.
+        - generic [ref=f91e264]:
+          - generic [ref=f91e268]: Никто не выбывает
+          - paragraph [ref=f91e269]: Без проигравших и вылетевших — все играют до финала. Застенчивым помогаем, активным направляем, младшим облегчаем, старшим усложняем.
+        - generic [ref=f91e270]:
+          - generic [ref=f91e274]: Безопасно и под контролем
+          - paragraph [ref=f91e275]: Никаких замкнутых помещений, темноты и запирания. Если ребёнку что-то не нравится — он может выйти и вернуться, когда захочет.
+    - generic [ref=f91e277]:
+      - heading "Отзывы" [level=2] [ref=f91e278]
+      - paragraph [ref=f91e279]:
+        - text: Рейтинг 5.0 на Яндекс Картах — по 154 оценкам ·
+        - link "Читать все отзывы" [ref=f91e280] [cursor=pointer]:
+          - /url: https://yandex.ru/maps/org/kvest_shou_igra_v_kalmara/19338708863/reviews/
+      - generic [ref=f91e281]:
+        - generic [ref=f91e282]:
+          - generic [ref=f91e283]: ★★★★★
+          - paragraph [ref=f91e284]: Огромное спасибо за невероятно крутой квест «Игра в кальмара»! Детям всё очень понравилось, они остались в полном восторге! Столько эмоций, азарта, веселья и незабываемых впечатлений! Всё было организовано на высшем уровне, ребята получили массу положительных эмоций и ещё долго делились своими впечатлениями. Спасибо организаторам за чудесный праздник, отличную атмосферу и подаренные детям счастливые моменты! Обязательно будем рекомендовать вас друзьям и с удовольствием придём ещё раз!
+          - text: Таня Косякова
+        - generic [ref=f91e285]:
+          - generic [ref=f91e286]: ★★★★★
+          - paragraph [ref=f91e287]: Праздновали день рождения сына. Остались довольны все и дети и родители. Потрясающая администратор, заняла детей несмотря на то что мы раньше пришли, всегда интересовалась нужно ли нам что-то. Ведущие без внимания ни одного ребенка не отставили. В интерьере продумано все до мелочей. Сын сказал в следующем году пойдем сюда снова. Тем более что у ребят меняется программа.
+          - text: Екатерина Щ.
+        - generic [ref=f91e288]:
+          - generic [ref=f91e289]: ★★★★★
+          - paragraph [ref=f91e290]: Очень крутое место, чтобы отметить день рождения ребенка! Атмосферно, две банкетных комнаты, большая стилизованная игровая! Актеры и администратор Елена — супер, очень приятные и отзывчивые. Детям очень понравилась игра! Спасибо
+          - text: Таня А.
+        - generic [ref=f91e291]:
+          - generic [ref=f91e292]: ★★★★★
+          - paragraph [ref=f91e293]: Отмечали день рождения ребенку 6.09. Хочу сказать спасибо организаторам. Все было на высшем уровне. Дети в восторге. Помещение очень чистое. Персонал приветливый. С удовольствием провели время. Если думаете где отметить день рождения ребенка, однозначно выбирайте этот квест.
+          - text: Михаил К.
+    - generic [ref=f91e295]:
+      - heading "Фотогалерея" [level=2] [ref=f91e296]
+      - paragraph [ref=f91e297]: Реальные моменты с наших праздников — нажми, чтобы рассмотреть
+      - generic [ref=f91e298]:
+        - button [ref=f91e299] [cursor=pointer]:
+          - img "Квест-шоу для детей — дети в футболках с номерами" [ref=f91e300]
+        - button [ref=f91e301] [cursor=pointer]:
+          - img "Эстафеты на квест-шоу для детей" [ref=f91e302]
+        - button [ref=f91e303] [cursor=pointer]:
+          - img "Командные игры на квесте" [ref=f91e304]
+        - button [ref=f91e305] [cursor=pointer]:
+          - img "Вышибалы на ярмарке игр" [ref=f91e306]
+        - button [ref=f91e307] [cursor=pointer]:
+          - img "Игра Угадай напиток на ярмарке" [ref=f91e308]
+        - button [ref=f91e309] [cursor=pointer]:
+          - img "Мафия с ведущим на квесте" [ref=f91e310]
+        - button [ref=f91e311] [cursor=pointer]:
+          - img "Стена-кидалка на квест-шоу" [ref=f91e312]
+        - button [ref=f91e313] [cursor=pointer]:
+          - img "Нащупай предмет на ярмарке игр" [ref=f91e314]
+        - button [ref=f91e315] [cursor=pointer]:
+          - img "Поздравление и вынос торта на квесте" [ref=f91e316]
+        - button [ref=f91e317] [cursor=pointer]:
+          - img "Вынос торта на детском празднике" [ref=f91e318]
+      - button "Все фото" [ref=f91e319] [cursor=pointer]
+    - generic [ref=f91e320]:
+      - generic [ref=f91e321]:
+        - heading "Оставить заявку" [level=2] [ref=f91e322]
+        - paragraph [ref=f91e323]: Заполните три поля — остальное подтянется из расчёта выше.
+      - generic [ref=f91e324]:
+        - generic [ref=f91e325]:
+          - generic [ref=f91e326]:
+            - generic [ref=f91e327]: Как вас зовут
+            - textbox "Как вас зовут ✓" [ref=f91e328]:
+              - /placeholder: Например, Анна
+            - text: ✓
+          - generic [ref=f91e329]:
+            - generic [ref=f91e330]: Телефон для связи
+            - textbox "Телефон для связи ✓" [ref=f91e331]:
+              - /placeholder: +7 (900) 000-00-00
+            - text: ✓
+          - generic [ref=f91e332]:
+            - generic [ref=f91e333]: Как с вами удобнее связаться
+            - generic [ref=f91e334]:
+              - button "Звонок" [ref=f91e335] [cursor=pointer]
+              - button "MAX" [ref=f91e336] [cursor=pointer]
+              - button "Telegram" [ref=f91e337] [cursor=pointer]
+              - button "WhatsApp" [ref=f91e338] [cursor=pointer]
+          - generic [ref=f91e339]:
+            - generic [ref=f91e340]: Комментарий — необязательно
+            - textbox "Комментарий — необязательно" [ref=f91e341]:
+              - /placeholder: Возраст детей, пожелания, вопросы…
+          - generic [ref=f91e342] [cursor=pointer]:
+            - checkbox "Согласен(а) с политикой конфиденциальности." [ref=f91e343]
+            - generic [ref=f91e344]:
+              - text: Согласен(а) с
+              - link "политикой конфиденциальности" [ref=f91e345]:
+                - /url: /privacy
+              - text: .
+          - button "Отправить заявку" [ref=f91e346] [cursor=pointer]
+          - paragraph [ref=f91e347]:
+            - text: Обычно отвечаем в течение часа. Нужно быстрее?
+            - link "Позвоните" [ref=f91e348] [cursor=pointer]:
+              - /url: tel:+79287588483
+            - text: .
+        - generic [ref=f91e349]:
+          - generic [ref=f91e350]: Состав заявки
+          - generic [ref=f91e352]:
+            - button "очистить" [ref=f91e353] [cursor=pointer]
+            - link "изменить расчёт →" [ref=f91e354] [cursor=pointer]:
+              - /url: "#calc"
+          - generic [ref=f91e356]:
+            - paragraph [ref=f91e357]: "Расчёт готов — перенесите его в заявку:"
+            - button "Перенести расчёт в заявку →" [ref=f91e358] [cursor=pointer]
+  - contentinfo [ref=f91e359]:
+    - generic [ref=f91e360]:
+      - paragraph [ref=f91e361]: © 2026 XKALMAR — квесты в Ростове-на-Дону
+      - paragraph [ref=f91e362]:
+        - link "Политика конфиденциальности" [ref=f91e363] [cursor=pointer]:
+          - /url: /privacy
+  - generic [ref=f91e366]:
+    - button "Menu" [ref=f91e367]
+    - button "Inspect" [ref=f91e373]
+    - button "Audit" [ref=f91e377]
+    - button "Settings" [ref=f91e382]

@@ -1,132 +1,83 @@
-## Development
+# AGENTS.md — точка входа для агентов проекта XKALMAR
 
-When starting the dev server, use background mode:
+> Этот файл — маршрутизатор. Он не содержит доменных знаний, а говорит,
+> какие файлы читать для какой задачи. Если факта нет в документах —
+> он не существует; его запрашивает у Степана.
 
-```
-astro dev --background
-```
+## Правило №0 — источник фактов
 
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+**Единственный источник фактов — Степан.** Документация и код — лишь
+снимки его ответов. Если код, документ и реальность противоречат друг
+другу — это неполнота или неактуальность снимка, а не «ошибка».
+Агент не «исправляет» факт, а фиксирует открытый вопрос и спрашивает
+Степана. Общедоступное (синтаксис, математика 2+2) — единственное, во
+что можно верить без него. Спорную инструкцию помечать FIXME-REVIEW,
+не выдумывать компромисс.
 
-## Documentation
+## Гейты (нарушение = уровень 1)
 
-Full documentation: https://docs.astro.build
+1. **Push только по явной команде Степана** (слово «пуш», «деплой»,
+   «выкладывай»). Коммит локально — можно после прохождения верификации.
+   Деплой: git push → Cloudflare Pages автодеплой → xkalmar-party.pages.dev.
+2. **Задача не завершена без визуальной приёмки Степаном** (скриншоты
+   до/после + краткий отчёт человеческим языком). Автопроверки обязательны,
+   но недостаточны: человек видит то, чего не видят проверки.
+3. Правки калькулятора, цен, текстов SPEC — только по явному заданию.
 
-Consult these guides before working on related tasks:
+## Маршрутизация: тип задачи → что читать
 
-- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
-- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
-- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
-- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
-- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
-- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+| Тип задачи | Читать обязательно | Читать по необходимости |
+|---|---|---|
+| Любая задача (первая в сессии) | 05-safety.md, этот файл | — |
+| Цены, пакеты, формулы, тексты | SPEC-business.md, 02-calculator.md | SPEC.md |
+| Код калькулятора | 02-calculator.md, 04-verification.md | project-map.md |
+| Визуал, стили, UI, галерея | skill xkalmar-visual-qa, 03-conventions.md | docs/design-system.md (DRAFT) |
+| Новая страница/компонент | 03-conventions.md, project-map.md | docs Astro: docs.astro.build |
+| Окружение, сборка, деплой | 01-environment.md | — |
+| Известный баг или «почините баг Х» | 06-registry.md (может быть отложен сознательно) | — |
+| Формулировки, лексика на сайте | SPEC-business.md (канон) + UX-линза из 03-conventions.md | — |
 
-# AGENTS — технические заметки для ИИ-агентов
+## Модель ролей (конвейер)
 
-## Стек
-Astro 7.4.2, Vite 8.3.5, Node ≥ 22.23.4, TS strict. Без фреймворков.
-В <script> внутри .astro — // @ts-nocheck первой строкой.
-Frontmatter .astro: ровно две линии --- на собственных строках, ничего
-до первой. Комментарий в frontmatter — одна строка (многострочный
-протекает на страницу).
+Степан даёт цель → Оркестратор разбивает → Аналитик пишет ТЗ
+(цель + поведение + ограничения + контрольные значения, без кода,
+псевдокод ≤ 5 строк) → Реализатор кодит → Ревизор гоняет чек-листы
+04-verification.md → Визуальный QA (skill) → Приёмка Степана →
+пуш по команде. Результат шага — всегда артефакт (ТЗ, код, отчёт
+с чек-листами, скриншоты), не «мнение». Один агент читает только
+свои файлы маршрутизации + 05-safety.md.
 
-## Состояние калькулятора
-- state.mode: 'packs' | 'custom'
-- state.pack: 'popular' | 'optimal' | 'maximal' | null
-- state.extSel: undefined (не трогал, действует дефолт пакета) |
-  число (выбрал) | null (снял выбор)
-- state.packModified: bool — тариф стал «Свой формат»
-- snapshot: снимок, ушедший в форму. lastOrder: текущий черновик.
-- dirty: snapshot ≠ lastOrder по полям tariffKey / tariff / tariffPrice
-  / guests / dateISO / slot / extras.
-- window.DR_CALC.sent: bool — форма успешно отправлена. Сохраняется
-  в localStorage, восстанавливается в restoreCalcState.
+## Процесс
 
-## Ключевые функции
-- calculate() — единственный источник цен. Формулы выверены.
-- pick(silent) — фиксирует lastOrder как snapshot. При silent=true
-  не показывает тост, не скроллит, не трогает кнопку шторки (тихий
-  перенос из формы). При silent=false — тост + «Добавлено ✓» + скролл.
-- restoreCalcState() — восстановление из localStorage (sent, три
-  состояния extSel, snapshot).
-- syncExt / syncVisibility / syncGuests / syncCart / showCart —
-  перерисовка UI по состоянию.
-- unsetPack() — снятие выбора карточки пакета. snapshot НЕ трогает.
+- Одна задача = одно ТЗ = один файл = один коммит.
+- Перед выдачей кода — прогнать контрольные цены из SPEC-business.md.
+  Не сходится — не выдавать.
+- Отчёт Степану — человеческим языком, без жаргона, со скриншотами
+  при затрагивании визуала.
 
-## Шина событий калькулятор ↔ форма
-- drcalc-update: отправка и подписка на document.
-- drcalc-refresh: форма отправляет на document БЕЗ всплытия; слушатель
-  должен быть на document, НЕ на window — CustomEvent по умолчанию не
-  всплывает. Причина бага этапа А. Новые события шины держать на одном
-  объекте (document).
+## Карта файлов-инструкций
 
-## Тихий режим переноса
-- pick() различает источник: перенос из формы (silent=true) — тост
-  НЕ показывается, кнопка шторки и скролл не трогаются; перенос из
-  шторки (silent=false) — тост и «Добавлено ✓» как раньше. Snapshot
-  и dirty — общая логика в обоих случаях.
-- Кнопка «Перенести расчёт в заявку →» в панели видна только при
-  c.ready && !c.selected; после переноса исчезает.
+- `.agents/docs/01-environment.md` — окружение, команды, деплой, гейт пуша
+- `.agents/docs/02-calculator.md` — домен калькулятора: состояние, функции, шина
+- `.agents/docs/03-conventions.md` — правила кода, UX-линза, кнопки, events
+- `.agents/docs/04-verification.md` — Definition of Done: чек-листы проверки
+- `.agents/docs/05-safety.md` — запреты: не возвращать удалённое, опасные места
+- `.agents/docs/06-registry.md` — журнал решений, известные баги, техдолг
+- `.agents/skills/xkalmar-visual-qa/SKILL.md` — навык визуального контроля
+- `SPEC-business.md` — правда по ценам/формулам/текстам (правит Степан)
+- `SPEC.md` — бэклог и процессы
+- `project-map.md` — карта кода «как есть»
+- `plans/faza0-truth-base.md` — черновик ревизии фактов 2026-11-03
+
+## Стек (кратко)
+
+Astro 7.4.2, Vite 8.3.5, Node ≥ 22.23.4, TS strict, без фреймворков.
+Dev-сервер в фоне: `astro dev --background` (stop/status/logs).
+Подробности и команды — 01-environment.md.
 
 ## Регрессионно-опасные места
-Любая правка в этих функциях = прогнать контрольные цены из SPEC.
-- calculate() — формулы
-- pick() / pushSnapshot() — перенос в форму
-- restoreCalcState() — восстановление
-- syncExt() — ярмарка
-- recalcAll() — порядок синхронизации (syncProgramUI первой строкой)
-- pick(true) из формы через drcalc-refresh — если сломается слушатель,
-  кнопки статуса в форме перестанут работать.
 
-## Правила
-1. Один файл — одна цель. Без мега-ТЗ на 10 правок.
-2. Не возвращать удалённое: правую колонку «Ваш тариф», бар,
-   absolute-бейджи, toprow, опции «без ярмарки», фиксированное
-   «Банкет под ключ 6 000 ₽».
-3. Radio-deselect (клик по выбранному снимает выбор): признак
-   повторного клика — String(curValue) === inp.value, НЕ inp.checked
-   (браузер обновляет checked до click-обработчика). После снятия —
-   обязательно перерисовать блок (syncExt / sync*) — иначе хинты и
-   пометки не обновятся.
-4. hidden и inline style.display не смешивать. Для элементов, которыми
-   управляет JS через style.display — в разметке style="display:none",
-   не hidden.
-5. Кнопки: -webkit-tap-highlight-color: transparent;
-   :focus:not(:focus-visible) { outline: none; }
-   :focus-visible { outline: 2px solid #0AD9C6; }
-6. Panels без width: 100% там, где они уже растянуты grid/flex — иначе
-   с боковыми margin даёт overflow.
-7. Перед выдачей кода — прогнать таблицу контрольных цен из SPEC.
-   Если не сходится — не выдавать.
-8. События-шины: drcalc-update и drcalc-refresh — слушать на document,
-   не на window. Новые события — туда же.
-
-## Процесс (для агентов)
-- Роли: Степан — бизнес-решения, лексика и цены (SPEC); Claude — код,
-  реализация, прогон контрольных цен, чек-лист для Степана; Алиса —
-  аналитика, формулировка ТЗ (цель + поведение + ограничения +
-  контрольные значения, без кода).
-- ТЗ не содержит готового JS/CSS — только цель и псевдокод ≤ 5 строк.
-- Одна задача = одно ТЗ = один файл = один коммит.
-- Спорная инструкция в ТЗ → помечать FIXME-REVIEW, не выдумывать
-  компромисс. Противоречие SPEC vs ТЗ → решает Степан.
-
-## Известные нюансы
-- effFreeGuests в calculate(): для Максимального при включённом меню
-  еда уже покрывает всех гостей — отдельная надбавка за еду не
-  начисляется. Это правило SPEC, не костыль.
-- progLimit = CONFIG.programLimit = 15 для всех тарифов. Не путать
-  с t.freeGuests (лимит еды).
-- Гвард 15 000 срабатывает только при lastTotal < 15000, не <=.
-  Голая Мини = 15 000 — кнопка активна.
-
-## Техдолг шины (мелочи, при случае)
-- data-remove="ym" в шторке — мёртвый ключ, убрать.
-
-## Известные баги в бэклоге
-- Счётчик пилла у Максимального показывает «1 позиция», хотя в шторке
-  5 строк. UX-вопрос, не баг.
-- Подпись под гостями при включённой еде Максимального молчит про
-  лимит программы 15.
-- alert() при отсутствии согласия в форме — заменить на inline
-  (Спринт 4).
+Любая правка = прогнать контрольные цены из SPEC-business.md:
+`calculate()`, `pick()` / `pushSnapshot()`, `restoreCalcState()`,
+`syncExt()`, `recalcAll()` (syncProgramUI первой строкой), слушатель
+`drcalc-refresh` на document (не window). Полный список — 05-safety.md.
