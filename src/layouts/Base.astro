@@ -1,22 +1,40 @@
 ---
-const { title = 'Кальмар — квесты в Ростове-на-Дону', description = 'Квесты для детей и взрослых в Ростове-на-Дону' } = Astro.props;
+// @ts-nocheck
+import '../styles/tokens.css';
+
+const {
+  title = 'XKALMAR — квест-шоу для детей | Ростов-на-Дону',
+  description = 'Квест-шоу «Игра в кальмара» для детей 6–12 лет в Ростове-на-Дону. Праздник под ключ: сценарий, актёры, банкет, торт.',
+  canonical = 'https://xkalmar.com',
+  ogImage = '/og-image.png',
+  theme = 'dark',
+} = Astro.props;
+
+const TEL = '+79287588483';
+const TEL_VIEW = '+7 (928) 758-84-83';
+const WA = 'https://wa.me/79287588483';
+const TG = 'https://t.me/xkalmar';
+const MAX = 'https://max.ru/u/f9LHodD0cOKVRRd0t2pjN2pm8s7nWCNllQJYsSra5mx0QiqcfNxI553bSzc';
+
+import ContactFab from '../components/ContactFab.astro';
 ---
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-theme={theme}>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{title}</title>
     <meta name="description" content={description}>
+    <meta name="theme-color" content="#032E2B">
     <link rel="icon" href="/favicon.svg">
-    <link rel="canonical" href="https://xkalmar.com">
+    <link rel="canonical" href={canonical}>
 
     <!-- OG -->
-    <meta property="og:title" content="XKALMAR — день рождения в квест-шоу | Ростов-на-Дону">
+    <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://xkalmar.com">
-    <meta property="og:image" content="/og-image.png">
+    <meta property="og:url" content={canonical}>
+    <meta property="og:image" content={ogImage}>
     <meta name="twitter:card" content="summary_large_image">
 
     <!-- Structured Data: EntertainmentBusiness -->
@@ -48,15 +66,13 @@ const { title = 'Кальмар — квесты в Ростове-на-Дону
   </head>
 <body>
   <header class="site-header">
-    <div class="wrap">
+    <div class="wrap site-header__wrap">
       <a href="/" class="logo">XKALMAR</a>
       <div class="site-header__right">
-        <nav>
-          <a href="/" class="site-header__link">Главная</a>
-          <a href="tel:+79287588483" class="site-header__phone">+7 (928) 758-84-83</a>
+        <nav class="site-header__nav" aria-label="Основная навигация">
+          <a href="tel:+79287588483" class="site-header__phone">{TEL_VIEW}</a>
         </nav>
         <div class="site-header__actions">
-          <a href="tel:+79287588483" class="site-header__phone-btn">📞 Позвонить</a>
           <a href="#zayavka" class="site-header__cta">Оставить заявку</a>
         </div>
       </div>
@@ -65,10 +81,40 @@ const { title = 'Кальмар — квесты в Ростове-на-Дону
 
   <main><slot /></main>
 
+  <ContactFab />
+
   <footer class="site-footer">
     <div class="wrap">
-      <p>© 2026 XKALMAR — квесты в Ростове-на-Дону</p>
-      <p><a href="/privacy" target="_blank" rel="noopener">Политика конфиденциальности</a></p>
+      <div class="site-footer__grid">
+        <div class="site-footer__col">
+          <a href="/" class="logo">XKALMAR</a>
+          <p class="site-footer__about">Квест-шоу «Игра в кальмара» для детей 6–12 лет. Праздник под ключ в Ростове-на-Дону, ул. Зорге, 15.</p>
+          <p class="site-footer__rating"><span class="site-footer__stars" aria-hidden="true">★★★★★</span> 5.0 · 154 оценки на <a href="https://yandex.ru/maps/org/kvest_shou_igra_v_kalmara/19338708863/" target="_blank" rel="noopener">Яндекс.Картах</a></p>
+        </div>
+        <nav class="site-footer__col" aria-label="Разделы страницы">
+          <b>На этой странице</b>
+          <a href="#format">Что это за формат</a>
+          <a href="#calc">Цены и бронь</a>
+          <a href="#timeline">Программа праздника</a>
+          <a href="#hallway">Площадка</a>
+          <a href="#faq">Частые вопросы</a>
+          <a href="#zayavka">Оставить заявку</a>
+        </nav>
+        <nav class="site-footer__col" aria-label="Связь">
+          <b>Связаться</b>
+          <a href={`tel:${TEL}`}>{TEL_VIEW}</a>
+          <a href={MAX} target="_blank" rel="noopener">МАКС</a>
+          <a href={TG} target="_blank" rel="noopener">Telegram</a>
+          <a href={WA} target="_blank" rel="noopener">WhatsApp</a>
+        </nav>
+        <nav class="site-footer__col" aria-label="Документы">
+          <b>Инфо</b>
+          <a href="/privacy" target="_blank" rel="noopener">Политика конфиденциальности</a>
+        </nav>
+      </div>
+      <div class="site-footer__bottom">
+        <p>© 2026 XKALMAR — квест-шоу в Ростове-на-Дону · Услугу оказывает ИП Терентьев С.В. (ИНН 110556190456)</p>
+      </div>
     </div>
   </footer>
 </body>
@@ -76,10 +122,11 @@ const { title = 'Кальмар — квесты в Ростове-на-Дону
 
 <style is:global>
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: #032E2B;
-  color: #ffffff;
+  font-family: var(--font-stack);
+  background: var(--bg);
+  color: var(--text);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -87,53 +134,86 @@ body {
 .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; width: 100%; }
 main { flex: 1; }
 
+/* Якоря не прячутся под sticky-шапкой и подменю */
+[id] { scroll-margin-top: 118px; }
+@media (max-width: 760px) {
+  [id] { scroll-margin-top: 108px; }
+}
+
+/* Единая ширина контента на всех разрешениях:
+   мобильный боковой отступ = 16px (замечание приёмки о разных краях) */
+@media (max-width: 640px) {
+  .wrap { padding: 0 16px; }
+}
+
+/* ---------- Шапка: sticky ---------- */
 .site-header {
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 14px 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
 }
-.site-header .wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-.logo { color: #ffffff; font-weight: 800; font-size: 22px; text-decoration: none; letter-spacing: 0.04em; }
-.site-header__right { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-.site-header nav { display: flex; gap: 24px; flex-wrap: wrap; }
-.site-header nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; }
-.site-header nav a:hover { color: #ffffff; }
-
-.site-header__actions { display: flex; gap: 12px; align-items: center; }
-.site-header__phone-btn {
-  color: #0AD9C6; text-decoration: none; font-size: 14px; font-weight: 600;
-  white-space: nowrap; transition: color .15s;
-}
-.site-header__phone-btn:hover { color: #fff; }
-
-.site-footer {
-  padding: 28px 0;
-  border-top: 1px solid rgba(255,255,255,0.12);
-  color: rgba(255,255,255,0.55);
-  font-size: 13px;
-}
-.site-footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-.site-footer a { color: rgba(255,255,255,0.75); }
-
+.site-header__wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.logo { color: var(--text); font-weight: 800; font-size: 22px; text-decoration: none; letter-spacing: 0.04em; }
+.site-header__right { display: flex; align-items: center; gap: var(--space-4); }
+.site-header__nav { display: flex; gap: var(--space-5); }
+.site-header__phone { color: var(--text-2); text-decoration: none; font-size: 14px; transition: color var(--dur-fast) var(--ease); }
+.site-header__phone:hover { color: var(--text); }
+.site-header__actions { display: flex; gap: var(--space-2); align-items: center; }
 .site-header__cta {
-  background: #C30067;
-  color: #fff !important;
+  background: var(--cta);
+  color: var(--on-cta);
   padding: 10px 22px;
-  border-radius: 22px;
+  border-radius: var(--radius-pill);
   font-weight: 700;
   font-size: 14px;
   text-decoration: none;
-  transition: background .15s;
+  transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 }
-.site-header__cta:hover { background: #E00077; }
+.site-header__cta:hover { background: var(--cta-hover); }
+.site-header__cta:active { background: var(--cta-press); transform: scale(0.98); }
 
+/* ---------- Футер ---------- */
+.site-footer {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--line);
+  padding: var(--space-7) 0 var(--space-5);
+  margin-top: var(--space-8);
+}
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: var(--space-6);
+}
+.site-footer__col { display: flex; flex-direction: column; gap: var(--space-2); }
+.site-footer__col b { font-size: var(--font-meta); font-weight: 700; color: var(--text); margin-bottom: var(--space-1); }
+.site-footer__col a { color: var(--text-2); text-decoration: none; font-size: var(--font-meta); padding: 6px 0; transition: color var(--dur-fast) var(--ease); }
+.site-footer__col a:hover { color: var(--accent); }
+.site-footer__about { font-size: var(--font-meta); line-height: 1.6; color: var(--text-2); max-width: 260px; }
+.site-footer__rating { font-size: var(--font-meta); color: var(--text-2); }
+.site-footer__rating a { color: var(--accent); text-decoration: none; }
+.site-footer__stars { color: var(--star); letter-spacing: 2px; }
+.site-footer__bottom {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+  font-size: var(--font-hint);
+  color: var(--text-3);
+}
+
+@media (max-width: 900px) {
+  .site-footer__grid { grid-template-columns: 1fr 1fr; }
+}
 @media (max-width: 640px) {
-  .site-header { padding: 12px 0; }
-  .site-header .wrap { gap: 8px; }
-  .site-header__right { gap: 12px; }
-  .site-header__link,
-  .site-header__phone { display: none; }
+  .site-header { padding: 10px 0; }
+  .site-header__wrap { gap: var(--space-2); }
   .logo { font-size: 18px; }
+  .site-header__phone { display: none; }
   .site-header__cta { padding: 9px 16px; font-size: 13px; }
-  .site-header__phone-btn { font-size: 13px; }
+  .site-footer { padding: var(--space-6) 0 var(--space-4); margin-top: var(--space-7); }
+  .site-footer__grid { grid-template-columns: 1fr; gap: var(--space-5); }
+  .site-footer__col a { padding: 10px 0; }
 }
 </style>

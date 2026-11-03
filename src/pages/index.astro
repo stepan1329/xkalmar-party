@@ -4,21 +4,45 @@ import Calculator from '../components/Calculator.astro';
 import RequestForm from '../components/RequestForm.astro';
 ---
 <Base title="XKALMAR — день рождения в квест-шоу | Ростов-на-Дону" description="День рождения в квест-шоу для детей в Ростове-на-Дону: сценарий, актёры, банкет под ключ, фото и торт. Рассчитайте праздник за минуту.">
-  <section class="hero">
-    <div class="hero__bg">
-      <div class="hero__overlay"></div>
-      <img src="/photos/hero-1.webp" alt="Квест-шоу Игра в кальмара для детей — праздник под ключ в Ростове-на-Дону" class="hero__img hero__img--desktop" />
-      <img src="/photos/hero-mobil-1.webp" alt="Детский квест-шоу в Ростове-на-Дону — яркие эмоции для детей 6–12 лет" class="hero__img hero__img--mobile" />
-    </div>
-    <div class="hero__inner">
-      <span class="hero__tag">Квест-шоу для детей · Ростов-на-Дону</span>
-      <h1>Дети — в квест-шоу.<br />Родители — <em>отдыхают</em>.</h1>
-      <p>Мы берём праздник на себя полностью: сценарий, актёры, сервировка, торт, фото. Вам остаётся только прийти и дождаться восторженных детей.</p>
-      <span class="hero__price">от 15 000 ₽ за 90 минут</span>
-      <a href="#format">Что это за формат?</a>
-      <a href="#calc" class="hero__cta-alt">Рассчитать праздник</a>
+  <section class="hero" id="top">
+    <div class="wrap hero__grid">
+      <div class="hero__content">
+        <span class="hero__tag">Квест-шоу для детей · Ростов-на-Дону</span>
+        <h1>Дети — в квест-шоу.<br />Родители — <em>отдыхают</em>.</h1>
+        <p>Мы берём праздник на себя полностью: сценарий, актёры, сервировка, торт, фото. Вам остаётся только прийти и дождаться восторженных детей.</p>
+        <div class="hero__meta">
+          <span class="chip">6–12 лет</span>
+          <span class="chip">90 минут</span>
+          <span class="chip">от 15 000 ₽</span>
+        </div>
+        <div class="hero__actions">
+          <a href="#calc" class="hero__cta">Рассчитать праздник</a>
+          <a href="#format" class="hero__ghost">Что это за формат?</a>
+        </div>
+        <p class="hero__trust">
+          <span class="hero__stars" aria-hidden="true">★★★★★</span>
+          5.0 · 154 оценки на <a href="https://yandex.ru/maps/org/kvest_shou_igra_v_kalmara/19338708863/" target="_blank" rel="noopener">Яндекс.Картах</a>
+        </p>
+      </div>
+      <div class="hero__visual">
+        <img src="/photos/hero-1.webp" alt="Квест-шоу Игра в кальмара для детей — праздник под ключ в Ростове-на-Дону" class="hero__img hero__img--desktop" fetchpriority="high" />
+        <img src="/photos/hero-mobil-1.webp" alt="Детский квест-шоу в Ростове-на-Дону — яркие эмоции для детей 6–12 лет" class="hero__img hero__img--mobile" fetchpriority="high" />
+      </div>
     </div>
   </section>
+
+  <nav class="page-nav" aria-label="Разделы страницы">
+    <div class="wrap page-nav__wrap">
+      <a href="#format">Формат</a>
+      <a href="#calc">Цены</a>
+      <a href="#timeline">Программа</a>
+      <a href="#yamarka">Ярмарка</a>
+      <a href="#hallway">Площадка</a>
+      <a href="#media">Фото и видео</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#zayavka">Заявка</a>
+    </div>
+  </nav>
 
   <!-- ЧТО ЭТО ЗА ФОРМАТ -->
   <section class="format" id="format">
@@ -31,14 +55,14 @@ import RequestForm from '../components/RequestForm.astro';
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
           </div>
           <b>Актёры и сценарий</b>
-          <p>Трое ведущих ведут игру — не один оператор в тёмной комнате. Каждый ребёнок в центре внимания.</p>
+          <p>Трое ведущих ведут игру — не один оператор в тёмной комнате. Застенчивым помогаем, активным направляем.</p>
         </div>
         <div class="format__card">
           <div class="format__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
           <b>9 игр за 90 минут</b>
-          <p>Каждые 8–10 минут — новое испытание. Эстафеты, логика, движение. Никто не скучает.</p>
+          <p>Каждые 8–10 минут — новое испытание. Эстафеты, логика, движение. Никто не выбывает и не скучает.</p>
         </div>
         <div class="format__card">
           <div class="format__icon">
@@ -49,44 +73,17 @@ import RequestForm from '../components/RequestForm.astro';
         </div>
         <div class="format__card">
           <div class="format__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
-          <b>Родители рядом</b>
-          <p>Смотрите игру из игровой комнаты или посидите в банкетной. Мы не выгоняем и не заставляем.</p>
+          <b>Безопасно. Родители рядом</b>
+          <p>Никакой темноты и запираний — если ребёнку что-то не нравится, он может выйти и вернуться. Родители смотрят игру или отдыхают в банкетной.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="faq" id="faq">
-    <div class="wrap">
-      <h2>Частые вопросы</h2>
-      <div class="faq__list">
-        <details class="faq__item">
-          <summary>Это же Игра в кальмара — это страшно?</summary>
-          <p>Нет. От сериала мы взяли только игры и реквизит — всё адаптировано под детей. Это не хоррор, а увлекательное квест-шоу с актёрами, где в центре внимания именинник. Малыши играют наравне со старшими, а родители видят весь процесс.</p>
-        </details>
-        <details class="faq__item">
-          <summary>Почему у вас дороже обычных квестов?</summary>
-          <p>В обычном квесте ребёнка встречают оператор и один актёр. У нас на празднике работает команда из 5 человек, и каждый занят: ведут игру, накрывают стол, снимают видео. Это формат «под ключ», а не час в закрытой комнате.</p>
-        </details>
-        <details class="faq__item">
-          <summary>С какого возраста? Будет ли интересно 6-летним? А 12-летним?</summary>
-          <p>Наша специализация — 6–12 лет, сценарий адаптируется: младшим играем мягче и проще, старшим добавляем логику и командные задания. Младших (от 4 лет) берём, если они пришли вместе с братом или сестрой — играют вместе со всеми.</p>
-        </details>
-        <details class="faq__item">
-          <summary>Где вы находитесь?</summary>
-          <p>Ростов-на-Дону, ул. Зорге, 15. Только эта площадка — выезда нет. Рядом «Магнит», «Пятёрочка», рынок «Привоз» и ТЦ «Талер» с пиццей и кафе. Площадка 240 кв. м: отдельная игровая комната и две банкетные, не связанные друг с другом — детей и взрослых можно рассадить раздельно. Во всех комнатах принудительная вентиляция и сплит-системы. Для торта и напитков — холодильник, есть микроволновка и питьевая вода.</p>
-        </details>
-        <details class="faq__item">
-          <summary>Что с собой везти?</summary>
-          <p>Зависит от пакета. В «Популярном», «Базе» и «Мини» еду приносите свою — стол накрываем мы: сервировка, скатерть, чай/кофе, печенье, нож для торта и контейнеры, чтобы увезти торт с собой. В «Оптимальном» стол под ключ: пицца, наггетсы, картошка фри, соки, порционный торт каждому. В «Максимальном» — то же меню под ключ и большой торт от кондитера. Принести своё сверх пакета можно всегда — хоть еду, хоть торт, ограничений нет.</p>
-        </details>
-        <details class="faq__item">
-          <summary>Как забронировать и сколько ждать?</summary>
-          <p>Оставьте заявку на сайте или позвоните — организатор Лена перезвонит в течение часа. Разговор 20 минут: расскажем, как проходит праздник, ответим на вопросы. Дальше — предоплата 3 000 ₽ (возвращается в любой день, кроме дня праздника), и время ваше. Можно просто «подумать» — без давления.</p>
-        </details>
+      <div class="format__stats">
+        <div class="format__stat"><b>5 лет</b><span>праздников с детьми 6–12</span></div>
+        <div class="format__stat"><b>5.0</b><span>154 отзыва на Я.Картах</span></div>
+        <div class="format__stat"><b>240 м²</b><span>своя площадка, Зорге 15</span></div>
+        <div class="format__stat"><b>до 30</b><span>детей в команде</span></div>
       </div>
     </div>
   </section>
@@ -201,12 +198,6 @@ import RequestForm from '../components/RequestForm.astro';
           </div>
           <p class="yamarka__note">Никто не стоит в очереди. Никто не ждёт своей команды. Каждый занят тем, что ему нравится.</p>
         </div>
-        <div class="yamarka__video">
-          <button class="yamarka__video-btn" data-video="https://kinescope.io/embed/sNbVwwHesgoeMfyGbU2GCG" aria-label="Смотреть видео Ярмарка игр">
-            <span class="yamarka__video-icon">▶</span>
-            Смотреть видео
-          </button>
-        </div>
       </div>
     </div>
   </section>
@@ -222,51 +213,20 @@ import RequestForm from '../components/RequestForm.astro';
           <p><b>Родители могут остаться</b></p>
           <p>Смотрите игру из игровой комнаты, посидите в банкетной, уходите и возвращайтесь — как вам удобно. Мы не выгоняем родителей и не заставляем их сидеть в коридоре. Вы участвуете в празднике ровно настолько, насколько хотите.</p>
         </div>
-        <div class="hallway__video">
-          <button class="hallway__video-btn" data-video="https://kinescope.io/embed/3QTCvnzrXbWFQxz3RHX3Gf" aria-label="Смотреть видео Обзор площадки">
-            <span class="hallway__video-icon">▶</span>
-            Смотреть видео
-          </button>
-        </div>
       </div>
+      <!-- Статичная карта вместо iframe: без рекламы, без внешнего JS (решение Степана) -->
       <div class="hallway__map">
-        <iframe src="https://yandex.ru/map-widget/v1/?ll=39.728500%2C47.238500&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1NzMwMTQyNxIJ0KDQvtGB0YHQuNGPLCDQmtGA0LDRgdC90L7QstGB0LXRgNCx0L3QvtCy0YDRgNC00LDRjyDQvtGB0LXRgNC00LDRjyDQvtGB0LXRgNC00LjRjyDQvtGC0LDQjNCy0YHQuCwg0J0g0JHQvtGB0L3QsNGPINC-0LDRjyDQvtGB0LXRgNC00LDRjyDQvtGB0LXRgNC00LjRjyDQvtGC0LDQjNCy0YHQuA%2C%2C&z=16" width="100%" height="300" frameborder="0" allowfullscreen="true" style="position:relative; border-radius: 12px;"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="features">
-    <div class="wrap">
-      <h2>Почему мы</h2>
-      <div class="features__grid">
-        <div class="feature-card">
-          <div class="feature-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <div class="map-card">
+          <div class="map-card__info">
+            <span class="map-card__pin" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            <div>
+              <b>Ростов-на-Дону, ул. Зорге, 15</b>
+              <p>Отдельный вход с торца здания. Рядом «Магнит», «Пятёрочка», ТЦ «Талер» — можно закупиться по дороге.</p>
+            </div>
           </div>
-          <b>Не квест-комната, а шоу</b>
-          <p>Дети не разгадывают загадки в закрытом помещении — двигаются, бегают, соревнуются. 90 минут без пауз и скуки.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <b>Команда, а не один ведущий</b>
-          <p>Трое ведущих на каждом празднике — каждый держит свой участок. Никто не остаётся без внимания.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </div>
-          <b>Никто не выбывает</b>
-          <p>Без проигравших и вылетевших — все играют до финала. Застенчивым помогаем, активным направляем, младшим облегчаем, старшим усложняем.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <b>Безопасно и под контролем</b>
-          <p>Никаких замкнутых помещений, темноты и запирания. Если ребёнку что-то не нравится — он может выйти и вернуться, когда захочет.</p>
+          <a class="map-card__btn" href="https://yandex.ru/maps/?text=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2-%D0%BD%D0%B0-%D0%94%D0%BE%D0%BD%D1%83%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%97%D0%BE%D1%80%D0%B3%D0%B5%2C%2015" target="_blank" rel="noopener">Открыть в Яндекс.Картах</a>
         </div>
       </div>
     </div>
@@ -302,12 +262,21 @@ import RequestForm from '../components/RequestForm.astro';
     </div>
   </section>
 
-  <!-- ГАЛЕРЕЯ -->
-  <section class="gallery" id="gallery">
+  <!-- МЕДИА: видео + фото (паттерн Мир Квестов: большой просмотрщик + превью) -->
+  <section class="gallery" id="media">
     <div class="wrap">
-      <h2>Фотогалерея</h2>
-      <p class="gallery__sub">Реальные моменты с наших праздников — нажми, чтобы рассмотреть</p>
-      <div class="gallery__grid">
+      <h2>Фото и видео</h2>
+      <p class="gallery__sub">Живые кадры с наших праздников — выберите кадр или ролик</p>
+      <div class="media__viewer">
+        <button class="media__main" id="media-main" type="button" data-type="photo" aria-label="Открыть просмотр">
+          <img id="media-main-img" src="/photos/squid-game-quest-1.webp" alt="Квест-шоу для детей — дети в футболках с номерами" />
+          <span class="media__play" id="media-play" style="display:none;">
+            <span class="media__play-circle" aria-hidden="true">▶</span>
+            <b id="media-play-label">Смотреть видео</b>
+          </span>
+        </button>
+      </div>
+      <div class="gallery__grid" id="media-thumbs">
         <button class="gallery__item" data-src="/photos/squid-game-quest-1.webp" data-alt="Квест-шоу Игра в кальмара — дети в игровых футболках с номерами">
           <img src="/photos/squid-game-quest-1.webp" alt="Квест-шоу для детей — дети в футболках с номерами" loading="lazy" />
         </button>
@@ -338,15 +307,22 @@ import RequestForm from '../components/RequestForm.astro';
         <button class="gallery__item" data-src="/photos/squid-game-quest-10.webp" data-alt="Торт на празднике — свечи и именинник в центре">
           <img src="/photos/squid-game-quest-10.webp" alt="Вынос торта на детском празднике" loading="lazy" />
         </button>
+        <button class="gallery__item media-thumb--video" data-video="https://kinescope.io/embed/sNbVwwHesgoeMfyGbU2GCG" data-title="Ярмарка игр" type="button" aria-label="Смотреть видео: Ярмарка игр">
+          <span class="media-thumb__badge" aria-hidden="true">▶</span>
+          <span class="media-thumb__title">Ярмарка игр</span>
+        </button>
+        <button class="gallery__item media-thumb--video" data-video="https://kinescope.io/embed/3QTCvnzrXbWFQxz3RHX3Gf" data-title="Обзор площадки" type="button" aria-label="Смотреть видео: Обзор площадки">
+          <span class="media-thumb__badge" aria-hidden="true">▶</span>
+          <span class="media-thumb__title">Обзор площадки</span>
+        </button>
       </div>
-      <button class="gallery__more" id="gallery-more">Все фото</button>
+      <button class="gallery__more" id="gallery-more">Показать ещё фото</button>
     </div>
   </section>
 
   <!-- Полная галерея (скрыта) -->
   <section class="gallery-full" id="gallery-full" style="display:none;">
     <div class="wrap">
-      <h2>Фотогалерея</h2>
       <p class="gallery-full__sub">Все фото с наших праздников — нажми, чтобы рассмотреть</p>
       <div class="gallery__grid">
         <button class="gallery__item" data-src="/photos/squid-game-quest-1.webp" data-alt="Квест-шоу Игра в кальмара — дети в игровых футболках с номерами">
@@ -506,6 +482,39 @@ import RequestForm from '../components/RequestForm.astro';
     </div>
   </section>
 
+  <!-- FAQ: снятие возражений перед формой (порядок блоков по аудиту) -->
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <h2>Частые вопросы</h2>
+      <div class="faq__list">
+        <details class="faq__item">
+          <summary>Это же Игра в кальмара — это страшно?</summary>
+          <p>Нет. От сериала мы взяли только игры и реквизит — всё адаптировано под детей. Это не хоррор, а увлекательное квест-шоу с актёрами, где в центре внимания именинник. Малыши играют наравне со старшими, а родители видят весь процесс.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Почему у вас дороже обычных квестов?</summary>
+          <p>В обычном квесте ребёнка встречают оператор и один актёр. У нас на празднике работает команда из 5 человек, и каждый занят: ведут игру, накрывают стол, снимают видео. Это формат «под ключ», а не час в закрытой комнате.</p>
+        </details>
+        <details class="faq__item">
+          <summary>С какого возраста? Будет ли интересно 6-летним? А 12-летним?</summary>
+          <p>Наша специализация — 6–12 лет, сценарий адаптируется: младшим играем мягче и проще, старшим добавляем логику и командные задания. Младших (от 4 лет) берём, если они пришли вместе с братом или сестрой — играют вместе со всеми.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Где вы находитесь?</summary>
+          <p>Ростов-на-Дону, ул. Зорге, 15. Только эта площадка — выезда нет. Рядом «Магнит», «Пятёрочка», рынок «Привоз» и ТЦ «Талер» с пиццей и кафе. Площадка 240 кв. м: отдельная игровая комната и две банкетные, не связанные друг с другом — детей и взрослых можно рассадить раздельно. Во всех комнатах принудительная вентиляция и сплит-системы. Для торта и напитков — холодильник, есть микроволновка и питьевая вода.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Что с собой везти?</summary>
+          <p>Зависит от пакета. В «Популярном», «Базе» и «Мини» еду приносите свою — стол накрываем мы: сервировка, скатерть, чай/кофе, печенье, нож для торта и контейнеры, чтобы увезти торт с собой. В «Оптимальном» стол под ключ: пицца, наггетсы, картошка фри, соки, порционный торт каждому. В «Максимальном» — то же меню под ключ и большой торт от кондитера. Принести своё сверх пакета можно всегда — хоть еду, хоть торт, ограничений нет.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Как забронировать и сколько ждать?</summary>
+          <p>Оставьте заявку на сайте или позвоните — организатор Лена перезвонит в течение часа. Разговор 20 минут: расскажем, как проходит праздник, ответим на вопросы. Дальше — предоплата 3 000 ₽ (возвращается в любой день, кроме дня праздника), и время ваше. Можно просто «подумать» — без давления.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <RequestForm />
 
   <!-- Лайтбокс фото -->
@@ -530,16 +539,20 @@ import RequestForm from '../components/RequestForm.astro';
     // @ts-nocheck
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    const allItems = document.querySelectorAll('.gallery__item');
     let currentIndex = 0;
 
+    // Живая выборка: превью добавляются пагинацией по клику.
+    function photoItems() {
+      return Array.from(document.querySelectorAll('#media-thumbs .gallery__item[data-src]'));
+    }
+
     function openLightbox(index) {
-      currentIndex = index;
-      const item = allItems[index];
-      const src = item.dataset.src;
-      const alt = item.dataset.alt;
-      lightboxImg.src = src;
-      lightboxImg.alt = alt;
+      const items = photoItems();
+      if (!items.length) return;
+      currentIndex = (index + items.length) % items.length;
+      const item = items[currentIndex];
+      lightboxImg.src = item.dataset.src;
+      lightboxImg.alt = item.dataset.alt;
       lightbox.classList.add('is-open');
       document.body.style.overflow = 'hidden';
     }
@@ -549,18 +562,9 @@ import RequestForm from '../components/RequestForm.astro';
       document.body.style.overflow = '';
     }
 
-    function navigate(dir) {
-      currentIndex = (currentIndex + dir + allItems.length) % allItems.length;
-      openLightbox(currentIndex);
-    }
-
-    allItems.forEach((item, i) => {
-      item.addEventListener('click', () => openLightbox(i));
-    });
-
     document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
-    document.getElementById('lightbox-prev').addEventListener('click', () => navigate(-1));
-    document.getElementById('lightbox-next').addEventListener('click', () => navigate(1));
+    document.getElementById('lightbox-prev').addEventListener('click', () => openLightbox(currentIndex - 1));
+    document.getElementById('lightbox-next').addEventListener('click', () => openLightbox(currentIndex + 1));
 
     lightbox.addEventListener('click', (e) => {
       if (e.target === lightbox) closeLightbox();
@@ -576,22 +580,71 @@ import RequestForm from '../components/RequestForm.astro';
 
   <script>
     // @ts-nocheck
-    const gallery = document.getElementById('gallery');
-    const galleryFull = document.getElementById('gallery-full');
-    const galleryMore = document.getElementById('gallery-more');
-    let galleryExpanded = false;
+    // МЕДИА-БЛОК: большой просмотрщик + превью (паттерн Мир Квестов).
+    const mainBtn = document.getElementById('media-main');
+    const mainImg = document.getElementById('media-main-img');
+    const playBadge = document.getElementById('media-play');
+    const playLabel = document.getElementById('media-play-label');
+    const thumbsGrid = document.getElementById('media-thumbs');
+    const hiddenGallery = document.getElementById('gallery-full');
+    const moreBtn = document.getElementById('gallery-more');
+    const PORTION = 12;
 
-    galleryMore.addEventListener('click', () => {
-      galleryExpanded = !galleryExpanded;
-      if (galleryExpanded) {
-        gallery.style.display = 'none';
-        galleryFull.style.display = 'block';
-        galleryMore.textContent = '← Назад';
+    // Клик по превью активирует большое окно.
+    function activate(item) {
+      document.querySelectorAll('#media-thumbs .is-active').forEach((el) => el.classList.remove('is-active'));
+      item.classList.add('is-active');
+      if (item.dataset.video) {
+        mainBtn.dataset.type = 'video';
+        mainBtn.dataset.video = item.dataset.video;
+        mainImg.style.display = 'none';
+        playLabel.textContent = item.dataset.title || 'Смотреть видео';
+        playBadge.style.display = 'flex';
       } else {
-        galleryFull.style.display = 'none';
-        gallery.style.display = 'block';
-        galleryMore.textContent = 'Все фото';
-        window.scrollTo({ top: gallery.offsetTop - 100, behavior: 'smooth' });
+        mainBtn.dataset.type = 'photo';
+        delete mainBtn.dataset.video;
+        mainImg.src = item.dataset.src;
+        mainImg.alt = item.dataset.alt;
+        mainImg.style.display = 'block';
+        playBadge.style.display = 'none';
+        currentIndex = photoItems().indexOf(item);
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      const item = e.target.closest('#media-thumbs .gallery__item');
+      if (item) activate(item);
+    });
+
+    mainBtn.addEventListener('click', () => {
+      if (mainBtn.dataset.type === 'video') {
+        openVideoModal(mainBtn.dataset.video);
+      } else {
+        openLightbox(currentIndex);
+      }
+    });
+
+    // Стартовое состояние — первое фото активно.
+    const firstThumb = thumbsGrid.querySelector('.gallery__item[data-src]');
+    if (firstThumb) firstThumb.classList.add('is-active');
+
+    // Пагинация: фото из скрытой полной галереи добавляются в превью по 12.
+    const hiddenItems = hiddenGallery
+      ? Array.from(hiddenGallery.querySelectorAll('.gallery__item'))
+      : [];
+    const firstVideoThumb = thumbsGrid.querySelector('.media-thumb--video');
+    let shownCount = photoItems().length;
+
+    moreBtn.addEventListener('click', () => {
+      const portion = hiddenItems.slice(shownCount, shownCount + PORTION);
+      portion.forEach((item) => {
+        const clone = item.cloneNode(true);
+        if (firstVideoThumb) thumbsGrid.insertBefore(clone, firstVideoThumb);
+        else thumbsGrid.appendChild(clone);
+      });
+      shownCount += portion.length;
+      if (shownCount >= hiddenItems.length) {
+        moreBtn.style.display = 'none';
       }
     });
   </script>
@@ -613,9 +666,7 @@ import RequestForm from '../components/RequestForm.astro';
       document.body.style.overflow = '';
     }
 
-    document.querySelectorAll('.yamarka__video-btn, .hallway__video-btn').forEach(btn => {
-      btn.addEventListener('click', () => openVideoModal(btn.dataset.video));
-    });
+    // Видео открывается кликом по большому окну медиа-блока (script выше).
 
     document.getElementById('video-modal-close').addEventListener('click', closeVideoModal);
     videoModal.addEventListener('click', (e) => {
@@ -627,122 +678,238 @@ import RequestForm from '../components/RequestForm.astro';
       if (e.key === 'Escape') closeVideoModal();
     });
   </script>
+
+  <!-- Structured Data: FAQPage (синхронно с блоком FAQ) -->
+  <script type="application/ld+json" is:inline>
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Это же Игра в кальмара — это страшно?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Нет. От сериала взяты только игры и реквизит — всё адаптировано под детей. Это не хоррор, а увлекательное квест-шоу с актёрами, где в центре внимания именинник." }
+      },
+      {
+        "@type": "Question",
+        "name": "С какого возраста?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Специализация — 6–12 лет, сценарий адаптируется под возраст. Младших (от 4 лет) берём вместе с братом или сестрой." }
+      },
+      {
+        "@type": "Question",
+        "name": "Где вы находитесь?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ростов-на-Дону, ул. Зорге, 15. Площадка 240 кв. м: игровая комната и две банкетные, вентиляция и сплит-системы. Выезда нет." }
+      },
+      {
+        "@type": "Question",
+        "name": "Как забронировать и сколько ждать?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Оставьте заявку или позвоните — организатор перезвонит в течение часа. Предоплата 3 000 ₽, возвращается в любой день, кроме дня праздника." }
+      }
+    ]
+  }
+  </script>
 </Base>
 
 <style>
-.hero { max-width: 900px; margin: 0 auto; padding: 72px 24px 64px; text-align: center; position: relative; }
-.hero__bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: 24px; }
-.hero__overlay { position: absolute; inset: 0; background: rgba(0,0,0,.55); z-index: 1; }
-.hero__img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+/* --- Hero: контент слева, фото справа (перестройка Этапа 3) --- */
+.hero__grid {
+  display: grid; grid-template-columns: 1.15fr 1fr; gap: var(--space-7);
+  align-items: center; padding-top: var(--space-8); padding-bottom: var(--space-8);
+}
+.hero__content { text-align: left; }
+.hero__visual {
+  position: relative; aspect-ratio: 4/3; border-radius: var(--radius-l);
+  overflow: hidden; box-shadow: var(--elev-2); background: var(--green-950);
+}
+.hero__img { width: 100%; height: 100%; object-fit: cover; }
 .hero__img--mobile { display: none; }
-.hero__inner { position: relative; z-index: 2; }
+.hero__trust { margin-top: var(--space-4); font-size: var(--font-meta); color: var(--text-2); }
+.hero__trust a { color: var(--accent); text-decoration: none; }
+.hero__stars { color: var(--star); letter-spacing: 2px; margin-right: 4px; }
 .hero__tag {
   display: inline-block;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: .06em;
   text-transform: uppercase;
-  color: #0AD9C6;
-  border: 1px solid rgba(10,217,198,.4);
-  border-radius: 20px;
+  color: var(--accent);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
   padding: 5px 12px;
-  margin-bottom: 22px;
+  margin-bottom: var(--space-4);
   white-space: nowrap;
 }
-.hero h1 { font-size: clamp(32px, 6vw, 56px); font-weight: 800; line-height: 1.15; margin: 0 0 18px; }
-.hero h1 em { font-style: normal; color: #C30067; }
-.hero p { font-size: 17px; line-height: 1.6; color: rgba(255,255,255,.75); max-width: 620px; margin: 0 auto 16px; }
-.hero__price { display: inline-block; font-size: 18px; font-weight: 700; color: #0AD9C6; margin-bottom: 24px; }
-.hero a { color: #fff; text-decoration: none; font-weight: 700; background: #C30067; padding: 16px 36px; border-radius: 30px; display: inline-block; margin: 0 8px; }
-.hero__cta-alt { background: transparent; border: 2px solid rgba(255,255,255,.6); }
-.hero__cta-alt:hover { background: rgba(255,255,255,.1); border-color: #fff; }
+/* --- Якорное меню страницы (паттерн Мир Квестов) --- */
+.page-nav {
+  position: sticky; top: var(--header-h, 62px); z-index: 40;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+}
+.page-nav__wrap {
+  display: flex; gap: var(--space-2); overflow-x: auto; scrollbar-width: none;
+  padding-top: 10px; padding-bottom: 10px;
+}
+.page-nav__wrap::-webkit-scrollbar { display: none; }
+.page-nav__wrap a {
+  flex: 0 0 auto; padding: 6px 14px; border-radius: var(--radius-pill);
+  color: var(--text-2); text-decoration: none; font-size: var(--font-meta); font-weight: 600;
+  border: 1px solid transparent;
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.page-nav__wrap a:hover { color: var(--text); border-color: var(--line); }
+.hero h1 { font-size: var(--font-display); font-weight: 800; line-height: 1.12; margin: 0 0 var(--space-4); }
+.hero h1 em { font-style: normal; color: var(--cta); }
+.hero p { font-size: var(--font-body); line-height: 1.6; color: var(--text-2); max-width: 620px; margin: 0 auto var(--space-4); }
+.hero__meta { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: var(--space-2); margin-bottom: var(--space-5); }
+.chip {
+  display: inline-flex; align-items: center;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--line);
+  font-size: var(--font-meta);
+  font-weight: 600;
+  color: var(--text);
+}
+.hero__actions { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+.hero__cta {
+  display: inline-block;
+  color: var(--on-cta); text-decoration: none; font-weight: 700; font-size: var(--font-cta);
+  background: var(--cta); padding: 16px 36px; border-radius: var(--radius-pill);
+  transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.hero__cta:hover { background: var(--cta-hover); }
+.hero__cta:active { background: var(--cta-press); transform: scale(.98); }
+.hero__ghost {
+  color: var(--text-2); text-decoration: none; font-weight: 600; font-size: var(--font-meta);
+  padding: 8px 4px; border-bottom: 1px solid var(--line);
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.hero__ghost:hover { color: var(--accent); border-color: var(--accent); }
 
-.format { background: #032E2B; padding: 72px 20px; }
-.format h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
-.format__sub { text-align: center; color: rgba(255,255,255,.75); font-size: 15px; line-height: 1.6; max-width: 640px; margin: 0 auto 40px; }
-.format__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1080px; margin: 0 auto; }
-.format__card { background: #fff; color: #032E2B; border-radius: 20px; padding: 28px; transition: transform .2s, box-shadow .2s; }
-.format__card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
-.format__icon { width: 32px; height: 32px; color: #0AD9C6; margin-bottom: 12px; }
+.format { background: var(--bg); padding: var(--space-8) 0; }
+.format h2 { font-size: var(--font-h2); font-weight: 700; text-align: center; margin: 0 0 var(--space-3); }
+.format__sub { text-align: center; color: var(--text-2); font-size: var(--font-body); line-height: 1.6; max-width: 640px; margin: 0 auto var(--space-6); }
+.format__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); max-width: 1080px; margin: 0 auto; }
+.format__card { background: var(--surface); border: 1px solid var(--line); color: var(--text); border-radius: var(--radius-m); padding: var(--space-5); transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+.format__card:hover { transform: translateY(-2px); box-shadow: var(--elev-1); }
+.format__icon { width: 32px; height: 32px; color: var(--accent); margin-bottom: var(--space-3); }
 .format__icon svg { width: 100%; height: 100%; }
-.format__card b { font-size: 17px; font-weight: 700; display: block; margin-bottom: 8px; }
-.format__card p { font-size: 15px; line-height: 1.6; color: #3C5B57; margin: 0; }
+.format__card b { font-size: var(--font-title); font-weight: 700; letter-spacing: .015em; display: block; margin-bottom: var(--space-2); }
+.format__card p { font-size: var(--font-body); line-height: 1.6; color: var(--text-2); margin: 0; }
+.format__stats {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-5);
+  margin-top: var(--space-6); text-align: center;
+}
+.format__stat { display: flex; flex-direction: column; gap: 2px; min-width: 140px; }
+.format__stat b { font-size: 26px; font-weight: 800; color: var(--text); line-height: 1.1; }
+.format__stat span { font-size: var(--font-meta); color: var(--text-2); }
+/* --- Медиа-блок: большой просмотрщик + превью (паттерн Мир Квестов) --- */
+.media__viewer { margin-bottom: var(--space-4); }
+.media__main {
+  display: block; width: 100%; padding: 0; border: 0; cursor: pointer;
+  position: relative; aspect-ratio: 16/9; border-radius: var(--radius-l);
+  overflow: hidden; background: var(--green-950);
+}
+.media__main img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.media__play {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: var(--space-3);
+  background: rgba(2,31,29,.55); color: var(--neutral-0);
+}
+.media__play-circle {
+  display: flex; align-items: center; justify-content: center;
+  width: 84px; height: 84px; border-radius: var(--radius-pill);
+  background: var(--cta); color: var(--on-cta); font-size: 28px; padding-left: 6px;
+  box-shadow: var(--elev-2); transition: transform var(--dur-fast) var(--ease);
+}
+.media__main:hover .media__play-circle { transform: scale(1.06); }
+.media__play b { font-size: var(--font-body); font-weight: 700; }
+.gallery__item.is-active { outline: 2px solid var(--cta); outline-offset: 2px; }
+.media-thumb--video {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2);
+  background: var(--surface); border: 1px dashed var(--line);
+  color: var(--text); font-weight: 700; font-size: var(--font-meta); text-align: center;
+}
+.media-thumb__badge {
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: var(--radius-pill);
+  background: var(--cta); color: var(--on-cta); font-size: 18px;
+}
+.media-thumb--video:hover { border-color: var(--cta); }
 
-.timeline { background: #032E2B; padding: 80px 20px; }
-.timeline h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
-.timeline__sub { max-width: 640px; margin: 0 auto 40px; text-align: center; color: rgba(255,255,255,.75); font-size: 15px; line-height: 1.6; }
+.timeline { background: var(--bg-alt); padding: var(--space-8) 0; }
+.timeline h2 { font-size: var(--font-h2); font-weight: 700; text-align: center; margin: 0 0 var(--space-3); }
+.timeline__sub { max-width: 640px; margin: 0 auto var(--space-6); text-align: center; color: var(--text-2); font-size: var(--font-body); line-height: 1.6; }
 .timeline__list { max-width: 720px; margin: 0 auto; }
-.timeline__item { display: flex; gap: 18px; margin-bottom: 28px; }
-.timeline__num { flex: 0 0 36px; height: 36px; border-radius: 50%; background: #C30067; color: #fff; font-size: 15px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
-.timeline__item b { font-size: 17px; font-weight: 700; color: #fff; display: block; margin-bottom: 4px; }
-.timeline__item p { font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.75); margin: 0; }
+.timeline__item { display: flex; gap: var(--space-4); margin-bottom: var(--space-5); }
+.timeline__num { flex: 0 0 36px; height: 36px; border-radius: var(--radius-pill); background: var(--cta); color: var(--on-cta); font-size: 15px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.timeline__item b { font-size: var(--font-title); font-weight: 700; color: var(--text); display: block; margin-bottom: 4px; }
+.timeline__item p { font-size: var(--font-body); line-height: 1.6; color: var(--text-2); margin: 0; }
 
-.features { background: #021F1D; padding: 80px 20px; }
-.features h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 40px; }
-.features__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1080px; margin: 0 auto; }
-.feature-card { background: #fff; color: #032E2B; border-radius: 20px; padding: 28px; transition: transform .2s, box-shadow .2s; }
-.feature-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
-.feature-card__icon { width: 32px; height: 32px; color: #0AD9C6; margin-bottom: 12px; }
-.feature-card__icon svg { width: 100%; height: 100%; }
-.feature-card b { font-size: 17px; font-weight: 700; display: block; margin-bottom: 8px; }
-.feature-card p { font-size: 15px; line-height: 1.6; color: #3C5B57; margin: 0; }
-
-.yamarka { background: #032E2B; padding: 72px 20px; }
-.yamarka h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
-.yamarka__sub { text-align: center; color: rgba(255,255,255,.75); font-size: 15px; margin: 0 0 40px; max-width: 640px; margin-left: auto; margin-right: auto; }
-.yamarka__content { display: flex; gap: 32px; max-width: 1200px; margin: 0 auto; align-items: flex-start; }
+.yamarka { background: var(--bg); padding: var(--space-8) 0; }
+.yamarka h2 { font-size: var(--font-h2); font-weight: 700; text-align: center; margin: 0 0 var(--space-3); }
+.yamarka__sub { text-align: center; color: var(--text-2); font-size: var(--font-body); margin: 0 auto var(--space-6); max-width: 640px; }
+.yamarka__content { display: flex; gap: var(--space-6); max-width: 1200px; margin: 0 auto; align-items: flex-start; }
 .yamarka__text { flex: 1; }
-.yamarka__list { display: grid; gap: 16px; }
-.yamarka__row { display: flex; gap: 14px; align-items: flex-start; }
-.yamarka__icon { width: 32px; height: 32px; flex: 0 0 32px; color: #0AD9C6; }
+.yamarka__list { display: grid; gap: var(--space-4); }
+.yamarka__row { display: flex; gap: var(--space-3); align-items: flex-start; }
+.yamarka__icon { width: 32px; height: 32px; flex: 0 0 32px; color: var(--accent); }
 .yamarka__icon svg { width: 100%; height: 100%; }
-.yamarka__row b { font-size: 16px; font-weight: 700; color: #fff; display: block; margin-bottom: 2px; }
-.yamarka__row p { font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.75); margin: 0; }
-.yamarka__note { margin-top: 20px; font-size: 14px; color: #0AD9C6; font-weight: 600; text-align: center; }
-.yamarka__video { flex: 0 0 480px; }
-.yamarka__video-btn {
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  background: #C30067; color: #fff; border: 0; border-radius: 12px;
-  padding: 16px 28px; font-size: 15px; font-weight: 700; cursor: pointer;
-  transition: background .15s; width: 100%;
-}
-.yamarka__video-btn:hover { background: #E00077; }
-.yamarka__video-icon { font-size: 20px; }
-
-.hallway { background: #021F1D; padding: 72px 20px; }
-.hallway h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
-.hallway__sub { text-align: center; color: rgba(255,255,255,.75); font-size: 15px; margin: 0 0 40px; max-width: 640px; margin-left: auto; margin-right: auto; }
-.hallway__content { display: flex; gap: 32px; max-width: 1200px; margin: 0 auto; align-items: flex-start; }
+.yamarka__row b { font-size: var(--font-body); font-weight: 700; color: var(--text); display: block; margin-bottom: 2px; }
+.yamarka__row p { font-size: var(--font-body); line-height: 1.6; color: var(--text-2); margin: 0; }
+.yamarka__note { margin-top: var(--space-5); font-size: var(--font-meta); color: var(--accent); font-weight: 600; text-align: center; }
+.hallway { background: var(--bg-alt); padding: var(--space-8) 0; }
+.hallway h2 { font-size: var(--font-h2); font-weight: 700; text-align: center; margin: 0 0 var(--space-3); }
+.hallway__sub { text-align: center; color: var(--text-2); font-size: var(--font-body); margin: 0 auto var(--space-6); max-width: 640px; }
+.hallway__content { display: flex; gap: var(--space-6); max-width: 1200px; margin: 0 auto; align-items: flex-start; }
 .hallway__text { flex: 1; }
-.hallway__text p { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,.75); margin: 0 0 16px; }
-.hallway__text b { color: #fff; }
-.hallway__video { flex: 0 0 480px; }
-.hallway__map { margin-top: 32px; }
-.hallway__map iframe { border-radius: 12px; }
-.hallway__video-btn {
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  background: #C30067; color: #fff; border: 0; border-radius: 12px;
-  padding: 16px 28px; font-size: 15px; font-weight: 700; cursor: pointer;
-  transition: background .15s; width: 100%;
+.hallway__text p { font-size: var(--font-body); line-height: 1.7; color: var(--text-2); margin: 0 0 var(--space-4); }
+.hallway__text b { color: var(--text); }
+.hallway__map { margin-top: var(--space-6); }
+.map-card {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4);
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius-m); padding: var(--space-5);
 }
-.hallway__video-btn:hover { background: #E00077; }
-.hallway__video-icon { font-size: 20px; }
+.map-card__info { display: flex; gap: var(--space-4); align-items: flex-start; }
+.map-card__pin {
+  display: flex; align-items: center; justify-content: center; flex: 0 0 44px;
+  width: 44px; height: 44px; border-radius: var(--radius-pill);
+  background: var(--cta); color: var(--on-cta);
+}
+.map-card__pin svg { width: 22px; height: 22px; }
+.map-card__info b { display: block; font-size: var(--font-body); font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.map-card__info p { margin: 0; font-size: var(--font-meta); line-height: 1.6; color: var(--text-2); max-width: 520px; }
+.map-card__btn {
+  display: inline-flex; align-items: center;
+  padding: 12px 22px; border-radius: var(--radius-pill);
+  background: var(--cta); color: var(--on-cta); text-decoration: none;
+  font-size: var(--font-meta); font-weight: 700;
+  transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.map-card__btn:hover { background: var(--cta-hover); }
+.map-card__btn:active { background: var(--cta-press); transform: scale(.98); }
+@media (max-width: 760px) {
+  .map-card { flex-direction: column; align-items: stretch; }
+  .map-card__btn { justify-content: center; }
+}
 
-.gallery { background: #021F1D; padding: 72px 20px; }
-.gallery h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
-.gallery__sub { text-align: center; color: rgba(255,255,255,.7); font-size: 15px; margin: 0 0 36px; max-width: 640px; margin-left: auto; margin-right: auto; }
-.gallery__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; max-width: 1200px; margin: 0 auto; }
-.gallery__item { border: 0; background: none; padding: 0; cursor: pointer; border-radius: 12px; overflow: hidden; position: relative; aspect-ratio: 4/3; }
-.gallery__item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
+.gallery { background: var(--bg-alt); padding: var(--space-8) 0; }
+.gallery h2 { font-size: var(--font-h2); font-weight: 700; text-align: center; margin: 0 0 var(--space-3); }
+.gallery__sub { text-align: center; color: var(--text-2); font-size: var(--font-body); margin: 0 auto var(--space-6); max-width: 640px; }
+.gallery__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-3); max-width: 1200px; margin: 0 auto; }
+.gallery__item { border: 0; background: none; padding: 0; cursor: pointer; border-radius: var(--radius-s); overflow: hidden; position: relative; aspect-ratio: 4/3; }
+.gallery__item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--dur-normal) var(--ease); }
 .gallery__item:hover img { transform: scale(1.05); }
 .gallery__more {
-  display: block; margin: 24px auto 0; background: #C30067; color: #fff;
-  border: 0; border-radius: 30px; padding: 14px 36px; font-size: 15px;
-  font-weight: 700; cursor: pointer; transition: background .15s;
+  display: block; margin: var(--space-5) auto 0; background: var(--cta); color: var(--on-cta);
+  border: 0; border-radius: var(--radius-pill); padding: 14px 36px; font-size: 15px;
+  font-weight: 700; cursor: pointer; transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 }
-.gallery__more:hover { background: #E00077; }
-.gallery-full { padding: 0 0 72px; }
-.gallery-full__sub { text-align: center; color: rgba(255,255,255,.7); font-size: 15px; margin: 0 0 36px; max-width: 640px; margin-left: auto; margin-right: auto; }
+.gallery__more:hover { background: var(--cta-hover); }
+.gallery__more:active { background: var(--cta-press); transform: scale(.98); }
+.gallery-full { padding: 0 0 var(--space-8); }
+.gallery-full__sub { text-align: center; color: var(--text-2); font-size: var(--font-body); margin: 0 0 var(--space-6); max-width: 640px; margin-left: auto; margin-right: auto; }
 
 /* Лайтбокс */
 .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.95); z-index: 1000; align-items: center; justify-content: center; }
@@ -770,47 +937,45 @@ import RequestForm from '../components/RequestForm.astro';
 }
 
 @media (max-width: 760px) {
-  .timeline { padding: 48px 14px; }
-  .timeline__item { gap: 12px; }
+  .timeline { padding: var(--space-7) 0; }
+  .timeline__item { gap: var(--space-3); }
   .timeline__num { width: 32px; height: 32px; font-size: 14px; }
-  .format { padding: 48px 14px; }
+  .format { padding: var(--space-7) 0; }
   .format__grid { grid-template-columns: 1fr; }
-  .features { padding: 48px 14px; }
-  .features__grid { grid-template-columns: 1fr; }
-  .faq { padding: 48px 14px; }
-  .reviews { padding: 48px 14px; }
+  .format__stats { gap: var(--space-4); }
+  .format__stat { min-width: 110px; }
+  .faq { padding: var(--space-7) 0; }
+  .reviews { padding: var(--space-7) 0; }
   .reviews__grid { grid-template-columns: 1fr; }
-  .yamarka { padding: 48px 14px; }
-  .hallway { padding: 48px 14px; }
+  .yamarka { padding: var(--space-7) 0; }
+  .hallway { padding: var(--space-7) 0; }
   .yamarka__content { flex-direction: column; }
   .hallway__content { flex-direction: column; }
-  .hero__img--desktop { display: none; }
-  .hero__img--mobile { display: block; }
-  .hero__price { font-size: 16px; }
-  .hero a { display: block; margin: 8px auto; max-width: 280px; }
+  .hero__grid { grid-template-columns: 1fr; gap: var(--space-5); padding-top: var(--space-6); padding-bottom: var(--space-6); }
+  .hero__visual { order: -1; aspect-ratio: 16/10; }
+  .hero__cta { display: block; width: 100%; max-width: 320px; }
+  .page-nav { top: 0; }
 }
 </style>
 
 <style is:global>
-.timeline summary { cursor: pointer; }
-.timeline summary:hover { color: #0AD9C6; }
-.faq { background: #032E2B; padding: 80px 20px; }
-.faq h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 36px; }
+.faq { background: var(--bg); padding: var(--space-8) 0; }
+.faq h2 { font-size: var(--font-h2); font-weight: 700; text-align: center; margin: 0 0 var(--space-6); }
 .faq__list { max-width: 720px; margin: 0 auto; }
-.faq__item { border-bottom: 1px solid rgba(255,255,255,.12); }
-.faq__item summary { padding: 18px 0; font-size: 17px; font-weight: 600; color: #fff; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
-.faq__item summary::after { content: '+'; font-size: 22px; color: #0AD9C6; transition: transform .2s; flex-shrink: 0; margin-left: 12px; }
+.faq__item { border-bottom: 1px solid var(--line); }
+.faq__item summary { padding: 18px 0; font-size: var(--font-title); font-weight: 600; color: var(--text); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+.faq__item summary::after { content: '+'; font-size: 22px; color: var(--accent); transition: transform var(--dur-fast) var(--ease); flex-shrink: 0; margin-left: var(--space-3); }
 .faq__item[open] summary::after { content: '−'; }
-.faq__item summary:hover { color: #0AD9C6; }
-.faq__item p { padding: 0 0 18px; font-size: 16px; line-height: 1.7; color: rgba(255,255,255,.75); margin: 0; }
+.faq__item summary:hover { color: var(--accent); }
+.faq__item p { padding: 0 0 18px; font-size: var(--font-body); line-height: 1.7; color: var(--text-2); margin: 0; }
 
-.reviews { background: #021F1D; padding: 80px 20px; }
-.reviews h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; text-align: center; margin: 0 0 12px; }
-.reviews__sub { text-align: center; color: rgba(255,255,255,.6); font-size: 14px; margin: 0 0 40px; }
-.reviews__sub a { color: #0AD9C6; }
-.reviews__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1080px; margin: 0 auto; }
-.review-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 28px; }
-.review-card__stars { color: #F5A623; font-size: 14px; letter-spacing: 2px; margin-bottom: 12px; }
-.review-card p { font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.8); margin: 0 0 12px; }
-.review-card__name { font-size: 14px; font-weight: 600; color: #0AD9C6; }
+.reviews { background: var(--bg-alt); padding: var(--space-8) 0; }
+.reviews h2 { font-size: var(--font-h2); font-weight: 700; text-align: center; margin: 0 0 var(--space-3); }
+.reviews__sub { text-align: center; color: var(--text-2); font-size: var(--font-meta); margin: 0 0 var(--space-6); }
+.reviews__sub a { color: var(--accent); }
+.reviews__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); max-width: 1080px; margin: 0 auto; }
+.review-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-m); padding: var(--space-5); }
+.review-card__stars { color: var(--star); font-size: 14px; letter-spacing: 2px; margin-bottom: var(--space-3); }
+.review-card p { font-size: var(--font-body); line-height: 1.6; color: var(--text-2); margin: 0 0 var(--space-3); }
+.review-card__name { font-size: var(--font-meta); font-weight: 600; color: var(--accent); }
 </style>

@@ -21,28 +21,39 @@ A modern Astro 7.4.2 static site with TypeScript strict mode, featuring a comple
 /
 ├── src/
 │   ├── pages/              # Astro pages
-│   │   ├── index.astro     # Main landing page
+│   │   ├── index.astro     # Посадочная «День рождения» (станет /den-rozhdeniya)
 │   │   └── privacy.astro   # Privacy policy
 │   ├── components/         # Reusable components
-│   │   ├── Calculator.astro  # Interactive calculator
+│   │   ├── Calculator.astro  # Interactive calculator (логика не трогать)
 │   │   ├── RequestForm.astro # Order form
-│   │   └── ImageGallery.astro # Photo gallery
+│   │   ├── ContactFab.astro  # Плавающая кнопка связи (мобильные)
+│   │   └── ImageGallery.astro # МЁРТВЫЙ КОД: не импортируется (разобрать)
+│   ├── styles/
+│   │   └── tokens.css      # Дизайн-токены v2 (2 темы: dark/light)
 │   └── layouts/
-│       └── Base.astro       # Base layout
+│       └── Base.astro       # Layout: sticky header, футер, FAB, canonical-props
 ├── public/                 # Static assets
 │   ├── photos/             # Event photos (55+ webp files)
 │   ├── favicon.svg/ico
 │   └── robots.txt, sitemap.xml
 ├── docs/                   # Documentation
-│   ├── design-system.md    # Design system (DRAFT)
+│   ├── design-system-v2.md # Дизайн-система v2 (утверждена предварительно)
+│   ├── design-system.md    # Старый DRAFT-снимок
 │   ├── design-system-audit.md
-│   └── qa/visual-audit.md  # Visual audit findings
+│   └── qa/                 # Аудиты и приёмочные скриншоты
 ├── scripts/                # Build scripts
 │   └── compress-images.js
 ├── package.json
 ├── astro.config.mjs
 └── tsconfig.json
 ```
+
+### Структура index.astro (после перестройки Этапа 3, 2026-11-03)
+Hero (2 колонки) → page-nav (якорное sticky-меню) → Формат+цифры
+→ Calculator → Timeline → Ярмарка → Площадка (карта-карточка) →
+Отзывы → Медиа-блок (вьювер+превью, скрытая полная галерея как
+источник пагинации) → FAQ → RequestForm → лайтбокс/видеомодалка →
+FAQPage JSON-LD.
 
 ## Key Modules and Interactions
 
