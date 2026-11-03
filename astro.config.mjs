@@ -5,6 +5,9 @@ import imagemin from 'vite-plugin-imagemin';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://xkalmar.com',
+  sitemap: {
+    exclude: ['/privacy/**'],
+  },
   vite: {
     plugins: [
       imagemin({
