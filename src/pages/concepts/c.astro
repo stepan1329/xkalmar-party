@@ -1,0 +1,518 @@
+---
+// @ts-nocheck
+// Концепт C «Реалити-игра»: стиль шоу-реалити — неон, игровая механика на виду: карточки игр, таймлайн как «раунды», отзывы как «результаты участников».
+import Concept from '../../layouts/Concept.astro';
+
+const TEL = '+79287588483';
+const TEL_VIEW = '+7 (928) 758-84-83';
+const WA = 'https://wa.me/79287588483';
+const TG = 'https://t.me/xkalmar';
+const MAX = 'https://max.ru/u/f9LHodD0cOKVRRd0t2pjN2pm8s7nWCNllQJYsSra5mx0QiqcfNxI553bSzc';
+const MAPS = 'https://yandex.ru/maps/?text=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2-%D0%BD%D0%B0-%D0%94%D0%BE%D0%BD%D1%83%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%97%D0%BE%D1%80%D0%B3%D0%B5%2C%2015';
+const REVIEWS = 'https://yandex.ru/maps/org/kvest_shou_igra_v_kalmara/19338708863/reviews/';
+---
+<Concept title="XKALMAR — концепт C «Реалити-игра»" description="Концепт главной XKALMAR: шоу-реалити с игровой механикой, раундами и результатами участников.">
+  <header class="hdr">
+    <div class="wrap hdr__in">
+      <a href="#top" class="logo">XKALMAR</a>
+      <nav class="hdr__nav" aria-label="Разделы">
+        <a href="#packages">Цены</a>
+        <a href="#program">Раунды</a>
+        <a href="#venue">Локация</a>
+        <a href="#reviews">Результаты</a>
+        <a href="#faq">Вопросы</a>
+      </nav>
+      <div class="hdr__right">
+        <a href={`tel:${TEL}`} class="hdr__phone">{TEL_VIEW}</a>
+        <a href="#zayavka" class="btn btn--cta hdr__cta">Оставить заявку</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. ПЕРВЫЙ ЭКРАН: оффер + цена + CTA -->
+    <section class="hero" id="top">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="wrap hero__in">
+        <div class="hero__text">
+          <p class="episode">Эпизод 01 · Квест-шоу для детей 6–12 лет</p>
+          <h1>Игра начинается.<br /><em>Побеждают все.</em></h1>
+          <p class="hero__lead">Квест-шоу по мотивам «Игры в кальмара» — не хоррор, а увлекательное шоу с командой из 3 ведущих-актёров. Испытания, раунды, сувенир каждому и праздничный стол.</p>
+          <ul class="hero__meta">
+            <li>6–12 лет</li>
+            <li>1–1,5 ч квест-шоу</li>
+            <li>от 15 000 ₽</li>
+          </ul>
+          <div class="hero__actions">
+            <a href="#zayavka" class="btn btn--cta btn--lg">Оставить заявку</a>
+            <a href="#program" class="btn btn--ghost btn--lg">Смотреть раунды</a>
+          </div>
+          <p class="hero__price">Мини <b>15 000 ₽</b> · Популярный <b>24 000 ₽</b> · Максимальный <b>50 000 ₽</b></p>
+          <p class="hero__trust"><span class="stars" aria-hidden="true">★★★★★</span> 5.0 на <a href={REVIEWS} target="_blank" rel="noopener">Яндекс.Картах</a></p>
+        </div>
+        <figure class="hero__media">
+          <img src="/photos/squid-game-quest-38.webp" alt="Дети в игровых футболках с номерами на площадке с таймером" fetchpriority="high" />
+          <figcaption>Площадка XKALMAR · Зорге, 15</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 2. ДОВЕРИЕ -->
+    <section class="sec sec--alt" id="trust">
+      <div class="wrap">
+        <p class="tag">Статистика</p>
+        <h2>Почему родители выбирают нас</h2>
+        <div class="trust">
+          <div class="trust__facts">
+            <div class="fact"><b>5.0</b><span>рейтинг на Яндекс.Картах</span></div>
+            <div class="fact"><b>3</b><span>ведущих-актёра в команде</span></div>
+            <div class="fact"><b>6–12</b><span>лет — наша специализация</span></div>
+            <div class="fact"><b>Под ключ</b><span>сценарий, актёры, стол, торт</span></div>
+          </div>
+          <div class="trust__gallery">
+            <img src="/photos/squid-game-quest-45.webp" alt="Дети с мячами на активной игре" loading="lazy" />
+            <img src="/photos/squid-game-quest-33.webp" alt="Дети собирают деревянный пазл на полу" loading="lazy" />
+            <img src="/photos/squid-game-quest-17.webp" alt="Дети в игровых футболках с номерами" loading="lazy" />
+            <img src="/photos/yarmarka-1.webp" alt="Ведущий с детьми у деревянного лабиринта" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ПАКЕТЫ И ЦЕНЫ -->
+    <section class="sec" id="packages">
+      <div class="wrap">
+        <p class="tag">Уровни</p>
+        <h2>Выбери свой уровень</h2>
+        <p class="sec__sub">Три понятных пакета — сравните без конфигуратора. Диапазон: от 15 000 до 50 000 ₽.</p>
+        <div class="packs">
+          <article class="pack">
+            <span class="pack__lvl">Уровень 1</span>
+            <h3>Мини</h3>
+            <p class="pack__price">15 000 ₽</p>
+            <p class="pack__meta">1 ч квест + 30 мин стол · до 8 детей</p>
+            <ul class="pack__list">
+              <li>Квест-шоу с командой ведущих-актёров</li>
+              <li>Праздничный стол (еду приносите свою)</li>
+              <li>Сувенир каждому ребёнку</li>
+            </ul>
+            <a href="#zayavka" class="btn btn--outline">Выбрать пакет</a>
+          </article>
+          <article class="pack pack--hot">
+            <span class="pack__lvl">Уровень 2 · хит</span>
+            <h3>Популярный</h3>
+            <p class="pack__price">24 000 ₽</p>
+            <p class="pack__meta">1,5 ч квест + 30 мин игры + 30 мин стол · до 15 детей</p>
+            <ul class="pack__list">
+              <li>Квест-шоу 1,5 ч с командой из 3 ведущих-актёров</li>
+              <li>Подвижные игры с призами — 30 мин</li>
+              <li>Праздничный стол (еду приносите свою)</li>
+            </ul>
+            <a href="#zayavka" class="btn btn--cta">Выбрать пакет</a>
+          </article>
+          <article class="pack">
+            <span class="pack__lvl">Уровень 3</span>
+            <h3>Максимальный</h3>
+            <p class="pack__price">50 000 ₽</p>
+            <p class="pack__meta">1,5 ч квест + 1 ч ярмарка · до 15 детей</p>
+            <ul class="pack__list">
+              <li>Квест-шоу 1,5 ч + расширенная ярмарка игр 1 ч</li>
+              <li>Меню под ключ, большой торт от кондитера</li>
+              <li>Фотограф, гелиевые шары, подарок каждому</li>
+            </ul>
+            <a href="#zayavka" class="btn btn--outline">Выбрать пакет</a>
+          </article>
+        </div>
+        <p class="packs__note">Свыше лимита — +1 000 ₽ за ребёнка. Есть ещё Базовый, Оптимальный и Расширенный — расскажем при брони.</p>
+      </div>
+    </section>
+
+    <!-- 4. КАК ПРОХОДИТ ПРАЗДНИК — раунды -->
+    <section class="sec sec--alt" id="program">
+      <div class="wrap">
+        <p class="tag">Раунды</p>
+        <h2>Как проходит праздник</h2>
+        <p class="sec__sub">Формат один, набор раундов — по выбранному пакету. Порядок подстроим под вас при брони.</p>
+        <ol class="rounds">
+          <li><span class="rounds__n">01</span><b>Сборы и инструктаж</b><p>Дети знакомятся с ведущими, надевают игровые футболки.</p></li>
+          <li><span class="rounds__n">02</span><b>Квест-шоу</b><p>Испытания на логику, скорость и командную работу.</p></li>
+          <li><span class="rounds__n">03</span><b>Сувенир каждому</b><p>Памятный подарок всем участникам.</p></li>
+          <li><span class="rounds__n">04</span><b>Поздравление и торт</b><p>Свечи, именинник в центре — самые живые кадры.</p></li>
+          <li><span class="rounds__n">05</span><b>Банкет</b><p>Сервированный стол: своя еда или под ключ.</p></li>
+          <li><span class="rounds__n">06</span><b>Ярмарка игр</b><p>Ведущие одновременно ведут разные активности.</p></li>
+          <li><span class="rounds__n">07</span><b>Чай с тортом и сборы</b><p>Спокойный финал праздника.</p></li>
+        </ol>
+
+        <p class="tag tag--mt">Игры на площадке</p>
+        <div class="games">
+          <article class="game"><img src="/photos/squid-game-quest-45.webp" alt="Дети играют с мячами" loading="lazy" /><b>Вышибалы</b><span>Командная игра на реакцию</span></article>
+          <article class="game"><img src="/photos/yarmarka-1.webp" alt="Ведущий с детьми у деревянного лабиринта" loading="lazy" /><b>Лабиринт</b><span>Логика и командная работа</span></article>
+          <article class="game"><img src="/photos/squid-game-quest-33.webp" alt="Дети собирают деревянный пазл" loading="lazy" /><b>Пазл-испытание</b><span>Скорость и внимание</span></article>
+          <article class="game"><img src="/photos/squid-game-quest-46.webp" alt="Дети за столом с деревянными фигурами" loading="lazy" /><b>Нащупай предмет</b><span>Игра на осязание</span></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ПОЧЕМУ ДОРОЖЕ КВЕСТА -->
+    <section class="sec" id="why">
+      <div class="wrap why">
+        <figure class="why__media">
+          <img src="/photos/squid-game-quest-17.webp" alt="Дети в игровых футболках с номерами на площадке" loading="lazy" />
+        </figure>
+        <div class="why__text">
+          <p class="tag">Честно о цене</p>
+          <h2>Почему дороже обычного квеста</h2>
+          <p>В обычном квесте ребёнка встречают оператор и один актёр. У нас на празднике работает команда из 3 ведущих-актёров плюс организатор — каждый занят делом: ведут игру, накрывают стол, следят за порядком.</p>
+          <p>Это формат «под ключ»: сценарий, актёры, стол, торт и фото — а не час в закрытой комнате.</p>
+          <a href="#zayavka" class="btn btn--cta">Оставить заявку</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ПЛОЩАДКА И АДРЕС -->
+    <section class="sec sec--alt" id="venue">
+      <div class="wrap">
+        <p class="tag">Локация</p>
+        <h2>Площадка и адрес</h2>
+        <div class="venue">
+          <figure class="venue__media">
+            <img src="/photos/squid-game-quest-50.webp" alt="Сервированный банкетный стол на площадке" loading="lazy" />
+          </figure>
+          <div class="venue__text">
+            <p class="venue__addr">Ростов-на-Дону, ул. Зорге, 15</p>
+            <ul class="venue__list">
+              <li>Отдельный вход с торца здания</li>
+              <li>Игровая и банкетные комнаты под одной крышей</li>
+              <li>Родителям есть где сесть — смотрите игру или отдыхайте</li>
+              <li>Вентиляция и кондиционеры, холодильник и микроволновка</li>
+            </ul>
+            <a href={MAPS} target="_blank" rel="noopener" class="btn btn--outline">Как добраться</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ОТЗЫВЫ — результаты участников -->
+    <section class="sec" id="reviews">
+      <div class="wrap">
+        <p class="tag">Результаты участников</p>
+        <h2>Отзывы</h2>
+        <p class="sec__sub">Реальные отзывы с Яндекс.Карт. <a href={REVIEWS} target="_blank" rel="noopener">Читать все отзывы</a></p>
+        <div class="results">
+          <blockquote class="result">
+            <div class="result__score"><span class="stars" aria-hidden="true">★★★★★</span><b>5.0</b></div>
+            <p>«Дети не хотели уходить, всё время прохождения держали в напряжении, но не пугали, а именно увлекали!»</p>
+            <cite>Таня К. · Яндекс.Карты</cite>
+          </blockquote>
+          <blockquote class="result">
+            <div class="result__score"><span class="stars" aria-hidden="true">★★★★★</span><b>5.0</b></div>
+            <p>«Все дети задействованы в игру. Активный, динамичный квест. Не страшно.»</p>
+            <cite>Михаил К. · Яндекс.Карты</cite>
+          </blockquote>
+          <blockquote class="result">
+            <div class="result__score"><span class="stars" aria-hidden="true">★★★★★</span><b>5.0</b></div>
+            <p>«Атмосфера на 100% соответствует заявленной — игре в кальмара.»</p>
+            <cite>Родитель · Яндекс.Карты</cite>
+          </blockquote>
+          <blockquote class="result">
+            <div class="result__score"><span class="stars" aria-hidden="true">★★★★★</span><b>5.0</b></div>
+            <p>«Именинница была в приоритете, это важно. Всё продумано до мелочей.»</p>
+            <cite>Екатерина Щ. · Яндекс.Карты</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. FAQ -->
+    <section class="sec sec--alt" id="faq">
+      <div class="wrap wrap--narrow">
+        <p class="tag">Вопросы</p>
+        <h2>Частые вопросы</h2>
+        <div class="faq">
+          <details><summary>Это же «Игра в кальмара» — это страшно?</summary><p>Нет. От сериала мы взяли только игры и реквизит — всё адаптировано под детей. Это не хоррор, а увлекательное квест-шоу с актёрами, где в центре внимания именинник.</p></details>
+          <details><summary>Почему у вас дороже обычных квестов?</summary><p>В обычном квесте — оператор и один актёр. У нас работает команда из 3 ведущих-актёров плюс организатор, и каждый занят делом. Это формат «под ключ», а не час в закрытой комнате.</p></details>
+          <details><summary>С какого возраста?</summary><p>Специализация — 6–12 лет, сценарий адаптируется: младшим играем мягче, старшим добавляем логику и командные задания. Младших (от 4 лет) берём вместе с братом или сестрой.</p></details>
+          <details><summary>Что с собой везти?</summary><p>Зависит от пакета. В «Мини» и «Популярном» еду приносите свою — стол накрываем мы. В «Максимальном» меню под ключ и большой торт от кондитера включены.</p></details>
+          <details><summary>Как забронировать и сколько ждать?</summary><p>Оставьте заявку или позвоните — организатор перезвонит в течение часа. Предоплата 3 000 ₽, возвращается в любой день, кроме дня праздника.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. ФОРМА ЗАЯВКИ + АЛЬТЕРНАТИВЫ -->
+    <section class="sec sec--form" id="zayavka">
+      <div class="wrap form-wrap">
+        <div class="form-intro">
+          <p class="tag">Заявка</p>
+          <h2>Оставить заявку</h2>
+          <p>Оставьте контакты — организатор перезвонит в течение часа, подберёт пакет и ответит на вопросы. Без давления.</p>
+          <div class="alts">
+            <a href={`tel:${TEL}`} class="alt">Позвонить<br /><b>{TEL_VIEW}</b></a>
+            <a href={WA} target="_blank" rel="noopener" class="alt">WhatsApp</a>
+            <a href={TG} target="_blank" rel="noopener" class="alt">Telegram</a>
+            <a href={MAX} target="_blank" rel="noopener" class="alt">МАКС</a>
+          </div>
+        </div>
+        <form class="form" onsubmit="return false">
+          <label class="field"><span>Имя</span><input type="text" name="name" placeholder="Как вас зовут" autocomplete="name" /></label>
+          <label class="field"><span>Телефон</span><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" /></label>
+          <label class="field"><span>Дата праздника</span><input type="date" name="date" /></label>
+          <label class="field"><span>Пакет</span>
+            <select name="pack">
+              <option>Ещё не выбрал(а)</option>
+              <option>Мини — 15 000 ₽</option>
+              <option>Популярный — 24 000 ₽</option>
+              <option>Максимальный — 50 000 ₽</option>
+            </select>
+          </label>
+          <label class="check"><input type="checkbox" name="consent" /> <span>Согласен(а) на обработку персональных данных для связи по заявке</span></label>
+          <button type="submit" class="btn btn--cta btn--lg btn--block">Отправить заявку</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 10. КАЛЬКУЛЯТОР (демотирован) -->
+    <section class="sec sec--calc" id="calc">
+      <div class="wrap calc">
+        <div>
+          <h3>Хотите точную смету?</h3>
+          <p>Соберите праздник по позициям — ярмарка, фотограф, шары, торт. Расчёт предварительный, точную сумму подтвердит организатор.</p>
+        </div>
+        <a href="#zayavka" class="btn btn--outline">Рассчитать точно</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ftr">
+    <div class="wrap ftr__in">
+      <div>
+        <a href="#top" class="logo">XKALMAR</a>
+        <p class="ftr__about">Квест-шоу «Игра в кальмара» для детей 6–12 лет. Праздник под ключ в Ростове-на-Дону, ул. Зорге, 15.</p>
+      </div>
+      <nav class="ftr__col" aria-label="Связь">
+        <b>Связаться</b>
+        <a href={`tel:${TEL}`}>{TEL_VIEW}</a>
+        <a href={MAX} target="_blank" rel="noopener">МАКС</a>
+        <a href={TG} target="_blank" rel="noopener">Telegram</a>
+        <a href={WA} target="_blank" rel="noopener">WhatsApp</a>
+      </nav>
+      <nav class="ftr__col" aria-label="Инфо">
+        <b>Инфо</b>
+        <a href="/privacy" target="_blank" rel="noopener">Политика конфиденциальности</a>
+      </nav>
+    </div>
+    <div class="wrap ftr__bottom">© 2026 XKALMAR · Услугу оказывает ИП Терентьев С.В. (ИНН 110556190456)</div>
+  </footer>
+
+  <a href="#zayavka" class="sticky-cta">Оставить заявку</a>
+</Concept>
+
+<style is:global>
+  :root {
+    --bg: #120A2A;
+    --bg-alt: #1B0F3B;
+    --surface: #241452;
+    --surface-2: #2E1A66;
+    --text: #F3EEFF;
+    --text-2: rgba(243, 238, 255, .72);
+    --text-3: rgba(243, 238, 255, .45);
+    --accent: #00E5FF;
+    --cta: #FF2D9B;
+    --cta-hover: #FF54AE;
+    --on-cta: #FFFFFF;
+    --line: rgba(255, 255, 255, .14);
+    --star: #FFD166;
+    --wrap: 1160px;
+    --r: 12px;
+    --r-l: 20px;
+  }
+  body { background: var(--bg); color: var(--text); }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; width: 100%; }
+  .wrap--narrow { max-width: 820px; }
+  [id] { scroll-margin-top: 84px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 13px 24px; border-radius: var(--r); border: 1px solid transparent;
+    font-weight: 800; font-size: 15px; text-decoration: none; cursor: pointer;
+    transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+  }
+  .btn--cta { background: var(--cta); color: var(--on-cta); box-shadow: 0 0 24px rgba(255,45,155,.45); }
+  .btn--cta:hover { background: var(--cta-hover); }
+  .btn--cta:active { transform: scale(.98); }
+  .btn--outline { border-color: var(--line); color: var(--text); background: transparent; }
+  .btn--outline:hover { border-color: var(--accent); color: var(--accent); }
+  .btn--ghost { color: var(--text-2); border-color: var(--line); }
+  .btn--ghost:hover { color: var(--text); border-color: var(--accent); }
+  .btn--lg { padding: 16px 30px; font-size: 16px; }
+  .btn--block { width: 100%; }
+
+  /* Шапка */
+  .hdr { position: sticky; top: 0; z-index: 50; background: rgba(18,10,42,.86); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .hdr__in { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 24px; }
+  .logo { font-weight: 900; font-size: 22px; letter-spacing: .1em; text-decoration: none; color: var(--text); }
+  .hdr__nav { display: flex; gap: 22px; }
+  .hdr__nav a { color: var(--text-2); text-decoration: none; font-size: 14px; font-weight: 600; }
+  .hdr__nav a:hover { color: var(--accent); }
+  .hdr__right { display: flex; align-items: center; gap: 16px; }
+  .hdr__phone { color: var(--text-2); text-decoration: none; font-size: 14px; }
+  .hdr__phone:hover { color: var(--text); }
+  .hdr__cta { padding: 10px 18px; font-size: 14px; }
+
+  /* Hero */
+  .hero { position: relative; overflow: hidden; }
+  .hero__glow { position: absolute; top: -160px; right: -120px; width: 620px; height: 620px; background: radial-gradient(circle, rgba(255,45,155,.4), transparent 62%); filter: blur(20px); pointer-events: none; }
+  .hero__in { position: relative; display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding: 72px 24px 80px; }
+  .episode { display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; margin-bottom: 20px; }
+  .hero h1 { font-size: clamp(36px, 6vw, 72px); font-weight: 900; line-height: 1; letter-spacing: -.02em; }
+  .hero h1 em { font-style: normal; color: var(--cta); text-shadow: 0 0 30px rgba(255,45,155,.5); }
+  .hero__lead { margin-top: 22px; max-width: 52ch; font-size: 17px; line-height: 1.65; color: var(--text-2); }
+  .hero__meta { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+  .hero__meta li { padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; font-size: 14px; font-weight: 700; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .hero__price { margin-top: 22px; font-size: 15px; color: var(--text-2); }
+  .hero__price b { color: var(--text); }
+  .hero__trust { margin-top: 14px; font-size: 14px; color: var(--text-2); }
+  .hero__trust a { color: var(--accent); }
+  .stars { color: var(--star); letter-spacing: 2px; margin-right: 6px; }
+  .hero__media { position: relative; border-radius: var(--r-l); overflow: hidden; border: 1px solid var(--line); box-shadow: 0 0 60px rgba(255,45,155,.25); }
+  .hero__media img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+  .hero__media figcaption { position: absolute; left: 14px; bottom: 14px; background: rgba(18,10,42,.8); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 700; }
+
+  /* Секции */
+  .sec { padding: 72px 0; }
+  .sec--alt { background: var(--bg-alt); }
+  .sec h2 { font-size: clamp(26px, 4vw, 40px); font-weight: 900; letter-spacing: -.01em; line-height: 1.08; }
+  .sec__sub { margin-top: 14px; color: var(--text-2); font-size: 16px; line-height: 1.6; max-width: 62ch; }
+  .sec__sub a { color: var(--accent); }
+  .tag { display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  .tag--mt { margin-top: 48px; }
+
+  /* Доверие */
+  .trust { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; margin-top: 32px; align-items: start; }
+  .trust__facts { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .fact { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; }
+  .fact b { display: block; font-size: 28px; font-weight: 900; color: var(--accent); }
+  .fact span { font-size: 13px; color: var(--text-2); }
+  .trust__gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .trust__gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--r); border: 1px solid var(--line); }
+
+  /* Пакеты */
+  .packs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
+  .pack { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-l); padding: 28px; display: flex; flex-direction: column; }
+  .pack--hot { border-color: var(--cta); box-shadow: 0 0 0 1px var(--cta), 0 0 50px rgba(255,45,155,.3); }
+  .pack__lvl { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .pack h3 { font-size: 22px; font-weight: 900; margin-top: 6px; }
+  .pack__price { font-size: 34px; font-weight: 900; margin-top: 8px; }
+  .pack__meta { font-size: 13px; color: var(--text-2); margin-top: 6px; }
+  .pack__list { list-style: none; margin: 18px 0 22px; display: grid; gap: 10px; }
+  .pack__list li { position: relative; padding-left: 22px; font-size: 14px; line-height: 1.5; color: var(--text-2); }
+  .pack__list li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); }
+  .pack .btn { margin-top: auto; }
+  .packs__note { margin-top: 20px; font-size: 13px; color: var(--text-3); }
+
+  /* Раунды */
+  .rounds { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 32px; }
+  .rounds li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; }
+  .rounds__n { display: inline-block; font-size: 22px; font-weight: 900; color: var(--cta); margin-bottom: 8px; }
+  .rounds b { display: block; font-size: 16px; font-weight: 800; }
+  .rounds p { margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--text-2); }
+
+  /* Игры */
+  .games { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 20px; }
+  .game { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+  .game img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+  .game b { display: block; padding: 12px 14px 2px; font-size: 15px; font-weight: 800; }
+  .game span { display: block; padding: 0 14px 14px; font-size: 13px; color: var(--text-2); }
+
+  /* Почему дороже */
+  .why { display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; align-items: center; }
+  .why__media img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--r-l); border: 1px solid var(--line); }
+  .why__text p { margin-top: 16px; font-size: 16px; line-height: 1.7; color: var(--text-2); }
+  .why__text .btn { margin-top: 24px; }
+
+  /* Площадка */
+  .venue { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; margin-top: 32px; align-items: center; }
+  .venue__media img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--r-l); border: 1px solid var(--line); }
+  .venue__addr { font-size: 22px; font-weight: 900; }
+  .venue__list { list-style: none; margin: 18px 0 24px; display: grid; gap: 12px; }
+  .venue__list li { position: relative; padding-left: 22px; font-size: 15px; line-height: 1.5; color: var(--text-2); }
+  .venue__list li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); }
+
+  /* Результаты */
+  .results { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 32px; }
+  .result { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-l); padding: 24px; }
+  .result__score { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .result__score b { font-size: 20px; font-weight: 900; color: var(--accent); }
+  .result p { font-size: 16px; line-height: 1.6; }
+  .result cite { display: block; margin-top: 14px; font-style: normal; font-size: 13px; color: var(--text-3); }
+
+  /* FAQ */
+  .faq { margin-top: 28px; }
+  .faq details { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); margin-bottom: 10px; padding: 0 20px; }
+  .faq summary { list-style: none; cursor: pointer; padding: 18px 0; font-size: 17px; font-weight: 800; display: flex; justify-content: space-between; gap: 16px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; color: var(--cta); font-size: 22px; }
+  .faq details[open] summary::after { content: "−"; }
+  .faq p { padding: 0 0 18px; font-size: 15px; line-height: 1.7; color: var(--text-2); }
+
+  /* Форма */
+  .sec--form { background: linear-gradient(180deg, var(--bg-alt), var(--bg)); }
+  .form-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .form-intro p { margin-top: 16px; font-size: 16px; line-height: 1.7; color: var(--text-2); }
+  .alts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 24px; }
+  .alt { display: block; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r); text-decoration: none; font-size: 14px; font-weight: 600; color: var(--text-2); background: var(--surface); }
+  .alt b { color: var(--text); font-size: 15px; }
+  .alt:hover { border-color: var(--accent); color: var(--accent); }
+  .form { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-l); padding: 28px; display: grid; gap: 16px; }
+  .field { display: grid; gap: 6px; }
+  .field span { font-size: 13px; font-weight: 600; color: var(--text-2); }
+  .field input, .field select { width: 100%; padding: 13px 14px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r); color: var(--text); font-size: 15px; }
+  .field input::placeholder { color: var(--text-3); }
+  .check { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--text-2); line-height: 1.5; }
+  .check input { margin-top: 2px; }
+
+  /* Калькулятор */
+  .sec--calc { padding: 40px 0; }
+  .calc { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; border: 1px dashed var(--line); border-radius: var(--r-l); padding: 28px; }
+  .calc h3 { font-size: 20px; font-weight: 900; }
+  .calc p { margin-top: 8px; font-size: 14px; color: var(--text-2); max-width: 60ch; }
+
+  /* Футер */
+  .ftr { background: var(--bg-alt); border-top: 1px solid var(--line); padding: 48px 0 24px; margin-top: 24px; }
+  .ftr__in { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 32px; }
+  .ftr__about { margin-top: 12px; font-size: 14px; line-height: 1.6; color: var(--text-2); max-width: 40ch; }
+  .ftr__col { display: flex; flex-direction: column; gap: 8px; }
+  .ftr__col b { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-3); }
+  .ftr__col a { color: var(--text-2); text-decoration: none; font-size: 14px; }
+  .ftr__col a:hover { color: var(--accent); }
+  .ftr__bottom { margin-top: 32px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12px; color: var(--text-3); }
+
+  .sticky-cta { display: none; }
+
+  @media (max-width: 900px) {
+    .hero__in { grid-template-columns: 1fr; gap: 32px; padding: 48px 24px 56px; }
+    .trust, .why, .venue, .form-wrap { grid-template-columns: 1fr; gap: 28px; }
+    .packs { grid-template-columns: 1fr; }
+    .rounds { grid-template-columns: 1fr; }
+    .games { grid-template-columns: 1fr 1fr; }
+    .results { grid-template-columns: 1fr; }
+    .ftr__in { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .wrap { padding: 0 16px; }
+    .hdr__nav, .hdr__phone { display: none; }
+    .hdr__in { padding: 10px 16px; }
+    .hero__in { padding: 40px 16px 48px; }
+    .sec { padding: 52px 0; }
+    .trust__facts { grid-template-columns: 1fr 1fr; }
+    .alts { grid-template-columns: 1fr 1fr; }
+    .ftr__in { grid-template-columns: 1fr; }
+    .sticky-cta {
+      display: flex; position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 60;
+      align-items: center; justify-content: center; padding: 16px; border-radius: var(--r);
+      background: var(--cta); color: var(--on-cta); font-weight: 800; text-decoration: none;
+      box-shadow: 0 0 30px rgba(255,45,155,.5);
+    }
+    body { padding-bottom: 84px; }
+  }
+</style>
