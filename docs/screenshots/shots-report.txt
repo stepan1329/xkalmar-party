@@ -1,0 +1,20 @@
+OK  full-1440px.png
+OK  full-1024px.png
+OK  full-768px.png
+OK  full-390px.png
+OK  full-360px.png
+OK  hero-1440-full.png  (section.hero @1440)
+OK  format-1440-full.png  (section.format @1440)
+OK  faq-1440-full.png  (section.faq @1440)
+OK  drc-1440-full.png  (section.drc @1440)
+OK  timeline-1440-full.png  (section.timeline @1440)
+OK  yamarka-1440-full.png  (section.yamarka @1440)
+OK  hallway-1440-full.png  (section.hallway @1440)
+MISSING  features-1440-full.png  selector not found: section.features
+OK  reviews-1440-full.png  (section.reviews @1440)
+OK  gallery-1440-full.png  (section.gallery @1440)
+OK  zayavka-1440-full.png  (#zayavka @1440)
+OK  footer-1440-full.png  (footer.site-footer @1440)
+OK  header-390-full.png  (header.site-header @390)
+OK  drc-390-full.png  (section.drc @390)
+OK  zayavka-390-full.png  (#zayavka @390)

@@ -37,10 +37,11 @@ A modern Astro 7.4.2 static site with TypeScript strict mode, featuring a comple
 │   ├── favicon.svg/ico
 │   └── robots.txt, sitemap.xml
 ├── docs/                   # Documentation
-│   ├── design-system-v2.md # Дизайн-система v2 (утверждена предварительно)
-│   ├── design-system.md    # Старый DRAFT-снимок
-│   ├── design-system-audit.md
-│   └── qa/                 # Аудиты и приёмочные скриншоты
+│   ├── design-spec.md      # Спецификация дизайна (создаёт design-lead)
+│   ├── research/ strategy/ concepts/ qa/ copy/  # артефакты ролей
+│   ├── design-references/  # Референс дизайна
+│   └── screenshots/        # Базовая линия «до» (скриншоты)
+   (старые design-system*.md и аудиты перенесены в .agents/archive/)
 ├── scripts/                # Build scripts
 │   └── compress-images.js
 ├── package.json
@@ -181,7 +182,7 @@ States:
 - Файл squid-game-quest-39.webp отсутствует в public/photos/ (номера
   1–38, затем 40+). Осознанность пропуска не подтверждена — открытый вопрос.
 - В public/photos/ сосуществуют оригиналы .jpg/.JPG и оптимизированные .webp.
-- Подробнее: docs/qa/visual-audit.md, журнал решений — .agents/docs/06-registry.md.
+- Журнал решений — .agents/docs/06-registry.md. Старые аудиты — .agents/archive/.
 
 ## Data Flow
 
