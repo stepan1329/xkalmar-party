@@ -1,0 +1,20 @@
+---
+// /calculator — страница расчёта праздника: калькулятор + форма заявки.
+// Пара работает вместе: калькулятор кладёт состав в window.DR_CALC,
+// форма читает его и отправляет на FORM_URL (фолбэк — WhatsApp).
+import Base from '../layouts/Base.astro';
+import Calculator from '../components/Calculator.astro';
+import RequestForm from '../components/RequestForm.astro';
+---
+<Base
+  title="Рассчитать праздник — цены квест-шоу | XKALMAR"
+  description="Соберите праздник из пакетов и допов и увидите итог сразу. Квест-шоу «Игра в кальмара» для детей 6–12 лет в Ростове-на-Дону."
+  canonical="https://xkalmar.com/calculator"
+  footerLinks={[
+    { href: '#calc', label: 'Расчёт праздника' },
+    { href: '#zayavka', label: 'Оставить заявку' },
+  ]}
+>
+  <Calculator />
+  <RequestForm />
+</Base>

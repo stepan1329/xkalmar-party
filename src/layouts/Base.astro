@@ -8,6 +8,15 @@ const {
   canonical = 'https://xkalmar.com',
   ogImage = '/og-image.png',
   theme = 'dark',
+  // Ссылки футера «На этой странице» — у каждой страницы свои якоря
+  footerLinks = [
+    { href: '#format', label: 'Что это за формат' },
+    { href: '#calc', label: 'Цены и бронь' },
+    { href: '#timeline', label: 'Программа праздника' },
+    { href: '#hallway', label: 'Площадка' },
+    { href: '#faq', label: 'Частые вопросы' },
+    { href: '#zayavka', label: 'Оставить заявку' },
+  ],
 } = Astro.props;
 
 const TEL = '+79287588483';
@@ -93,12 +102,7 @@ import ContactFab from '../components/ContactFab.astro';
         </div>
         <nav class="site-footer__col" aria-label="Разделы страницы">
           <b>На этой странице</b>
-          <a href="#format">Что это за формат</a>
-          <a href="#calc">Цены и бронь</a>
-          <a href="#timeline">Программа праздника</a>
-          <a href="#hallway">Площадка</a>
-          <a href="#faq">Частые вопросы</a>
-          <a href="#zayavka">Оставить заявку</a>
+          {footerLinks.map((l) => <a href={l.href}>{l.label}</a>)}
         </nav>
         <nav class="site-footer__col" aria-label="Связь">
           <b>Связаться</b>

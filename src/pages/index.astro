@@ -1,981 +1,2655 @@
 ---
-import Base from '../layouts/Base.astro';
-import Calculator from '../components/Calculator.astro';
-import RequestForm from '../components/RequestForm.astro';
+// Главная «Праздник-конструктор» — боевая версия эталона B2.
+// Факты и цены — канон SPEC-business.md (Г2/Г3).
+// Формы (квиз + заявка) шлются на FORM_URL, фолбэк — WhatsApp.
+// Калькулятор живёт на отдельной странице /calculator (полоса-ссылка внизу).
 ---
-<Base title="XKALMAR — день рождения в квест-шоу | Ростов-на-Дону" description="День рождения в квест-шоу для детей в Ростове-на-Дону: сценарий, актёры, банкет под ключ, фото и торт. Рассчитайте праздник за минуту.">
-  <section class="hero" id="top">
-    <div class="wrap hero__grid">
-      <div class="hero__content">
-        <span class="hero__tag">Квест-шоу для детей · Ростов-на-Дону</span>
-        <h1>Дети — в квест-шоу.<br />Родители — <em>отдыхают</em>.</h1>
-        <p>Мы берём праздник на себя полностью: сценарий, актёры, сервировка, торт, фото. Вам остаётся только прийти и дождаться восторженных детей.</p>
-        <div class="hero__meta">
-          <span class="chip">6–12 лет</span>
-          <span class="chip">90 минут</span>
-          <span class="chip">от 15 000 ₽</span>
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>XKALMAR — квест-шоу «Игра в кальмара» для детей 6–12 лет в Ростове-на-Дону</title>
+    <meta name="description" content="Детский праздник под ключ в Ростове-на-Дону: квест-шоу по мотивам «Игры в кальмара» для детей 6–12 лет. Команда из 3 ведущих-актёров, банкет и торт, пакеты от 15 000 ₽. Организатор перезвонит в течение часа." />
+    <link rel="canonical" href="https://xkalmar.com/" />
+    <link rel="icon" href="/favicon.svg" />
+    <meta property="og:title" content="XKALMAR — квест-шоу «Игра в кальмара» для детей в Ростове-на-Дону" />
+    <meta property="og:description" content="Праздник под ключ: квест-шоу, команда из 3 ведущих-актёров, банкет и торт. Пакеты от 15 000 ₽." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://xkalmar.com/" />
+    <meta property="og:image" content="https://xkalmar.com/photos/hero-1.webp" />
+    <meta name="theme-color" content="#fbf4e8" />
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "EntertainmentBusiness",
+      "name": "XKALMAR — квест-шоу",
+      "description": "Квест-шоу для детей 6–12 лет в Ростове-на-Дону: команда из 3 ведущих-актёров, банкет под ключ, торт.",
+      "url": "https://xkalmar.com",
+      "telephone": "+79287588483",
+      "email": "quest@xkalmar.ru",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Зорге, 15",
+        "addressLocality": "Ростов-на-Дону",
+        "addressCountry": "RU"
+      },
+      "priceRange": "15 000 — 50 000 ₽",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "154",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+    </script>
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Это же «Игра в кальмара» — будет страшно?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Мы взяли из сериала только игры и реквизит и адаптировали их под детей. Это не хоррор, а увлекательное шоу с актёрами, в центре которого — именинник." }
+        },
+        {
+          "@type": "Question",
+          "name": "Почему дороже обычного квеста?",
+          "acceptedAnswer": { "@type": "Answer", "text": "В обычном квесте ребёнка встречают оператор и один актёр. У нас — команда из 3 ведущих-актёров и организатор: игра идёт для всей группы, а организацию праздника берёт на себя команда." }
+        },
+        {
+          "@type": "Question",
+          "name": "С какого возраста? А будет ли интересно 12-летним?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Специализация — 6–12 лет. Сценарий адаптируется: младшим — мягче, старшим — больше логики и командной работы. Четырёхлетнего берём, если он приходит с братом или сестрой." }
+        },
+        {
+          "@type": "Question",
+          "name": "Как забронировать и сколько ждать ответа?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Оставьте заявку или позвоните — организатор перезвонит в течение часа. Разговор занимает около 20 минут, дальше — предоплата 3 000 ₽ или «пусть пока подумаем»." }
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+  <!-- Самодостаточные токены концепта B2 (не зависят от темы основного сайта) -->
+  <style is:global>
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 200 900;
+      font-display: swap;
+      src: url('/fonts/nunito-cyrillic.woff2') format('woff2');
+      unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 200 900;
+      font-display: swap;
+      src: url('/fonts/nunito-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+        U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    body {
+      background: #fbf4e8;
+    }
+  </style>
+
+  <div class="b2">
+    <a class="skip" href="#main">Перейти к содержанию</a>
+
+    <!-- ======================= Шапка ======================= -->
+    <header class="hdr">
+      <div class="container hdr__in">
+        <a class="logo" href="#top" aria-label="XKALMAR — на начало страницы">
+          <span class="logo__mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          XKALMAR
+        </a>
+        <nav class="hdr__nav" aria-label="Разделы страницы">
+          <a href="#packages">Пакеты</a>
+          <a href="#program">Программа</a>
+          <a href="#venue">Площадка</a>
+          <a href="#reviews">Отзывы</a>
+          <a href="#faq">Вопросы</a>
+        </nav>
+        <div class="hdr__act">
+          <a class="hdr__phone" href="tel:+79287588483">+7 928 758-84-83</a>
+          <a class="btn btn--primary btn--s" href="#zayavka">Оставить заявку</a>
         </div>
-        <div class="hero__actions">
-          <a href="#calc" class="hero__cta">Рассчитать праздник</a>
-          <a href="#format" class="hero__ghost">Что это за формат?</a>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ======================= 1. Первый экран ======================= -->
+      <section class="hero" id="top">
+        <svg class="hero__bunting" viewBox="0 0 1200 46" aria-hidden="true" focusable="false">
+          <path d="M0 7 Q 600 19 1200 7" fill="none" stroke="#e8dcc8" stroke-width="2" />
+          <path d="M22 9 L58 9 L40 40 Z" fill="#d14524" />
+          <path d="M122 10 L158 10 L140 41 Z" fill="#f6b93b" />
+          <path d="M222 11 L258 11 L240 42 Z" fill="#0e7c74" />
+          <path d="M322 12 L358 12 L340 43 Z" fill="#f8ddd2" />
+          <path d="M422 12 L458 12 L440 43 Z" fill="#ddeee9" />
+          <path d="M522 13 L558 13 L540 44 Z" fill="#d14524" />
+          <path d="M622 13 L658 13 L640 44 Z" fill="#f6b93b" />
+          <path d="M722 13 L758 13 L740 44 Z" fill="#0e7c74" />
+          <path d="M822 12 L858 12 L840 43 Z" fill="#f8ddd2" />
+          <path d="M922 12 L958 12 L940 43 Z" fill="#ddeee9" />
+          <path d="M1022 11 L1058 11 L1040 42 Z" fill="#d14524" />
+          <path d="M1122 10 L1158 10 L1140 41 Z" fill="#f6b93b" />
+        </svg>
+
+        <div class="container hero__grid">
+          <div class="hero__copy">
+            <p class="hero__eyebrow">Квест-шоу для детей 6–12 лет · Ростов-на-Дону</p>
+            <h1 class="hero__title">
+              Праздник, из которого <em>дети не хотят уходить</em>
+            </h1>
+            <p class="hero__lead">
+              Квест-шоу по мотивам «Игры в кальмара» — игра и азарт, без страшного.
+              Команда из 3&nbsp;ведущих-актёров, именинник — в центре программы,
+              а организация — на нас.
+            </p>
+
+            <div class="hero__cta" id="hero-cta">
+              <a class="btn btn--primary btn--xl" href="#zayavka">Оставить заявку</a>
+              <a class="btn btn--ghost btn--lg" href="tel:+79287588483">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                Позвонить
+              </a>
+            </div>
+            <p class="hero__micro">Организатор перезвонит в течение часа</p>
+
+            <div class="price-card">
+              <p class="price-card__num"><span>от</span> 15 000 ₽</p>
+              <ul class="price-card__list">
+                <li><i class="dot dot--coral"></i>«Мини» — 15 000 ₽: квест-шоу 1 ч + стол 30 мин, до 8 детей</li>
+                <li><i class="dot dot--sun"></i>«Популярный» — 24 000 ₽: шоу 1,5 ч + игры с призами + стол</li>
+                <li><i class="dot dot--teal"></i>«Максимальный» — 50 000 ₽: всё включено, до 15 детей</li>
+              </ul>
+              <p class="price-card__note">Сувенир — каждому гостю, в любом пакете</p>
+            </div>
+          </div>
+
+          <div class="hero__media">
+            <figure class="hero__photo">
+              <img
+                src="/photos/squid-game-quest-3.webp"
+                alt="Дети смеются во время квест-шоу «Игра в кальмара»"
+                width="1400"
+                height="934"
+                fetchpriority="high"
+              />
+              <figcaption class="hero__sticker" aria-hidden="true">6–12<br />лет</figcaption>
+            </figure>
+            <figure class="hero__mini" aria-hidden="true">
+              <img
+                src="/photos/squid-game-quest-15.webp"
+                alt=""
+                width="934"
+                height="1400"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <span class="cf cf--circle" style="top: 4%; left: -4%" aria-hidden="true"></span>
+            <span class="cf cf--tri" style="top: 30%; right: -3%; animation-delay: 1.2s" aria-hidden="true"></span>
+            <span class="cf cf--sq" style="bottom: 34%; left: -6%; animation-delay: 2.1s" aria-hidden="true"></span>
+          </div>
         </div>
-        <p class="hero__trust">
-          <span class="hero__stars" aria-hidden="true">★★★★★</span>
-          5.0 · 154 оценки на <a href="https://yandex.ru/maps/org/kvest_shou_igra_v_kalmara/19338708863/" target="_blank" rel="noopener">Яндекс.Картах</a>
+
+        <!-- Квиз-вход: альтернативный путь к заявке -->
+        <div class="container">
+          <section class="quiz" id="quiz" aria-label="Подбор праздника за 4 шага">
+            <div class="quiz__head">
+              <h2 class="quiz__title">Подберём праздник за 4 шага</h2>
+              <p class="quiz__stepnum" id="q-stepnum">Шаг 1 из 4</p>
+            </div>
+            <div class="quiz__bar" aria-hidden="true"><span class="quiz__bar-fill" id="q-bar"></span></div>
+
+            <form id="q-form" novalidate>
+              <!-- Шаг 1: дата -->
+              <fieldset class="q-step" data-step="0">
+                <legend class="sr-only">Шаг 1 — дата праздника</legend>
+                <h3 class="q-q" tabindex="-1">Когда планируете праздник?</h3>
+                <div class="field">
+                  <label class="sr-only" for="q-date">Дата праздника</label>
+                  <input type="date" id="q-date" name="q-date" />
+                  <p class="f-err" hidden>Выберите дату или отметьте «еще не знаю»</p>
+                </div>
+                <label class="q-check">
+                  <input type="checkbox" id="q-nodate" />
+                  <span>Точная дата еще не известна</span>
+                </label>
+              </fieldset>
+
+              <!-- Шаг 2: повод и возраст -->
+              <fieldset class="q-step" data-step="1" hidden>
+                <legend class="sr-only">Шаг 2 — повод и возраст детей</legend>
+                <h3 class="q-q" tabindex="-1">Повод и возраст детей?</h3>
+                <div class="q-group" data-group>
+                  <p class="q-group__label">Повод</p>
+                  <div class="chips">
+                    <label class="chip"><input type="radio" name="q2-occasion" value="День рождения" /><span>День рождения</span></label>
+                    <label class="chip"><input type="radio" name="q2-occasion" value="Выпускной" /><span>Выпускной</span></label>
+                    <label class="chip"><input type="radio" name="q2-occasion" value="Корпоратив" /><span>Корпоратив</span></label>
+                    <label class="chip"><input type="radio" name="q2-occasion" value="Другой повод" /><span>Другой повод</span></label>
+                  </div>
+                  <p class="f-err" hidden>Выберите повод</p>
+                </div>
+                <div class="q-group" data-group>
+                  <p class="q-group__label">Возраст</p>
+                  <div class="chips">
+                    <label class="chip"><input type="radio" name="q2-age" value="4–6" /><span>4–6</span></label>
+                    <label class="chip"><input type="radio" name="q2-age" value="6–9" /><span>6–9</span></label>
+                    <label class="chip"><input type="radio" name="q2-age" value="9–12" /><span>9–12</span></label>
+                    <label class="chip"><input type="radio" name="q2-age" value="12+" /><span>12+</span></label>
+                  </div>
+                  <p class="f-err" hidden>Выберите возраст</p>
+                </div>
+              </fieldset>
+
+              <!-- Шаг 3: гости -->
+              <fieldset class="q-step" data-step="2" hidden>
+                <legend class="sr-only">Шаг 3 — количество гостей</legend>
+                <h3 class="q-q" tabindex="-1">Сколько будет детей?</h3>
+                <div class="q-group" data-group>
+                  <div class="chips">
+                    <label class="chip"><input type="radio" name="q3" value="до 8" /><span>До 8</span></label>
+                    <label class="chip"><input type="radio" name="q3" value="9–15" /><span>9–15</span></label>
+                    <label class="chip"><input type="radio" name="q3" value="больше 15" /><span>Больше 15</span></label>
+                  </div>
+                  <p class="f-err" hidden>Выберите количество гостей</p>
+                </div>
+              </fieldset>
+
+              <!-- Шаг 4: контакт -->
+              <fieldset class="q-step" data-step="3" hidden>
+                <legend class="sr-only">Шаг 4 — контакт для заявки</legend>
+                <h3 class="q-q" tabindex="-1">Куда перезвонить?</h3>
+                <div class="field">
+                  <label for="q-name">Имя</label>
+                  <input type="text" id="q-name" name="q-name" autocomplete="name" placeholder="Как вас зовут" />
+                  <p class="f-err" hidden>Напишите имя</p>
+                </div>
+                <div class="field">
+                  <label for="q-phone">Телефон</label>
+                  <input type="tel" id="q-phone" name="q-phone" inputmode="tel" autocomplete="tel" placeholder="+7 ___ ___-__-__" />
+                  <p class="f-err" hidden>Проверьте номер — нужно не меньше 10 цифр</p>
+                </div>
+                <label class="q-check">
+                  <input type="checkbox" id="q-consent" />
+                  <span>Согласен на <a href="/privacy">обработку персональных данных</a></span>
+                </label>
+                <p class="f-err" hidden>Нужно согласие на обработку данных</p>
+              </fieldset>
+
+              <div class="quiz__nav">
+                <button type="button" class="btn btn--ghost btn--s" id="q-back" hidden>Назад</button>
+                <button type="button" class="btn btn--primary btn--s" id="q-next">Далее</button>
+              </div>
+            </form>
+
+            <div class="quiz__done" id="q-done" hidden>
+              <span class="quiz__ok" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+              </span>
+              <h3>Заявка собрана!</h3>
+              <p id="q-rec">Организатор позвонит в течение часа, подберёт пакет и ответит на вопросы.</p>
+              <p class="quiz__done-alt">
+                Не хотите ждать звонка? <a href="#zayavka">Заполните полную форму заявки</a>
+              </p>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- ======================= 2. Доверие ======================= -->
+      <section class="trust">
+        <div class="container">
+          <h2 class="h2">Родителям можно спокойно выдохнуть</h2>
+          <div class="trust__grid">
+            <article class="t-card">
+              <span class="t-card__icon t-card__icon--teal" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/><path d="M9 11.5l2 2 4-4.5"/></svg>
+              </span>
+              <h3>Без страшного</h3>
+              <p>Взяли из сериала только игры и реквизит и адаптировали всё под детей. Не хоррор, а шоу с актёрами.</p>
+            </article>
+            <article class="t-card">
+              <span class="t-card__icon t-card__icon--coral" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6"/><circle cx="16.5" cy="9" r="2.6"/><path d="M15.8 14.7c2.2.3 4 1.7 4.7 4.3"/></svg>
+              </span>
+              <h3>Команда, а не один ведущий</h3>
+              <p>3 ведущих-актёра ведут игру, организатор на связи с вами — от заявки до торта.</p>
+            </article>
+            <article class="t-card">
+              <span class="t-card__icon t-card__icon--sun" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M12 11v9M4 15h16M12 11c-3.8 0-5.3-1.4-4.8-2.9.5-1.6 2.9-1.3 4.8 2.9zm0 0c3.8 0 5.3-1.4 4.8-2.9-.5-1.6-2.9-1.3-4.8 2.9z"/></svg>
+              </span>
+              <h3>Под ключ</h3>
+              <p>Сценарий, реквизит, стол и торт — в пакетах «под ключ». Родителям не нужно ничего организовывать.</p>
+            </article>
+            <article class="t-card">
+              <span class="t-card__icon t-card__icon--mint" aria-hidden="true"><b>₽</b></span>
+              <h3>Бронируем спокойно</h3>
+              <p>Предоплата 3 000 ₽ — возвращается в любой день, кроме дня праздника.</p>
+            </article>
+          </div>
+
+          <blockquote class="trust__quote">
+            <p>«Дети не хотели уходить, всё время прохождения держали в напряжении, но&nbsp;не&nbsp;пугали, а&nbsp;именно увлекали!»</p>
+            <footer>— Ангелина, отзыв на Яндекс&nbsp;Картах</footer>
+          </blockquote>
+
+          <div class="trust__shots">
+            <img src="/photos/squid-game-quest-20.webp" alt="Дети играют с мягкими мячами на ярмарке игр" width="1400" height="934" loading="lazy" decoding="async" />
+            <img src="/photos/squid-game-quest-13.webp" alt="Дети сидят в кругу и дают «пять» друг другу" width="1400" height="934" loading="lazy" decoding="async" />
+            <img src="/photos/squid-game-quest-18.webp" alt="Ведущая в красном костюме с группой детей" width="1400" height="934" loading="lazy" decoding="async" />
+            <img src="/photos/squid-game-quest-49.webp" alt="Дети в белых футболках с номерами готовятся к игре" width="1400" height="934" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= 3. Пакеты ======================= -->
+      <section class="packs" id="packages">
+        <div class="container">
+          <h2 class="h2">Пакеты: выберите по числу гостей</h2>
+          <p class="sub">
+            От 15 000 до 50 000 ₽. В каждом — квест-шоу с командой из 3&nbsp;ведущих-актёров
+            и сувенир каждому ребёнку.
+          </p>
+
+          <div class="packs__grid">
+            <article class="pack">
+              <div class="pack__top"><span class="pack__tag" aria-hidden="true">01</span><h3>Мини</h3></div>
+              <p class="pack__price"><b>15 000 ₽</b></p>
+              <p class="pack__meta">1 ч квест-шоу + 30 мин стол · до 8 детей</p>
+              <ul class="pack__list">
+                <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Квест-шоу — 1 час</li>
+                <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Праздничный стол — 30 мин, еда своя</li>
+                <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Сувенир каждому гостю</li>
+                <li class="off" aria-disabled="true">Игры с призами и ярмарка</li>
+                <li class="off" aria-disabled="true">Еда, торт, фотограф, шары</li>
+              </ul>
+              <button type="button" class="btn btn--primary pack__cta" data-package="Мини">Выбрать пакет</button>
+            </article>
+
+            <article class="pack pack--hot">
+              <p class="pack__flag">Золотая середина</p>
+              <div class="pack__top"><span class="pack__tag" aria-hidden="true">02</span><h3>Популярный</h3></div>
+              <p class="pack__price"><b>24 000 ₽</b></p>
+              <p class="pack__meta">2,5 часа · до 15 детей · еда своя</p>
+              <ul class="pack__list">
+                <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Квест-шоу — 1,5 часа</li>
+                <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Игры с призами — 30 мин</li>
+                <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Ярмарка игр — 30 мин</li>
+                <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Праздничный стол — 30 мин, еда своя</li>
+                <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Сувенир каждому гостю</li>
+                <li class="off" aria-disabled="true">Еда, торт, фотограф, шары</li>
+              </ul>
+              <button type="button" class="btn btn--primary pack__cta" data-package="Популярный">Выбрать пакет</button>
+            </article>
+
+            <article class="pack">
+              <div class="pack__top"><span class="pack__tag" aria-hidden="true">03</span><h3>Максимальный</h3></div>
+              <p class="pack__price"><b>50 000 ₽</b></p>
+              <p class="pack__meta">3,5 часа · до 15 детей · всё включено</p>
+              <ul class="pack__list">
+                <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Квест-шоу — 1,5 часа</li>
+                <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Ярмарка игр — 1 час: подвижные игры и мафия</li>
+                <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Меню под ключ и большой торт от кондитера</li>
+                <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Фотограф и гелиевые шары</li>
+                <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Подарок каждому ребёнку</li>
+              </ul>
+              <button type="button" class="btn btn--primary pack__cta" data-package="Максимальный">Выбрать пакет</button>
+            </article>
+          </div>
+
+          <p class="packs__note">
+            Гостей больше 15 — +1 000 ₽ за каждого. Видеосъёмка — +4 000 ₽ к любому пакету.
+            Предоплата — 3 000 ₽.
+          </p>
+
+          <details class="packs__more">
+            <summary>Показать все пакеты</summary>
+            <ul>
+              <li><b>Базовый — 20 000 ₽</b><span>квест-шоу 1,5 ч + стол 30 мин (еда своя) · до 15 детей</span></li>
+              <li><b>Оптимальный — 33 500 ₽</b><span>квест-шоу 1,5 ч + игры 1 ч + банкет под ключ с порционным тортом</span></li>
+              <li><b>Расширенный — 43 000 ₽</b><span>как «Оптимальный» + фотограф и гелиевые шары</span></li>
+            </ul>
+          </details>
+        </div>
+      </section>
+
+      <!-- ======================= 4. Таймлайн программы ======================= -->
+      <section class="prog" id="program">
+        <div class="container">
+          <h2 class="h2">Как проходит праздник</h2>
+          <p class="sub">
+            Точный тайминг зависит от пакета — последовательность покажем здесь,
+            а минуты организатор распишет при бронировании.
+          </p>
+          <div class="prog__grid">
+            <figure class="prog__photo">
+              <img
+                src="/photos/squid-game-quest-23.webp"
+                alt="Именинник у праздничного торта в форме мяча, рядом гости и ведущий"
+                width="1400"
+                height="933"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <ol class="prog__steps">
+              <li>
+                <span class="prog__num" aria-hidden="true">1</span>
+                <div><h3>Сборы и инструктаж</h3><p>Встречаем гостей, знакомим с ведущими и правилами игры.</p></div>
+              </li>
+              <li>
+                <span class="prog__num" aria-hidden="true">2</span>
+                <div><h3>Квест-шоу</h3><p>Дети проходят задания в движении и с азартом — вместе с командой из 3&nbsp;ведущих-актёров.</p></div>
+              </li>
+              <li>
+                <span class="prog__num" aria-hidden="true">3</span>
+                <div><h3>Сувениры</h3><p>Каждый участник получает сувенир на память — в любом пакете.</p></div>
+              </li>
+              <li>
+                <span class="prog__num" aria-hidden="true">4</span>
+                <div><h3>Поздравление и торт</h3><p>Вынос торта и поздравление именинника.</p></div>
+              </li>
+              <li>
+                <span class="prog__num" aria-hidden="true">5</span>
+                <div><h3>Праздничный стол</h3><p>Банкет: от стола со своей едой до меню под ключ — зависит от пакета.</p></div>
+              </li>
+              <li>
+                <span class="prog__num" aria-hidden="true">6</span>
+                <div><h3>Ярмарка игр</h3><p>Подвижные игры с призами, в «Максимальном» — ещё и мафия.</p></div>
+              </li>
+              <li>
+                <span class="prog__num" aria-hidden="true">7</span>
+                <div><h3>Чай и сборы</h3><p>Спокойное завершение: чай с тортом, фото и прощание.</p></div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= 5. Почему дороже квеста ======================= -->
+      <section class="why">
+        <div class="container">
+          <h2 class="h2 h2--light">Почему мы дороже обычного квеста</h2>
+          <div class="why__grid">
+            <article class="why__card why__card--them">
+              <h3>Обычный квест</h3>
+              <p class="why__big">1 оператор + 1 актёр</p>
+              <p class="why__sub">на всю группу детей</p>
+            </article>
+            <article class="why__card why__card--us">
+              <h3>Квест-шоу XKALMAR</h3>
+              <p class="why__big">3 ведущих-актёра + организатор</p>
+              <ul class="why__list">
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Сценарий под возраст: младшим — мягче, старшим — сложнее</li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Именинник — в центре программы</li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Организация — на команде, родители просто рядом</li>
+              </ul>
+            </article>
+          </div>
+          <p class="why__foot">В стоимость заложена команда, которая ведёт праздник от сборов до торта.</p>
+        </div>
+      </section>
+
+      <!-- ======================= 6. Площадка ======================= -->
+      <section class="venue" id="venue">
+        <div class="container">
+          <h2 class="h2">Площадка в Ростове-на-Дону</h2>
+          <div class="venue__grid">
+            <div class="venue__info">
+              <div class="venue__card">
+                <h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>ул. Зорге, 15</h3>
+                <ul class="venue__facts">
+                  <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Банкетные комнаты — стол и торт в отдельной комнате</li>
+                  <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Вентиляция и кондиционеры</li>
+                  <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Рядом магазины и доставка пиццы</li>
+                </ul>
+                <p class="venue__hours">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+                  Ежедневно, 10:00–22:00, по записи
+                </p>
+                <div class="venue__btns">
+                  <a class="btn btn--primary" href="https://yandex.ru/maps/?text=Ростов-на-Дону%2C%20улица%20Зорге%2C%2015" target="_blank" rel="noopener">Как добраться</a>
+                  <a class="btn btn--ghost" href="tel:+79287588483">Позвонить</a>
+                </div>
+              </div>
+            </div>
+            <div class="venue__shots">
+              <img class="venue__big" src="/photos/banquet-room-9.webp" alt="Банкетная комната с сервированными столами" width="2048" height="1536" loading="lazy" decoding="async" />
+              <img src="/photos/banquet-room-6.webp" alt="Банкетная комната с длинным столом" width="3024" height="4032" loading="lazy" decoding="async" />
+              <img src="/photos/banquet-room-2.webp" alt="Накрытый праздничный стол с порционными тортами" width="3024" height="4032" loading="lazy" decoding="async" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= 7. Отзывы ======================= -->
+      <section class="reviews" id="reviews">
+        <div class="container">
+          <h2 class="h2">Что пишут родители</h2>
+          <div class="reviews__row">
+            <article class="rev">
+              <p class="rev__text">«Все дети задействованы в игру. Активный, динамичный квест. Не&nbsp;страшно.»</p>
+              <footer><b>Анна Д.</b><span>14 октября 2025</span><a href="https://yandex.ru/maps/org/kvest_shou_igra_v_kalmara/19338708863/reviews/" target="_blank" rel="noopener">Яндекс Карты</a></footer>
+            </article>
+            <article class="rev">
+              <p class="rev__text">«Очень четкая и продуманная организация праздника, интересные конкурсы (по&nbsp;мотивам сериала, но&nbsp;без кровожадности и&nbsp;насилия), помещения чистые.»</p>
+              <footer><b>Елена С.</b><span>28 февраля</span><a href="https://yandex.ru/maps/org/kvest_shou_igra_v_kalmara/19338708863/reviews/" target="_blank" rel="noopener">Яндекс Карты</a></footer>
+            </article>
+            <article class="rev">
+              <p class="rev__text">«Все прошло максимально комфортно, сделали под ключ, дети были довольны, родители избавлены от&nbsp;лишней суеты в&nbsp;организации.»</p>
+              <footer><b>Анна Р.</b><span>23 мая</span><a href="https://yandex.ru/maps/org/kvest_shou_igra_v_kalmara/19338708863/reviews/" target="_blank" rel="noopener">Яндекс Карты</a></footer>
+            </article>
+            <article class="rev">
+              <p class="rev__text">«Настолько все продумано, дети не&nbsp;скучают ни&nbsp;минуты, вовлечены все. Атмосфера на&nbsp;100% соответствует заявленной.»</p>
+              <footer><b>Виктория М.</b><span>14 сентября 2025</span><a href="https://yandex.ru/maps/org/kvest_shou_igra_v_kalmara/19338708863/reviews/" target="_blank" rel="noopener">Яндекс Карты</a></footer>
+            </article>
+          </div>
+          <a class="reviews__all" href="https://yandex.ru/maps/org/kvest_shou_igra_v_kalmara/19338708863/reviews/" target="_blank" rel="noopener">
+            Читать все отзывы на Яндекс Картах
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- ======================= 8. FAQ ======================= -->
+      <section class="faq" id="faq">
+        <div class="container faq__in">
+          <h2 class="h2">Вопросы родителей</h2>
+          <details class="faq__item" open>
+            <summary><h3>Это же «Игра в кальмара» — будет страшно?</h3><span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>
+              Мы взяли из сериала только игры и реквизит и адаптировали их под детей.
+              Это не хоррор, а увлекательное шоу с актёрами, в центре которого — именинник.
+              Как пишут родители в отзывах: «не пугали, а именно увлекали».
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary><h3>Почему дороже обычного квеста?</h3><span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>
+              В обычном квесте ребёнка встречают оператор и один актёр. У нас — команда
+              из 3 ведущих-актёров и организатор: игра идёт для всей группы, а организацию
+              праздника берёт на себя команда.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary><h3>С какого возраста? А будет ли интересно 12-летним?</h3><span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>
+              Наша специализация — 6–12 лет. Сценарий адаптируется: младшим — мягче,
+              старшим — больше логики и командной работы. Четырёхлетнего берём,
+              если он приходит с братом или сестрой.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary><h3>Что взять с собой?</h3><span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>
+              Зависит от пакета. В «Мини», «Базовом» и «Популярном» еда своя.
+              В «Оптимальном» еда и порционный торт уже включены, в «Максимальном» —
+              меню под ключ и большой торт от кондитера.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary><h3>Как забронировать и сколько ждать ответа?</h3><span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>
+              Оставьте заявку или позвоните — организатор перезвонит в течение часа.
+              Разговор занимает около 20 минут, дальше — предоплата 3 000 ₽
+              или «пусть пока подумаем».
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <!-- ======================= 9. Форма заявки ======================= -->
+      <section class="req" id="zayavka">
+        <div class="container req__grid">
+          <div class="req__copy">
+            <h2 class="h2">Оставьте заявку — перезвоним в течение часа</h2>
+            <p class="sub">
+              Расскажем про свободные даты, поможем выбрать пакет и посчитаем праздник
+              под ваш состав гостей.
+            </p>
+            <a class="req__phone" href="tel:+79287588483">+7 928 758-84-83</a>
+            <div class="req__msgrs">
+              <a class="msgr" href="https://wa.me/79287588483" target="_blank" rel="noopener"><i style="background:#128c7e"></i>WhatsApp</a>
+              <a class="msgr" href="https://t.me/xkalmar" target="_blank" rel="noopener"><i style="background:#2aabee"></i>Telegram</a>
+              <a class="msgr" href="https://max.ru/u/f9LHodD0cOKVRRd0t2pjN2pm8s7nWCNllQJYsSra5mx0QiqcfNxI553bSzc" target="_blank" rel="noopener"><i style="background:#6a3cf5"></i>MAX</a>
+              <a class="msgr" href="https://vk.ru/xkalmar" target="_blank" rel="noopener"><i style="background:#0077ff"></i>ВКонтакте</a>
+            </div>
+            <ul class="req__points">
+              <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Предоплата 3 000 ₽ — возвращается, если планы изменятся (кроме дня праздника)</li>
+              <li><svg viewBox="0 0 24 24" class="ok" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Дата закрепляется после предоплаты</li>
+            </ul>
+          </div>
+
+          <div class="req__card">
+            <form id="f-form" novalidate>
+              <div class="req__cols">
+                <div class="field">
+                  <label for="f-name">Имя родителя *</label>
+                  <input type="text" id="f-name" name="name" autocomplete="name" placeholder="Как вас зовут" />
+                  <p class="f-err" hidden>Напишите имя</p>
+                </div>
+                <div class="field">
+                  <label for="f-phone">Телефон *</label>
+                  <input type="tel" id="f-phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="+7 ___ ___-__-__" />
+                  <p class="f-err" hidden>Проверьте номер — нужно не меньше 10 цифр</p>
+                </div>
+                <div class="field">
+                  <label for="f-date">Дата праздника</label>
+                  <input type="date" id="f-date" name="date" />
+                </div>
+                <div class="field">
+                  <label for="f-guests">Сколько детей</label>
+                  <select id="f-guests" name="guests">
+                    <option value="">Пока не знаем</option>
+                    <option>До 8</option>
+                    <option>9–15</option>
+                    <option>Больше 15</option>
+                  </select>
+                </div>
+                <div class="field field--full">
+                  <label for="f-package">Пакет</label>
+                  <select id="f-package" name="package">
+                    <option value="">Подберём по телефону</option>
+                    <option>Мини</option>
+                    <option>Базовый</option>
+                    <option>Популярный</option>
+                    <option>Оптимальный</option>
+                    <option>Расширенный</option>
+                    <option>Максимальный</option>
+                    <option>Свой формат</option>
+                  </select>
+                </div>
+                <div class="field field--full">
+                  <label for="f-comment">Комментарий</label>
+                  <textarea id="f-comment" name="comment" rows="2" placeholder="Возраст детей, пожелания"></textarea>
+                </div>
+              </div>
+              <label class="q-check">
+                <input type="checkbox" id="f-consent" />
+                <span>Согласен на <a href="/privacy">обработку персональных данных</a></span>
+              </label>
+              <p class="f-err" id="f-consent-err" hidden>Нужно согласие на обработку данных</p>
+              <button type="submit" class="btn btn--primary btn--xl req__submit">Отправить заявку</button>
+            </form>
+            <div class="req__done" id="f-done" hidden>
+              <span class="quiz__ok" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+              </span>
+              <h3>Заявка собрана!</h3>
+              <p>Организатор перезвонит в течение часа. Если вопрос срочный — позвоните нам: <a href="tel:+79287588483">+7 928 758-84-83</a>.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= 10. Калькулятор (демотирован) ======================= -->
+      <section class="calcstrip">
+        <div class="container calcstrip__in">
+          <div>
+            <b>Нужна точная смета?</b>
+            <p>Соберите праздник из отдельных позиций и увидите итог — в калькуляторе.</p>
+          </div>
+          <a class="btn btn--ghost" href="/calculator">Открыть калькулятор
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- ======================= Подвал ======================= -->
+    <footer class="ftr">
+      <div class="container ftr__in">
+        <p class="ftr__logo">XKALMAR</p>
+        <p>Квест-шоу «Игра в кальмара» для детей 6–12 лет · Ростов-на-Дону, ул. Зорге, 15</p>
+        <p><a href="tel:+79287588483">+7 928 758-84-83</a> · <a href="mailto:quest@xkalmar.ru">quest@xkalmar.ru</a></p>
+        <p class="ftr__legal">
+          ИП Терентьев С.В. · ИНН 110556190456 ·
+          <a href="/privacy">Политика конфиденциальности</a>
         </p>
+        <p class="ftr__legal">Шоу проводится по мотивам сериала; проект не связан с правообладателями.</p>
       </div>
-      <div class="hero__visual">
-        <img src="/photos/hero-1.webp" alt="Квест-шоу Игра в кальмара для детей — праздник под ключ в Ростове-на-Дону" class="hero__img hero__img--desktop" fetchpriority="high" />
-        <img src="/photos/hero-mobil-1.webp" alt="Детский квест-шоу в Ростове-на-Дону — яркие эмоции для детей 6–12 лет" class="hero__img hero__img--mobile" fetchpriority="high" />
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <nav class="page-nav" aria-label="Разделы страницы">
-    <div class="wrap page-nav__wrap">
-      <a href="#format">Формат</a>
-      <a href="#calc">Цены</a>
-      <a href="#timeline">Программа</a>
-      <a href="#yamarka">Ярмарка</a>
-      <a href="#hallway">Площадка</a>
-      <a href="#media">Фото и видео</a>
-      <a href="#faq">Вопросы</a>
-      <a href="#zayavka">Заявка</a>
-    </div>
-  </nav>
-
-  <!-- ЧТО ЭТО ЗА ФОРМАТ -->
-  <section class="format" id="format">
-    <div class="wrap">
-      <h2>Что это за формат?</h2>
-      <p class="format__sub">Это праздник, где дети проходят испытания как в сериале «Игра в кальмара» — но безопасно и весело. Три ведущих, 9 игр, 90 минут, банкет. Без проигравших.</p>
-      <div class="format__grid">
-        <div class="format__card">
-          <div class="format__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-          </div>
-          <b>Актёры и сценарий</b>
-          <p>Трое ведущих ведут игру — не один оператор в тёмной комнате. Застенчивым помогаем, активным направляем.</p>
-        </div>
-        <div class="format__card">
-          <div class="format__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <b>9 игр за 90 минут</b>
-          <p>Каждые 8–10 минут — новое испытание. Эстафеты, логика, движение. Никто не выбывает и не скучает.</p>
-        </div>
-        <div class="format__card">
-          <div class="format__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-          </div>
-          <b>Банкет под ключ</b>
-          <p>Своя еда или под ключ — пицца, наггетсы, соки, торт. Сервировка, скатерть, чай — всё включено.</p>
-        </div>
-        <div class="format__card">
-          <div class="format__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <b>Безопасно. Родители рядом</b>
-          <p>Никакой темноты и запираний — если ребёнку что-то не нравится, он может выйти и вернуться. Родители смотрят игру или отдыхают в банкетной.</p>
-        </div>
-      </div>
-      <div class="format__stats">
-        <div class="format__stat"><b>5 лет</b><span>праздников с детьми 6–12</span></div>
-        <div class="format__stat"><b>5.0</b><span>154 отзыва на Я.Картах</span></div>
-        <div class="format__stat"><b>240 м²</b><span>своя площадка, Зорге 15</span></div>
-        <div class="format__stat"><b>до 30</b><span>детей в команде</span></div>
-      </div>
-    </div>
-  </section>
-
-  <Calculator />
-
-  <!-- TIMELINE -->
-  <section class="timeline" id="timeline">
-    <div class="wrap">
-      <h2>Из чего состоит праздник</h2>
-      <p class="timeline__sub">Формат один, набор блоков — по выбранному пакету. Длительность и порядок подстроим под вас при брони.</p>
-      <div class="timeline__list">
-        <div class="timeline__item">
-          <span class="timeline__num">1</span>
-          <div>
-            <b>Сборы и инструктаж</b>
-            <p>Дети надевают игровые футболки с номерами и знакомятся с ведущими. Родители ждут в зоне ожидания с кофе.</p>
-          </div>
-        </div>
-        <div class="timeline__item">
-          <span class="timeline__num">2</span>
-          <div>
-            <b>Квест-шоу</b>
-            <p>Эстафеты, логика, внимание и память. Новое испытание каждые 8–10 минут — никто не выбывает и не скучает. Каждый участник получает сувенир.</p>
-          </div>
-        </div>
-        <div class="timeline__item">
-          <span class="timeline__num">3</span>
-          <div>
-            <b>Поздравление и вынос торта</b>
-            <p>Свечи, именинник в центре — самые живые кадры праздника.</p>
-          </div>
-        </div>
-        <div class="timeline__item">
-          <span class="timeline__num">4</span>
-          <div>
-            <b>Банкет</b>
-            <p>Сервированная банкетная комната. Своя еда или под ключ — как в выбранном пакете.</p>
-          </div>
-        </div>
-        <div class="timeline__item">
-          <span class="timeline__num">5</span>
-          <div>
-            <b>Ярмарка игр</b>
-            <p>Трое ведущих играют одновременно: стена-кидалка, мафия, вышибалы, «нащупай предмет», «угадай напиток». Каждый ребёнок выбирает своё — без очередей.</p>
-          </div>
-        </div>
-        <div class="timeline__item">
-          <span class="timeline__num">6</span>
-          <div>
-            <b>Чай с тортом и сборы</b>
-            <p>Организатор нарезает торт, дети пьют чай — праздник завершён.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ЯРМАРКА ИГР -->
-  <section class="yamarka" id="yamarka">
-    <div class="wrap">
-      <h2>Ярмарка игр</h2>
-      <p class="yamarka__sub">После квеста трое ведущих одновременно проводят разные активности — и каждый ребёнок выбирает, что ему по душе.</p>
-      <div class="yamarka__content">
-        <div class="yamarka__text">
-          <div class="yamarka__list">
-            <div class="yamarka__row">
-              <div class="yamarka__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-              </div>
-              <div>
-                <b>Вышибалы впятером</b>
-                <p>Командная игра на реакцию и координацию. Кто последний остался — победил!</p>
-              </div>
-            </div>
-            <div class="yamarka__row">
-              <div class="yamarka__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-              </div>
-              <div>
-                <b>Угадай напиток</b>
-                <p>Вслепую определяешь вкус — от газировки до сока. Сложнее, чем кажется!</p>
-              </div>
-            </div>
-            <div class="yamarka__row">
-              <div class="yamarka__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-10-5.46a2 2 0 0 0-2 0l-10 5.46A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l10 5.46a2 2 0 0 0 2 0l10-5.46A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-              </div>
-              <div>
-                <b>Нащупай предмет</b>
-                <p>В ящике спрятан предмет — угадай на ощупь. Руки обмануть не обманут!</p>
-              </div>
-            </div>
-            <div class="yamarka__row">
-              <div class="yamarka__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 4v16"/><path d="M14 4v16"/></svg>
-              </div>
-              <div>
-                <b>Мафия</b>
-                <p>Стратегическая игра на логику и наблюдательность. Ведущий ведёт партию.</p>
-              </div>
-            </div>
-            <div class="yamarka__row">
-              <div class="yamarka__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 3v18"/></svg>
-              </div>
-              <div>
-                <b>Стена-кидалка</b>
-                <p>Проектор на стене — лови мяч, уклоняйся, реагируй. Движение без пауз.</p>
-              </div>
-            </div>
-          </div>
-          <p class="yamarka__note">Никто не стоит в очереди. Никто не ждёт своей команды. Каждый занят тем, что ему нравится.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ПЛОЩАДКА -->
-  <section class="hallway" id="hallway">
-    <div class="wrap">
-      <h2>Площадка 240 м²</h2>
-      <p class="hallway__sub">Своя территория под квест-шоу — не арендуем чужую площадку на час.</p>
-      <div class="hallway__content">
-        <div class="hallway__text">
-          <p>Игровая и банкетная комнаты — под одной крышей, отдельный вход, вентиляция. Звук, свет, видеоряд — всё своё, всё настроено под квест-шоу. Вам не нужно переезжать из комнаты в комнату через чужой коридор.</p>
-          <p><b>Родители могут остаться</b></p>
-          <p>Смотрите игру из игровой комнаты, посидите в банкетной, уходите и возвращайтесь — как вам удобно. Мы не выгоняем родителей и не заставляем их сидеть в коридоре. Вы участвуете в празднике ровно настолько, насколько хотите.</p>
-        </div>
-      </div>
-      <!-- Статичная карта вместо iframe: без рекламы, без внешнего JS (решение Степана) -->
-      <div class="hallway__map">
-        <div class="map-card">
-          <div class="map-card__info">
-            <span class="map-card__pin" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </span>
-            <div>
-              <b>Ростов-на-Дону, ул. Зорге, 15</b>
-              <p>Отдельный вход с торца здания. Рядом «Магнит», «Пятёрочка», ТЦ «Талер» — можно закупиться по дороге.</p>
-            </div>
-          </div>
-          <a class="map-card__btn" href="https://yandex.ru/maps/?text=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2-%D0%BD%D0%B0-%D0%94%D0%BE%D0%BD%D1%83%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%97%D0%BE%D1%80%D0%B3%D0%B5%2C%2015" target="_blank" rel="noopener">Открыть в Яндекс.Картах</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- REVIEWS -->
-  <section class="reviews">
-    <div class="wrap">
-      <h2>Отзывы</h2>
-      <p class="reviews__sub">Рейтинг 5.0 на Яндекс Картах — по 154 оценкам · <a href="https://yandex.ru/maps/org/kvest_shou_igra_v_kalmara/19338708863/reviews/" target="_blank" rel="noopener">Читать все отзывы</a></p>
-      <div class="reviews__grid">
-        <div class="review-card">
-          <div class="review-card__stars">★★★★★</div>
-          <p>Огромное спасибо за невероятно крутой квест «Игра в кальмара»! Детям всё очень понравилось, они остались в полном восторге! Столько эмоций, азарта, веселья и незабываемых впечатлений! Всё было организовано на высшем уровне, ребята получили массу положительных эмоций и ещё долго делились своими впечатлениями. Спасибо организаторам за чудесный праздник, отличную атмосферу и подаренные детям счастливые моменты! Обязательно будем рекомендовать вас друзьям и с удовольствием придём ещё раз!</p>
-          <span class="review-card__name">Таня Косякова</span>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">★★★★★</div>
-          <p>Праздновали день рождения сына. Остались довольны все и дети и родители. Потрясающая администратор, заняла детей несмотря на то что мы раньше пришли, всегда интересовалась нужно ли нам что-то. Ведущие без внимания ни одного ребенка не отставили. В интерьере продумано все до мелочей. Сын сказал в следующем году пойдем сюда снова. Тем более что у ребят меняется программа.</p>
-          <span class="review-card__name">Екатерина Щ.</span>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">★★★★★</div>
-          <p>Очень крутое место, чтобы отметить день рождения ребенка! Атмосферно, две банкетных комнаты, большая стилизованная игровая! Актеры и администратор Елена — супер, очень приятные и отзывчивые. Детям очень понравилась игра! Спасибо</p>
-          <span class="review-card__name">Таня А.</span>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">★★★★★</div>
-          <p>Отмечали день рождения ребенку 6.09. Хочу сказать спасибо организаторам. Все было на высшем уровне. Дети в восторге. Помещение очень чистое. Персонал приветливый. С удовольствием провели время. Если думаете где отметить день рождения ребенка, однозначно выбирайте этот квест.</p>
-          <span class="review-card__name">Михаил К.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- МЕДИА: видео + фото (паттерн Мир Квестов: большой просмотрщик + превью) -->
-  <section class="gallery" id="media">
-    <div class="wrap">
-      <h2>Фото и видео</h2>
-      <p class="gallery__sub">Живые кадры с наших праздников — выберите кадр или ролик</p>
-      <div class="media__viewer">
-        <button class="media__main" id="media-main" type="button" data-type="photo" aria-label="Открыть просмотр">
-          <img id="media-main-img" src="/photos/squid-game-quest-1.webp" alt="Квест-шоу для детей — дети в футболках с номерами" />
-          <span class="media__play" id="media-play" style="display:none;">
-            <span class="media__play-circle" aria-hidden="true">▶</span>
-            <b id="media-play-label">Смотреть видео</b>
-          </span>
-        </button>
-      </div>
-      <div class="gallery__grid" id="media-thumbs">
-        <button class="gallery__item" data-src="/photos/squid-game-quest-1.webp" data-alt="Квест-шоу Игра в кальмара — дети в игровых футболках с номерами">
-          <img src="/photos/squid-game-quest-1.webp" alt="Квест-шоу для детей — дети в футболках с номерами" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-2.webp" data-alt="Эстафеты на квест-шоу — активные игры для детей 6–12 лет">
-          <img src="/photos/squid-game-quest-2.webp" alt="Эстафеты на квест-шоу для детей" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-3.webp" data-alt="Командные игры на квесте — логика и внимание">
-          <img src="/photos/squid-game-quest-3.webp" alt="Командные игры на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-4.webp" data-alt="Вышибалы на ярмарке игр — активная игра для детей">
-          <img src="/photos/squid-game-quest-4.webp" alt="Вышибалы на ярмарке игр" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-5.webp" data-alt="Угадай напиток — игра на ярмарке для детей">
-          <img src="/photos/squid-game-quest-5.webp" alt="Игра Угадай напиток на ярмарке" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-6.webp" data-alt="Мафия с ведущим — стратегическая игра для детей">
-          <img src="/photos/squid-game-quest-6.webp" alt="Мафия с ведущим на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-7.webp" data-alt="Стена-кидалка — интерактивная игра на проекторе">
-          <img src="/photos/squid-game-quest-7.webp" alt="Стена-кидалка на квест-шоу" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-8.webp" data-alt="Нащупай предмет — игра вслепую на ярмарке">
-          <img src="/photos/squid-game-quest-8.webp" alt="Нащупай предмет на ярмарке игр" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-9.webp" data-alt="Поздравление именинника — вынос торта на квесте">
-          <img src="/photos/squid-game-quest-9.webp" alt="Поздравление и вынос торта на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-10.webp" data-alt="Торт на празднике — свечи и именинник в центре">
-          <img src="/photos/squid-game-quest-10.webp" alt="Вынос торта на детском празднике" loading="lazy" />
-        </button>
-        <button class="gallery__item media-thumb--video" data-video="https://kinescope.io/embed/sNbVwwHesgoeMfyGbU2GCG" data-title="Ярмарка игр" type="button" aria-label="Смотреть видео: Ярмарка игр">
-          <span class="media-thumb__badge" aria-hidden="true">▶</span>
-          <span class="media-thumb__title">Ярмарка игр</span>
-        </button>
-        <button class="gallery__item media-thumb--video" data-video="https://kinescope.io/embed/3QTCvnzrXbWFQxz3RHX3Gf" data-title="Обзор площадки" type="button" aria-label="Смотреть видео: Обзор площадки">
-          <span class="media-thumb__badge" aria-hidden="true">▶</span>
-          <span class="media-thumb__title">Обзор площадки</span>
-        </button>
-      </div>
-      <button class="gallery__more" id="gallery-more">Показать ещё фото</button>
-    </div>
-  </section>
-
-  <!-- Полная галерея (скрыта) -->
-  <section class="gallery-full" id="gallery-full" style="display:none;">
-    <div class="wrap">
-      <p class="gallery-full__sub">Все фото с наших праздников — нажми, чтобы рассмотреть</p>
-      <div class="gallery__grid">
-        <button class="gallery__item" data-src="/photos/squid-game-quest-1.webp" data-alt="Квест-шоу Игра в кальмара — дети в игровых футболках с номерами">
-          <img src="/photos/squid-game-quest-1.webp" alt="Квест-шоу для детей — дети в футболках с номерами" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-2.webp" data-alt="Эстафеты на квест-шоу — активные игры для детей 6–12 лет">
-          <img src="/photos/squid-game-quest-2.webp" alt="Эстафеты на квест-шоу для детей" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-3.webp" data-alt="Командные игры на квесте — логика и внимание">
-          <img src="/photos/squid-game-quest-3.webp" alt="Командные игры на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-4.webp" data-alt="Вышибалы на ярмарке игр — активная игра для детей">
-          <img src="/photos/squid-game-quest-4.webp" alt="Вышибалы на ярмарке игр" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-5.webp" data-alt="Угадай напиток — игра на ярмарке для детей">
-          <img src="/photos/squid-game-quest-5.webp" alt="Игра Угадай напиток на ярмарке" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-6.webp" data-alt="Мафия с ведущим — стратегическая игра для детей">
-          <img src="/photos/squid-game-quest-6.webp" alt="Мафия с ведущим на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-7.webp" data-alt="Стена-кидалка — интерактивная игра на проекторе">
-          <img src="/photos/squid-game-quest-7.webp" alt="Стена-кидалка на квест-шоу" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-8.webp" data-alt="Нащупай предмет — игра вслепую на ярмарке">
-          <img src="/photos/squid-game-quest-8.webp" alt="Нащупай предмет на ярмарке игр" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-9.webp" data-alt="Поздравление именинника — вынос торта на квесте">
-          <img src="/photos/squid-game-quest-9.webp" alt="Поздравление и вынос торта на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-10.webp" data-alt="Торт на празднике — свечи и именинник в центре">
-          <img src="/photos/squid-game-quest-10.webp" alt="Вынос торта на детском празднике" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-11.webp" data-alt="Банкетная комната — сервировка стола на квесте">
-          <img src="/photos/squid-game-quest-11.webp" alt="Банкетная комната на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-12.webp" data-alt="Дети за банкетным столом — праздник под ключ">
-          <img src="/photos/squid-game-quest-12.webp" alt="Дети за банкетным столом" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-13.webp" data-alt="Ведущие-актёры с детьми — квест-шоу для детей 6–12 лет">
-          <img src="/photos/squid-game-quest-13.webp" alt="Ведущие-актёры с детьми на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-14.webp" data-alt="Родители наблюдают за праздником — зона ожидания">
-          <img src="/photos/squid-game-quest-14.webp" alt="Родители наблюдают за квестом" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-15.webp" data-alt="Сувениры каждому ребёнку — памятные подарки на квесте">
-          <img src="/photos/squid-game-quest-15.webp" alt="Сувениры каждому ребёнку на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-16.webp" data-alt="Финал квест-шоу — все дети вместе">
-          <img src="/photos/squid-game-quest-16.webp" alt="Финал квест-шоу — все участники вместе" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-17.webp" data-alt="Игровая комната — пространство 240 м² для квеста">
-          <img src="/photos/squid-game-quest-17.webp" alt="Игровая комната на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-18.webp" data-alt="Ведущие проводят игру — квест-шоу для детей">
-          <img src="/photos/squid-game-quest-18.webp" alt="Ведущие проводят квест-шоу" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-19.webp" data-alt="Дети выполняют задания — логика и скорость">
-          <img src="/photos/squid-game-quest-19.webp" alt="Дети выполняют задания на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-20.webp" data-alt="Командная эстафета — соревнования на квесте">
-          <img src="/photos/squid-game-quest-20.webp" alt="Командная эстафета на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-21.webp" data-alt="Активные игры — бег и прыжки на квест-шоу">
-          <img src="/photos/squid-game-quest-21.webp" alt="Активные игры на квест-шоу" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-22.webp" data-alt="Задание на экране — интерактивная игра">
-          <img src="/photos/squid-game-quest-22.webp" alt="Задание на экране на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-23.webp" data-alt="Фотозона — памятные кадры на празднике">
-          <img src="/photos/squid-game-quest-23.webp" alt="Фотозона на празднике" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-24.webp" data-alt="Торт на празднике — свечки и поздравления">
-          <img src="/photos/squid-game-quest-24.webp" alt="Торт на детском празднике" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-25.webp" data-alt="Дети празднуют — эмоции и радость">
-          <img src="/photos/squid-game-quest-25.webp" alt="Дети празднуют на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-26.webp" data-alt="Банкетная часть — дети за столом">
-          <img src="/photos/squid-game-quest-26.webp" alt="Банкетная часть на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-27.webp" data-alt="Сервировка стола — подготовка к празднику">
-          <img src="/photos/squid-game-quest-27.webp" alt="Сервировка стола на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-28.webp" data-alt="Еда на празднике — пицца и напитки">
-          <img src="/photos/squid-game-quest-28.webp" alt="Еда на празднике — банкет под ключ" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-29.webp" data-alt="Родители наблюдают — зона ожидания">
-          <img src="/photos/squid-game-quest-29.webp" alt="Родители наблюдают за праздником" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-30.webp" data-alt="Ведущие общаются с детьми — индивидуальный подход">
-          <img src="/photos/squid-game-quest-30.webp" alt="Ведущие общаются с детьми" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-31.webp" data-alt="Призы и подарки — сувениры каждому ребёнку">
-          <img src="/photos/squid-game-quest-31.webp" alt="Призы и подарки на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-32.webp" data-alt="Сувениры — памятные подарки на квест-шоу">
-          <img src="/photos/squid-game-quest-32.webp" alt="Сувениры каждому ребёнку" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-33.webp" data-alt="Ярмарка игр — стена-кидалка в действии">
-          <img src="/photos/squid-game-quest-33.webp" alt="Стена-кидалка на ярмарке" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-34.webp" data-alt="Мафия — стратегическая игра для детей">
-          <img src="/photos/squid-game-quest-34.webp" alt="Мафия на ярмарке игр" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-35.webp" data-alt="Вышибалы — активная игра на ярмарке">
-          <img src="/photos/squid-game-quest-35.webp" alt="Вышибалы на ярмарке" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-36.webp" data-alt="Угадай напиток — игра вслепую">
-          <img src="/photos/squid-game-quest-36.webp" alt="Угадай напиток на ярмарке" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-37.webp" data-alt="Нащупай предмет — игра на осязание">
-          <img src="/photos/squid-game-quest-37.webp" alt="Нащупай предмет на ярмарке" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-38.webp" data-alt="Дети смеются — положительные эмоции">
-          <img src="/photos/squid-game-quest-38.webp" alt="Дети смеются на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-40.webp" data-alt="Эмоции детей — восторг и азарт">
-          <img src="/photos/squid-game-quest-40.webp" alt="Эмоции детей на квест-шоу" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-41.webp" data-alt="Финальные кадры — памятные фото">
-          <img src="/photos/squid-game-quest-41.webp" alt="Финальные кадры праздника" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-42.webp" data-alt="Праздник под ключ — всё включено">
-          <img src="/photos/squid-game-quest-42.webp" alt="Праздник под ключ" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-43.webp" data-alt="Организатор Лена — подготовка к празднику">
-          <img src="/photos/squid-game-quest-43.webp" alt="Организатор Лена на празднике" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-44.webp" data-alt="Подготовка площадки — всё готово к приёму гостей">
-          <img src="/photos/squid-game-quest-44.webp" alt="Подготовка площадки к празднику" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-45.webp" data-alt="Дети в игровых футболках — номерки квеста">
-          <img src="/photos/squid-game-quest-45.webp" alt="Дети в игровых футболках" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-46.webp" data-alt="Антурж квеста — декорации и реквизит">
-          <img src="/photos/squid-game-quest-46.webp" alt="Антураж квест-шоу" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-47.webp" data-alt="Звук и свет — техническое оснащение">
-          <img src="/photos/squid-game-quest-47.webp" alt="Звук и свет на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-49.webp" data-alt="Игровая зона — простор 240 м²">
-          <img src="/photos/squid-game-quest-49.webp" alt="Игровая зона 240 м²" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-50.webp" data-alt="Банкетная комната — место для празднования">
-          <img src="/photos/squid-game-quest-50.webp" alt="Банкетная комната на квесте" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-51.webp" data-alt="Вторая банкетная комната — для разделения гостей">
-          <img src="/photos/squid-game-quest-51.webp" alt="Вторая банкетная комната" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-52.webp" data-alt="Вентиляция и кондиционеры — комфорт в комнатах">
-          <img src="/photos/squid-game-quest-52.webp" alt="Вентиляция и кондиционеры на площадке" loading="lazy" />
-        </button>
-        <button class="gallery__item" data-src="/photos/squid-game-quest-53.webp" data-alt="Холодильник и микроволновка — всё для банкета">
-          <img src="/photos/squid-game-quest-53.webp" alt="Холодильник и микроволновка на площадке" loading="lazy" />
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ: снятие возражений перед формой (порядок блоков по аудиту) -->
-  <section class="faq" id="faq">
-    <div class="wrap">
-      <h2>Частые вопросы</h2>
-      <div class="faq__list">
-        <details class="faq__item">
-          <summary>Это же Игра в кальмара — это страшно?</summary>
-          <p>Нет. От сериала мы взяли только игры и реквизит — всё адаптировано под детей. Это не хоррор, а увлекательное квест-шоу с актёрами, где в центре внимания именинник. Малыши играют наравне со старшими, а родители видят весь процесс.</p>
-        </details>
-        <details class="faq__item">
-          <summary>Почему у вас дороже обычных квестов?</summary>
-          <p>В обычном квесте ребёнка встречают оператор и один актёр. У нас на празднике работает команда из 5 человек, и каждый занят: ведут игру, накрывают стол, снимают видео. Это формат «под ключ», а не час в закрытой комнате.</p>
-        </details>
-        <details class="faq__item">
-          <summary>С какого возраста? Будет ли интересно 6-летним? А 12-летним?</summary>
-          <p>Наша специализация — 6–12 лет, сценарий адаптируется: младшим играем мягче и проще, старшим добавляем логику и командные задания. Младших (от 4 лет) берём, если они пришли вместе с братом или сестрой — играют вместе со всеми.</p>
-        </details>
-        <details class="faq__item">
-          <summary>Где вы находитесь?</summary>
-          <p>Ростов-на-Дону, ул. Зорге, 15. Только эта площадка — выезда нет. Рядом «Магнит», «Пятёрочка», рынок «Привоз» и ТЦ «Талер» с пиццей и кафе. Площадка 240 кв. м: отдельная игровая комната и две банкетные, не связанные друг с другом — детей и взрослых можно рассадить раздельно. Во всех комнатах принудительная вентиляция и сплит-системы. Для торта и напитков — холодильник, есть микроволновка и питьевая вода.</p>
-        </details>
-        <details class="faq__item">
-          <summary>Что с собой везти?</summary>
-          <p>Зависит от пакета. В «Популярном», «Базе» и «Мини» еду приносите свою — стол накрываем мы: сервировка, скатерть, чай/кофе, печенье, нож для торта и контейнеры, чтобы увезти торт с собой. В «Оптимальном» стол под ключ: пицца, наггетсы, картошка фри, соки, порционный торт каждому. В «Максимальном» — то же меню под ключ и большой торт от кондитера. Принести своё сверх пакета можно всегда — хоть еду, хоть торт, ограничений нет.</p>
-        </details>
-        <details class="faq__item">
-          <summary>Как забронировать и сколько ждать?</summary>
-          <p>Оставьте заявку на сайте или позвоните — организатор Лена перезвонит в течение часа. Разговор 20 минут: расскажем, как проходит праздник, ответим на вопросы. Дальше — предоплата 3 000 ₽ (возвращается в любой день, кроме дня праздника), и время ваше. Можно просто «подумать» — без давления.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <RequestForm />
-
-  <!-- Лайтбокс фото -->
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox__close" id="lightbox-close">✕</button>
-    <button class="lightbox__nav lightbox__prev" id="lightbox-prev">‹</button>
-    <div class="lightbox__content">
-      <img src="" alt="" id="lightbox-img" />
-    </div>
-    <button class="lightbox__nav lightbox__next" id="lightbox-next">›</button>
-  </div>
-
-  <!-- Модальное окно видео -->
-  <div class="video-modal" id="video-modal">
-    <button class="video-modal__close" id="video-modal-close">✕</button>
-    <div class="video-modal__content">
-      <iframe src="" allow="autoplay; fullscreen" allowfullscreen title="Видео"></iframe>
+    <!-- Sticky-кнопка на мобильных -->
+    <div class="stickybar" id="stickybar">
+      <a class="btn btn--primary stickybar__cta" href="#zayavka">Оставить заявку</a>
+      <a class="stickybar__tel" href="tel:+79287588483" aria-label="Позвонить">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </a>
     </div>
   </div>
 
   <script>
-    // @ts-nocheck
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    let currentIndex = 0;
+    // @ts-nocheck — инлайн-скрипт макета на чистом DOM, без типов Astro-модуля
+    const $ = (s, r = document) => r.querySelector(s);
+    const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+    const digits = (v) => (String(v).match(/\d/g) || []).length;
 
-    // Живая выборка: превью добавляются пагинацией по клику.
-    function photoItems() {
-      return Array.from(document.querySelectorAll('#media-thumbs .gallery__item[data-src]'));
-    }
+    /* ---------- Общая отправка лидов ---------- */
+    const FORM_URL = 'https://script.google.com/macros/s/AKfycbwvgQ0INRJRzT4xu5mQ6ht_SakiUL7kEIBqDw-a88ooyfapllfD3Yr1undNexLI2KaP/exec';
+    const WA_NUMBER = '79287588483';
 
-    function openLightbox(index) {
-      const items = photoItems();
-      if (!items.length) return;
-      currentIndex = (index + items.length) % items.length;
-      const item = items[currentIndex];
-      lightboxImg.src = item.dataset.src;
-      lightboxImg.alt = item.dataset.alt;
-      lightbox.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove('is-open');
-      document.body.style.overflow = '';
-    }
-
-    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
-    document.getElementById('lightbox-prev').addEventListener('click', () => openLightbox(currentIndex - 1));
-    document.getElementById('lightbox-next').addEventListener('click', () => openLightbox(currentIndex + 1));
-
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (!lightbox.classList.contains('is-open')) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') navigate(-1);
-      if (e.key === 'ArrowRight') navigate(1);
-    });
-  </script>
-
-  <script>
-    // @ts-nocheck
-    // МЕДИА-БЛОК: большой просмотрщик + превью (паттерн Мир Квестов).
-    const mainBtn = document.getElementById('media-main');
-    const mainImg = document.getElementById('media-main-img');
-    const playBadge = document.getElementById('media-play');
-    const playLabel = document.getElementById('media-play-label');
-    const thumbsGrid = document.getElementById('media-thumbs');
-    const hiddenGallery = document.getElementById('gallery-full');
-    const moreBtn = document.getElementById('gallery-more');
-    const PORTION = 12;
-
-    // Клик по превью активирует большое окно.
-    function activate(item) {
-      document.querySelectorAll('#media-thumbs .is-active').forEach((el) => el.classList.remove('is-active'));
-      item.classList.add('is-active');
-      if (item.dataset.video) {
-        mainBtn.dataset.type = 'video';
-        mainBtn.dataset.video = item.dataset.video;
-        mainImg.style.display = 'none';
-        playLabel.textContent = item.dataset.title || 'Смотреть видео';
-        playBadge.style.display = 'flex';
-      } else {
-        mainBtn.dataset.type = 'photo';
-        delete mainBtn.dataset.video;
-        mainImg.src = item.dataset.src;
-        mainImg.alt = item.dataset.alt;
-        mainImg.style.display = 'block';
-        playBadge.style.display = 'none';
-        currentIndex = photoItems().indexOf(item);
+    async function sendLead(payload) {
+      try {
+        const res = await fetch(FORM_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json().catch(() => null);
+        return res.ok && (!data || data.ok !== false);
+      } catch (e) {
+        return false;
       }
     }
 
-    document.addEventListener('click', (e) => {
-      const item = e.target.closest('#media-thumbs .gallery__item');
-      if (item) activate(item);
-    });
+    function waLink(text) {
+      return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text);
+    }
 
-    mainBtn.addEventListener('click', () => {
-      if (mainBtn.dataset.type === 'video') {
-        openVideoModal(mainBtn.dataset.video);
-      } else {
-        openLightbox(currentIndex);
-      }
-    });
+    /* ---------- Квиз: 4 шага ---------- */
+    const quiz = $('#quiz');
+    if (quiz) {
+      const steps = $$('.q-step', quiz);
+      const bar = $('#q-bar');
+      const stepnum = $('#q-stepnum');
+      const back = $('#q-back');
+      const next = $('#q-next');
+      const done = $('#q-done');
+      const form = $('#q-form');
+      let cur = 0;
 
-    // Стартовое состояние — первое фото активно.
-    const firstThumb = thumbsGrid.querySelector('.gallery__item[data-src]');
-    if (firstThumb) firstThumb.classList.add('is-active');
-
-    // Пагинация: фото из скрытой полной галереи добавляются в превью по 12.
-    const hiddenItems = hiddenGallery
-      ? Array.from(hiddenGallery.querySelectorAll('.gallery__item'))
-      : [];
-    const firstVideoThumb = thumbsGrid.querySelector('.media-thumb--video');
-    let shownCount = photoItems().length;
-
-    moreBtn.addEventListener('click', () => {
-      const portion = hiddenItems.slice(shownCount, shownCount + PORTION);
-      portion.forEach((item) => {
-        const clone = item.cloneNode(true);
-        if (firstVideoThumb) thumbsGrid.insertBefore(clone, firstVideoThumb);
-        else thumbsGrid.appendChild(clone);
+      const noDate = $('#q-nodate');
+      const dateInput = $('#q-date');
+      noDate.addEventListener('change', () => {
+        dateInput.disabled = noDate.checked;
+        if (noDate.checked) markField(dateInput, false);
       });
-      shownCount += portion.length;
-      if (shownCount >= hiddenItems.length) {
-        moreBtn.style.display = 'none';
+
+      function markField(input, bad) {
+        const field = input.closest('.field') || input.closest('.q-group');
+        if (!field) return;
+        input.setAttribute('aria-invalid', bad ? 'true' : 'false');
+        const err = $('.f-err', field);
+        if (err) err.hidden = !bad;
       }
-    });
-  </script>
+      function markGroup(group, bad) {
+        group.classList.toggle('is-error', bad);
+        const err = $('.f-err', group);
+        if (err) err.hidden = !bad;
+      }
 
-  <script>
-    // @ts-nocheck
-    const videoModal = document.getElementById('video-modal');
-    const videoIframe = videoModal.querySelector('iframe');
+      function stepValid(n) {
+        const step = steps[n];
+        let ok = true;
+        if (n === 0) {
+          const bad = !dateInput.value && !noDate.checked;
+          markField(dateInput, bad);
+          ok = !bad;
+        } else if (n === 1) {
+          $$('[data-group]', step).forEach((g) => {
+            const bad = !$('input:checked', g);
+            markGroup(g, bad);
+            if (bad) ok = false;
+          });
+        } else if (n === 2) {
+          const g = $('[data-group]', step);
+          const bad = !$('input:checked', g);
+          markGroup(g, bad);
+          ok = !bad;
+        } else {
+          const name = $('#q-name');
+          const phone = $('#q-phone');
+          const consent = $('#q-consent');
+          const badName = name.value.trim().length < 2;
+          const badPhone = digits(phone.value) < 10;
+          markField(name, badName);
+          markField(phone, badPhone);
+          const consentErr = $('#q-consent').closest('label').nextElementSibling;
+          if (consentErr) consentErr.hidden = consent.checked;
+          if (badName || badPhone || !consent.checked) ok = false;
+        }
+        return ok;
+      }
 
-    function openVideoModal(url) {
-      videoIframe.src = url;
-      videoModal.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
+      function show(n) {
+        cur = n;
+        steps.forEach((s, k) => (s.hidden = k !== n));
+        stepnum.textContent = 'Шаг ' + (n + 1) + ' из ' + steps.length;
+        bar.style.width = (n / (steps.length - 1)) * 100 + '%';
+        back.hidden = n === 0;
+        next.textContent = n === steps.length - 1 ? 'Отправить' : 'Далее';
+        const h = $('h3', steps[n]);
+        if (h) h.focus({ preventScroll: true });
+      }
+
+      async function submitQuizLead(rec) {
+        const name = $('#q-name').value.trim();
+        const phone = $('#q-phone').value.trim();
+        const dateKnown = $('#q-nodate').checked ? '' : $('#q-date').value || '';
+        const occasion = ($('input[name="q2-occasion"]:checked', quiz) || {}).value || '';
+        const age = ($('input[name="q2-age"]:checked', quiz) || {}).value || '';
+        const guests = ($('input[name="q3"]:checked', quiz) || {}).value || '';
+        const text = [
+          '🔔 ЗАЯВКА С КВИЗА (xkalmar.com)',
+          'Имя: ' + (name || 'не указано'),
+          'Телефон: ' + (phone || 'не указан'),
+          'Дата праздника: ' + (dateKnown || 'пока не известна'),
+          'Повод: ' + (occasion || 'не указан'),
+          'Возраст детей: ' + (age || 'не указан'),
+          'Гостей: ' + (guests || 'не указано'),
+          'Подходящий пакет: ' + rec
+        ].join('\n');
+        const ok = await sendLead({ name, phone, partyDate: dateKnown, summary: rec, text });
+        if (!ok) {
+          const alt = $('.quiz__done-alt', quiz);
+          if (alt && !$('.quiz__fallback', quiz)) {
+            alt.insertAdjacentHTML('beforebegin',
+              '<p class="quiz__done-alt">Не отправилось автоматически? <a href="' + waLink(text) + '" target="_blank" rel="noopener">Продублируйте заявку в WhatsApp</a></p>');
+          }
+        }
+      }
+
+      next.addEventListener('click', () => {
+        if (!stepValid(cur)) return;
+        if (cur === steps.length - 1) {
+          const g = ($('input[name="q3"]:checked', quiz) || {}).value || '';
+          let rec = '«Популярный» — 24 000 ₽';
+          if (g === 'до 8') rec = '«Мини» — 15 000 ₽ или «Популярный» — 24 000 ₽';
+          else if (g === 'больше 15')
+            rec = '«Популярный» — 24 000 ₽ или «Максимальный» — 50 000 ₽ (за каждого гостя сверх 15 — +1 000 ₽)';
+          $('#q-rec').textContent =
+            'Похоже, вам подойдёт ' + rec + '. Точный состав организатор подтвердит по телефону — перезвоним в течение часа.';
+          form.hidden = true;
+          $('.quiz__nav', quiz).hidden = true;
+          done.hidden = false;
+          submitQuizLead(rec);
+        } else {
+          show(cur + 1);
+        }
+      });
+      back.addEventListener('click', () => show(Math.max(0, cur - 1)));
+
+      // Ошибки снимаются при исправлении
+      $$('input, select', quiz).forEach((el) => {
+        el.addEventListener('input', () => {
+          if (el.type === 'radio' || el.type === 'checkbox') {
+            const g = el.closest('.q-group');
+            if (g) markGroup(g, false);
+            if (el.id === 'q-consent') {
+              const e = el.closest('label').nextElementSibling;
+              if (e) e.hidden = true;
+            }
+          } else {
+            markField(el, false);
+          }
+        });
+      });
+      show(0);
     }
 
-    function closeVideoModal() {
-      videoModal.classList.remove('is-open');
-      videoIframe.src = '';
-      document.body.style.overflow = '';
+    /* ---------- Форма заявки ---------- */
+    const fform = $('#f-form');
+    if (fform) {
+      const name = $('#f-name');
+      const phone = $('#f-phone');
+      const consent = $('#f-consent');
+      const consentErr = $('#f-consent-err');
+      const mark = (input, bad) => {
+        input.setAttribute('aria-invalid', bad ? 'true' : 'false');
+        const err = input.closest('.field')?.querySelector('.f-err');
+        if (err) err.hidden = !bad;
+      };
+      fform.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const badName = name.value.trim().length < 2;
+        const badPhone = digits(phone.value) < 10;
+        mark(name, badName);
+        mark(phone, badPhone);
+        consentErr.hidden = consent.checked;
+        if (badName || badPhone || !consent.checked) return;
+        fform.hidden = true;
+        $('#f-done').hidden = false;
+
+        const date = $('#f-date').value || '';
+        const guestsSel = $('#f-guests');
+        const packageSel = $('#f-package');
+        const comment = $('#f-comment').value.trim();
+        const text = [
+          '🔔 ЗАЯВКА С ФОРМЫ (xkalmar.com)',
+          'Имя: ' + name.value.trim(),
+          'Телефон: ' + phone.value.trim(),
+          'Дата праздника: ' + (date || 'пока не известна'),
+          'Гостей: ' + (guestsSel.value || 'не указано'),
+          'Пакет: ' + (packageSel.value || 'подберём по телефону'),
+          comment ? 'Комментарий: ' + comment : '',
+          '— — —',
+          'Источник: главная, без расчёта из калькулятора'
+        ].filter((l) => l !== '').join('\n');
+        const ok = await sendLead({
+          name: name.value.trim(),
+          phone: phone.value.trim(),
+          partyDate: date,
+          summary: packageSel.value ? 'Пакет: ' + packageSel.value : '',
+          text
+        });
+        if (!ok) {
+          const fallback = $('#f-done p');
+          if (fallback && !$('#f-done .quiz__fallback')) {
+            fallback.insertAdjacentHTML('afterend',
+              '<p class="quiz__fallback"><a href="' + waLink(text) + '" target="_blank" rel="noopener">Продублируйте заявку в WhatsApp</a></p>');
+          }
+        }
+      });
+      [name, phone].forEach((el) => el.addEventListener('input', () => mark(el, false)));
+      consent.addEventListener('change', () => (consentErr.hidden = true));
     }
 
-    // Видео открывается кликом по большому окну медиа-блока (script выше).
-
-    document.getElementById('video-modal-close').addEventListener('click', closeVideoModal);
-    videoModal.addEventListener('click', (e) => {
-      if (e.target === videoModal) closeVideoModal();
+    /* ---------- «Выбрать пакет» → предзаполнение формы ---------- */
+    $$('.pack__cta').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const sel = $('#f-package');
+        if (sel) {
+          sel.value = btn.dataset.package;
+          sel.classList.add('is-flash');
+          setTimeout(() => sel.classList.remove('is-flash'), 1200);
+        }
+        $('#zayavka').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const name = $('#f-name');
+        if (name) name.focus({ preventScroll: true });
+      });
     });
 
-    document.addEventListener('keydown', (e) => {
-      if (!videoModal.classList.contains('is-open')) return;
-      if (e.key === 'Escape') closeVideoModal();
+    /* ---------- Sticky-панель на мобильных ---------- */
+    const bar = $('#stickybar');
+    const heroCta = $('#hero-cta');
+    const formSec = $('#zayavka');
+    if (bar && 'IntersectionObserver' in window && heroCta && formSec) {
+      let heroVisible = true;
+      let formVisible = false;
+      const update = () => bar.classList.toggle('is-hidden', heroVisible || formVisible);
+      new IntersectionObserver((entries) => {
+        heroVisible = entries[0].isIntersecting;
+        update();
+      }).observe(heroCta);
+      new IntersectionObserver((entries) => {
+        formVisible = entries[0].isIntersecting;
+        update();
+      }).observe(formSec);
+    }
+
+    /* ---------- Минимальная дата — сегодня ---------- */
+    $$('input[type="date"]').forEach((i) => {
+      i.min = new Date().toISOString().slice(0, 10);
     });
   </script>
-
-  <!-- Structured Data: FAQPage (синхронно с блоком FAQ) -->
-  <script type="application/ld+json" is:inline>
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Это же Игра в кальмара — это страшно?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Нет. От сериала взяты только игры и реквизит — всё адаптировано под детей. Это не хоррор, а увлекательное квест-шоу с актёрами, где в центре внимания именинник." }
-      },
-      {
-        "@type": "Question",
-        "name": "С какого возраста?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Специализация — 6–12 лет, сценарий адаптируется под возраст. Младших (от 4 лет) берём вместе с братом или сестрой." }
-      },
-      {
-        "@type": "Question",
-        "name": "Где вы находитесь?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Ростов-на-Дону, ул. Зорге, 15. Площадка 240 кв. м: игровая комната и две банкетные, вентиляция и сплит-системы. Выезда нет." }
-      },
-      {
-        "@type": "Question",
-        "name": "Как забронировать и сколько ждать?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Оставьте заявку или позвоните — организатор перезвонит в течение часа. Предоплата 3 000 ₽, возвращается в любой день, кроме дня праздника." }
-      }
-    ]
-  }
-  </script>
-</Base>
+</body>
+</html>
 
 <style>
-/* --- Hero: контент слева, фото справа (перестройка Этапа 3) --- */
-.hero__grid {
-  display: grid; grid-template-columns: 1.15fr 1fr; gap: var(--space-7);
-  align-items: center; padding-top: var(--space-8); padding-bottom: var(--space-8);
-}
-.hero__content { text-align: left; }
-.hero__visual {
-  position: relative; aspect-ratio: 4/3; border-radius: var(--radius-l);
-  overflow: hidden; box-shadow: var(--elev-2); background: var(--green-950);
-}
-.hero__img { width: 100%; height: 100%; object-fit: cover; }
-.hero__img--mobile { display: none; }
-.hero__trust { margin-top: var(--space-4); font-size: var(--font-meta); color: var(--text-2); }
-.hero__trust a { color: var(--accent); text-decoration: none; }
-.hero__stars { color: var(--star); letter-spacing: 2px; margin-right: 4px; }
-.hero__tag {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: var(--accent);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
-  padding: 5px 12px;
-  margin-bottom: var(--space-4);
-  white-space: nowrap;
-}
-/* --- Якорное меню страницы (паттерн Мир Квестов) --- */
-.page-nav {
-  position: sticky; top: var(--header-h, 62px); z-index: 40;
-  background: var(--bg); border-bottom: 1px solid var(--line);
-}
-.page-nav__wrap {
-  display: flex; gap: var(--space-2); overflow-x: auto; scrollbar-width: none;
-  padding-top: 10px; padding-bottom: 10px;
-}
-.page-nav__wrap::-webkit-scrollbar { display: none; }
-.page-nav__wrap a {
-  flex: 0 0 auto; padding: 6px 14px; border-radius: var(--radius-pill);
-  color: var(--text-2); text-decoration: none; font-size: var(--font-meta); font-weight: 600;
-  border: 1px solid transparent;
-  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
-}
-.page-nav__wrap a:hover { color: var(--text); border-color: var(--line); }
-.hero h1 { font-size: var(--font-display); font-weight: 800; line-height: 1.12; margin: 0 0 var(--space-4); }
-.hero h1 em { font-style: normal; color: var(--cta); }
-.hero p { font-size: var(--font-body); line-height: 1.6; color: var(--text-2); max-width: 620px; margin: 0 auto var(--space-4); }
-.hero__meta { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: var(--space-2); margin-bottom: var(--space-5); }
-.chip {
-  display: inline-flex; align-items: center;
-  padding: 8px 14px;
-  border-radius: var(--radius-pill);
-  background: rgba(255,255,255,.08);
-  border: 1px solid var(--line);
-  font-size: var(--font-meta);
-  font-weight: 600;
-  color: var(--text);
-}
-.hero__actions { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); }
-.hero__cta {
-  display: inline-block;
-  color: var(--on-cta); text-decoration: none; font-weight: 700; font-size: var(--font-cta);
-  background: var(--cta); padding: 16px 36px; border-radius: var(--radius-pill);
-  transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
-}
-.hero__cta:hover { background: var(--cta-hover); }
-.hero__cta:active { background: var(--cta-press); transform: scale(.98); }
-.hero__ghost {
-  color: var(--text-2); text-decoration: none; font-weight: 600; font-size: var(--font-meta);
-  padding: 8px 4px; border-bottom: 1px solid var(--line);
-  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
-}
-.hero__ghost:hover { color: var(--accent); border-color: var(--accent); }
+  /* ============================================================
+     B2 «Праздник-конструктор» — тёплый доверительный референс.
+     Палитра: крем-бумага, чернильный сине-зелёный, коралловый CTA,
+     солнечный акцент, мятные и персиковые плашки.
+     ============================================================ */
 
-.format { background: var(--bg); padding: var(--space-8) 0; }
-.format h2 { font-size: var(--font-h2); font-weight: 700; text-align: center; margin: 0 0 var(--space-3); }
-.format__sub { text-align: center; color: var(--text-2); font-size: var(--font-body); line-height: 1.6; max-width: 640px; margin: 0 auto var(--space-6); }
-.format__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); max-width: 1080px; margin: 0 auto; }
-.format__card { background: var(--surface); border: 1px solid var(--line); color: var(--text); border-radius: var(--radius-m); padding: var(--space-5); transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
-.format__card:hover { transform: translateY(-2px); box-shadow: var(--elev-1); }
-.format__icon { width: 32px; height: 32px; color: var(--accent); margin-bottom: var(--space-3); }
-.format__icon svg { width: 100%; height: 100%; }
-.format__card b { font-size: var(--font-title); font-weight: 700; letter-spacing: .015em; display: block; margin-bottom: var(--space-2); }
-.format__card p { font-size: var(--font-body); line-height: 1.6; color: var(--text-2); margin: 0; }
-.format__stats {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-5);
-  margin-top: var(--space-6); text-align: center;
-}
-.format__stat { display: flex; flex-direction: column; gap: 2px; min-width: 140px; }
-.format__stat b { font-size: 26px; font-weight: 800; color: var(--text); line-height: 1.1; }
-.format__stat span { font-size: var(--font-meta); color: var(--text-2); }
-/* --- Медиа-блок: большой просмотрщик + превью (паттерн Мир Квестов) --- */
-.media__viewer { margin-bottom: var(--space-4); }
-.media__main {
-  display: block; width: 100%; padding: 0; border: 0; cursor: pointer;
-  position: relative; aspect-ratio: 16/9; border-radius: var(--radius-l);
-  overflow: hidden; background: var(--green-950);
-}
-.media__main img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.media__play {
-  position: absolute; inset: 0; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: var(--space-3);
-  background: rgba(2,31,29,.55); color: var(--neutral-0);
-}
-.media__play-circle {
-  display: flex; align-items: center; justify-content: center;
-  width: 84px; height: 84px; border-radius: var(--radius-pill);
-  background: var(--cta); color: var(--on-cta); font-size: 28px; padding-left: 6px;
-  box-shadow: var(--elev-2); transition: transform var(--dur-fast) var(--ease);
-}
-.media__main:hover .media__play-circle { transform: scale(1.06); }
-.media__play b { font-size: var(--font-body); font-weight: 700; }
-.gallery__item.is-active { outline: 2px solid var(--cta); outline-offset: 2px; }
-.media-thumb--video {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2);
-  background: var(--surface); border: 1px dashed var(--line);
-  color: var(--text); font-weight: 700; font-size: var(--font-meta); text-align: center;
-}
-.media-thumb__badge {
-  display: flex; align-items: center; justify-content: center;
-  width: 44px; height: 44px; border-radius: var(--radius-pill);
-  background: var(--cta); color: var(--on-cta); font-size: 18px;
-}
-.media-thumb--video:hover { border-color: var(--cta); }
+  .b2 {
+    /* --- палитра --- */
+    --paper: #fbf4e8;
+    --paper-2: #f3e7d3;
+    --card: #ffffff;
+    --ink: #22333b;
+    --ink-2: #51626b;
+    --ink-3: #7c8b92;
+    --coral: #d14524;
+    --coral-deep: #b93a1e;
+    --coral-soft: #f8ddd2;
+    --teal: #0e7c74;
+    --teal-soft: #ddeee9;
+    --deep: #134e4a;
+    --sun: #f6b93b;
+    --sun-soft: #fcebc8;
+    --line: #e8dcc8;
+    --cream: #fbf4e8;
+    /* --- форма --- */
+    --r-s: 12px;
+    --r-m: 18px;
+    --r-l: 28px;
+    --shadow-s: 0 2px 10px rgba(34, 51, 59, 0.07);
+    --shadow-m: 0 14px 34px rgba(34, 51, 59, 0.13);
+    /* перекрытие акцента фокуса из Concept.astro: на креме нужен тёмный бирюзовый */
+    --accent: #0e7c74;
 
-.timeline { background: var(--bg-alt); padding: var(--space-8) 0; }
-.timeline h2 { font-size: var(--font-h2); font-weight: 700; text-align: center; margin: 0 0 var(--space-3); }
-.timeline__sub { max-width: 640px; margin: 0 auto var(--space-6); text-align: center; color: var(--text-2); font-size: var(--font-body); line-height: 1.6; }
-.timeline__list { max-width: 720px; margin: 0 auto; }
-.timeline__item { display: flex; gap: var(--space-4); margin-bottom: var(--space-5); }
-.timeline__num { flex: 0 0 36px; height: 36px; border-radius: var(--radius-pill); background: var(--cta); color: var(--on-cta); font-size: 15px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
-.timeline__item b { font-size: var(--font-title); font-weight: 700; color: var(--text); display: block; margin-bottom: 4px; }
-.timeline__item p { font-size: var(--font-body); line-height: 1.6; color: var(--text-2); margin: 0; }
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.6;
+    overflow-x: clip;
+  }
+  @media (max-width: 767px) {
+    .b2 {
+      padding-bottom: 84px; /* место под sticky-панель */
+    }
+  }
 
-.yamarka { background: var(--bg); padding: var(--space-8) 0; }
-.yamarka h2 { font-size: var(--font-h2); font-weight: 700; text-align: center; margin: 0 0 var(--space-3); }
-.yamarka__sub { text-align: center; color: var(--text-2); font-size: var(--font-body); margin: 0 auto var(--space-6); max-width: 640px; }
-.yamarka__content { display: flex; gap: var(--space-6); max-width: 1200px; margin: 0 auto; align-items: flex-start; }
-.yamarka__text { flex: 1; }
-.yamarka__list { display: grid; gap: var(--space-4); }
-.yamarka__row { display: flex; gap: var(--space-3); align-items: flex-start; }
-.yamarka__icon { width: 32px; height: 32px; flex: 0 0 32px; color: var(--accent); }
-.yamarka__icon svg { width: 100%; height: 100%; }
-.yamarka__row b { font-size: var(--font-body); font-weight: 700; color: var(--text); display: block; margin-bottom: 2px; }
-.yamarka__row p { font-size: var(--font-body); line-height: 1.6; color: var(--text-2); margin: 0; }
-.yamarka__note { margin-top: var(--space-5); font-size: var(--font-meta); color: var(--accent); font-weight: 600; text-align: center; }
-.hallway { background: var(--bg-alt); padding: var(--space-8) 0; }
-.hallway h2 { font-size: var(--font-h2); font-weight: 700; text-align: center; margin: 0 0 var(--space-3); }
-.hallway__sub { text-align: center; color: var(--text-2); font-size: var(--font-body); margin: 0 auto var(--space-6); max-width: 640px; }
-.hallway__content { display: flex; gap: var(--space-6); max-width: 1200px; margin: 0 auto; align-items: flex-start; }
-.hallway__text { flex: 1; }
-.hallway__text p { font-size: var(--font-body); line-height: 1.7; color: var(--text-2); margin: 0 0 var(--space-4); }
-.hallway__text b { color: var(--text); }
-.hallway__map { margin-top: var(--space-6); }
-.map-card {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4);
-  background: var(--surface); border: 1px solid var(--line);
-  border-radius: var(--radius-m); padding: var(--space-5);
-}
-.map-card__info { display: flex; gap: var(--space-4); align-items: flex-start; }
-.map-card__pin {
-  display: flex; align-items: center; justify-content: center; flex: 0 0 44px;
-  width: 44px; height: 44px; border-radius: var(--radius-pill);
-  background: var(--cta); color: var(--on-cta);
-}
-.map-card__pin svg { width: 22px; height: 22px; }
-.map-card__info b { display: block; font-size: var(--font-body); font-weight: 700; color: var(--text); margin-bottom: 4px; }
-.map-card__info p { margin: 0; font-size: var(--font-meta); line-height: 1.6; color: var(--text-2); max-width: 520px; }
-.map-card__btn {
-  display: inline-flex; align-items: center;
-  padding: 12px 22px; border-radius: var(--radius-pill);
-  background: var(--cta); color: var(--on-cta); text-decoration: none;
-  font-size: var(--font-meta); font-weight: 700;
-  transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
-}
-.map-card__btn:hover { background: var(--cta-hover); }
-.map-card__btn:active { background: var(--cta-press); transform: scale(.98); }
-@media (max-width: 760px) {
-  .map-card { flex-direction: column; align-items: stretch; }
-  .map-card__btn { justify-content: center; }
-}
+  .b2 .container {
+    width: min(1180px, 100% - 40px);
+    margin-inline: auto;
+  }
+  .b2 section {
+    scroll-margin-top: 84px;
+  }
+  .b2 .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .b2 .skip {
+    position: absolute;
+    left: 16px;
+    top: -48px;
+    z-index: 100;
+    background: var(--ink);
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    transition: top 0.15s ease;
+  }
+  .b2 .skip:focus-visible {
+    top: 12px;
+  }
 
-.gallery { background: var(--bg-alt); padding: var(--space-8) 0; }
-.gallery h2 { font-size: var(--font-h2); font-weight: 700; text-align: center; margin: 0 0 var(--space-3); }
-.gallery__sub { text-align: center; color: var(--text-2); font-size: var(--font-body); margin: 0 auto var(--space-6); max-width: 640px; }
-.gallery__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-3); max-width: 1200px; margin: 0 auto; }
-.gallery__item { border: 0; background: none; padding: 0; cursor: pointer; border-radius: var(--radius-s); overflow: hidden; position: relative; aspect-ratio: 4/3; }
-.gallery__item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--dur-normal) var(--ease); }
-.gallery__item:hover img { transform: scale(1.05); }
-.gallery__more {
-  display: block; margin: var(--space-5) auto 0; background: var(--cta); color: var(--on-cta);
-  border: 0; border-radius: var(--radius-pill); padding: 14px 36px; font-size: 15px;
-  font-weight: 700; cursor: pointer; transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
-}
-.gallery__more:hover { background: var(--cta-hover); }
-.gallery__more:active { background: var(--cta-press); transform: scale(.98); }
-.gallery-full { padding: 0 0 var(--space-8); }
-.gallery-full__sub { text-align: center; color: var(--text-2); font-size: var(--font-body); margin: 0 0 var(--space-6); max-width: 640px; margin-left: auto; margin-right: auto; }
+  /* ---------- Типографика ---------- */
+  .b2 .h2 {
+    font-size: clamp(1.55rem, 2.6vw + 0.6rem, 2.35rem);
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+  }
+  .b2 .h2--light {
+    color: var(--cream);
+  }
+  .b2 .sub {
+    color: var(--ink-2);
+    max-width: 640px;
+    margin: 0 0 34px;
+    font-size: 1.02rem;
+  }
 
-/* Лайтбокс */
-.lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.95); z-index: 1000; align-items: center; justify-content: center; }
-.lightbox.is-open { display: flex; }
-.lightbox__close { position: absolute; top: 20px; right: 20px; background: none; border: 0; color: #fff; font-size: 32px; cursor: pointer; z-index: 10; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background .2s; }
-.lightbox__close:hover { background: rgba(255,255,255,.1); }
-.lightbox__content { max-width: 90vw; max-height: 90vh; position: relative; display: flex; flex-direction: column; align-items: center; }
-.lightbox__content img { max-width: 100%; max-height: 85vh; object-fit: contain; border-radius: 8px; }
-.lightbox__caption { color: rgba(255,255,255,.8); font-size: 14px; margin-top: 12px; text-align: center; }
-.lightbox__nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.1); border: 0; color: #fff; font-size: 48px; width: 64px; height: 64px; border-radius: 50%; cursor: pointer; transition: background .2s; display: flex; align-items: center; justify-content: center; }
-.lightbox__nav:hover { background: rgba(255,255,255,.2); }
-.lightbox__prev { left: 20px; }
-.lightbox__next { right: 20px; }
+  /* ---------- Кнопки ---------- */
+  .b2 .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 13px 26px;
+    border-radius: 999px;
+    border: 0;
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 1.2;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  }
+  .b2 .btn svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex: none;
+  }
+  .b2 .btn--primary {
+    background: var(--coral);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(209, 69, 36, 0.28);
+  }
+  .b2 .btn--primary:hover {
+    background: var(--coral-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(209, 69, 36, 0.34);
+  }
+  .b2 .btn--primary:active {
+    transform: translateY(0);
+  }
+  .b2 .btn--ghost {
+    background: transparent;
+    color: var(--ink);
+    box-shadow: inset 0 0 0 2px rgba(34, 51, 59, 0.22);
+  }
+  .b2 .btn--ghost:hover {
+    box-shadow: inset 0 0 0 2px var(--ink);
+    transform: translateY(-2px);
+  }
+  .b2 .btn--s {
+    padding: 9px 18px;
+    font-size: 0.92rem;
+  }
+  .b2 .btn--lg {
+    padding: 14px 26px;
+  }
+  .b2 .btn--xl {
+    padding: 17px 34px;
+    font-size: 1.06rem;
+  }
 
-/* Модальное окно видео */
-.video-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.95); z-index: 1001; align-items: center; justify-content: center; }
-.video-modal.is-open { display: flex; }
-.video-modal__close { position: absolute; top: 20px; right: 20px; background: none; border: 0; color: #fff; font-size: 32px; cursor: pointer; z-index: 10; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background .2s; }
-.video-modal__close:hover { background: rgba(255,255,255,.1); }
-.video-modal__content { max-width: 90vw; max-height: 90vh; width: 800px; }
-.video-modal__content iframe { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 12px; }
+  /* ---------- Шапка ---------- */
+  .b2 .hdr {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(251, 244, 232, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .b2 .hdr__in {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height: 64px;
+  }
+  .b2 .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    font-size: 1.02rem;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .b2 .logo__mark {
+    display: inline-flex;
+    gap: 4px;
+  }
+  .b2 .logo__mark i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--coral);
+  }
+  .b2 .logo__mark i:nth-child(2) {
+    background: var(--sun);
+  }
+  .b2 .logo__mark i:nth-child(3) {
+    background: var(--teal);
+  }
+  .b2 .hdr__nav {
+    display: none;
+    gap: 26px;
+    margin-inline: auto;
+  }
+  .b2 .hdr__nav a {
+    font-weight: 700;
+    font-size: 0.93rem;
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+  .b2 .hdr__nav a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--sun);
+  }
+  .b2 .hdr__act {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-left: auto;
+  }
+  .b2 .hdr__phone {
+    display: none;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .b2 .hdr__phone:hover {
+    color: var(--coral);
+  }
+  @media (min-width: 1024px) {
+    .b2 .hdr__nav {
+      display: flex;
+    }
+    .b2 .hdr__phone {
+      display: inline;
+    }
+  }
 
-@media (max-width: 760px) {
-  .video-modal__content { width: 95vw; }
-}
+  /* ---------- Первый экран ---------- */
+  .b2 .hero {
+    position: relative;
+    padding-bottom: clamp(56px, 8vw, 88px);
+  }
+  .b2 .hero__bunting {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 6px;
+  }
+  .b2 .hero__grid {
+    display: grid;
+    gap: 34px;
+  }
+  .b2 .hero__eyebrow {
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin: 0 0 12px;
+  }
+  .b2 .hero__title {
+    font-size: clamp(2.05rem, 5.2vw + 0.6rem, 3.45rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin: 0 0 16px;
+  }
+  .b2 .hero__title em {
+    font-style: normal;
+    background: linear-gradient(transparent 62%, var(--sun) 62%, var(--sun) 94%, transparent 94%);
+    padding-inline: 2px;
+  }
+  .b2 .hero__lead {
+    color: var(--ink-2);
+    font-size: 1.06rem;
+    max-width: 520px;
+    margin: 0 0 24px;
+  }
+  .b2 .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .b2 .hero__micro {
+    font-size: 0.85rem;
+    color: var(--ink-2);
+    margin: 10px 0 0;
+  }
 
-@media (max-width: 760px) {
-  .timeline { padding: var(--space-7) 0; }
-  .timeline__item { gap: var(--space-3); }
-  .timeline__num { width: 32px; height: 32px; font-size: 14px; }
-  .format { padding: var(--space-7) 0; }
-  .format__grid { grid-template-columns: 1fr; }
-  .format__stats { gap: var(--space-4); }
-  .format__stat { min-width: 110px; }
-  .faq { padding: var(--space-7) 0; }
-  .reviews { padding: var(--space-7) 0; }
-  .reviews__grid { grid-template-columns: 1fr; }
-  .yamarka { padding: var(--space-7) 0; }
-  .hallway { padding: var(--space-7) 0; }
-  .yamarka__content { flex-direction: column; }
-  .hallway__content { flex-direction: column; }
-  .hero__grid { grid-template-columns: 1fr; gap: var(--space-5); padding-top: var(--space-6); padding-bottom: var(--space-6); }
-  .hero__visual { order: -1; aspect-ratio: 16/10; }
-  .hero__cta { display: block; width: 100%; max-width: 320px; }
-  .page-nav { top: 0; }
-}
-</style>
+  .b2 .price-card {
+    margin-top: 26px;
+    background: var(--card);
+    border: 1px solid rgba(34, 51, 59, 0.07);
+    border-radius: var(--r-l);
+    box-shadow: var(--shadow-s);
+    padding: 20px 22px;
+    max-width: 520px;
+  }
+  .b2 .price-card__num {
+    font-size: clamp(1.8rem, 3vw, 2.3rem);
+    font-weight: 900;
+    margin: 0 0 10px;
+    line-height: 1.1;
+  }
+  .b2 .price-card__num span {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ink-2);
+    margin-right: 4px;
+  }
+  .b2 .price-card__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 12px;
+    display: grid;
+    gap: 7px;
+    font-size: 0.93rem;
+    color: var(--ink-2);
+  }
+  .b2 .price-card__list li {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+  }
+  .b2 .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex: none;
+    transform: translateY(-1px);
+  }
+  .b2 .dot--coral {
+    background: var(--coral);
+  }
+  .b2 .dot--sun {
+    background: var(--sun);
+  }
+  .b2 .dot--teal {
+    background: var(--teal);
+  }
+  .b2 .price-card__note {
+    margin: 0;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--teal);
+  }
 
-<style is:global>
-.faq { background: var(--bg); padding: var(--space-8) 0; }
-.faq h2 { font-size: var(--font-h2); font-weight: 700; text-align: center; margin: 0 0 var(--space-6); }
-.faq__list { max-width: 720px; margin: 0 auto; }
-.faq__item { border-bottom: 1px solid var(--line); }
-.faq__item summary { padding: 18px 0; font-size: var(--font-title); font-weight: 600; color: var(--text); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
-.faq__item summary::after { content: '+'; font-size: 22px; color: var(--accent); transition: transform var(--dur-fast) var(--ease); flex-shrink: 0; margin-left: var(--space-3); }
-.faq__item[open] summary::after { content: '−'; }
-.faq__item summary:hover { color: var(--accent); }
-.faq__item p { padding: 0 0 18px; font-size: var(--font-body); line-height: 1.7; color: var(--text-2); margin: 0; }
+  .b2 .hero__media {
+    position: relative;
+    max-width: 460px;
+  }
+  .b2 .hero__photo {
+    margin: 0;
+    position: relative;
+  }
+  .b2 .hero__photo img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    object-position: 50% 18%;
+    border-radius: 999px 999px 32px 32px;
+    border: 6px solid #fff;
+    box-shadow: var(--shadow-m);
+  }
+  .b2 .hero__sticker {
+    position: absolute;
+    top: -12px;
+    right: -8px;
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    background: var(--sun);
+    color: var(--ink);
+    display: grid;
+    place-content: center;
+    text-align: center;
+    font-weight: 900;
+    font-size: 1.3rem;
+    line-height: 1.1;
+    transform: rotate(7deg);
+    box-shadow: var(--shadow-s);
+  }
+  .b2 .hero__mini {
+    display: none;
+    margin: 0;
+  }
+  .b2 .cf {
+    position: absolute;
+    animation: b2-float 7s ease-in-out infinite;
+  }
+  .b2 .cf--circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--teal);
+    opacity: 0.55;
+  }
+  .b2 .cf--tri {
+    width: 0;
+    height: 0;
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    border-bottom: 19px solid var(--coral-soft);
+    filter: drop-shadow(0 2px 3px rgba(34, 51, 59, 0.12));
+  }
+  .b2 .cf--sq {
+    width: 15px;
+    height: 15px;
+    border-radius: 4px;
+    background: var(--sun);
+    opacity: 0.7;
+    transform: rotate(14deg);
+  }
+  @keyframes b2-float {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -9px;
+    }
+  }
+  @media (min-width: 768px) {
+    .b2 .hero__photo img {
+      height: 420px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .b2 .hero__grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: start;
+      gap: 48px;
+    }
+    .b2 .hero__media {
+      justify-self: end;
+      width: min(440px, 100%);
+    }
+    .b2 .hero__photo img {
+      height: 520px;
+    }
+    .b2 .hero__mini {
+      display: block;
+      position: absolute;
+      bottom: -26px;
+      left: -44px;
+      width: 148px;
+      height: 148px;
+    }
+    .b2 .hero__mini img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #fff;
+      box-shadow: var(--shadow-m);
+      transform: rotate(-5deg);
+    }
+  }
 
-.reviews { background: var(--bg-alt); padding: var(--space-8) 0; }
-.reviews h2 { font-size: var(--font-h2); font-weight: 700; text-align: center; margin: 0 0 var(--space-3); }
-.reviews__sub { text-align: center; color: var(--text-2); font-size: var(--font-meta); margin: 0 0 var(--space-6); }
-.reviews__sub a { color: var(--accent); }
-.reviews__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); max-width: 1080px; margin: 0 auto; }
-.review-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-m); padding: var(--space-5); }
-.review-card__stars { color: var(--star); font-size: 14px; letter-spacing: 2px; margin-bottom: var(--space-3); }
-.review-card p { font-size: var(--font-body); line-height: 1.6; color: var(--text-2); margin: 0 0 var(--space-3); }
-.review-card__name { font-size: var(--font-meta); font-weight: 600; color: var(--accent); }
+  /* ---------- Квиз ---------- */
+  .b2 .quiz {
+    margin-top: 40px;
+    background: var(--card);
+    border: 1px solid rgba(34, 51, 59, 0.07);
+    border-radius: var(--r-l);
+    box-shadow: var(--shadow-m);
+    padding: 24px 22px 18px;
+    max-width: 560px;
+  }
+  @media (min-width: 1024px) {
+    .b2 .quiz {
+      margin-top: -64px;
+      margin-left: -56px;
+      position: relative;
+      z-index: 2;
+      max-width: 480px;
+    }
+  }
+  .b2 .quiz__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .b2 .quiz__title {
+    font-size: 1.18rem;
+    font-weight: 800;
+    margin: 0;
+  }
+  .b2 .quiz__stepnum {
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin: 0;
+    white-space: nowrap;
+  }
+  .b2 .quiz__bar {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--paper-2);
+    overflow: hidden;
+    margin-bottom: 18px;
+  }
+  .b2 .quiz__bar-fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: var(--coral);
+    transition: width 0.25s ease;
+  }
+  .b2 .q-step {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .b2 .q-q {
+    font-size: 1.04rem;
+    font-weight: 800;
+    margin: 0 0 12px;
+    outline: none;
+  }
+  .b2 .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .b2 .chip {
+    position: relative;
+  }
+  .b2 .chip input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  .b2 .chip span {
+    display: inline-block;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1.5px solid var(--line);
+    background: var(--card);
+    font-weight: 700;
+    font-size: 0.93rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .b2 .chip span:hover {
+    border-color: var(--teal);
+  }
+  .b2 .chip input:checked + span {
+    background: var(--teal-soft);
+    border-color: var(--teal);
+    box-shadow: inset 0 0 0 1px var(--teal);
+  }
+  .b2 .chip input:focus-visible + span {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .b2 .q-group {
+    margin-bottom: 16px;
+  }
+  .b2 .q-group__label {
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin: 0 0 8px;
+  }
+  .b2 .q-group.is-error .chips {
+    outline: 2px solid var(--coral);
+    outline-offset: 4px;
+    border-radius: 8px;
+  }
+  .b2 .field {
+    margin-bottom: 14px;
+  }
+  .b2 .field label {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .b2 .field input,
+  .b2 .field select,
+  .b2 .field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: var(--r-s);
+    border: 1.5px solid var(--line);
+    background: #fff;
+    font: inherit;
+    color: var(--ink);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .b2 .field input:focus,
+  .b2 .field select:focus,
+  .b2 .field textarea:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(14, 124, 116, 0.18);
+  }
+  .b2 .field input[aria-invalid='true'],
+  .b2 .field select[aria-invalid='true'] {
+    border-color: var(--coral);
+  }
+  .b2 .f-err {
+    color: var(--coral);
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin: 6px 0 0;
+  }
+  .b2 .q-check {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    margin: 4px 0 10px;
+    cursor: pointer;
+  }
+  .b2 .q-check input {
+    width: 19px;
+    height: 19px;
+    margin-top: 2px;
+    accent-color: var(--teal);
+    flex: none;
+  }
+  .b2 .q-check a {
+    color: var(--teal);
+    font-weight: 700;
+  }
+  .b2 .quiz__nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .b2 .quiz__nav .btn--primary {
+    margin-left: auto;
+  }
+  .b2 .quiz__done {
+    padding: 6px 0 4px;
+  }
+  .b2 .quiz__ok {
+    display: inline-grid;
+    place-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--teal);
+    margin-bottom: 12px;
+  }
+  .b2 .quiz__ok svg {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .b2 .quiz__done h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin: 0 0 8px;
+  }
+  .b2 .quiz__done p {
+    margin: 0 0 10px;
+    color: var(--ink-2);
+  }
+  .b2 .quiz__done-alt a {
+    color: var(--teal);
+    font-weight: 800;
+  }
+  .b2 .quiz__demo {
+    font-size: 0.78rem;
+    color: var(--ink-3);
+    margin: 14px 0 0;
+  }
+
+  /* ---------- Доверие ---------- */
+  .b2 .trust {
+    background: var(--card);
+    padding-block: clamp(56px, 9vw, 96px);
+  }
+  .b2 .trust__grid {
+    display: grid;
+    gap: 14px;
+    margin-top: 26px;
+  }
+  @media (min-width: 640px) {
+    .b2 .trust__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .b2 .trust__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .b2 .t-card {
+    background: var(--paper);
+    border-radius: var(--r-m);
+    padding: 20px;
+  }
+  .b2 .t-card__icon {
+    display: inline-grid;
+    place-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    margin-bottom: 12px;
+  }
+  .b2 .t-card__icon svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .b2 .t-card__icon b {
+    font-size: 1.3rem;
+    font-weight: 900;
+  }
+  .b2 .t-card__icon--teal {
+    background: var(--teal-soft);
+    color: var(--teal);
+  }
+  .b2 .t-card__icon--coral {
+    background: var(--coral-soft);
+    color: var(--coral);
+  }
+  .b2 .t-card__icon--sun {
+    background: var(--sun-soft);
+    color: var(--ink);
+  }
+  .b2 .t-card__icon--mint {
+    background: var(--teal-soft);
+    color: var(--deep);
+  }
+  .b2 .t-card h3 {
+    font-size: 1.02rem;
+    font-weight: 800;
+    margin: 0 0 6px;
+  }
+  .b2 .t-card p {
+    margin: 0;
+    font-size: 0.93rem;
+    color: var(--ink-2);
+  }
+  .b2 .trust__quote {
+    margin: 30px 0 0;
+    background: var(--sun-soft);
+    border-radius: var(--r-l);
+    padding: 24px 28px;
+  }
+  .b2 .trust__quote p {
+    margin: 0 0 8px;
+    font-size: 1.12rem;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+  .b2 .trust__quote footer {
+    font-size: 0.85rem;
+    color: var(--ink-2);
+  }
+  .b2 .trust__shots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 30px;
+  }
+  @media (min-width: 900px) {
+    .b2 .trust__shots {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .b2 .trust__shots img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--r-m);
+    border: 5px solid #fff;
+    box-shadow: var(--shadow-s);
+  }
+  .b2 .trust__shots img:nth-child(2) {
+    transform: rotate(1.1deg);
+  }
+  .b2 .trust__shots img:nth-child(3) {
+    transform: rotate(-1.1deg);
+  }
+
+  /* ---------- Пакеты ---------- */
+  .b2 .packs {
+    padding-block: clamp(56px, 9vw, 96px);
+  }
+  .b2 .packs__grid {
+    display: grid;
+    gap: 18px;
+  }
+  @media (min-width: 820px) {
+    .b2 .packs__grid {
+      grid-template-columns: repeat(3, 1fr);
+      align-items: stretch;
+    }
+  }
+  .b2 .pack {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    border: 1px solid rgba(34, 51, 59, 0.08);
+    border-radius: var(--r-l);
+    box-shadow: var(--shadow-s);
+    padding: 26px 24px 24px;
+  }
+  .b2 .pack--hot {
+    border: 2px solid var(--sun);
+    box-shadow: var(--shadow-m);
+  }
+  @media (min-width: 820px) {
+    .b2 .pack--hot {
+      transform: translateY(-10px);
+    }
+  }
+  .b2 .pack__flag {
+    position: absolute;
+    top: -14px;
+    left: 22px;
+    margin: 0;
+    background: var(--sun);
+    color: var(--ink);
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 5px 13px;
+    border-radius: 999px;
+    box-shadow: var(--shadow-s);
+  }
+  .b2 .pack__top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .b2 .pack__tag {
+    display: inline-grid;
+    place-content: center;
+    min-width: 34px;
+    height: 26px;
+    padding-inline: 6px;
+    border-radius: 8px;
+    background: var(--ink);
+    color: var(--sun);
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+  }
+  .b2 .pack__top h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin: 0;
+  }
+  .b2 .pack__price {
+    margin: 0 0 4px;
+  }
+  .b2 .pack__price b {
+    font-size: 1.85rem;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+  }
+  .b2 .pack__meta {
+    margin: 0 0 16px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--ink-2);
+  }
+  .b2 .pack__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    display: grid;
+    gap: 9px;
+    font-size: 0.94rem;
+    flex: 1;
+  }
+  .b2 .pack__list li {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+  }
+  .b2 .pack__list svg.ok {
+    width: 17px;
+    height: 17px;
+    flex: none;
+    margin-top: 3px;
+    fill: none;
+    stroke: var(--teal);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .b2 .pack__list li.off {
+    color: var(--ink-3);
+    font-size: 0.88rem;
+  }
+  .b2 .pack__list li.off::before {
+    content: '—';
+    flex: none;
+    width: 17px;
+    text-align: center;
+    font-weight: 800;
+  }
+  .b2 .pack__cta {
+    width: 100%;
+  }
+  .b2 .packs__note {
+    margin: 22px 0 0;
+    font-size: 0.88rem;
+    color: var(--ink-2);
+  }
+  .b2 .packs__more {
+    margin-top: 18px;
+  }
+  .b2 .packs__more summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    color: var(--teal);
+    cursor: pointer;
+    list-style: none;
+  }
+  .b2 .packs__more summary::-webkit-details-marker {
+    display: none;
+  }
+  .b2 .packs__more summary::after {
+    content: '▾';
+    transition: rotate 0.2s ease;
+  }
+  .b2 .packs__more[open] summary::after {
+    rotate: 180deg;
+  }
+  .b2 .packs__more ul {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+    display: grid;
+    gap: 0;
+  }
+  .b2 .packs__more li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    padding: 13px 2px;
+    border-top: 1px solid var(--line);
+    font-size: 0.94rem;
+  }
+  .b2 .packs__more li b {
+    min-width: 210px;
+  }
+  .b2 .packs__more li span {
+    color: var(--ink-2);
+  }
+
+  /* ---------- Программа ---------- */
+  .b2 .prog {
+    background: var(--card);
+    padding-block: clamp(56px, 9vw, 96px);
+  }
+  .b2 .prog__grid {
+    display: grid;
+    gap: 30px;
+  }
+  .b2 .prog__photo {
+    margin: 0;
+  }
+  .b2 .prog__photo img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: 50% 30%;
+    border-radius: var(--r-l);
+    box-shadow: var(--shadow-s);
+  }
+  .b2 .prog__steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 4px;
+  }
+  .b2 .prog__steps li {
+    position: relative;
+    display: flex;
+    gap: 16px;
+    padding: 10px 0;
+  }
+  .b2 .prog__steps li:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 52px;
+    bottom: -10px;
+    border-left: 2px dashed var(--line);
+  }
+  .b2 .prog__num {
+    flex: none;
+    display: inline-grid;
+    place-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--sun);
+    color: var(--ink);
+    font-weight: 900;
+    font-size: 1rem;
+    box-shadow: var(--shadow-s);
+  }
+  .b2 .prog__steps h3 {
+    font-size: 1.02rem;
+    font-weight: 800;
+    margin: 6px 0 2px;
+  }
+  .b2 .prog__steps p {
+    margin: 0;
+    font-size: 0.93rem;
+    color: var(--ink-2);
+  }
+  @media (min-width: 900px) {
+    .b2 .prog__grid {
+      grid-template-columns: 360px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .b2 .prog__photo {
+      position: sticky;
+      top: 96px;
+    }
+    .b2 .prog__photo img {
+      height: 430px;
+    }
+  }
+
+  /* ---------- Почему дороже ---------- */
+  .b2 .why {
+    background: var(--deep);
+    color: var(--cream);
+    padding-block: clamp(56px, 9vw, 96px);
+  }
+  .b2 .why__grid {
+    display: grid;
+    gap: 16px;
+    margin-top: 30px;
+  }
+  @media (min-width: 860px) {
+    .b2 .why__grid {
+      grid-template-columns: 1fr 1.2fr;
+    }
+  }
+  .b2 .why__card {
+    border-radius: var(--r-l);
+    padding: 28px;
+  }
+  .b2 .why__card h3 {
+    font-size: 0.88rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin: 0 0 12px;
+  }
+  .b2 .why__big {
+    font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin: 0 0 6px;
+  }
+  .b2 .why__sub {
+    margin: 0;
+    opacity: 0.75;
+    font-size: 0.95rem;
+  }
+  .b2 .why__card--them {
+    background: rgba(255, 255, 255, 0.07);
+  }
+  .b2 .why__card--us {
+    background: var(--sun);
+    color: var(--ink);
+  }
+  .b2 .why__card--us h3 {
+    opacity: 0.65;
+  }
+  .b2 .why__list {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 0;
+    display: grid;
+    gap: 10px;
+    font-size: 0.97rem;
+    font-weight: 700;
+  }
+  .b2 .why__list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .b2 .why__list svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    margin-top: 4px;
+    fill: none;
+    stroke: var(--deep);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .b2 .why__foot {
+    margin: 26px 0 0;
+    opacity: 0.8;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- Площадка ---------- */
+  .b2 .venue {
+    background: #fbeadf;
+    padding-block: clamp(56px, 9vw, 96px);
+  }
+  .b2 .venue__grid {
+    display: grid;
+    gap: 30px;
+  }
+  .b2 .venue__card {
+    background: var(--card);
+    border-radius: var(--r-l);
+    box-shadow: var(--shadow-s);
+    padding: 26px;
+  }
+  .b2 .venue__card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.45rem;
+    font-weight: 900;
+    margin: 0 0 16px;
+  }
+  .b2 .venue__card h3 svg {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: var(--coral);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex: none;
+  }
+  .b2 .venue__facts {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+    display: grid;
+    gap: 10px;
+    font-size: 0.96rem;
+    color: var(--ink-2);
+  }
+  .b2 .venue__facts li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .b2 .venue__facts svg.ok {
+    width: 17px;
+    height: 17px;
+    flex: none;
+    margin-top: 4px;
+    fill: none;
+    stroke: var(--teal);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .b2 .venue__hours {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    margin: 0 0 20px;
+  }
+  .b2 .venue__hours svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: var(--ink-2);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex: none;
+  }
+  .b2 .venue__btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .b2 .venue__shots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .b2 .venue__big {
+    grid-column: 1 / -1;
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: var(--r-m);
+    box-shadow: var(--shadow-s);
+  }
+  .b2 .venue__shots img:not(.venue__big) {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: var(--r-m);
+    box-shadow: var(--shadow-s);
+  }
+  @media (min-width: 900px) {
+    .b2 .venue__grid {
+      grid-template-columns: 1fr 1.05fr;
+      align-items: start;
+    }
+    .b2 .venue__big {
+      height: 300px;
+    }
+    .b2 .venue__shots img:not(.venue__big) {
+      height: 210px;
+    }
+  }
+
+  /* ---------- Отзывы ---------- */
+  .b2 .reviews {
+    background: var(--card);
+    padding-block: clamp(56px, 9vw, 96px);
+  }
+  .b2 .reviews__row {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min(320px, 82%);
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
+    margin-inline: -20px;
+    padding-inline: 20px;
+    scrollbar-width: none;
+  }
+  .b2 .reviews__row::-webkit-scrollbar {
+    display: none;
+  }
+  @media (min-width: 900px) {
+    .b2 .reviews__row {
+      grid-auto-flow: row;
+      grid-auto-columns: unset;
+      grid-template-columns: repeat(2, 1fr);
+      overflow: visible;
+      margin-inline: 0;
+      padding-inline: 0;
+    }
+  }
+  .b2 .rev {
+    scroll-snap-align: start;
+    background: var(--paper);
+    border-radius: var(--r-l);
+    padding: 24px;
+    position: relative;
+  }
+  .b2 .rev::before {
+    content: '“';
+    position: absolute;
+    top: 6px;
+    right: 20px;
+    font-size: 4.4rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--coral-soft);
+  }
+  .b2 .rev__text {
+    margin: 0 0 16px;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+  .b2 .rev footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+    font-size: 0.86rem;
+  }
+  .b2 .rev footer b {
+    font-weight: 800;
+  }
+  .b2 .rev footer span {
+    color: var(--ink-2);
+  }
+  .b2 .rev footer a {
+    color: var(--teal);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .b2 .rev footer a:hover {
+    text-decoration: underline;
+  }
+  .b2 .reviews__all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 26px;
+    font-weight: 800;
+    color: var(--teal);
+    text-decoration: none;
+  }
+  .b2 .reviews__all:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .b2 .reviews__all svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ---------- FAQ ---------- */
+  .b2 .faq {
+    padding-block: clamp(56px, 9vw, 96px);
+  }
+  .b2 .faq__in {
+    max-width: 820px;
+  }
+  .b2 .faq__item {
+    background: var(--card);
+    border: 1px solid rgba(34, 51, 59, 0.08);
+    border-radius: var(--r-m);
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-s);
+  }
+  .b2 .faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 22px;
+    cursor: pointer;
+    list-style: none;
+    border-radius: var(--r-m);
+  }
+  .b2 .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+  .b2 .faq__item summary h3 {
+    font-size: 1.02rem;
+    font-weight: 800;
+    margin: 0;
+  }
+  .b2 .faq__plus {
+    position: relative;
+    flex: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--sun-soft);
+  }
+  .b2 .faq__plus::before,
+  .b2 .faq__plus::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 2.5px;
+    border-radius: 2px;
+    background: var(--ink);
+    translate: -50% -50%;
+    transition: rotate 0.2s ease;
+  }
+  .b2 .faq__plus::after {
+    rotate: 90deg;
+  }
+  .b2 .faq__item[open] .faq__plus::after {
+    rotate: 0deg;
+  }
+  .b2 .faq__item p {
+    padding: 0 22px 20px;
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.97rem;
+  }
+
+  /* ---------- Форма заявки ---------- */
+  .b2 .req {
+    background: var(--coral-soft);
+    padding-block: clamp(56px, 9vw, 96px);
+  }
+  .b2 .req__grid {
+    display: grid;
+    gap: 34px;
+  }
+  @media (min-width: 960px) {
+    .b2 .req__grid {
+      grid-template-columns: 1fr 1.1fr;
+      gap: 48px;
+      align-items: start;
+    }
+  }
+  .b2 .req__phone {
+    display: inline-block;
+    font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+    font-weight: 900;
+    color: var(--ink);
+    text-decoration: none;
+    margin: 4px 0 16px;
+  }
+  .b2 .req__phone:hover {
+    color: var(--coral);
+  }
+  .b2 .req__msgrs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .b2 .msgr {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    background: var(--card);
+    box-shadow: var(--shadow-s);
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: var(--ink);
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+  .b2 .msgr:hover {
+    transform: translateY(-2px);
+  }
+  .b2 .msgr i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex: none;
+  }
+  .b2 .req__points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+    font-size: 0.93rem;
+    color: var(--ink-2);
+  }
+  .b2 .req__points li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .b2 .req__points svg.ok {
+    width: 17px;
+    height: 17px;
+    flex: none;
+    margin-top: 4px;
+    fill: none;
+    stroke: var(--teal);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .b2 .req__card {
+    background: var(--card);
+    border-radius: var(--r-l);
+    box-shadow: var(--shadow-m);
+    padding: 26px 24px;
+  }
+  .b2 .req__cols {
+    display: grid;
+    gap: 0 16px;
+  }
+  @media (min-width: 560px) {
+    .b2 .req__cols {
+      grid-template-columns: 1fr 1fr;
+    }
+    .b2 .field--full {
+      grid-column: 1 / -1;
+    }
+  }
+  .b2 .req__submit {
+    width: 100%;
+    margin-top: 6px;
+  }
+  .b2 .req__done {
+    padding: 10px 0;
+  }
+  .b2 .req__done h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin: 0 0 8px;
+  }
+  .b2 .req__done p {
+    margin: 0;
+    color: var(--ink-2);
+  }
+  .b2 .req__done a {
+    color: var(--teal);
+    font-weight: 800;
+  }
+  .b2 select.is-flash {
+    border-color: var(--sun);
+    box-shadow: 0 0 0 3px rgba(246, 185, 59, 0.35);
+  }
+
+  /* ---------- Калькулятор (демотирован) ---------- */
+  .b2 .calcstrip {
+    padding-block: 34px;
+  }
+  .b2 .calcstrip__in {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: var(--paper-2);
+    border-radius: var(--r-l);
+    padding: 22px 26px;
+  }
+  .b2 .calcstrip__in b {
+    font-size: 1.05rem;
+    font-weight: 800;
+  }
+  .b2 .calcstrip__in p {
+    margin: 2px 0 0;
+    font-size: 0.9rem;
+    color: var(--ink-2);
+  }
+
+  /* ---------- Подвал ---------- */
+  .b2 .ftr {
+    background: var(--deep);
+    color: var(--cream);
+    padding-block: 40px;
+  }
+  .b2 .ftr__in {
+    display: grid;
+    gap: 8px;
+    font-size: 0.92rem;
+  }
+  .b2 .ftr__logo {
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    font-size: 1.05rem;
+    margin: 0 0 6px;
+  }
+  .b2 .ftr a {
+    color: var(--cream);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: rgba(251, 244, 232, 0.4);
+    text-underline-offset: 3px;
+  }
+  .b2 .ftr a:hover {
+    text-decoration-color: var(--cream);
+  }
+  .b2 .ftr__legal {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  /* ---------- Sticky-панель (мобильные) ---------- */
+  .b2 .stickybar {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    z-index: 60;
+    display: flex;
+    gap: 10px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+  .b2 .stickybar.is-hidden {
+    transform: translateY(130%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .b2 .stickybar__cta {
+    flex: 1;
+    box-shadow: 0 12px 26px rgba(34, 51, 59, 0.3);
+  }
+  .b2 .stickybar__tel {
+    display: grid;
+    place-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--card);
+    color: var(--ink);
+    box-shadow: var(--shadow-m);
+    flex: none;
+  }
+  .b2 .stickybar__tel svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  @media (min-width: 768px) {
+    .b2 .stickybar {
+      display: none;
+    }
+  }
+
+  /* ---------- Доступность: движение ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .b2 .cf {
+      animation: none;
+    }
+    .b2 .btn,
+    .b2 .msgr,
+    .b2 .stickybar,
+    .b2 .quiz__bar-fill {
+      transition: none;
+    }
+  }
 </style>
